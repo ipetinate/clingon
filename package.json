@@ -1,0 +1,14 @@
+{
+  "name": "tricorder",
+  "version": "0.0.1",
+  "description": "Multipurpose generator CLI based on local config and templates",
+  "main": "main.ts",
+  "author": "Isac Petinate <idpetinate@gmail.com>",
+  "license": "LGPL",
+  "type": "module",
+  "private": false,
+  "dependencies": {
+    "@inquirer/prompts": "^4.3.2",
+    "commander": "^12.0.0"
+  }
+}
