@@ -1,12 +1,17 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
 import { FileExtensions } from "../enums/file-extensions.js";
 
+/**
+ * Get files form root dir
+ *
+ * @param {(error, files) => void} callback Function to handle file result or error
+ */
 export function getFiles(callback) {
   const folder = process.cwd();
 
-  fs.readdir(folder, (err, files) => {
+  fs.readdirSync(folder, (err, files) => {
     if (err) {
       callback(err, null);
       return;
@@ -21,13 +26,7 @@ export function getFiles(callback) {
 }
 
 export function readFileContent(filePath, callback) {
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      callback(err, null);
-      return;
-    }
-    callback(null, data);
-  });
+  fs.readFileSync(filePath, "utf8", callback);
 }
 
 export function createFileWithContent(filename, content) {

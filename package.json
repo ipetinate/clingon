@@ -7,6 +7,12 @@
   "license": "LGPL",
   "type": "module",
   "private": false,
+  "scripts": {
+    "test": "node --test",
+    "test:watch": "node --test --watch",
+    "test:coverage": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info",
+    "dev": "nodejs ./src/main.js"
+  },
   "dependencies": {
     "@inquirer/prompts": "^4.3.2",
     "commander": "^12.0.0"

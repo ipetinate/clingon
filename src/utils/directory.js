@@ -1,17 +1,19 @@
 import fs from "fs";
-import path from "path";
+import nodePath from "path";
 
-export function getDirectories(callback) {
-  const folder = process.cwd();
+/**
+ * Navigate to a path folder and return directories path inside specified folder, if not specify path `process.cwd()` will be used instead
+ *
+ * @param {string} path Path to a specific folder, if undefined `process.cwd()` will be used instead
+ * @returns {string[]}
+ */
+export function getDirectories(path) {
+  const folder = path ?? process.cwd();
 
-  fs.readdir(folder, (error, directories) => {
-    if (error) return callback(error, null);
+  const dirs = fs.readdirSync(folder);
 
-    const dirs = directories.filter((directory) => {
-      return fs.statSync(path.join(folder, directory)).isDirectory();
-    });
-
-    callback(null, dirs);
+  return dirs.filter((directory) => {
+    return fs.statSync(nodePath.join(folder, directory)).isDirectory();
   });
 }
 

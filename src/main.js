@@ -44,12 +44,20 @@ await readLocalConfig((error, fileContent) => {
  * Guided flow - using user local templates from /.tricorder-templates
  */
 
-program.command("guided").action(guidedAction);
-
-program.parse();
+program
+  .command("guided")
+  .action(guidedAction)
+  .description(
+    "Start a guided flow to generate resources (components, functions, pages, etc)"
+  );
 
 /*
  * Init flow - generate needed files
  */
 
 // TODO
+
+/*
+ * Parse program to execution
+ */
+program.parse();

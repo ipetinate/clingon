@@ -6,7 +6,7 @@ import {
   resourcesPaths,
   tsTypeChoices,
 } from "../constants/choices.js";
-import { boolAsString } from "../utils/string.js";
+import { boolAsText } from "../utils/string.js";
 
 import { guidedFlowGenerator } from "../flows/guided-flow-generator.js";
 
@@ -140,9 +140,9 @@ function showPreview(answers) {
     "Resource Path": answers.resourcePath,
     "Test Path": answers.testPath,
     "Spec Path": answers.storyPath,
-    "With TypeScript": boolAsString(answers.typescript),
-    "With Story": boolAsString(answers.withStory),
-    "With Unit Test": boolAsString(answers.withTest),
+    "With TypeScript": boolAsText(answers.typescript),
+    "With Story": boolAsText(answers.withStory),
+    "With Unit Test": boolAsText(answers.withTest),
     "My Test Postfix": answers.testPostfix,
   });
 }
