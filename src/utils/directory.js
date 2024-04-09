@@ -1,5 +1,5 @@
-import fs from "fs";
-import nodePath from "path";
+import fs from "node:fs";
+import nodePath from "node:path";
 
 /**
  * Navigate to a path folder and return directories path inside specified folder, if not specify path `process.cwd()` will be used instead
@@ -17,12 +17,18 @@ export function getDirectories(path) {
   });
 }
 
+/**
+ * Check if a tree structure of folders exists
+ *
+ * @param {string[]} directories List of dirs, e.g `["src", "utils"]`
+ * @returns {boolean}
+ */
 export function checkDirectoriesTree(directories) {
   const rootDirectory = process.cwd();
   let currentDirectory = rootDirectory;
 
   for (const directory of directories) {
-    currentDirectory = path.join(currentDirectory, directory);
+    currentDirectory = nodePath.join(currentDirectory, directory);
     if (
       !fs.existsSync(currentDirectory) ||
       !fs.statSync(currentDirectory).isDirectory()

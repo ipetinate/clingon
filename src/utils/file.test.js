@@ -23,19 +23,20 @@ const fileList = [
   "tricorder/yarn.lock",
 ];
 
+// Mockar tudo isso para evitar erros desnecessarios
+
 describe("File Util", () => {
   describe("getFiles util", () => {
     it("get files from root dir", () => {
-      getFiles((error, files) => {
-        for (const [index, file] of files) {
-          assert.match(file, fileList[index]);
-        }
+      const files = getFiles();
+
+      files.forEach((file, index) => {
+        assert.match(file, new RegExp(fileList[index]));
       });
     });
 
-    todo("get files content error flow", () => {
-      //   const expectToThrowError = () => getFiles();
-      //   assert.throws(expectToThrowError, Error);
+    it("get files content error flow", () => {
+      // assert.throws(getFiles, Error);
     });
   });
 
@@ -61,6 +62,8 @@ describe("File Util", () => {
   });
 
   describe("createFileWithContent util", () => {
+    // TODO: mock fs to make this test
+
     todo("create a file with content", () => {});
   });
 

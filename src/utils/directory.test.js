@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 
-import { getDirectories } from "./directory.js";
+import { checkDirectoriesTree, getDirectories } from "./directory.js";
 
 const srcDirs = [
   "actions",
@@ -27,6 +27,20 @@ describe("Directory Utils", () => {
       const directories = getDirectories();
 
       assert.deepEqual(directories, rootDirs);
+    });
+  });
+
+  describe("checkDirectoriesTree util", () => {
+    it("returns true if directory tree structure exists", () => {
+      const exists = checkDirectoriesTree(["src", "actions"]);
+
+      assert.strictEqual(exists, true);
+    });
+
+    it("returns false if directory tree structure not exists", () => {
+      const exists = checkDirectoriesTree(["src", "foo", "bar"]);
+
+      assert.strictEqual(exists, false);
     });
   });
 });

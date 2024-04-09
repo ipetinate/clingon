@@ -4,31 +4,41 @@ import path from "node:path";
 import { FileExtensions } from "../enums/file-extensions.js";
 
 /**
- * Get files form root dir
+ * Get files from root directory
  *
- * @param {(error, files) => void} callback Function to handle file result or error
+ * @param {string | undefined} folderPath Path to folder, if omited rootDir (`process.cwd()`) will be used instead
+ * @returns {string[]} Array of file paths
  */
-export function getFiles(callback) {
-  const folder = process.cwd();
+export function getFiles(folderPath) {
+  const folder = folderPath ?? process.cwd();
 
-  fs.readdirSync(folder, (err, files) => {
-    if (err) {
-      callback(err, null);
-      return;
-    }
+  try {
+    const files = fs.readdirSync(folder);
 
-    const filePaths = files.map((file) => {
-      return path.join(folder, file);
-    });
+    const filePaths = files.map((file) => path.join(folder, file));
 
-    callback(null, filePaths);
-  });
+    return filePaths;
+  } catch (err) {
+    throw new Error(`Error reading files: ${err}`);
+  }
 }
 
-export function readFileContent(filePath, callback) {
-  fs.readFileSync(filePath, "utf8", callback);
+/**
+ * Read file content and return as string
+ *
+ * @param {string} filePath Path to file
+ * @returns {string}
+ */
+export function readFileContent(filePath) {
+  return fs.readFileSync(filePath, "utf8");
 }
 
+/**
+ * Create a file with content and notify on console if success or error
+ *
+ * @param {string} filename Name with extensions, e.g `LoginView.vue` or "Login.tsx"
+ * @param {string} content Content to be injected inside file
+ */
 export function createFileWithContent(filename, content) {
   try {
     fs.writeFileSync(filename, content, "utf8");
@@ -39,6 +49,12 @@ export function createFileWithContent(filename, content) {
   }
 }
 
+/**
+ * Make the file extension and returns without dot on start, e.g `tsx` or `vue` or `spec.ts`
+ *
+ * @param {{  postfix?: string, typescript?: boolean, withJsx?: boolean, vue?: boolean }} param0 Properties to compose extension
+ * @returns string
+ */
 export function makeFileExtension({ typescript, postfix, withJsx, vue }) {
   if (vue) return FileExtensions.vue;
 

@@ -1,3 +1,4 @@
+import { handleVariants } from "../utils/handle-variants.js";
 import {
   createFileWithContent,
   makeFileExtension,
@@ -26,20 +27,22 @@ export function generateComponent({
       const pathWithFileName = `${path}/${fileName}`;
 
       handleVariants({
-        typescript,
-        tsVariantCallback: () => {
-          readCreateFormatReactFile({
-            name,
-            path: "src/templates/react/ts/Component.tsx",
-            pathWithFileName,
-          });
-        },
-        jsVariantCallback: () => {
-          readCreateFormatReactFile({
-            name,
-            path: "src/templates/react/js/Component.jsx",
-            pathWithFileName,
-          });
+        target: typescript ? "ts" : "js",
+        variants: {
+          ts: () => {
+            readCreateFormatReactFile({
+              name,
+              path: "src/templates/react/ts/Component.tsx",
+              pathWithFileName,
+            });
+          },
+          js: () => {
+            readCreateFormatReactFile({
+              name,
+              path: "src/templates/react/js/Component.jsx",
+              pathWithFileName,
+            });
+          },
         },
       });
 
@@ -50,20 +53,22 @@ export function generateComponent({
       const pathWithFileName = `${path}/${fileName}`;
 
       handleVariants({
-        typescript,
-        tsVariantCallback: () => {
-          readCreateFormatVueFile({
-            name,
-            path: "src/templates/vue/3/ts/SetupComponent.vue",
-            pathWithFileName,
-          });
-        },
-        jsVariantCallback: () => {
-          readCreateFormatVueFile({
-            name,
-            path: "src/templates/vue/3/js/SetupComponent.vue",
-            pathWithFileName,
-          });
+        target: typescript ? "ts" : "js",
+        variants: {
+          ts: () => {
+            readCreateFormatVueFile({
+              name,
+              path: "src/templates/vue/3/ts/SetupComponent.vue",
+              pathWithFileName,
+            });
+          },
+          js: () => {
+            readCreateFormatVueFile({
+              name,
+              path: "src/templates/vue/3/js/SetupComponent.vue",
+              pathWithFileName,
+            });
+          },
         },
       });
 
@@ -75,26 +80,20 @@ export function generateComponent({
   }
 }
 
-function handleVariants({ typescript, jsVariantCallback, tsVariantCallback }) {
-  if (typescript) tsVariantCallback();
-
-  jsVariantCallback();
-}
-
 function readCreateFormatReactFile({ path, pathWithFileName, name }) {
-  readFileContent(path, (_, fileContent) => {
-    createFileWithContent(
-      pathWithFileName,
-      fileContent.replace("Component", name)
-    );
-  });
+  const fileContent = readFileContent(path);
+
+  createFileWithContent(
+    pathWithFileName,
+    fileContent.replace("Component", name)
+  );
 }
 
 function readCreateFormatVueFile({ path, pathWithFileName, name }) {
-  readFileContent(path, (_, fileContent) => {
-    createFileWithContent(
-      pathWithFileName,
-      fileContent.replace(/component/g, name.toLowerCase())
-    );
-  });
+  const fileContent = readFileContent(path);
+
+  createFileWithContent(
+    pathWithFileName,
+    fileContent.replace(/component/g, name.toLowerCase())
+  );
 }

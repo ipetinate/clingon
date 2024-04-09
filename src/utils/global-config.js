@@ -1,11 +1,13 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
 /**
  * Reads the content of a local configuration file named "tricorder.json".
  *
+ * @typedef {{ exportDefault: boolean }} GlobalConfig - Project global configuration
+ *
  * @param {string} filename The configuration file name.
- * @returns {Object | null} The content of the configuration file, or null if not found.
+ * @returns {GlobalConfig | null}
  */
 export function readLocalConfig(filename) {
   try {
@@ -16,7 +18,6 @@ export function readLocalConfig(filename) {
 
     if (!localConfigPath) {
       throw new Error("Error: Configuration file not found");
-      return null;
     }
 
     const filePath = path.join(folder, localConfigPath);
@@ -25,7 +26,5 @@ export function readLocalConfig(filename) {
     return JSON.parse(fileContent);
   } catch (error) {
     throw new Error(error);
-
-    return null;
   }
 }

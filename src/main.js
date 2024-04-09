@@ -18,21 +18,7 @@ program
  * Read config file from rootDir
  */
 
-let config = null;
-
-await readLocalConfig((error, fileContent) => {
-  if (error) {
-    console.log(
-      "Ops! You don't have a local configuration file, would you like to create one?"
-    );
-  }
-
-  config = JSON.parse(fileContent);
-
-  /*
-   * Global config flow
-   */
-});
+const config = readLocalConfig("tricorder.json");
 
 /*
  * Autogen flow - using built-in opinionated templates
