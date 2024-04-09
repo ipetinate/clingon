@@ -4,14 +4,14 @@
   "description": "Multipurpose generator CLI based on local config and templates",
   "main": "main.ts",
   "author": "Isac Petinate <idpetinate@gmail.com>",
-  "license": "LGPL",
+  "license": "MIT",
   "type": "module",
   "private": false,
   "scripts": {
     "test": "node --test",
     "test:watch": "node --test --watch",
     "test:coverage": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info",
-    "dev": "nodejs ./src/main.js"
+    "dev": "node src/main.js "
   },
   "dependencies": {
     "@inquirer/prompts": "^4.3.2",
