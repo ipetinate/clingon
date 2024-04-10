@@ -1,4 +1,6 @@
-import { describe, it, todo } from "node:test";
+import fs from "node:fs";
+
+import { describe, it, todo, mock } from "node:test";
 import assert from "node:assert/strict";
 
 import { getFiles, makeFileExtension, readFileContent } from "./file.js";
@@ -10,54 +12,54 @@ const postfix = {
   test: "test",
 };
 
-const fileList = [
-  "tricorder/.git",
-  "tricorder/.gitignore",
-  "tricorder/README.md",
-  "tricorder/doc",
-  "tricorder/jsconfig.json",
-  "tricorder/node_modules",
-  "tricorder/package.json",
-  "tricorder/src",
-  "tricorder/tricorder.json",
-  "tricorder/yarn.lock",
-];
+const mockFsReadDir = mock.method(fs, "readdirSync");
+const mockFsReadFileSync = mock.method(fs, "readFileSync");
 
-// Mockar tudo isso para evitar erros desnecessarios
+const mockFolderFiles = ["mockFile.json", "mocks.js", "fakeFile.ts"];
 
 describe("File Util", () => {
   describe("getFiles util", () => {
     it("get files from root dir", () => {
+      mockFsReadDir.mock.mockImplementation(() => mockFolderFiles);
+
       const files = getFiles();
 
-      files.forEach((file, index) => {
-        assert.match(file, new RegExp(fileList[index]));
-      });
+      for (const [index, filePath] of files) {
+        assert.match(filePath, new RegExp(mockFolderFiles[index]));
+      }
     });
 
     it("get files content error flow", () => {
-      // assert.throws(getFiles, Error);
+      mockFsReadDir.mock.mockImplementation(() => {
+        throw new Error("fake error");
+      });
+
+      assert.throws(getFiles, Error);
     });
   });
 
   describe("readFileContent util", () => {
     it("get file content", () => {
-      readFileContent(
-        process.cwd() + "/tricorder.json",
-        (error, fileContent) => {
-          assert.deepEqual(JSON.parse(fileContent), { exportDefault: false });
-        }
-      );
+      mockFsReadFileSync.mock.mockImplementation((fileName) => {
+        const files = {
+          "tricorder.json": '{"exportDefault":false}',
+        };
+
+        return files[fileName];
+      });
+
+      const fileContent = readFileContent("tricorder.json");
+
+      assert.deepEqual(JSON.parse(fileContent), { exportDefault: false });
     });
 
     it("get file content error flow", () => {
-      const expectToThrowError = () =>
-        readFileContent(
-          process.cwd() + "/tricorder.blabla",
-          (error, fileContent) => {}
-        );
+      const expectToThrowError = () => {
+        const fileContent = readFileContent("/tricorder.blabla");
 
-      assert.throws(expectToThrowError, Error);
+        assert.strictEqual(fileContent, undefined);
+        assert.throws(expectToThrowError, Error);
+      };
     });
   });
 
