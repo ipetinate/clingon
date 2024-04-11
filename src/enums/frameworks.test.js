@@ -5,7 +5,7 @@ import { FrameworkEnum } from "./frameworks.js";
 
 describe("FrameworksEnum", () => {
   it("should return properly values", () => {
-    assert.strictEqual(FrameworkEnum.Vue, "vue");
-    assert.strictEqual(FrameworkEnum.React, "react");
+    assert.strictEqual(FrameworkEnum.vue, "vue");
+    assert.strictEqual(FrameworkEnum.react, "react");
   });
 });

@@ -18,7 +18,7 @@ const answers = {
   withTest: false,
 };
 
-describe.todo("Components Generator", () => {
+describe.todo("Tests Generator", () => {
   todo(
     "should create a component based on answers (user's prompted)",
     () => {}

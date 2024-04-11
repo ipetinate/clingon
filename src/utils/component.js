@@ -55,12 +55,12 @@ export function defineComponentTemplate(data) {
     };
 
     switch (data.framework) {
-      case FrameworkEnum.React: {
+      case FrameworkEnum.react: {
         templatePath = templates.react[variant].functional;
 
         return { ...data, templatePath };
       }
-      case FrameworkEnum.Vue: {
+      case FrameworkEnum.vue: {
         /**
          * @type {VueApi}
          */
@@ -103,12 +103,12 @@ export function getTemplateContent(data) {
  */
 export function replaceAllComponentTextOccurrences(data) {
   switch (data.framework) {
-    case FrameworkEnum.React: {
+    case FrameworkEnum.react: {
       data.fileContent = data.fileContent.replace("Component", data.name);
 
       return data;
     }
-    case FrameworkEnum.Vue: {
+    case FrameworkEnum.vue: {
       data.fileContent = data.fileContent.replace(
         /component/g,
         convertCase("kebab-case", data.name.toLowerCase())
@@ -136,8 +136,8 @@ export function replaceAllComponentTextOccurrences(data) {
 export function generateComponentFile(data) {
   const extension = makeFileExtension({
     typescript: data.typescript,
-    vue: data.framework === FrameworkEnum.Vue,
-    withJsx: data.framework === FrameworkEnum.React,
+    vue: data.framework === FrameworkEnum.vue,
+    withJsx: data.framework === FrameworkEnum.react,
   });
 
   const fileName = `${data.name}.${extension}`;

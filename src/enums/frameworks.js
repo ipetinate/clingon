@@ -1,4 +1,7 @@
+/**
+ * List of availables frameworks
+ */
 export const FrameworkEnum = {
-  Vue: "vue",
-  React: "react",
+  vue: "vue",
+  react: "react",
 };

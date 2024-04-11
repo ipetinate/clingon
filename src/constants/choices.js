@@ -1,33 +1,35 @@
+import { ResourceType } from "../enums/resource-type.js";
 import { FrameworkEnum } from "../enums/frameworks.js";
 import { VueVersionEnum } from "../enums/vue-version.js";
+import { StoryPostfixEnum, TestPostfixEnum } from "../enums/postfixes.js";
 
 export const tsTypeChoices = [
-  { name: "Page", value: "page" },
-  { name: "Component", value: "component" },
-  { name: "Function", value: "function" },
-  { name: "Type", value: "type" },
-  { name: "Model", value: "model" },
-  { name: "Enum", value: "enum" },
-  { name: "Test", value: "test" },
-  { name: "Spec", value: "spec" },
-  { name: "Cypress Spec", value: "cypress_spec" },
-  { name: "Storybook Story", value: "storybook_story" },
+  { name: "Page", value: ResourceType.page },
+  { name: "Component", value: ResourceType.component },
+  { name: "Function", value: ResourceType.function },
+  { name: "Type", value: ResourceType.type },
+  { name: "Model", value: ResourceType.model },
+  { name: "Enum", value: ResourceType.enum },
+  { name: "Test", value: ResourceType.test },
+  { name: "Spec", value: ResourceType.spec },
+  { name: "Cypress Spec", value: ResourceType.cypress_spec },
+  { name: "Storybook Story", value: ResourceType.storybook_story },
 ];
 
 export const jsTypeChoices = [
-  { name: "Page", value: "page" },
-  { name: "Component", value: "component" },
-  { name: "Function", value: "function" },
-  { name: "Enum", value: "enum" },
-  { name: "Test", value: "test" },
-  { name: "Spec", value: "spec" },
-  { name: "Cypress Spec", value: "cypress_spec" },
-  { name: "Storybook Story", value: "storybook_story" },
+  { name: "Page", value: ResourceType.page },
+  { name: "Component", value: ResourceType.component },
+  { name: "Function", value: ResourceType.function },
+  { name: "Enum", value: ResourceType.enum },
+  { name: "Test", value: ResourceType.test },
+  { name: "Spec", value: ResourceType.spec },
+  { name: "Cypress Spec", value: ResourceType.cypress_spec },
+  { name: "Storybook Story", value: ResourceType.storybook_story },
 ];
 
 export const frameworksAndLibsChoices = [
-  { name: "Vue", value: FrameworkEnum.Vue },
-  { name: "React", value: FrameworkEnum.React },
+  { name: "Vue", value: FrameworkEnum.vue },
+  { name: "React", value: FrameworkEnum.react },
 ];
 
 export const vueVersionsChoices = [
@@ -35,9 +37,13 @@ export const vueVersionsChoices = [
   { name: "Vue 3", value: VueVersionEnum[3] },
 ];
 
-export const postfixChoices = [
-  { name: ".spec", value: "spec" },
-  { name: ".test", value: "test" },
+export const testPostfixChoices = [
+  { name: ".spec", value: TestPostfixEnum.spec },
+  { name: ".test", value: TestPostfixEnum.test },
+];
+
+export const storiesPostfixChoices = [
+  { name: ".stories", value: StoryPostfixEnum.stories },
 ];
 
 export const resourcesPaths = {

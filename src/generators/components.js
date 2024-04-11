@@ -7,14 +7,6 @@ import {
 import { compose } from "../utils/compose.js";
 
 /**
- * @typedef {{
- *    path: string,
- *    pathWithFileName: string,
- *    name: string
- *  }} CreateComponentData - Data to create component file
- * @typedef {"vue" | "react"} Framework - Framework target
- * @typedef {"spec" | "test"} TestPostfix - Postfix for unit test file
- * @typedef {"stories"} StoryPostfix - Postfix for stories file (storybook, or other lib)
  * @typedef {import("../actions/guided.js").Answers} Answers
  */
 
