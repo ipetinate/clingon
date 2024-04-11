@@ -1,4 +1,4 @@
-export const FileExtensions = {
+export const FileExtensionEnum = {
   ts: "ts",
   tsx: "tsx",
   js: "js",

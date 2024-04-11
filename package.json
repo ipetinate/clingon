@@ -8,6 +8,7 @@
   "type": "module",
   "private": false,
   "scripts": {
+    "build": "rollup --config",
     "test": "node --test",
     "test:watch": "node --test --watch",
     "test:coverage": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info",
@@ -16,5 +17,9 @@
   "dependencies": {
     "@inquirer/prompts": "^4.3.2",
     "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^6.1.0",
+    "rollup": "^4.14.1"
   }
 }
