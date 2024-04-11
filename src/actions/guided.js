@@ -2,62 +2,128 @@ import { confirm, input, select } from "@inquirer/prompts";
 import {
   frameworksAndLibsChoices,
   jsTypeChoices,
-  postfixChoices,
+  testPostfixChoices,
   resourcesPaths,
   tsTypeChoices,
   vueVersionsChoices,
+  storiesPostfixChoices,
 } from "../constants/choices.js";
-import { boolAsText } from "../utils/string.js";
 
+import { boolAsText } from "../utils/string.js";
 import { guidedFlowGenerator } from "../flows/guided-flow-generator.js";
+
+import { ResourceType } from "../enums/resource-type.js";
 import { FrameworkEnum } from "../enums/frameworks.js";
+import { StoryPostfixEnum, TestPostfixEnum } from "../enums/postfixes.js";
 
 /**
+ * @typedef {keyof ResourceType} Resource - Resource type
+ * @typedef {keyof FrameworkEnum} Framework - Framework target
+ * @typedef {keyof TestPostfixEnum} TestPostfix - Postfix for unit test file
+ * @typedef {keyof StoryPostfixEnum} StoryPostfix - Postfix for stories file (storybook, or other lib)
  * @typedef {{
- *   type: string;
  *   name: string;
- *   framework: string;
+ *   type: Resource;
+ *   framework: Framework;
  *   version: string | number
- *   resourcePath: string;
- *   testPath: string
- *   storyPath: string
- *   testPostfix: string;
  *   typescript: boolean;
  *   withTest: boolean;
  *   withStory: boolean;
- * }} Answers
+ *   testPostfix: TestPostfix;
+ *   storyPostfix: StoryPostfix;
+ *   resourcePath: string;
+ *   testPath: string
+ *   storyPath: string
+ * }} Answers - Users prompted answers
  */
 
 export async function guidedAction() {
+  /**
+   * With unit tests?
+   *
+   * @type {boolean}
+   */
   let withTest = false;
+  /**
+   * With stories
+   *
+   * @type {boolean}
+   */
   let withStory = false;
+  /**
+   * Test file postfix
+   *
+   * @type {TestPostfix}
+   */
   let testPostfix = null;
+  /**
+   * Test file postfix
+   *
+   * @type {StoryPostfix}
+   */
+  let storyPostfix = null;
 
+  /**
+   * Test file path
+   *
+   * @type {string}
+   */
   let testPath = null;
+  /**
+   * Story file path
+   *
+   * @type {string}
+   */
   let storyPath = null;
+  /**
+   * Resource file path
+   *
+   * @type {string}
+   */
   let resourcePath = null;
 
+  /**
+   * Target version of framework (e.g Vue 2 or 3, etc)
+   *
+   * @type {number | string}
+   */
   let version = null;
 
+  /**
+   * @type {Framework} - Framework target value
+   */
   const framework = await select({
     message: "Select your framework/lib",
     choices: frameworksAndLibsChoices,
   });
 
-  if (framework === FrameworkEnum.Vue) {
+  if (framework === FrameworkEnum.vue) {
     version = await select({
       message: "What is your Vue version?",
       choices: vueVersionsChoices,
     });
   }
 
+  /**
+   * With typescript
+   *
+   * @type {boolean}
+   */
   const typescript = await confirm({ message: "Do you use TypeScript?" });
 
+  /**
+   * Resource to be generated type
+   *
+   * @type {Resource}
+   */
   const type = await select({
     message: "What do you want to create?",
     choices: typescript ? tsTypeChoices : jsTypeChoices,
   });
 
+  /**
+   * Opinionated path choices
+   */
   const choices = getPathChoices({ type });
 
   if (choices) {
@@ -74,12 +140,6 @@ export async function guidedAction() {
   if (["component", "function", "page"].includes(type)) {
     withTest = await confirm({
       message: "Would you like to add unit tests?",
-    });
-  }
-
-  if (["component", "page"].includes(type)) {
-    withStory = await confirm({
-      message: "Would you like to add storybook story?",
     });
   }
 
@@ -100,7 +160,13 @@ export async function guidedAction() {
 
     testPostfix = await select({
       message: "What postfix do you use in your test file?",
-      choices: postfixChoices,
+      choices: testPostfixChoices,
+    });
+  }
+
+  if (["component", "page"].includes(type)) {
+    withStory = await confirm({
+      message: "Would you like to add storybook story?",
     });
   }
 
@@ -118,8 +184,16 @@ export async function guidedAction() {
           "What is the folder path that I should create your story in? e.g. folder/here",
       });
     }
+
+    storyPostfix = await select({
+      message: "What postfix do you use in your story file?",
+      choices: storiesPostfixChoices,
+    });
   }
 
+  /**
+   * Resource name (e.g if is a component, should be like `PersonCard`)
+   */
   const name = await input({ message: "Name" });
 
   /**
@@ -133,6 +207,7 @@ export async function guidedAction() {
     testPath,
     storyPath,
     testPostfix,
+    storyPostfix,
     type,
     typescript,
     withStory,
@@ -141,6 +216,11 @@ export async function guidedAction() {
 
   showPreview(answers);
 
+  /**
+   * User's confirmation to proceed with generation after preview setup
+   *
+   * * @type {boolean}
+   */
   const allowedToGenerate = await confirm({
     message: "Confirm this is what you want to create?",
   });
@@ -148,6 +228,11 @@ export async function guidedAction() {
   if (allowedToGenerate) {
     await guidedFlowGenerator(answers);
   } else {
+    /**
+     * If user made a mistake, ask if he want's to restart generation
+     *
+     * @type {boolean}
+     */
     const doAgain = await confirm({
       message: "Do you want to restart the generator?",
     });
