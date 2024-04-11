@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { FileExtensions } from "../enums/file-extensions.js";
+import { FileExtensionEnum } from "../enums/file-extension.js";
 
 /**
  * Get files from root directory
@@ -44,8 +44,11 @@ export function createFileWithContent(filename, content) {
     fs.writeFileSync(filename, content, "utf8");
 
     console.log(`File "${filename}" created successfully.`);
+
+    return true;
   } catch (error) {
     console.error(`Error creating file "${filename}":`, error);
+    return false;
   }
 }
 
@@ -56,10 +59,10 @@ export function createFileWithContent(filename, content) {
  * @returns string
  */
 export function makeFileExtension({ typescript, postfix, withJsx, vue }) {
-  if (vue) return FileExtensions.vue;
+  if (vue) return FileExtensionEnum.vue;
 
-  const tsExt = withJsx ? FileExtensions.tsx : FileExtensions.ts;
-  const jsExt = withJsx ? FileExtensions.jsx : FileExtensions.js;
+  const tsExt = withJsx ? FileExtensionEnum.tsx : FileExtensionEnum.ts;
+  const jsExt = withJsx ? FileExtensionEnum.jsx : FileExtensionEnum.js;
 
   const extension = `${typescript ? tsExt : jsExt}`;
 

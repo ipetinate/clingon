@@ -5,10 +5,28 @@ import {
   postfixChoices,
   resourcesPaths,
   tsTypeChoices,
+  vueVersionsChoices,
 } from "../constants/choices.js";
 import { boolAsText } from "../utils/string.js";
 
 import { guidedFlowGenerator } from "../flows/guided-flow-generator.js";
+import { FrameworkEnum } from "../enums/frameworks.js";
+
+/**
+ * @typedef {{
+ *   type: string;
+ *   name: string;
+ *   framework: string;
+ *   version: string | number
+ *   resourcePath: string;
+ *   testPath: string
+ *   storyPath: string
+ *   testPostfix: string;
+ *   typescript: boolean;
+ *   withTest: boolean;
+ *   withStory: boolean;
+ * }} Answers
+ */
 
 export async function guidedAction() {
   let withTest = false;
@@ -19,10 +37,19 @@ export async function guidedAction() {
   let storyPath = null;
   let resourcePath = null;
 
+  let version = null;
+
   const framework = await select({
     message: "Select your framework/lib",
     choices: frameworksAndLibsChoices,
   });
+
+  if (framework === FrameworkEnum.Vue) {
+    version = await select({
+      message: "What is your Vue version?",
+      choices: vueVersionsChoices,
+    });
+  }
 
   const typescript = await confirm({ message: "Do you use TypeScript?" });
 
@@ -95,8 +122,12 @@ export async function guidedAction() {
 
   const name = await input({ message: "Name" });
 
+  /**
+   * @type {Answers}
+   */
   const answers = {
     framework,
+    version,
     name,
     resourcePath,
     testPath,

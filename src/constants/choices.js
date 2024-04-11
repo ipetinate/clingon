@@ -1,3 +1,6 @@
+import { FrameworkEnum } from "../enums/frameworks.js";
+import { VueVersionEnum } from "../enums/vue-version.js";
+
 export const tsTypeChoices = [
   { name: "Page", value: "page" },
   { name: "Component", value: "component" },
@@ -23,8 +26,13 @@ export const jsTypeChoices = [
 ];
 
 export const frameworksAndLibsChoices = [
-  { name: "Vue", value: "vue" },
-  { name: "React", value: "react" },
+  { name: "Vue", value: FrameworkEnum.Vue },
+  { name: "React", value: FrameworkEnum.React },
+];
+
+export const vueVersionsChoices = [
+  { name: "Vue 2", value: VueVersionEnum[2] },
+  { name: "Vue 3", value: VueVersionEnum[3] },
 ];
 
 export const postfixChoices = [
