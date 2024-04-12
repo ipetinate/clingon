@@ -2,14 +2,11 @@ import { FrameworkEnum } from "../enums/frameworks.js";
 
 import { makeFileExtension } from "./file.js";
 
-import { frameworkTemplates } from "../constants/templates.js";
+import { unitTestTemplates } from "../constants/templates.js";
 import { createFileWithContent, readFileContent } from "../utils/file.js";
-import { convertCase } from "./string.js";
-import { VueVersionEnum } from "../enums/vue-version.js";
 
 /**
  * @typedef {import("../actions/guided.js").Answers} Answers
- * @typedef {Record<2 | 3, "options" | "setup">} VueApi - Vue API variant options or setup (composition)
  */
 
 /**
@@ -21,48 +18,16 @@ import { VueVersionEnum } from "../enums/vue-version.js";
 export function defineComponentTemplate(data) {
   return () => {
     /**
-     * Template path from path's dictionary
-     */
-    let templatePath = "";
-
-    /**
      * @type {"js" | "ts"}
      */
     const variant = data.typescript ? "ts" : "js";
 
     /**
-     * @type {2 | 3}
+     * Template path from path's dictionary
      */
-    const vueVersion = data.version;
+    const templatePath = unitTestTemplates.generic[variant].unit;
 
-    /**
-     * @type {VueApi}
-     */
-    const vueApi = {
-      2: "options",
-      3: "setup",
-    };
-
-    switch (data.framework) {
-      case FrameworkEnum.react: {
-        templatePath = frameworkTemplates.react[variant].functional;
-
-        return { ...data, templatePath };
-      }
-      case FrameworkEnum.vue: {
-        /**
-         * @type {VueApi}
-         */
-        const api = vueApi[vueVersion];
-
-        templatePath = frameworkTemplates.vue[vueVersion][variant][api];
-
-        return { ...data, templatePath };
-      }
-      default: {
-        throw new Error("Framework is required to get a template");
-      }
-    }
+    return { ...data, templatePath };
   };
 }
 
@@ -91,26 +56,9 @@ export function getTemplateContent(data) {
  * @returns {() => data}
  */
 export function replaceAllComponentTextOccurrences(data) {
-  switch (data.framework) {
-    case FrameworkEnum.react: {
-      data.fileContent = data.fileContent.replace("Component", data.name);
+  data.fileContent = data.fileContent.replace("ResourceName", data.name);
 
-      return data;
-    }
-    case FrameworkEnum.vue: {
-      data.fileContent = data.fileContent.replace(
-        /component/g,
-        convertCase("kebab-case", data.name.toLowerCase())
-      );
-
-      return data;
-    }
-    default: {
-      throw new Error(
-        "Framework is required to replace all occurences inside template"
-      );
-    }
-  }
+  return data;
 }
 
 /**
@@ -125,7 +73,7 @@ export function replaceAllComponentTextOccurrences(data) {
 export function generateComponentFile(data) {
   const extension = makeFileExtension({
     typescript: data.typescript,
-    vue: data.framework === FrameworkEnum.vue,
+    postfix: data.testPostfix,
     withJsx: data.framework === FrameworkEnum.react,
   });
 

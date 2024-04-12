@@ -149,7 +149,13 @@ export async function guidedAction() {
     if (choices) {
       testPath = await select({
         message: "What is the folder path that I should create your tests in?",
-        choices,
+        choices: [
+          ...choices,
+          {
+            name: `Same as your ${type}: ${resourcePath}`,
+            value: resourcePath,
+          },
+        ],
       });
     } else {
       testPath = await input({
@@ -197,6 +203,8 @@ export async function guidedAction() {
   const name = await input({ message: "Name" });
 
   /**
+   * Result of user's prompted asked questions
+   *
    * @type {Answers}
    */
   const answers = {
@@ -248,6 +256,11 @@ function getPathChoices({ type, target }) {
   return resourcesPaths[type];
 }
 
+/**
+ * Viewing answers to questions asked to the user
+ *
+ * @param {Answers} answers User's responses
+ */
 function showPreview(answers) {
   console.table({
     "Framework/Lib": answers.framework,
