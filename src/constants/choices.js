@@ -70,10 +70,17 @@ export const frameworksAndLibsChoices = [
  * @type {CssrameworkChoices[]}
  */
 export const cssFrameworkChoices = [
-  { name: "Vanilla Pure CSS", value: CssFrameworkEnum.vanilla_css },
-  { name: "Tailwind CSS", value: CssFrameworkEnum.tailwind_css },
-  { name: "CSS Modules", value: CssFrameworkEnum.css_modules },
-  { name: "SASS (w/ .scss)", value: CssFrameworkEnum.scss },
+  { name: "Vanilla Pure CSS (.css)", value: CssFrameworkEnum.vanilla_css },
+  {
+    name: "Tailwind CSS Inline (inside component)",
+    value: CssFrameworkEnum.tailwind_inline,
+  },
+  {
+    name: "Tailwind CSS w/ File (.css w/ @apply)",
+    value: CssFrameworkEnum.tailwind_file,
+  },
+  { name: "CSS Modules (.css)", value: CssFrameworkEnum.css_modules },
+  { name: "SASS (.scss)", value: CssFrameworkEnum.scss },
 ];
 
 export const vueVersionsChoices = [

@@ -14,7 +14,7 @@ import {
 import { boolAsText } from "../utils/string.js";
 import { guidedFlowGenerator } from "../flows/guided-flow-generator.js";
 
-import { FrameworkEnum } from "../enums/frameworks.js";
+import { CssFrameworkEnum, FrameworkEnum } from "../enums/frameworks.js";
 
 export async function guidedAction() {
   /**
@@ -138,13 +138,6 @@ export async function guidedAction() {
         choices: cssFrameworkChoices,
       });
     }
-
-    if (cssFramework === "tailwind_css") {
-      withTailwindInline = await confirm({
-        message:
-          "Do you want to use Tailwind inline on elements class attribute? If you don't choose anything, a .css file with @apply directive will be created by default",
-      });
-    }
   }
 
   /**
@@ -245,6 +238,7 @@ export async function guidedAction() {
    */
   const answers = {
     framework,
+    cssFramework,
     testFramework,
     version,
     name,
@@ -258,7 +252,6 @@ export async function guidedAction() {
     withStory,
     withTest,
     withTestingLibrary,
-    withTailwindInline,
   };
 
   showPreview(answers);
@@ -306,7 +299,7 @@ function showPreview(answers) {
     "Resource Type": answers.type,
     "Resource Name": answers.name,
     "With TypeScript": boolAsText(answers.typescript),
-    "With Tailwind": boolAsText(answers.withTailwindInline),
+    "CSS approach": getCssApproachName(answers.cssFramework),
     "With Story": boolAsText(answers.withStory),
     "With Unit Test": boolAsText(answers.withTest),
     "With Testing Library": boolAsText(answers.withTestingLibrary),
@@ -316,4 +309,22 @@ function showPreview(answers) {
     "Test Path": answers.testPath,
     "Story Path": answers.storyPath,
   });
+}
+
+/**
+ * Css Frameworks
+ *
+ * @param {import("../types.js").CssFramework} target Css framework
+ */
+function getCssApproachName(target) {
+  const nameMap = {
+    [CssFrameworkEnum.css_modules]: "CSS Modules (.css)",
+    [CssFrameworkEnum.tailwind_inline]:
+      "Tailwind CSS Inline (inside component)",
+    [CssFrameworkEnum.tailwind_file]: "Tailwind CSS w/ File (.css w/ @apply)",
+    [CssFrameworkEnum.vanilla_css]: "Vanilla Pure CSS (.css)",
+    [CssFrameworkEnum.scss]: "SASS (.scss)",
+  };
+
+  return nameMap[target];
 }

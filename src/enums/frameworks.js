@@ -19,7 +19,8 @@ export const TestFrameworkEnum = {
  */
 export const CssFrameworkEnum = {
   css_modules: "css_modules",
-  tailwind_css: "tailwind_css",
+  tailwind_inline: "tailwind_inline",
+  tailwind_file: "tailwind_file",
   vanilla_css: "vanilla_css",
   scss: "scss",
 };

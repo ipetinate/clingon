@@ -6,10 +6,18 @@ export const frameworkTemplates = {
     ts: {
       // TODO: add react class templates
       functional: "src/templates/react/ts/FunctionalComponent.tsx",
+      tailwind_file: "src/templates/react/ts/TailwindFunctionalComponent.tsx",
+      tailwind_inline:
+        "src/templates/react/ts/TailwindInlineFunctionalComponent.tsx",
+      css_modules: "src/templates/react/ts/CssModulesFunctionalComponent.tsx",
     },
     js: {
       // TODO: add react class templates
       functional: "src/templates/react/js/FunctionalComponent.jsx",
+      tailwind_file: "src/templates/react/js/TailwindFunctionalComponent.jsx",
+      tailwind_inline:
+        "src/templates/react/js/TailwindInlineFunctionalComponent.jsx",
+      css_modules: "src/templates/react/js/CssModulesFunctionalComponent.jsx",
     },
   },
   vue: {

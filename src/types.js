@@ -27,7 +27,6 @@ import {
  *   withTest: boolean;
  *   withStory: boolean;
  *   withTestingLibrary: boolean
- *   withTailwindInline: boolean
  *   testPostfix: TestPostfix;
  *   storyPostfix: StoryPostfix;
  *   testFramework: TestFramework
@@ -40,7 +39,7 @@ import {
  * @typedef {"Page" | "Component" | "Function" | "Type" | "Model" | "Enum" | "Test" | "Spec" | "Cypress Spec" | "Storybook Story"} TypeNames
  * @typedef {"Vue" | "React"} FrameworkNames
  * @typedef {"Vitest" | "Jest"} TestFrameworkNames
- * @typedef {"CSS Modules" | "Tailwind CSS" | "Vanilla Pure CSS" | "SASS (w/ .scss)"} CssFrameworkNames
+ * @typedef {"CSS Modules (.css)" | "Tailwind CSS Inline (inside component)" | "Tailwind CSS w/ File (.css w/ @apply)" | "Vanilla Pure CSS (.css)" | "SASS (.scss)"} CssFrameworkNames
  */
 
 export default {};
