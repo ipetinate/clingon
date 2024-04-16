@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import ComponentName from "./ComponentName";
+import { ComponentName } from "componentPath/ComponentName";
 
 describe("ComponentName", () => {
   it("renders welcome message", () => {
