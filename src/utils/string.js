@@ -46,6 +46,12 @@ export function convertCase(targetPattern, inputString) {
   }
 }
 
+/**
+ * Convert a string on any case to a camelCase
+ *
+ * @param {string} inputString String to be converted
+ * @returns {string}
+ */
 export function convertToCamelCase(inputString) {
   let words = inputString.split(/[-_]/);
 
@@ -60,6 +66,12 @@ export function convertToCamelCase(inputString) {
   return words.join("");
 }
 
+/**
+ * Convert a string on any case to a snake_case
+ *
+ * @param {string} inputString String to be converted
+ * @returns {string}
+ */
 export function convertToSnakeCase(inputString) {
   return inputString
     .replace(/([a-z])([A-Z])/g, "$1_$2")
@@ -67,15 +79,52 @@ export function convertToSnakeCase(inputString) {
     .toLowerCase();
 }
 
+/**
+ * Convert a string on any case to a PascalCase
+ *
+ * @param {string} inputString String to be converted
+ * @returns {string}
+ */
 export function convertToPascalCase(inputString) {
   return inputString
     .replace(/[-_](.)/g, (_, char) => char.toUpperCase())
     .replace(/^\w/, (char) => char.toUpperCase());
 }
 
+/**
+ * Convert a string on any case to a kebab-case
+ *
+ * @param {string} inputString String to be converted
+ * @returns {string}
+ */
 export function convertToKebabCase(inputString) {
   return inputString
     .replace(/([a-z])([A-Z])/g, "$1-$2")
     .replace(/[_\s]/g, "-")
     .toLowerCase();
+}
+
+/**
+ * Capitalize a string first letter of entire word or all occurrences after a pattern
+ *
+ * @param {string} text Original text to be capitalized
+ * @param {"first_letter" | "all"} target Target of capitalization, can be only first letter or all letters after a separator
+ * @param {string | RegExp} separator Separator pattern to split word and capitalize first occurence
+ * @returns {string}
+ */
+export function capitalizeLetter(text, target = "first_letter", separator) {
+  if (target === "all") {
+    const words = text.split(new RegExp(separator));
+    const capitalizedWordsArray = words.map((word) => capitalizeLetter(word));
+    const capitalizedWordsString = capitalizedWordsArray.join(separator);
+
+    return capitalizedWordsString;
+  }
+
+  const firstLetter = text.charAt(0).toUpperCase();
+  const remainingLetters = text.slice(1);
+
+  const mergedText = firstLetter + remainingLetters;
+
+  return mergedText;
 }

@@ -9,6 +9,7 @@ import {
   convertToPascalCase,
   convertToKebabCase,
   convertToSnakeCase,
+  capitalizeLetter,
 } from "./string.js";
 
 describe("String Utils", () => {
@@ -134,6 +135,48 @@ describe("String Utils", () => {
         "pascal_to_snake"
       );
       assert.strictEqual(convertToSnakeCase("camelToSnake"), "camel_to_snake");
+    });
+  });
+
+  describe("capitalizeLetter", () => {
+    it("capitalize only first letter on a word with defaults (implicit target)", () => {
+      const linuxCreatorName = "linus torvalds";
+
+      const result = capitalizeLetter(linuxCreatorName);
+
+      assert.strictEqual(result, "Linus torvalds");
+    });
+
+    it("capitalize only first letter on a word with explicit target param", () => {
+      const linuxCreatorName = "linus torvalds";
+
+      const result = capitalizeLetter(linuxCreatorName, "first_letter");
+
+      assert.strictEqual(result, "Linus torvalds");
+    });
+
+    it("capitalize all first letter occurences after a space on a word", () => {
+      const linuxCreatorName = "linus torvalds";
+
+      const result = capitalizeLetter(linuxCreatorName, "all", " ");
+
+      assert.strictEqual(result, "Linus Torvalds");
+    });
+
+    it("capitalize all first letter occurences after a space on a word with multiple words", () => {
+      const linuxCreatorName = "linus torvalds creator of linux kernel";
+
+      const result = capitalizeLetter(linuxCreatorName, "all", " ");
+
+      assert.strictEqual(result, "Linus Torvalds Creator Of Linux Kernel");
+    });
+
+    it("capitalize all first letter occurences after a space on a word with multiple words with comma", () => {
+      const linuxCreatorName = "linus,torvalds,creator,of,linux,kernel";
+
+      const result = capitalizeLetter(linuxCreatorName, "all", ",");
+
+      assert.strictEqual(result, "Linus,Torvalds,Creator,Of,Linux,Kernel");
     });
   });
 });
