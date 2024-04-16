@@ -1,13 +1,20 @@
-import { FrameworkEnum, TestFrameworkEnum } from "../enums/frameworks.js";
+import {
+  CssFrameworkEnum,
+  FrameworkEnum,
+  TestFrameworkEnum,
+} from "../enums/frameworks.js";
 import { VueVersionEnum } from "../enums/vue-version.js";
 import { ResourceTypeEnum } from "../enums/resource-type.js";
 import { StoryPostfixEnum, TestPostfixEnum } from "../enums/postfixes.js";
 
 /**
  * @typedef {{ name: import("../types.js").TypeNames, value: import("../types.js").Resource }} TypeChoices
+ *
  * @typedef {{ name: import("../types.js").FrameworkNames, value: import("../types.js").Framework }} FrameworkChoices
  *
  * @typedef {{ name: import("../types.js").TestFrameworkNames, value: import("../types.js").TestFramework }} TestFrameworkChoices
+ *
+ * @typedef {{ name: import("../types.js").CssFrameworkNames, value: import("../types.js").CssFramework }} CssrameworkChoices
  */
 
 /**
@@ -57,6 +64,16 @@ export const testFrameworkChoices = [
 export const frameworksAndLibsChoices = [
   { name: "Vue", value: FrameworkEnum.vue },
   { name: "React", value: FrameworkEnum.react },
+];
+
+/**
+ * @type {CssrameworkChoices[]}
+ */
+export const cssFrameworkChoices = [
+  { name: "Vanilla Pure CSS", value: CssFrameworkEnum.vanilla_css },
+  { name: "Tailwind CSS", value: CssFrameworkEnum.tailwind_css },
+  { name: "CSS Modules", value: CssFrameworkEnum.css_modules },
+  { name: "SASS (w/ .scss)", value: CssFrameworkEnum.scss },
 ];
 
 export const vueVersionsChoices = [

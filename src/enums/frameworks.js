@@ -13,3 +13,13 @@ export const TestFrameworkEnum = {
   jest: "jest",
   vitest: "vitest",
 };
+
+/**
+ * List of availables css frameworks
+ */
+export const CssFrameworkEnum = {
+  css_modules: "css_modules",
+  tailwind_css: "tailwind_css",
+  vanilla_css: "vanilla_css",
+  scss: "scss",
+};

@@ -1,11 +1,16 @@
 import { ResourceTypeEnum } from "enums/resource-type.js";
-import { FrameworkEnum, TestFrameworkEnum } from "enums/frameworks.js";
 import { StoryPostfixEnum, TestPostfixEnum } from "enums/postfixes.js";
+import {
+  FrameworkEnum,
+  TestFrameworkEnum,
+  CssFrameworkEnum,
+} from "enums/frameworks.js";
 
 /**
  * @typedef {keyof ResourceTypeEnum} Resource - Resource type
  *
  * @typedef {keyof TestFrameworkEnum} TestFramework - Test framework target
+ * @typedef {keyof CssFrameworkEnum} CssFramework - Test framework target
  *
  * @typedef {keyof FrameworkEnum} Framework - Framework target
  *
@@ -22,10 +27,11 @@ import { StoryPostfixEnum, TestPostfixEnum } from "enums/postfixes.js";
  *   withTest: boolean;
  *   withStory: boolean;
  *   withTestingLibrary: boolean
- *   withTailwind: boolean
+ *   withTailwindInline: boolean
  *   testPostfix: TestPostfix;
  *   storyPostfix: StoryPostfix;
  *   testFramework: TestFramework
+ *   cssFramework: CssFramework
  *   resourcePath: string;
  *   testPath: string
  *   storyPath: string
@@ -34,6 +40,7 @@ import { StoryPostfixEnum, TestPostfixEnum } from "enums/postfixes.js";
  * @typedef {"Page" | "Component" | "Function" | "Type" | "Model" | "Enum" | "Test" | "Spec" | "Cypress Spec" | "Storybook Story"} TypeNames
  * @typedef {"Vue" | "React"} FrameworkNames
  * @typedef {"Vitest" | "Jest"} TestFrameworkNames
+ * @typedef {"CSS Modules" | "Tailwind CSS" | "Vanilla Pure CSS" | "SASS (w/ .scss)"} CssFrameworkNames
  */
 
 export default {};

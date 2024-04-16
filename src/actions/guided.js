@@ -8,6 +8,7 @@ import {
   vueVersionsChoices,
   storiesPostfixChoices,
   testFrameworkChoices,
+  cssFrameworkChoices,
 } from "../constants/choices.js";
 
 import { boolAsText } from "../utils/string.js";
@@ -39,7 +40,7 @@ export async function guidedAction() {
    *
    * @type {boolean}
    */
-  let withTailwind = false;
+  let withTailwindInline = false;
   /**
    * Test file postfix
    *
@@ -78,6 +79,13 @@ export async function guidedAction() {
    * @type {string}
    */
   let resourcePath = null;
+
+  /**
+   * Css Framework target
+   *
+   * @type {import("../types.js").CssFramework}
+   */
+  let cssFramework = "vanilla_css";
 
   /**
    * Target version of framework (e.g Vue 2 or 3, etc)
@@ -119,7 +127,24 @@ export async function guidedAction() {
   });
 
   if (["component", "page"].includes(type)) {
-    withTailwind = await confirm({ message: "Do you use Tailwind?" });
+    const chooseCssFramework = await confirm({
+      message: "Do you want to select a specific css approach? ",
+    });
+
+    if (chooseCssFramework) {
+      cssFramework = await select({
+        message:
+          "Would you like to select the CSS approach? If you don't choose anything, a .css file with pure CSS will be created by default",
+        choices: cssFrameworkChoices,
+      });
+    }
+
+    if (cssFramework === "tailwind_css") {
+      withTailwindInline = await confirm({
+        message:
+          "Do you want to use Tailwind inline on elements class attribute? If you don't choose anything, a .css file with @apply directive will be created by default",
+      });
+    }
   }
 
   /**
@@ -233,7 +258,7 @@ export async function guidedAction() {
     withStory,
     withTest,
     withTestingLibrary,
-    withTailwind,
+    withTailwindInline,
   };
 
   showPreview(answers);
@@ -281,7 +306,7 @@ function showPreview(answers) {
     "Resource Type": answers.type,
     "Resource Name": answers.name,
     "With TypeScript": boolAsText(answers.typescript),
-    "With Tailwind": boolAsText(answers.withTailwind),
+    "With Tailwind": boolAsText(answers.withTailwindInline),
     "With Story": boolAsText(answers.withStory),
     "With Unit Test": boolAsText(answers.withTest),
     "With Testing Library": boolAsText(answers.withTestingLibrary),
