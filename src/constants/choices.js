@@ -1,4 +1,4 @@
-import { FrameworkEnum } from "../enums/frameworks.js";
+import { FrameworkEnum, TestFrameworkEnum } from "../enums/frameworks.js";
 import { VueVersionEnum } from "../enums/vue-version.js";
 import { ResourceTypeEnum } from "../enums/resource-type.js";
 import { StoryPostfixEnum, TestPostfixEnum } from "../enums/postfixes.js";
@@ -6,6 +6,8 @@ import { StoryPostfixEnum, TestPostfixEnum } from "../enums/postfixes.js";
 /**
  * @typedef {{ name: import("../types.js").TypeNames, value: import("../types.js").Resource }} TypeChoices
  * @typedef {{ name: import("../types.js").FrameworkNames, value: import("../types.js").Framework }} FrameworkChoices
+ *
+ * @typedef {{ name: import("../types.js").TestFrameworkNames, value: import("../types.js").TestFramework }} TestFrameworkChoices
  */
 
 /**
@@ -39,6 +41,14 @@ export const jsTypeChoices = [
   { name: "Spec", value: ResourceTypeEnum.spec },
   { name: "Cypress Spec", value: ResourceTypeEnum.cypress_spec },
   { name: "Storybook Story", value: ResourceTypeEnum.storybook_story },
+];
+
+/**
+ * @type {TestFrameworkChoices[]}
+ */
+export const testFrameworkChoices = [
+  { name: "Jest", value: TestFrameworkEnum.jest },
+  { name: "Vitest", value: TestFrameworkEnum.vitest },
 ];
 
 /**

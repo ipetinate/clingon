@@ -43,11 +43,8 @@ export function createFileWithContent(filename, content) {
   try {
     fs.writeFileSync(filename, content, "utf8");
 
-    console.log(`File "${filename}" created successfully.`);
-
     return true;
   } catch (error) {
-    console.error(`Error creating file "${filename}":`, error);
     return false;
   }
 }

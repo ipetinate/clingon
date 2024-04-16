@@ -5,7 +5,6 @@ import { makeFileExtension } from "./file.js";
 import { frameworkTemplates } from "../constants/templates.js";
 import { createFileWithContent, readFileContent } from "../utils/file.js";
 import { convertCase } from "./string.js";
-import { VueVersionEnum } from "../enums/vue-version.js";
 
 /**
  * @typedef {import("../actions/guided.js").Answers} Answers
