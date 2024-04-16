@@ -1,13 +1,15 @@
 /**
- * Built-in templates path dictionary
+ * Built-in templates for components and pages path dictionary
  */
-export const templates = {
+export const frameworkTemplates = {
   react: {
     ts: {
-      functional: "src/templates/react/ts/FuncionalComponent.tsx",
+      // TODO: add react class templates
+      functional: "src/templates/react/ts/FunctionalComponent.tsx",
     },
     js: {
-      functional: "src/templates/react/js/FuncionalComponent.jsx",
+      // TODO: add react class templates
+      functional: "src/templates/react/js/FunctionalComponent.jsx",
     },
   },
   vue: {
@@ -28,4 +30,19 @@ export const templates = {
       },
     },
   },
+};
+
+/**
+ * Built-in templates for unit tests path dictionary
+ */
+export const unitTestTemplates = {
+  generic: {
+    ts: {
+      unit: "src/templates/tests/generic/ts/unit.ts",
+    },
+    js: {
+      unit: "src/templates/tests/generic/js/unit.js",
+    },
+  },
+  // TODO: add jest, vitest, etc
 };

@@ -13,13 +13,9 @@ import { compose } from "../utils/compose.js";
 /**
  * Component generator
  *
- * @param {Answers} answers Answers prompted to the user
+ * @param {Answers & { path: string }} answers Answers prompted to the user
  */
 export function generateComponent(answers) {
-  if (!answers.framework) {
-    throw new Error("You must inform the framework!");
-  }
-
   const { success, error, path } = compose(
     defineComponentTemplate(answers),
     getTemplateContent,
