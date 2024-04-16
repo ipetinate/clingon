@@ -3,6 +3,7 @@
  */
 
 import { compose } from "../utils/compose.js";
+import { capitalizeLetter } from "../utils/string.js";
 import {
   defineComponentTemplate,
   generateComponentFile,
@@ -24,9 +25,11 @@ export function generateTests(answers) {
   );
 
   if (success) {
-    console.info("Component created successfully: " + path);
+    console.info(
+      capitalizeLetter(answers.testPostfix) + " created successfully: " + path
+    );
   }
   if (error) {
-    console.info("Error on create component, try again");
+    console.info(`Error on create ${answers.testPostfix}, try again`);
   }
 }
