@@ -1,7 +1,7 @@
 /**
  * Resource to be generated type
  */
-export const ResourceType = {
+export const ResourceTypeEnum = {
   page: "page",
   component: "component",
   function: "function",

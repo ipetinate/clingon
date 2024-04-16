@@ -1,7 +1,3 @@
-/**
- * @typedef {import("../actions/guided.js").Answers} Answers
- */
-
 import { compose } from "../utils/compose.js";
 import { capitalizeLetter } from "../utils/string.js";
 import {
@@ -14,7 +10,7 @@ import {
 /**
  * Component generator
  *
- * @param {Answers  & { path: string }} answers Answers prompted to the user
+ * @param {import("../types.js").Answers  & { path: string }} answers Answers prompted to the user
  */
 export function generateTests(answers) {
   const { success, error, path } = compose(

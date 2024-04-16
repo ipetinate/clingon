@@ -1,4 +1,6 @@
-import { describe, it } from "node:test";
+import fs from "node:fs";
+
+import { describe, it, mock } from "node:test";
 import assert from "node:assert/strict";
 
 import { checkDirectoriesTree, getDirectories } from "./directory.js";
@@ -15,15 +17,21 @@ const srcDirs = [
 
 const rootDirs = [".git", "doc", "node_modules", "src"];
 
+const mockFsReadDir = mock.method(fs, "readdirSync");
+
 describe("Directory Utils", () => {
   describe("getDirectories util", () => {
     it("get directories from a specific path/dir", () => {
+      mockFsReadDir.mock.mockImplementation(() => srcDirs);
+
       const directories = getDirectories(process.cwd() + "/src");
 
       assert.deepEqual(directories, srcDirs);
     });
 
     it("get directories from root", () => {
+      mockFsReadDir.mock.mockImplementation(() => rootDirs);
+
       const directories = getDirectories();
 
       assert.deepEqual(directories, rootDirs);

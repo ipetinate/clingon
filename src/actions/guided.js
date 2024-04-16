@@ -12,30 +12,7 @@ import {
 import { boolAsText } from "../utils/string.js";
 import { guidedFlowGenerator } from "../flows/guided-flow-generator.js";
 
-import { ResourceType } from "../enums/resource-type.js";
 import { FrameworkEnum } from "../enums/frameworks.js";
-import { StoryPostfixEnum, TestPostfixEnum } from "../enums/postfixes.js";
-
-/**
- * @typedef {keyof ResourceType} Resource - Resource type
- * @typedef {keyof FrameworkEnum} Framework - Framework target
- * @typedef {keyof TestPostfixEnum} TestPostfix - Postfix for unit test file
- * @typedef {keyof StoryPostfixEnum} StoryPostfix - Postfix for stories file (storybook, or other lib)
- * @typedef {{
- *   name: string;
- *   type: Resource;
- *   framework: Framework;
- *   version: string | number
- *   typescript: boolean;
- *   withTest: boolean;
- *   withStory: boolean;
- *   testPostfix: TestPostfix;
- *   storyPostfix: StoryPostfix;
- *   resourcePath: string;
- *   testPath: string
- *   storyPath: string
- * }} Answers - Users prompted answers
- */
 
 export async function guidedAction() {
   /**
@@ -53,13 +30,13 @@ export async function guidedAction() {
   /**
    * Test file postfix
    *
-   * @type {TestPostfix}
+   * @type {import("../types.js").TestPostfix}
    */
   let testPostfix = null;
   /**
    * Test file postfix
    *
-   * @type {StoryPostfix}
+   * @type {import("../types.js").StoryPostfix}
    */
   let storyPostfix = null;
 
@@ -90,7 +67,7 @@ export async function guidedAction() {
   let version = null;
 
   /**
-   * @type {Framework} - Framework target value
+   * @type {import("../types.js").Framework} - Framework target value
    */
   const framework = await select({
     message: "Select your framework/lib",
@@ -114,7 +91,7 @@ export async function guidedAction() {
   /**
    * Resource to be generated type
    *
-   * @type {Resource}
+   * @type {import("../types.js").Resource}
    */
   const type = await select({
     message: "What do you want to create?",
@@ -199,13 +176,14 @@ export async function guidedAction() {
 
   /**
    * Resource name (e.g if is a component, should be like `PersonCard`)
+   * @type {string}
    */
   const name = await input({ message: "Name" });
 
   /**
    * Result of user's prompted asked questions
    *
-   * @type {Answers}
+   * @type {import("../types.js").Answers}
    */
   const answers = {
     framework,
@@ -227,7 +205,7 @@ export async function guidedAction() {
   /**
    * User's confirmation to proceed with generation after preview setup
    *
-   * * @type {boolean}
+   * @type {boolean}
    */
   const allowedToGenerate = await confirm({
     message: "Confirm this is what you want to create?",
@@ -259,7 +237,7 @@ function getPathChoices({ type, target }) {
 /**
  * Viewing answers to questions asked to the user
  *
- * @param {Answers} answers User's responses
+ * @param {import("../types.js").Answers} answers User's responses
  */
 function showPreview(answers) {
   console.table({

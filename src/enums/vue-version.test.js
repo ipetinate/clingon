@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { VueVersionEnum } from "./vue-version";
+import { VueVersionEnum } from "./vue-version.js";
 
 describe("FrameworksEnum", () => {
   it("should return properly values", () => {

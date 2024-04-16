@@ -1,6 +1,6 @@
-import { describe, it } from "node:test";
+import { describe, it, todo } from "node:test";
 import assert from "node:assert/strict";
 
-describe("Component Generator Utils", () => {
-  describe("createComponent util", () => {});
+describe.todo("Component Generator Utils", () => {
+  describe.todo("createComponent util", () => {});
 });

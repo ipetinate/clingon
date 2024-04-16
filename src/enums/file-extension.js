@@ -1,3 +1,6 @@
+/**
+ * Available file extensions enum
+ */
 export const FileExtensionEnum = {
   ts: "ts",
   tsx: "tsx",

@@ -1,32 +1,49 @@
-import { ResourceType } from "../enums/resource-type.js";
 import { FrameworkEnum } from "../enums/frameworks.js";
 import { VueVersionEnum } from "../enums/vue-version.js";
+import { ResourceTypeEnum } from "../enums/resource-type.js";
 import { StoryPostfixEnum, TestPostfixEnum } from "../enums/postfixes.js";
 
+/**
+ * @typedef {{ name: import("../types.js").TypeNames, value: import("../types.js").Resource }} TypeChoices
+ * @typedef {{ name: import("../types.js").FrameworkNames, value: import("../types.js").Framework }} FrameworkChoices
+ */
+
+/**
+ * Type choices for TS variant of resources
+ * @type {TypeChoices[]}
+ */
 export const tsTypeChoices = [
-  { name: "Page", value: ResourceType.page },
-  { name: "Component", value: ResourceType.component },
-  { name: "Function", value: ResourceType.function },
-  { name: "Type", value: ResourceType.type },
-  { name: "Model", value: ResourceType.model },
-  { name: "Enum", value: ResourceType.enum },
-  { name: "Test", value: ResourceType.test },
-  { name: "Spec", value: ResourceType.spec },
-  { name: "Cypress Spec", value: ResourceType.cypress_spec },
-  { name: "Storybook Story", value: ResourceType.storybook_story },
+  { name: "Page", value: ResourceTypeEnum.page },
+  { name: "Component", value: ResourceTypeEnum.component },
+  { name: "Function", value: ResourceTypeEnum.function },
+  { name: "Type", value: ResourceTypeEnum.type },
+  { name: "Model", value: ResourceTypeEnum.model },
+  { name: "Enum", value: ResourceTypeEnum.enum },
+  { name: "Test", value: ResourceTypeEnum.test },
+  { name: "Spec", value: ResourceTypeEnum.spec },
+  { name: "Cypress Spec", value: ResourceTypeEnum.cypress_spec },
+  { name: "Storybook Story", value: ResourceTypeEnum.storybook_story },
 ];
 
+/**
+ * Type choices for JS variant of resources
+ *
+ * @type {TypeChoices[]}
+ */
 export const jsTypeChoices = [
-  { name: "Page", value: ResourceType.page },
-  { name: "Component", value: ResourceType.component },
-  { name: "Function", value: ResourceType.function },
-  { name: "Enum", value: ResourceType.enum },
-  { name: "Test", value: ResourceType.test },
-  { name: "Spec", value: ResourceType.spec },
-  { name: "Cypress Spec", value: ResourceType.cypress_spec },
-  { name: "Storybook Story", value: ResourceType.storybook_story },
+  { name: "Page", value: ResourceTypeEnum.page },
+  { name: "Component", value: ResourceTypeEnum.component },
+  { name: "Function", value: ResourceTypeEnum.function },
+  { name: "Enum", value: ResourceTypeEnum.enum },
+  { name: "Test", value: ResourceTypeEnum.test },
+  { name: "Spec", value: ResourceTypeEnum.spec },
+  { name: "Cypress Spec", value: ResourceTypeEnum.cypress_spec },
+  { name: "Storybook Story", value: ResourceTypeEnum.storybook_story },
 ];
 
+/**
+ * @type {FrameworkChoices[]}
+ */
 export const frameworksAndLibsChoices = [
   { name: "Vue", value: FrameworkEnum.vue },
   { name: "React", value: FrameworkEnum.react },
