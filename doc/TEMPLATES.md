@@ -5,8 +5,8 @@
 ### Frontend Frameworks
 
 - [ ] Vue
-  - [ ] 2
-    - [ ] JS
+  - [x] 2
+    - [x] JS
       - [x] Options Component
       - [x] Options Page
       - [x] SCSS Options Component
@@ -17,7 +17,7 @@
       - [x] Tailwind Options Page
       - [x] CSS Modules Options Component
       - [x] CSS Modules Options Page
-    - [ ] TS
+    - [x] TS
       - [x] Options Component
       - [x] Options Page
       - [x] SCSS Options Component
