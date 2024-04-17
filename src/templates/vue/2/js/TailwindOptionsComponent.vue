@@ -30,12 +30,10 @@ export default {
 
 <style scoped>
 .component {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @apply flex justify-center items-center;
 }
 
 .paragraph {
-  color: #333;
+  @apply text-slate-800;
 }
 </style>

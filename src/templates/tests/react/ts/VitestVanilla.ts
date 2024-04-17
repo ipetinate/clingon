@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import { describe, it, expect } from "vitest";
 
-import { ComponentName } from "componentPath/ComponentName";
+import { ComponentName } from "componentPath";
 
 describe("ComponentName", () => {
   it("renders without crashing", () => {

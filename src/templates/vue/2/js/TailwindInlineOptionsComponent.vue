@@ -21,21 +21,9 @@ export default {
 </script>
 
 <template>
-  <div class="component">
-    <p class="paragraph">
+  <div class="flex justify-center items-center">
+    <p class="text-slate-800">
       {{ message }}
     </p>
   </div>
 </template>
-
-<style scoped>
-.component {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.paragraph {
-  color: #333;
-}
-</style>

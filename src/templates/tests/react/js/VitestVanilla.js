@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { ComponentName } from "componentPath/ComponentName";
+import { ComponentName } from "componentPath";
 
 describe("ComponentName", () => {
   it("renders without crashing", () => {
