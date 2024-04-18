@@ -6,6 +6,7 @@ import { compose } from "../utils/compose.js";
 import { convertCase } from "../utils/string.js";
 import { makeFileExtension } from "../utils/file.js";
 import { createFileWithContent, readFileContent } from "../utils/file.js";
+import { localDirname } from "../main.js";
 
 /**
  * @typedef {import("../actions/guided.js").Answers} Answers
@@ -101,6 +102,13 @@ export function defineComponentTemplate(data) {
  *  }}
  */
 export function getTemplateContent(data) {
+  const fullPath = `${localDirname}/${data.templatePath}`;
+
+  console.log({
+    localDirname,
+    fullPath,
+  });
+
   const fileContent = readFileContent(data.templatePath);
 
   return { ...data, fileContent };

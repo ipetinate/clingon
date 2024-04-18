@@ -1,5 +1,20 @@
 import fs from "node:fs";
+import path from "node:path";
 import nodePath from "node:path";
+
+import { fileURLToPath } from "node:url";
+
+/**
+ * Get library `__dirname` to acces root based on lib and not on command was executed (`process.cwd()`)
+ *
+ * @returns {string}
+ */
+export function getLocalLibDirname() {
+  const __filename = fileURLToPath(import.meta.url);
+  const dirname = path.dirname(__filename);
+
+  return dirname?.replace("/utils", "");
+}
 
 /**
  * Navigate to a path folder and return directories path inside specified folder, if not specify path `process.cwd()` will be used instead

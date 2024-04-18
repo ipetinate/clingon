@@ -1,7 +1,15 @@
+#!/usr/bin/env node
+
 import { Command } from "commander";
 
 import { guidedAction } from "./actions/guided.js";
-import { readLocalConfig } from "./utils/global-config.js";
+import { getLocalLibDirname } from "./utils/directory.js";
+
+/*
+ * Global Variables
+ */
+
+export const localDirname = getLocalLibDirname();
 
 /*
  * Resources
@@ -18,7 +26,7 @@ program
  * Read config file from rootDir
  */
 
-const config = readLocalConfig("tricorder.json");
+// const config = readLocalConfig("tricorder.json");
 
 /*
  * Autogen flow - using built-in opinionated templates
