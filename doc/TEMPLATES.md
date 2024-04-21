@@ -4,7 +4,7 @@
 
 ### Frontend Frameworks
 
-- [ ] Vue
+- [x] Vue
   - [x] 2
     - [x] JS
       - [x] Options Component
@@ -28,7 +28,7 @@
       - [x] Tailwind Options Page
       - [x] CSS Modules Options Component
       - [x] CSS Modules Options Page
-  - [ ] 3
+  - [x] 3
     - [x] JS
       - [x] Options Component
       - [x] Options Page
@@ -50,24 +50,24 @@
       - [x] CSS Modules Options Page
       - [x] CSS Modules Setup Component
       - [x] CSS Modules Setup Page
-    - [ ] TS
-      - [ ] Options Component
-      - [ ] Options Page
+    - [x] TS
+      - [x] Options Component
+      - [x] Options Page
       - [x] Setup Component
       - [x] Setup Page
-      - [ ] SCSS Options Component
-      - [ ] SCSS Options Page
+      - [x] SCSS Options Component
+      - [x] SCSS Options Page
       - [x] SCSS Setup Component
       - [x] SCSS Setup Page
-      - [ ] Tailwind Inline Options Component
-      - [ ] Tailwind Options Component
-      - [ ] Tailwind Inline Setup Component
-      - [ ] Tailwind Setup Component
-      - [ ] Tailwind Inline Options Page
-      - [ ] Tailwind Options Page
-      - [ ] Tailwind Inline Setup Page
-      - [ ] Tailwind Setup Page
-      - [ ] CSS Modules Options Component
-      - [ ] CSS Modules Options Page
-      - [ ] CSS Modules Setup Component
-      - [ ] CSS Modules Setup Page
+      - [x] Tailwind Inline Options Component
+      - [x] Tailwind Options Component
+      - [x] Tailwind Inline Setup Component
+      - [x] Tailwind Setup Component
+      - [x] Tailwind Inline Options Page
+      - [x] Tailwind Options Page
+      - [x] Tailwind Inline Setup Page
+      - [x] Tailwind Setup Page
+      - [x] CSS Modules Options Component
+      - [x] CSS Modules Options Page
+      - [x] CSS Modules Setup Component
+      - [x] CSS Modules Setup Page
