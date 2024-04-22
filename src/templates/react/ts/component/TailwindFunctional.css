@@ -1,0 +1,7 @@
+.component {
+  @apply flex justify-center items-center;
+}
+
+.paragraph {
+  @apply text-slate-800;
+}
