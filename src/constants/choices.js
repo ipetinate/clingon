@@ -25,13 +25,13 @@ export const tsTypeChoices = [
   { name: "Page", value: ResourceTypeEnum.page },
   { name: "Component", value: ResourceTypeEnum.component },
   { name: "Function", value: ResourceTypeEnum.function },
-  { name: "Type", value: ResourceTypeEnum.type },
-  { name: "Model", value: ResourceTypeEnum.model },
-  { name: "Enum", value: ResourceTypeEnum.enum },
-  { name: "Test", value: ResourceTypeEnum.test },
-  { name: "Spec", value: ResourceTypeEnum.spec },
-  { name: "Cypress Spec", value: ResourceTypeEnum.cypress_spec },
-  { name: "Storybook Story", value: ResourceTypeEnum.storybook_story },
+  // { name: "Type", value: ResourceTypeEnum.type },
+  // { name: "Model", value: ResourceTypeEnum.model },
+  // { name: "Enum", value: ResourceTypeEnum.enum },
+  // { name: "Test", value: ResourceTypeEnum.test },
+  // { name: "Spec", value: ResourceTypeEnum.spec },
+  // { name: "Cypress Spec", value: ResourceTypeEnum.cypress_spec },
+  // { name: "Storybook Story", value: ResourceTypeEnum.storybook_story },
 ];
 
 /**
@@ -43,11 +43,11 @@ export const jsTypeChoices = [
   { name: "Page", value: ResourceTypeEnum.page },
   { name: "Component", value: ResourceTypeEnum.component },
   { name: "Function", value: ResourceTypeEnum.function },
-  { name: "Enum", value: ResourceTypeEnum.enum },
-  { name: "Test", value: ResourceTypeEnum.test },
-  { name: "Spec", value: ResourceTypeEnum.spec },
-  { name: "Cypress Spec", value: ResourceTypeEnum.cypress_spec },
-  { name: "Storybook Story", value: ResourceTypeEnum.storybook_story },
+  // { name: "Enum", value: ResourceTypeEnum.enum },
+  // { name: "Test", value: ResourceTypeEnum.test },
+  // { name: "Spec", value: ResourceTypeEnum.spec },
+  // { name: "Cypress Spec", value: ResourceTypeEnum.cypress_spec },
+  // { name: "Storybook Story", value: ResourceTypeEnum.storybook_story },
 ];
 
 /**

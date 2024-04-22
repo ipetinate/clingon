@@ -9,7 +9,7 @@ import { createFileWithContent, readFileContent } from "../utils/file.js";
 import { localDirname } from "../main.js";
 
 /**
- * @typedef {import("../actions/guided.js").Answers} Answers
+ * @typedef {import("../types.js").Answers} Answers
  */
 
 /**
@@ -71,17 +71,58 @@ export function defineComponentTemplate(data) {
 
     switch (data.framework) {
       case FrameworkEnum.react: {
-        templatePath = frameworkTemplates.react[variant].functional;
+        if (data.cssFramework === "vanilla_css") {
+          templatePath =
+            frameworkTemplates.react[variant].component.functional.vanilla_css;
+        }
+        if (data.cssFramework === "css_modules") {
+          templatePath =
+            frameworkTemplates.react[variant].component.functional.css_modules;
+        }
+        if (data.cssFramework === "scss") {
+          templatePath =
+            frameworkTemplates.react[variant].component.functional.scss;
+        }
+        if (data.cssFramework === "tailwind_file") {
+          templatePath =
+            frameworkTemplates.react[variant].component.functional
+              .tailwind_file;
+        }
+        if (data.cssFramework === "tailwind_inline") {
+          templatePath =
+            frameworkTemplates.react[variant].component.functional
+              .tailwind_inline;
+        }
 
         return { ...data, templatePath };
       }
       case FrameworkEnum.vue: {
-        /**
-         * @type {VueApi}
-         */
         const api = vueApi[vueVersion];
 
-        templatePath = frameworkTemplates.vue[vueVersion][variant][api];
+        if (data.cssFramework === "vanilla_css") {
+          templatePath =
+            frameworkTemplates.vue[vueVersion][variant].component[api]
+              .vanilla_css;
+        }
+        if (data.cssFramework === "scss") {
+          templatePath =
+            frameworkTemplates.vue[vueVersion][variant].component[api].scss;
+        }
+        if (data.cssFramework === "css_modules") {
+          templatePath =
+            frameworkTemplates.vue[vueVersion][variant].component[api]
+              .css_modules;
+        }
+        if (data.cssFramework === "tailwind_file") {
+          templatePath =
+            frameworkTemplates.vue[vueVersion][variant].component[api]
+              .tailwind_file;
+        }
+        if (data.cssFramework === "tailwind_inline") {
+          templatePath =
+            frameworkTemplates.vue[vueVersion][variant].component[api]
+              .tailwind_inline;
+        }
 
         return { ...data, templatePath };
       }
@@ -104,12 +145,7 @@ export function defineComponentTemplate(data) {
 export function getTemplateContent(data) {
   const fullPath = `${localDirname}/${data.templatePath}`;
 
-  console.log({
-    localDirname,
-    fullPath,
-  });
-
-  const fileContent = readFileContent(data.templatePath);
+  const fileContent = readFileContent(fullPath);
 
   return { ...data, fileContent };
 }

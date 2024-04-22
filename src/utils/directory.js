@@ -13,7 +13,7 @@ export function getLocalLibDirname() {
   const __filename = fileURLToPath(import.meta.url);
   const dirname = path.dirname(__filename);
 
-  return dirname?.replace("/src/utils", "");
+  return dirname?.replace("/utils", "");
 }
 
 /**

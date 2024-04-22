@@ -9,6 +9,7 @@ import {
   createFileWithContent,
   readFileContent,
 } from "../utils/file.js";
+import { localDirname } from "../main.js";
 
 /**
  * Component generator
@@ -17,10 +18,10 @@ import {
  */
 export function generateTests(answers) {
   const { success, error, path } = compose(
-    defineComponentTemplate(answers),
+    defineTestTemplate(answers),
     getTemplateContent,
-    replaceAllComponentTextOccurrences,
-    generateComponentFile
+    replaceAllTestTextOccurrences,
+    generateTestFile
   );
 
   if (success) {
@@ -36,10 +37,10 @@ export function generateTests(answers) {
 /**
  * Get component template details
  *
- * @param {Answers & { path: string }} data - Data to compose component
- * @returns {() => Answers & { templatePath: string }}
+ * @param {import("../types.js").Answers & { path: string }} data - Data to compose component
+ * @returns {() => import("../types.js").Answers & { templatePath: string }}
  */
-export function defineComponentTemplate(data) {
+export function defineTestTemplate(data) {
   return () => {
     /**
      * @type {"js" | "ts"}
@@ -49,7 +50,46 @@ export function defineComponentTemplate(data) {
     /**
      * Template path from path's dictionary
      */
-    const templatePath = unitTestTemplates.generic[variant].unit;
+    let templatePath = "";
+
+    switch (data.framework) {
+      case FrameworkEnum.react: {
+        if (data.testFramework === "jest") {
+          if (data.withTestingLibrary) {
+            templatePath = unitTestTemplates.react[variant].jestTestingLibrary;
+          } else {
+            templatePath = unitTestTemplates.react[variant].jest;
+          }
+        }
+
+        if (data.testFramework === "vitest") {
+          if (data.withTestingLibrary) {
+            templatePath =
+              unitTestTemplates.react[variant].vitestTestingLibrary;
+          } else {
+            templatePath = unitTestTemplates.react[variant].vitest;
+          }
+        }
+      }
+
+      case FrameworkEnum.vue: {
+        if (data.testFramework === "jest") {
+          if (data.withTestingLibrary) {
+            templatePath = unitTestTemplates.vue[variant].jestTestingLibrary;
+          } else {
+            templatePath = unitTestTemplates.vue[variant].jest;
+          }
+        }
+
+        if (data.testFramework === "vitest") {
+          if (data.withTestingLibrary) {
+            templatePath = unitTestTemplates.vue[variant].vitestTestingLibrary;
+          } else {
+            templatePath = unitTestTemplates.vue[variant].vitest;
+          }
+        }
+      }
+    }
 
     return { ...data, templatePath };
   };
@@ -65,7 +105,9 @@ export function defineComponentTemplate(data) {
  *  }}
  */
 export function getTemplateContent(data) {
-  const fileContent = readFileContent(data.templatePath);
+  const fullPath = `${localDirname}/${data.templatePath}`;
+
+  const fileContent = readFileContent(fullPath);
 
   return { ...data, fileContent };
 }
@@ -79,7 +121,7 @@ export function getTemplateContent(data) {
  *  }} data - Data to compose component
  * @returns {() => data}
  */
-export function replaceAllComponentTextOccurrences(data) {
+export function replaceAllTestTextOccurrences(data) {
   data.fileContent = data.fileContent.replace("ResourceName", data.name);
 
   return data;
@@ -94,7 +136,7 @@ export function replaceAllComponentTextOccurrences(data) {
  *  }} data - Data to compose component
  * @returns {() => string}
  */
-export function generateComponentFile(data) {
+export function generateTestFile(data) {
   const extension = makeFileExtension({
     typescript: data.typescript,
     postfix: data.testPostfix,

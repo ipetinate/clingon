@@ -7,10 +7,13 @@ import {
 } from "enums/frameworks.js";
 
 /**
+ *
  * @typedef {keyof ResourceTypeEnum} Resource - Resource type
  *
  * @typedef {keyof TestFrameworkEnum} TestFramework - Test framework target
  * @typedef {keyof CssFrameworkEnum} CssFramework - Test framework target
+ *
+ * @typedef {CssFramework} TemplateVariants - Variants of templates
  *
  * @typedef {keyof FrameworkEnum} Framework - Framework target
  *
@@ -40,6 +43,12 @@ import {
  * @typedef {"Vue" | "React"} FrameworkNames
  * @typedef {"Vitest" | "Jest"} TestFrameworkNames
  * @typedef {"CSS Modules (.css)" | "Tailwind CSS Inline (inside component)" | "Tailwind CSS w/ File (.css w/ @apply)" | "Vanilla Pure CSS (.css)" | "SASS (.scss)"} CssFrameworkNames
+ *
+ * @typedef { "2" | "3" } VueVersion Vue JS versions
+ * @typedef { "ts" | "js" } LangType Lang type: `js` or `ts`
+ *
+ * @typedef {"options" | "setup"} VueApi - Vue api template syntax
+ * @typedef {"class" | "functional"} ReactComponentVariant - React component type variant (class or functional)
  */
 
 export default {};

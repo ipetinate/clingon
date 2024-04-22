@@ -134,8 +134,9 @@ export async function guidedAction() {
     if (chooseCssFramework) {
       cssFramework = await select({
         message:
-          "Would you like to select the CSS approach? If you don't choose anything, a .css file with pure CSS will be created by default",
+          "Would you like to select the CSS approach? (default: .css file with css vanilla)",
         choices: cssFrameworkChoices,
+        default: CssFrameworkEnum.vanilla_css,
       });
     }
   }
@@ -152,7 +153,7 @@ export async function guidedAction() {
     });
   } else {
     resourcePath = await input({
-      message: `What is the folder path that I should create your ${type} in? e.g. folder/here`,
+      message: `What is the folder path that I should create your ${type} in? e.g. src/folder/here`,
     });
   }
 
@@ -169,11 +170,11 @@ export async function guidedAction() {
       testPath = await select({
         message: "What is the folder path that I should create your tests in?",
         choices: [
-          ...choices,
           {
             name: `Same as your ${type}: ${resourcePath}`,
             value: resourcePath,
           },
+          ...choices,
         ],
       });
     } else {
@@ -183,13 +184,13 @@ export async function guidedAction() {
       });
     }
 
-    withTestingLibrary = await confirm({
-      message: "Do you use Testing Library in your tests?",
-    });
-
     testFramework = await select({
       message: "What is your test framework?",
       choices: testFrameworkChoices,
+    });
+
+    withTestingLibrary = await confirm({
+      message: "Do you use Testing Library in your tests?",
     });
 
     testPostfix = await select({
@@ -210,7 +211,13 @@ export async function guidedAction() {
     if (choices) {
       storyPath = await select({
         message: "What is the folder path that I should create your story in?",
-        choices,
+        choices: [
+          {
+            name: `Same as your ${type}: ${resourcePath}`,
+            value: resourcePath,
+          },
+          choices,
+        ],
       });
     } else {
       storyPath = await input({
