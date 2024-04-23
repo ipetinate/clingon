@@ -1,3 +1,3 @@
 export function FunctionName(): void {
-  return;
+  return
 }

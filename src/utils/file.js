@@ -1,7 +1,7 @@
-import fs from "node:fs";
-import path from "node:path";
+import fs from 'node:fs'
+import path from 'node:path'
 
-import { FileExtensionEnum } from "../enums/file-extension.js";
+import { FileExtensionEnum } from '../enums/file-extension.js'
 
 /**
  * Get files from root directory
@@ -10,16 +10,16 @@ import { FileExtensionEnum } from "../enums/file-extension.js";
  * @returns {string[]} Array of file paths
  */
 export function getFiles(folderPath) {
-  const folder = folderPath ?? process.cwd();
+  const folder = folderPath ?? process.cwd()
 
   try {
-    const files = fs.readdirSync(folder);
+    const files = fs.readdirSync(folder)
 
-    const filePaths = files.map((file) => path.join(folder, file));
+    const filePaths = files.map((file) => path.join(folder, file))
 
-    return filePaths;
+    return filePaths
   } catch (err) {
-    throw new Error(`Error reading files: ${err}`);
+    throw new Error(`Error reading files: ${err}`)
   }
 }
 
@@ -30,7 +30,7 @@ export function getFiles(folderPath) {
  * @returns {string}
  */
 export function readFileContent(filePath) {
-  return fs.readFileSync(filePath, "utf8");
+  return fs.readFileSync(filePath, 'utf8')
 }
 
 /**
@@ -41,11 +41,11 @@ export function readFileContent(filePath) {
  */
 export function createFileWithContent(filename, content) {
   try {
-    fs.writeFileSync(filename, content, "utf8");
+    fs.writeFileSync(filename, content, 'utf8')
 
-    return true;
+    return true
   } catch (error) {
-    return false;
+    return false
   }
 }
 
@@ -56,14 +56,14 @@ export function createFileWithContent(filename, content) {
  * @returns string
  */
 export function makeFileExtension({ typescript, postfix, withJsx, vue }) {
-  if (vue) return FileExtensionEnum.vue;
+  if (vue) return FileExtensionEnum.vue
 
-  const tsExt = withJsx ? FileExtensionEnum.tsx : FileExtensionEnum.ts;
-  const jsExt = withJsx ? FileExtensionEnum.jsx : FileExtensionEnum.js;
+  const tsExt = withJsx ? FileExtensionEnum.tsx : FileExtensionEnum.ts
+  const jsExt = withJsx ? FileExtensionEnum.jsx : FileExtensionEnum.js
 
-  const extension = `${typescript ? tsExt : jsExt}`;
+  const extension = `${typescript ? tsExt : jsExt}`
 
-  if (postfix) return `${postfix}.${extension}`;
+  if (postfix) return `${postfix}.${extension}`
 
-  return extension;
+  return extension
 }

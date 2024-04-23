@@ -1,10 +1,6 @@
-import { ResourceTypeEnum } from "enums/resource-type.js";
-import { StoryPostfixEnum, TestPostfixEnum } from "enums/postfixes.js";
-import {
-  FrameworkEnum,
-  TestFrameworkEnum,
-  CssFrameworkEnum,
-} from "enums/frameworks.js";
+import { ResourceTypeEnum } from 'enums/resource-type.js'
+import { StoryPostfixEnum, TestPostfixEnum } from 'enums/postfixes.js'
+import { FrameworkEnum, TestFrameworkEnum, CssFrameworkEnum } from 'enums/frameworks.js'
 
 /**
  *
@@ -51,4 +47,4 @@ import {
  * @typedef {"class" | "functional"} ReactComponentVariant - React component type variant (class or functional)
  */
 
-export default {};
+export default {}

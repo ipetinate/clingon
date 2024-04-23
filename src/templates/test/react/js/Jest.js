@@ -1,12 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import { ResourceName } from "componentPath";
+import { ResourceName } from 'resourcePath'
 
-describe("ResourceName", () => {
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
+describe('ResourceName', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div')
 
-    ReactDOM.render(<ResourceName />, div);
-  });
-});
+    ReactDOM.render(<ResourceName />, div)
+  })
+})

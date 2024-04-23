@@ -1,72 +1,60 @@
-import fs from "node:fs";
+import fs from 'node:fs'
 
-import { describe, it, mock } from "node:test";
-import assert from "node:assert/strict";
+import { describe, it, mock } from 'node:test'
+import assert from 'node:assert/strict'
 
-import {
-  checkDirectoriesTree,
-  getDirectories,
-  getLocalLibDirname,
-} from "./directory.js";
-import path from "node:path";
+import { checkDirectoriesTree, getDirectories, getLocalLibDirname } from './directory.js'
+import path from 'node:path'
 
-const srcDirs = [
-  "actions",
-  "constants",
-  "enums",
-  "flows",
-  "generators",
-  "templates",
-  "utils",
-];
+const srcDirs = ['actions', 'constants', 'enums', 'flows', 'generators', 'templates', 'utils']
 
-const rootDirs = [".git", "doc", "node_modules", "src"];
+const rootDirs = ['.git', 'doc', 'node_modules', 'src']
 
-const mockFsReadDir = mock.method(fs, "readdirSync");
-const pathDirnameMock = mock.method(path, "dirname");
+const mockFsReadDir = mock.method(fs, 'readdirSync')
+const pathDirnameMock = mock.method(path, 'dirname')
 
-describe("Directory Utils", () => {
-  describe("getDirectories util", () => {
-    it("get directories from a specific path/dir", () => {
-      mockFsReadDir.mock.mockImplementation(() => srcDirs);
+describe('Directory Utils', () => {
+  describe('getDirectories util', () => {
+    it('get directories from a specific path/dir', () => {
+      mockFsReadDir.mock.mockImplementation(() => srcDirs)
 
-      const directories = getDirectories(process.cwd() + "/src");
+      const directories = getDirectories(process.cwd() + '/src')
 
-      assert.deepEqual(directories, srcDirs);
-    });
+      assert.deepEqual(directories, srcDirs)
+    })
 
-    it("get directories from root", () => {
-      mockFsReadDir.mock.mockImplementation(() => rootDirs);
+    it('get directories from root', () => {
+      mockFsReadDir.mock.mockImplementation(() => rootDirs)
 
-      const directories = getDirectories();
+      const directories = getDirectories()
 
-      assert.deepEqual(directories, rootDirs);
-    });
-  });
+      assert.deepEqual(directories, rootDirs)
+    })
+  })
 
-  describe("checkDirectoriesTree util", () => {
-    it("returns true if directory tree structure exists", () => {
-      const exists = checkDirectoriesTree(["src", "actions"]);
+  describe('checkDirectoriesTree util', () => {
+    it('returns true if directory tree structure exists', () => {
+      const exists = checkDirectoriesTree(['src', 'actions'])
 
-      assert.strictEqual(exists, true);
-    });
+      assert.strictEqual(exists, true)
+    })
 
-    it("returns false if directory tree structure not exists", () => {
-      const exists = checkDirectoriesTree(["src", "foo", "bar"]);
+    it('returns false if directory tree structure not exists', () => {
+      const exists = checkDirectoriesTree(['src', 'foo', 'bar'])
 
-      assert.strictEqual(exists, false);
-    });
-  });
+      assert.strictEqual(exists, false)
+    })
+  })
 
-  describe("getLocalLibDirname util", () => {
-    it("returns true if directory tree structure exists", () => {
-      const mockPath = "mock_path/src";
+  describe('getLocalLibDirname util', () => {
+    it('returns true if directory tree structure exists', () => {
+      const mockPath = 'mock_path/src'
 
-      pathDirnameMock.mock.mockImplementation(() => mockPath);
+      pathDirnameMock.mock.mockImplementation(() => mockPath)
 
-      const local_dirname = getLocalLibDirname();
+      const local_dirname = getLocalLibDirname()
 
-      assert.strictEqual(local_dirname, mockPath);
-    });
-  });
-});
+      assert.strictEqual(local_dirname, mockPath)
+    })
+  })
+})

@@ -1,11 +1,11 @@
-import { localDirname } from "../main.js";
+import { localDirname } from '../main.js'
 
-import { functionTemplates } from "../constants/templates.js";
+import { functionTemplates } from '../constants/templates.js'
 
-import { compose } from "../utils/compose.js";
-import { convertCase } from "../utils/string.js";
-import { makeFileExtension } from "../utils/file.js";
-import { createFileWithContent, readFileContent } from "../utils/file.js";
+import { compose } from '../utils/compose.js'
+import { convertCase } from '../utils/string.js'
+import { makeFileExtension } from '../utils/file.js'
+import { createFileWithContent, readFileContent } from '../utils/file.js'
 
 /**
  * @typedef {import("../types.js").Answers} Answers
@@ -22,13 +22,13 @@ export function generateFunction(answers) {
     getTemplateContent,
     replaceAllFunctionTextOccurrences,
     generateFunctionFile
-  );
+  )
 
   if (success) {
-    console.info("Function created successfully: " + path);
+    console.info('Function created successfully: ' + path)
   }
   if (error) {
-    console.info("Error on create component, try again");
+    console.info('Error on create component, try again')
   }
 }
 
@@ -43,17 +43,17 @@ export function defineFunctionTemplate(data) {
     /**
      * Template path from path's dictionary
      */
-    let templatePath = "";
+    let templatePath = ''
 
     /**
      * @type {"js" | "ts"}
      */
-    const variant = data.typescript ? "ts" : "js";
+    const variant = data.typescript ? 'ts' : 'js'
 
-    templatePath = functionTemplates[variant];
+    templatePath = functionTemplates[variant]
 
-    return { ...data, templatePath };
-  };
+    return { ...data, templatePath }
+  }
 }
 
 /**
@@ -66,11 +66,11 @@ export function defineFunctionTemplate(data) {
  *  }}
  */
 export function getTemplateContent(data) {
-  const fullPath = `${localDirname}/${data.templatePath}`;
+  const fullPath = `${localDirname}/${data.templatePath}`
 
-  const fileContent = readFileContent(fullPath);
+  const fileContent = readFileContent(fullPath)
 
-  return { ...data, fileContent };
+  return { ...data, fileContent }
 }
 
 /**
@@ -83,11 +83,9 @@ export function getTemplateContent(data) {
  * @returns {() => data}
  */
 export function replaceAllFunctionTextOccurrences(data) {
-  data.name = convertCase("camelCase", data.name);
+  data.fileContent = data.fileContent.replace('FunctionName', convertCase('camelCase', data.name))
 
-  data.fileContent = data.fileContent.replace("FunctionName", data.name);
-
-  return data;
+  return data
 }
 
 /**
@@ -100,16 +98,16 @@ export function replaceAllFunctionTextOccurrences(data) {
  * @returns {() => string}
  */
 export function generateFunctionFile(data) {
-  const extension = makeFileExtension({ typescript: data.typescript });
+  const extension = makeFileExtension({ typescript: data.typescript })
 
-  const fileName = `${data.name}.${extension}`;
-  const pathWithFileName = `${data.path}/${fileName}`;
+  const fileName = `${convertCase('kebab-case', data.name)}.${extension}`
+  const pathWithFileName = `${data.path}/${fileName}`
 
-  const success = createFileWithContent(pathWithFileName, data.fileContent);
+  const success = createFileWithContent(pathWithFileName, data.fileContent)
 
   return {
     success,
     error: !success,
-    path: pathWithFileName,
-  };
+    path: pathWithFileName
+  }
 }

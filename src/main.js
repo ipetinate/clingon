@@ -1,26 +1,23 @@
 #!/usr/bin/env node
 
-import { Command } from "commander";
+import { Command } from 'commander'
 
-import { guidedAction } from "./actions/guided.js";
-import { getLocalLibDirname } from "./utils/directory.js";
+import { guidedAction } from './actions/guided.js'
+import { getLocalLibDirname } from './utils/directory.js'
 
 /*
  * Global Variables
  */
 
-export const localDirname = getLocalLibDirname();
+export const localDirname = getLocalLibDirname()
 
 /*
  * Resources
  */
 
-const program = new Command();
+const program = new Command()
 
-program
-  .name("tricorder")
-  .description("CLI to generate files based on templates")
-  .version("0.0.1");
+program.name('tricorder').description('CLI to generate files based on templates').version('0.0.1')
 
 /*
  * Read config file from rootDir
@@ -39,11 +36,9 @@ program
  */
 
 program
-  .command("guided")
+  .command('guided')
   .action(guidedAction)
-  .description(
-    "Start a guided flow to generate resources (components, functions, pages, etc)"
-  );
+  .description('Start a guided flow to generate resources (components, functions, pages, etc)')
 
 /*
  * Init flow - generate needed files
@@ -54,4 +49,4 @@ program
 /*
  * Parse program to execution
  */
-program.parse();
+program.parse()

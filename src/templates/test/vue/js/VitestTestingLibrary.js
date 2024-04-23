@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/vue";
 
 import { describe, it, expect } from "vitest";
 
-import { ResourceName } from "componentPath";
+import ResourceName from "resourcePath";
 
 describe("ResourceName", () => {
   const componentData = {

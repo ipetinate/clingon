@@ -1,139 +1,139 @@
-import fs from "node:fs";
+import fs from 'node:fs'
 
-import { describe, it, todo, mock } from "node:test";
-import assert from "node:assert/strict";
+import { describe, it, todo, mock } from 'node:test'
+import assert from 'node:assert/strict'
 
-import { getFiles, makeFileExtension, readFileContent } from "./file.js";
+import { getFiles, makeFileExtension, readFileContent } from './file.js'
 
-const typescript = true;
-const withJsx = true;
+const typescript = true
+const withJsx = true
 const postfix = {
-  spec: "spec",
-  test: "test",
-};
+  spec: 'spec',
+  test: 'test'
+}
 
-const mockFsReadDir = mock.method(fs, "readdirSync");
-const mockFsReadFileSync = mock.method(fs, "readFileSync");
+const mockFsReadDir = mock.method(fs, 'readdirSync')
+const mockFsReadFileSync = mock.method(fs, 'readFileSync')
 
-const mockFolderFiles = ["mockFile.json", "mocks.js", "fakeFile.ts"];
+const mockFolderFiles = ['mockFile.json', 'mocks.js', 'fakeFile.ts']
 
-describe("File Util", () => {
-  describe("getFiles util", () => {
-    it("get files from root dir", () => {
-      mockFsReadDir.mock.mockImplementation(() => mockFolderFiles);
+describe('File Util', () => {
+  describe('getFiles util', () => {
+    it('get files from root dir', () => {
+      mockFsReadDir.mock.mockImplementation(() => mockFolderFiles)
 
-      const files = getFiles();
+      const files = getFiles()
 
       for (const [index, filePath] of files) {
-        assert.match(filePath, new RegExp(mockFolderFiles[index]));
+        assert.match(filePath, new RegExp(mockFolderFiles[index]))
       }
-    });
+    })
 
-    it("get files content error flow", () => {
+    it('get files content error flow', () => {
       mockFsReadDir.mock.mockImplementation(() => {
-        throw new Error("fake error");
-      });
+        throw new Error('fake error')
+      })
 
-      assert.throws(getFiles, Error);
-    });
-  });
+      assert.throws(getFiles, Error)
+    })
+  })
 
-  describe("readFileContent util", () => {
-    it("get file content", () => {
+  describe('readFileContent util', () => {
+    it('get file content', () => {
       mockFsReadFileSync.mock.mockImplementation((fileName) => {
         const files = {
-          "tricorder.json": '{"exportDefault":false}',
-        };
+          'tricorder.json': '{"exportDefault":false}'
+        }
 
-        return files[fileName];
-      });
+        return files[fileName]
+      })
 
-      const fileContent = readFileContent("tricorder.json");
+      const fileContent = readFileContent('tricorder.json')
 
-      assert.deepEqual(JSON.parse(fileContent), { exportDefault: false });
-    });
+      assert.deepEqual(JSON.parse(fileContent), { exportDefault: false })
+    })
 
-    it("get file content error flow", () => {
+    it('get file content error flow', () => {
       const expectToThrowError = () => {
-        const fileContent = readFileContent("/tricorder.blabla");
+        const fileContent = readFileContent('/tricorder.blabla')
 
-        assert.strictEqual(fileContent, undefined);
-        assert.throws(expectToThrowError, Error);
-      };
-    });
-  });
+        assert.strictEqual(fileContent, undefined)
+        assert.throws(expectToThrowError, Error)
+      }
+    })
+  })
 
-  describe("createFileWithContent util", () => {
+  describe('createFileWithContent util', () => {
     // TODO: mock fs to make this test
 
-    todo("create a file with content", () => {});
-  });
+    todo('create a file with content', () => {})
+  })
 
-  describe("makeFileExtension util", () => {
-    it("make a file extension based on parameters for .vue", () => {
-      const extension = makeFileExtension({ vue: true });
+  describe('makeFileExtension util', () => {
+    it('make a file extension based on parameters for .vue', () => {
+      const extension = makeFileExtension({ vue: true })
 
-      assert.strictEqual(extension, "vue");
-    });
+      assert.strictEqual(extension, 'vue')
+    })
 
-    it("make a file extension based on parameters for .tsx", () => {
-      const extension = makeFileExtension({ typescript, withJsx });
+    it('make a file extension based on parameters for .tsx', () => {
+      const extension = makeFileExtension({ typescript, withJsx })
 
-      assert.strictEqual(extension, "tsx");
-    });
+      assert.strictEqual(extension, 'tsx')
+    })
 
-    it("make a file extension based on parameters for .jsx", () => {
-      const extension = makeFileExtension({ withJsx });
+    it('make a file extension based on parameters for .jsx', () => {
+      const extension = makeFileExtension({ withJsx })
 
-      assert.strictEqual(extension, "jsx");
-    });
+      assert.strictEqual(extension, 'jsx')
+    })
 
-    it("make a file extension based on parameters for .ts", () => {
-      const extension = makeFileExtension({ typescript });
+    it('make a file extension based on parameters for .ts', () => {
+      const extension = makeFileExtension({ typescript })
 
-      assert.strictEqual(extension, "ts");
-    });
+      assert.strictEqual(extension, 'ts')
+    })
 
-    it("make a file extension based on parameters for .js", () => {
-      const extension = makeFileExtension({ typescript: false });
+    it('make a file extension based on parameters for .js', () => {
+      const extension = makeFileExtension({ typescript: false })
 
-      assert.strictEqual(extension, "js");
-    });
+      assert.strictEqual(extension, 'js')
+    })
 
-    it("make a file extension based on parameters for .ts with postfix spec", () => {
+    it('make a file extension based on parameters for .ts with postfix spec', () => {
       const extension = makeFileExtension({
         typescript,
-        postfix: postfix.spec,
-      });
+        postfix: postfix.spec
+      })
 
-      assert.strictEqual(extension, "spec.ts");
-    });
+      assert.strictEqual(extension, 'spec.ts')
+    })
 
-    it("make a file extension based on parameters for .js with postfix spec", () => {
+    it('make a file extension based on parameters for .js with postfix spec', () => {
       const extension = makeFileExtension({
         typescript: false,
-        postfix: postfix.spec,
-      });
+        postfix: postfix.spec
+      })
 
-      assert.strictEqual(extension, "spec.js");
-    });
+      assert.strictEqual(extension, 'spec.js')
+    })
 
-    it("make a file extension based on parameters for .ts with postfix test", () => {
+    it('make a file extension based on parameters for .ts with postfix test', () => {
       const extension = makeFileExtension({
         typescript,
-        postfix: postfix.test,
-      });
+        postfix: postfix.test
+      })
 
-      assert.strictEqual(extension, "test.ts");
-    });
+      assert.strictEqual(extension, 'test.ts')
+    })
 
-    it("make a file extension based on parameters for .js with postfix test", () => {
+    it('make a file extension based on parameters for .js with postfix test', () => {
       const extension = makeFileExtension({
         typescript: false,
-        postfix: postfix.test,
-      });
+        postfix: postfix.test
+      })
 
-      assert.strictEqual(extension, "test.js");
-    });
-  });
-});
+      assert.strictEqual(extension, 'test.js')
+    })
+  })
+})

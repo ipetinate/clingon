@@ -1,8 +1,8 @@
-import fs from "node:fs";
-import path from "node:path";
-import nodePath from "node:path";
+import fs from 'node:fs'
+import path from 'node:path'
+import nodePath from 'node:path'
 
-import { fileURLToPath } from "node:url";
+import { fileURLToPath } from 'node:url'
 
 /**
  * Get library `__dirname` to acces root based on lib and not on command was executed (`process.cwd()`)
@@ -10,10 +10,10 @@ import { fileURLToPath } from "node:url";
  * @returns {string}
  */
 export function getLocalLibDirname() {
-  const __filename = fileURLToPath(import.meta.url);
-  const dirname = path.dirname(__filename);
+  const __filename = fileURLToPath(import.meta.url)
+  const dirname = path.dirname(__filename)
 
-  return dirname?.replace("/utils", "");
+  return dirname?.replace('/utils', '')
 }
 
 /**
@@ -23,13 +23,13 @@ export function getLocalLibDirname() {
  * @returns {string[]}
  */
 export function getDirectories(path) {
-  const folder = path ?? process.cwd();
+  const folder = path ?? process.cwd()
 
-  const dirs = fs.readdirSync(folder);
+  const dirs = fs.readdirSync(folder)
 
   return dirs.filter((directory) => {
-    return fs.statSync(nodePath.join(folder, directory)).isDirectory();
-  });
+    return fs.statSync(nodePath.join(folder, directory)).isDirectory()
+  })
 }
 
 /**
@@ -39,18 +39,15 @@ export function getDirectories(path) {
  * @returns {boolean}
  */
 export function checkDirectoriesTree(directories) {
-  const rootDirectory = process.cwd();
-  let currentDirectory = rootDirectory;
+  const rootDirectory = process.cwd()
+  let currentDirectory = rootDirectory
 
   for (const directory of directories) {
-    currentDirectory = nodePath.join(currentDirectory, directory);
-    if (
-      !fs.existsSync(currentDirectory) ||
-      !fs.statSync(currentDirectory).isDirectory()
-    ) {
-      return false;
+    currentDirectory = nodePath.join(currentDirectory, directory)
+    if (!fs.existsSync(currentDirectory) || !fs.statSync(currentDirectory).isDirectory()) {
+      return false
     }
   }
 
-  return true;
+  return true
 }

@@ -1,16 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from 'vitest'
 
-import { ResourceName } from "componentPath";
+import { ResourceName } from 'resourcePath'
 
-describe("ResourceName", () => {
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
+describe('ResourceName', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div')
 
-    const element = ReactDOM.render(<ResourceName />, div);
+    const element = ReactDOM.render(<ResourceName />, div)
 
-    expect(element).toBeDefined();
-  });
-});
+    expect(element).toBeDefined()
+  })
+})

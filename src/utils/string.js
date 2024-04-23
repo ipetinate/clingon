@@ -5,13 +5,11 @@
  * @returns {Array<string>}
  */
 export function splitPathString(path) {
-  if (!path.includes("/")) {
-    throw new Error(
-      "Should pass a string with slash separator, like a folder tree path"
-    );
+  if (!path.includes('/')) {
+    throw new Error('Should pass a string with slash separator, like a folder tree path')
   }
 
-  return path.split("/");
+  return path.split('/')
 }
 
 /**
@@ -21,7 +19,7 @@ export function splitPathString(path) {
  * @returns {string}
  */
 export function boolAsText(bool) {
-  return bool ? "Yes" : "No";
+  return bool ? 'Yes' : 'No'
 }
 
 /**
@@ -33,16 +31,16 @@ export function boolAsText(bool) {
  */
 export function convertCase(targetPattern, inputString) {
   switch (targetPattern) {
-    case "camelCase":
-      return convertToCamelCase(inputString);
-    case "snake_case":
-      return convertToSnakeCase(inputString);
-    case "PascalCase":
-      return convertToPascalCase(inputString);
-    case "kebab-case":
-      return convertToKebabCase(inputString);
+    case 'camelCase':
+      return convertToCamelCase(inputString)
+    case 'snake_case':
+      return convertToSnakeCase(inputString)
+    case 'PascalCase':
+      return convertToPascalCase(inputString)
+    case 'kebab-case':
+      return convertToKebabCase(inputString)
     default:
-      throw new Error("Invalid target pattern.");
+      throw new Error('Invalid target pattern.')
   }
 }
 
@@ -53,17 +51,17 @@ export function convertCase(targetPattern, inputString) {
  * @returns {string}
  */
 export function convertToCamelCase(inputString) {
-  let words = inputString.split(/[-_]/);
+  let words = inputString.split(/[-_]/)
 
   if (words.length === 1) {
-    return inputString.charAt(0).toLowerCase() + inputString.slice(1);
+    return inputString.charAt(0).toLowerCase() + inputString.slice(1)
   }
 
   for (let i = 1; i < words.length; i++) {
-    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1)
   }
 
-  return words.join("");
+  return words.join('')
 }
 
 /**
@@ -74,9 +72,9 @@ export function convertToCamelCase(inputString) {
  */
 export function convertToSnakeCase(inputString) {
   return inputString
-    .replace(/([a-z])([A-Z])/g, "$1_$2")
-    .replace(/[-\s]/g, "_")
-    .toLowerCase();
+    .replace(/([a-z])([A-Z])/g, '$1_$2')
+    .replace(/[-\s]/g, '_')
+    .toLowerCase()
 }
 
 /**
@@ -88,7 +86,7 @@ export function convertToSnakeCase(inputString) {
 export function convertToPascalCase(inputString) {
   return inputString
     .replace(/[-_](.)/g, (_, char) => char.toUpperCase())
-    .replace(/^\w/, (char) => char.toUpperCase());
+    .replace(/^\w/, (char) => char.toUpperCase())
 }
 
 /**
@@ -99,9 +97,9 @@ export function convertToPascalCase(inputString) {
  */
 export function convertToKebabCase(inputString) {
   return inputString
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .replace(/[_\s]/g, "-")
-    .toLowerCase();
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[_\s]/g, '-')
+    .toLowerCase()
 }
 
 /**
@@ -112,19 +110,19 @@ export function convertToKebabCase(inputString) {
  * @param {string | RegExp} separator Separator pattern to split word and capitalize first occurence
  * @returns {string}
  */
-export function capitalizeLetter(text, target = "first_letter", separator) {
-  if (target === "all") {
-    const words = text.split(new RegExp(separator));
-    const capitalizedWordsArray = words.map((word) => capitalizeLetter(word));
-    const capitalizedWordsString = capitalizedWordsArray.join(separator);
+export function capitalizeLetter(text, target = 'first_letter', separator) {
+  if (target === 'all') {
+    const words = text.split(new RegExp(separator))
+    const capitalizedWordsArray = words.map((word) => capitalizeLetter(word))
+    const capitalizedWordsString = capitalizedWordsArray.join(separator)
 
-    return capitalizedWordsString;
+    return capitalizedWordsString
   }
 
-  const firstLetter = text.charAt(0).toUpperCase();
-  const remainingLetters = text.slice(1);
+  const firstLetter = text.charAt(0).toUpperCase()
+  const remainingLetters = text.slice(1)
 
-  const mergedText = firstLetter + remainingLetters;
+  const mergedText = firstLetter + remainingLetters
 
-  return mergedText;
+  return mergedText
 }
