@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ComponentName",
+  name: "ResourceName",
   props: {},
   components: {},
   data() {
@@ -24,7 +24,7 @@ export default defineComponent({
 
 <template>
   <div :class="$style.component">
-    <p :class="$style.paragraph">
+    <p :class="$style.message">
       {{ message }}
     </p>
   </div>
@@ -37,7 +37,7 @@ export default defineComponent({
   align-items: center;
 }
 
-.paragraph {
+.message {
   color: #333;
 }
 </style>

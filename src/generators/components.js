@@ -158,7 +158,7 @@ export function getTemplateContent(data) {
 export function replaceAllComponentTextOccurrences(data) {
   switch (data.framework) {
     case FrameworkEnum.react: {
-      data.fileContent = data.fileContent.replace("ComponentName", data.name);
+      data.fileContent = data.fileContent.replace("ResourceName", data.name);
 
       return data;
     }

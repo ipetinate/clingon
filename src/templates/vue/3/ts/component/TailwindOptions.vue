@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ComponentName",
+  name: "ResourceName",
   props: {},
   components: {},
   data() {
@@ -24,7 +24,7 @@ export default defineComponent({
 
 <template>
   <div class="component">
-    <p class="paragraph">
+    <p class="message">
       {{ message }}
     </p>
   </div>
@@ -35,7 +35,7 @@ export default defineComponent({
   @apply flex justify-center items-center;
 }
 
-.paragraph {
+.message {
   @apply text-slate-800;
 }
 </style>

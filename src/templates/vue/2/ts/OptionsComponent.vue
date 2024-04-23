@@ -1,6 +1,6 @@
 <template>
   <div class="component">
-    <div class="paragraph">
+    <div class="message">
       {{ message }}
     </div>
   </div>
@@ -10,7 +10,7 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "ComponentName",
+  name: "ResourceName",
   components: {},
   filters: {},
   props: {},
@@ -38,7 +38,7 @@ export default Vue.extend({
   align-items: center;
 }
 
-.paragraph {
+.message {
   color: #333;
 }
 </style>

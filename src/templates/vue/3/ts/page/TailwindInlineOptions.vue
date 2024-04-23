@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ComponentName",
+  name: "ResourceName",
   components: {},
   filters: {},
   props: {},
@@ -30,7 +30,7 @@ export default defineComponent({
 <template>
   <div class="flex flex-col justify-start py-5 px-10">
     <header class="flex flex-row justify-between items-center content-center">
-      <h2 class="text-slate-800 text-xl">ComponentName</h2>
+      <h2 class="text-slate-800 text-xl">ResourceName</h2>
 
       <button
         @click="greeting"

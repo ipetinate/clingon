@@ -1,6 +1,6 @@
-import "./ComponentName.css";
+import "./ResourceName.css";
 
-export function ComponentName() {
+export function ResourceName() {
   return (
     <div className="component">
       <p className="message">

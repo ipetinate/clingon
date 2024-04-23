@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
 
-import { ComponentName } from "componentPath";
+import { ResourceName } from "componentPath";
 
-describe("ComponentName", () => {
-  const wrapper = shallowMount(ComponentName);
+describe("ResourceName", () => {
+  const wrapper = shallowMount(ResourceName);
 
   it("renders the correct message", () => {
     expect(wrapper.text()).toBe(

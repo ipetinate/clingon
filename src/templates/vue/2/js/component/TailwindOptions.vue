@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "ComponentName",
+  name: "ResourceName",
   props: {},
   components: {},
   data() {
@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div class="component">
-    <p class="paragraph">
+    <p class="message">
       {{ message }}
     </p>
   </div>
@@ -33,7 +33,7 @@ export default {
   @apply flex justify-center items-center;
 }
 
-.paragraph {
+.message {
   @apply text-slate-800;
 }
 </style>

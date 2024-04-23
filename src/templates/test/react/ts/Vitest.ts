@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 
 import { describe, it, expect } from "vitest";
 
-import { ComponentName } from "componentPath";
+import { ResourceName } from "componentPath";
 
-describe("ComponentName", () => {
+describe("ResourceName", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
 
-    const element = ReactDOM.render(<ComponentName />, div);
+    const element = ReactDOM.render(<ResourceName />, div);
 
     expect(element).toBeDefined();
   });

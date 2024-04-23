@@ -2,7 +2,7 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "ComponentName",
+  name: "ResourceName",
   props: {},
   components: {},
   data() {
@@ -24,7 +24,7 @@ export default Vue.extend({
 
 <template>
   <div :class="$style.component">
-    <p :class="$style.paragraph">
+    <p :class="$style.message">
       {{ message }}
     </p>
   </div>
@@ -37,7 +37,7 @@ export default Vue.extend({
   align-items: center;
 }
 
-.paragraph {
+.message {
   color: #333;
 }
 </style>

@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ComponentName",
+  name: "ResourceName",
   props: {},
   components: {},
   data() {

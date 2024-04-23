@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ComponentName",
+  name: "ResourceName",
   components: {},
   filters: {},
   props: {},
@@ -30,7 +30,7 @@ export default defineComponent({
 <template>
   <div class="page">
     <header class="header">
-      <h2 class="title">ComponentName</h2>
+      <h2 class="title">ResourceName</h2>
 
       <button @click="greeting" class="action">Action</button>
     </header>

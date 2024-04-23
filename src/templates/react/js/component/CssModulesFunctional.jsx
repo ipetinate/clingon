@@ -1,6 +1,6 @@
-import styles from "./ComponentName.css";
+import styles from "./ResourceName.css";
 
-export function ComponentName() {
+export function ResourceName() {
   return (
     <div className={styles.component}>
       <p className={styles.message}>

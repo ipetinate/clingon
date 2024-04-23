@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 
-import { ComponentName } from "componentPath";
+import { ResourceName } from "componentPath";
 
-describe("ComponentName", () => {
+describe("ResourceName", () => {
   it("renders welcome message", () => {
-    render(<ComponentName />);
+    render(<ResourceName />);
 
     expect(
       screen.getByText(

@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "ComponentName",
+  name: "ResourceName",
   props: {},
   components: {},
   data() {

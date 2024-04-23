@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "ComponentName",
+  name: "ResourceName",
   props: {},
   components: {},
   data() {
@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div class="component">
-    <p class="paragraph">
+    <p class="message">
       {{ message }}
     </p>
   </div>
@@ -35,7 +35,7 @@ export default {
   align-items: center;
 }
 
-.paragraph {
+.message {
   color: #333;
 }
 </style>

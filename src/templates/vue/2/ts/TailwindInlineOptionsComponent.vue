@@ -2,7 +2,7 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "ComponentName",
+  name: "ResourceName",
   props: {},
   components: {},
   data() {

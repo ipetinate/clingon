@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "ComponentName",
+  name: "ResourceName",
   components: {},
   filters: {},
   props: {},
@@ -28,7 +28,7 @@ export default {
 <template>
   <div :class="$style.page">
     <header :class="$style.header">
-      <h2 :class="$style.title">ComponentName</h2>
+      <h2 :class="$style.title">ResourceName</h2>
 
       <button @click="greeting" :class="$style.action">Action</button>
     </header>
