@@ -121,6 +121,7 @@ export function getTemplateContent(data) {
  *    extension: string,
  *    fileName: string,
  *    pathWithFileName: string,
+ *    resourcePathWithFileName: string,
  *  }}
  */
 export function makePathWithExtension(data) {
@@ -134,8 +135,15 @@ export function makePathWithExtension(data) {
 
   const fileName = `${data.name}.${extension}`
   const pathWithFileName = `${data.path}/${fileName}`
+  const resourcePathWithFileName = `${data.resourcePath}/${data.name}.${extension}`
 
-  return { ...data, extension, fileName, pathWithFileName }
+  return {
+    ...data,
+    extension,
+    fileName,
+    pathWithFileName,
+    resourcePathWithFileName
+  }
 }
 
 /**
@@ -147,6 +155,7 @@ export function makePathWithExtension(data) {
  *    extension: string,
  *    fileName: string,
  *    pathWithFileName: string,
+ *    resourcePathWithFileName: string,
  *  }} data - Data to compose component
  * @returns {Answers & {
  *    templatePath: string,
@@ -154,6 +163,7 @@ export function makePathWithExtension(data) {
  *    extension: string,
  *    fileName: string,
  *    pathWithFileName: string,
+ *    resourcePathWithFileName: string,
  *  }}
  */
 export function replaceAllTestTextOccurrences(data) {
@@ -172,13 +182,13 @@ export function replaceAllTestTextOccurrences(data) {
   if (data.framework === FrameworkEnum.vue) {
     data.fileContent = data.fileContent.replace(
       /resourcePath/g,
-      removeTestPostfix(data.pathWithFileName, '.vue')
+      removeTestPostfix(data.resourcePathWithFileName, '.vue')
     )
   }
   if (data.framework === FrameworkEnum.react) {
     data.fileContent = data.fileContent.replace(
       /resourcePath/g,
-      removeTestPostfix(data.pathWithFileName, data.typescript ? '.tsx' : '.jsx')
+      removeTestPostfix(data.resourcePathWithFileName, data.typescript ? '.tsx' : '.jsx')
     )
   }
 

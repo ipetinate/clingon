@@ -69,13 +69,18 @@ async function checkProvidedPathRecursive(path, callback, target) {
 async function handleTests(data, path) {
   if (!data.withTest) return
 
-  if (!(data.testPath === data.resourcePath)) {
-    return await checkProvidedPathRecursive(
-      data.testPath,
-      (newPath) => generateTests({ ...data, path: newPath }),
-      data.testPostfix
-    )
+  if (data.testPath === data.resourcePath) {
+    generateTests({ ...data, path })
   }
 
-  generateTests({ ...data, path })
+  return await checkProvidedPathRecursive(
+    data.testPath,
+    (newPath) =>
+      generateTests({
+        ...data,
+        path: newPath,
+        resourcePath: path
+      }),
+    data.testPostfix
+  )
 }

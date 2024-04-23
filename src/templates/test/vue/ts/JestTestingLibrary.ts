@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/vue'
+import { render, screen, type RenderOptions } from '@testing-library/vue'
 
 import ResourceName from 'resourcePath'
 
 type RenderComponent = {
   props: InstanceType<typeof ResourceName>['$props']
   slots: InstanceType<typeof ResourceName>['$slots']
-}
+} & RenderOptions
 
 describe('ResourceName', () => {
   const componentData: RenderComponent = {
