@@ -84,8 +84,8 @@ export const cssFrameworkChoices = [
 ];
 
 export const vueVersionsChoices = [
-  { name: "Vue 2", value: VueVersionEnum[2] },
   { name: "Vue 3", value: VueVersionEnum[3] },
+  { name: "Vue 2", value: VueVersionEnum[2] },
 ];
 
 export const testPostfixChoices = [
@@ -138,6 +138,20 @@ export const resourcesPaths = {
       { name: "src/__tests__", value: "src/__tests__" },
       { name: "src/components", value: "src/components" },
       { name: "src/components/__tests__", value: "src/components/__tests__" },
+    ],
+    function: [
+      { name: "src/tests", value: "src/tests" },
+      { name: "src/__tests__", value: "src/__tests__" },
+      { name: "src/utils", value: "src/utils" },
+      { name: "src/utils/__tests__", value: "src/utils/__tests__" },
+      { name: "src/helpers", value: "src/helpers" },
+      { name: "src/helpers/__tests__", value: "src/helpers/__tests__" },
+      { name: "src/functions", value: "src/functions" },
+      { name: "src/functions/__tests__", value: "src/functions/__tests__" },
+      { name: "src/core", value: "src/core" },
+      { name: "src/core/__tests__", value: "src/core/__tests__" },
+      { name: "src/shared", value: "src/shared" },
+      { name: "src/shared/__tests__", value: "src/shared/__tests__" },
     ],
   },
   cypress_spec: [

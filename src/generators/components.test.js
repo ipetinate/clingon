@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { FrameworkEnum } from "../enums/frameworks.js";
 
 /**
- * @type {import("./components.js").Answers}
+ * @type {import("../types.js").Answers}
  */
 const answers = {
   framework: FrameworkEnum.vue,

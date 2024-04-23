@@ -10,6 +10,7 @@ import { localDirname } from "../main.js";
 
 /**
  * @typedef {import("../types.js").Answers} Answers
+ * @typedef {Record<2 | 3, "options" | "setup">} VueApi - Vue API variant options or setup (composition)
  */
 
 /**
@@ -32,11 +33,6 @@ export function generateComponent(answers) {
     console.info("Error on create component, try again");
   }
 }
-
-/**
- * @typedef {import("../actions/guided.js").Answers} Answers
- * @typedef {Record<2 | 3, "options" | "setup">} VueApi - Vue API variant options or setup (composition)
- */
 
 /**
  * Get component template details
@@ -162,7 +158,7 @@ export function getTemplateContent(data) {
 export function replaceAllComponentTextOccurrences(data) {
   switch (data.framework) {
     case FrameworkEnum.react: {
-      data.fileContent = data.fileContent.replace("Component", data.name);
+      data.fileContent = data.fileContent.replace("ComponentName", data.name);
 
       return data;
     }

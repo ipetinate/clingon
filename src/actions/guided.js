@@ -55,6 +55,11 @@ export async function guidedAction() {
   let storyPostfix = null;
 
   /**
+   * @type {import("../types.js").Framework} - Framework target value
+   */
+  let framework = null;
+
+  /**
    * Test file postfix
    *
    * @type {import("../types.js").TestFramework}
@@ -95,21 +100,6 @@ export async function guidedAction() {
   let version = null;
 
   /**
-   * @type {import("../types.js").Framework} - Framework target value
-   */
-  const framework = await select({
-    message: "Select your framework/lib",
-    choices: frameworksAndLibsChoices,
-  });
-
-  if (framework === FrameworkEnum.vue) {
-    version = await select({
-      message: "What is your Vue version?",
-      choices: vueVersionsChoices,
-    });
-  }
-
-  /**
    * With typescript
    *
    * @type {boolean}
@@ -125,6 +115,20 @@ export async function guidedAction() {
     message: "What do you want to create?",
     choices: typescript ? tsTypeChoices : jsTypeChoices,
   });
+
+  if (["component", "page"].includes(type)) {
+    framework = await select({
+      message: "Select your framework/lib",
+      choices: frameworksAndLibsChoices,
+    });
+  }
+
+  if (framework === FrameworkEnum.vue) {
+    version = await select({
+      message: "What is your Vue version?",
+      choices: vueVersionsChoices,
+    });
+  }
 
   if (["component", "page"].includes(type)) {
     const chooseCssFramework = await confirm({
@@ -189,9 +193,11 @@ export async function guidedAction() {
       choices: testFrameworkChoices,
     });
 
-    withTestingLibrary = await confirm({
-      message: "Do you use Testing Library in your tests?",
-    });
+    if (["component", "page"].includes(type)) {
+      withTestingLibrary = await confirm({
+        message: "Do you use Testing Library in your tests?",
+      });
+    }
 
     testPostfix = await select({
       message: "What postfix do you use in your test file?",
@@ -216,7 +222,7 @@ export async function guidedAction() {
             name: `Same as your ${type}: ${resourcePath}`,
             value: resourcePath,
           },
-          choices,
+          ...choices,
         ],
       });
     } else {
@@ -288,6 +294,12 @@ export async function guidedAction() {
   }
 }
 
+/**
+ * Get path choices for list on prompt
+ *
+ * @param {{ type: import("../types.js").Resource, target: }} props
+ * @returns {import("../constants/choices.js").TypeChoices[]}
+ */
 function getPathChoices({ type, target }) {
   if (target === "test") return resourcesPaths.test[type];
   if (target === "story") return resourcesPaths.storybook_story[type];

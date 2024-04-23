@@ -3,6 +3,7 @@ import { checkDirectoriesTree } from "../utils/directory.js";
 import { splitPathString } from "../utils/string.js";
 import { generateComponent } from "../generators/components.js";
 import { generateTests } from "../generators/tests.js";
+import { generateFunction } from "../generators/functions.js";
 
 /**
  * Generate file from guided prompt
@@ -13,7 +14,21 @@ export async function guidedFlowGenerator(data) {
   await checkProvidedPathRecursive(
     data.resourcePath,
     async (path) => {
-      generateComponent({ ...data, path });
+      switch (data.type) {
+        case "page":
+        case "component": {
+          generateComponent({ ...data, path });
+
+          break;
+        }
+        case "function": {
+          generateFunction({ ...data, path });
+          break;
+        }
+        default: {
+          break;
+        }
+      }
 
       await handleTests(data, path);
     },
