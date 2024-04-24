@@ -1,11 +1,15 @@
+# Folders
+
 /src
 /node_modules
-/doc
 /.github
 
-.rollup.config.json
+# RunCom files
+
+.nvmrc
 .babelrc
 .prettierrc
-yarn.lock
 
-*.md
+# Config and other files
+yarn.lock
+rollup.config.json
