@@ -1,13 +1,13 @@
 {
-  "name": "tricorder",
-  "version": "0.0.1",
+  "name": "clingon",
+  "version": "0.3.4",
   "description": "Multipurpose generator CLI based on local config and templates",
-  "main": "./src/main.ts",
-  "bin": "./src/main.js",
+  "main": "./lib/main.js",
+  "bin": "./lib/main.js",
   "author": "Isac Petinate <idpetinate@gmail.com>",
   "license": "MIT",
-  "type": "module",
   "private": false,
+  "type": "module",
   "scripts": {
     "build": "rollup --config",
     "test": "node --test",
@@ -20,7 +20,10 @@
     "commander": "^12.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-json": "^6.1.0",
-    "rollup": "^4.14.1"
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.14.1",
+    "rollup-plugin-copy": "^3.5.0"
   }
 }

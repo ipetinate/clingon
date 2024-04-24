@@ -203,11 +203,13 @@ export async function guidedAction() {
     })
   }
 
-  if (['component', 'page'].includes(type)) {
-    withStory = await confirm({
-      message: 'Would you like to add storybook story?'
-    })
-  }
+  // TODO: implements Story templatates and generator before uncomment this piece
+
+  // if (['component', 'page'].includes(type)) {
+  //   withStory = await confirm({
+  //     message: 'Would you like to add storybook story?'
+  //   })
+  // }
 
   if (withStory) {
     const choices = getPathChoices({ type, target: 'story' })

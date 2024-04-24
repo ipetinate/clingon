@@ -1,6 +1,10 @@
 /src
 /node_modules
+/doc
+/.github
 
+.rollup.config.json
+.babelrc
 .prettierrc
 yarn.lock
 

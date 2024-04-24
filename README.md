@@ -2,7 +2,7 @@
   <img src="doc/img/tricorder.svg" alt="Star Trek Tricorder" width="100"  style="display: block; margin: 0 auto;">
 </p>
 
-# Tricorder CLI
+# Clingon CLI
 
 > Create components, functions, pages, and other files for your project with a few commands
 
@@ -29,22 +29,22 @@ Instale a ferramenta globalmente usando seu gerenciador de pacotes Node preferid
 - Using node package manager
 
   ```shell
-  npm i -g tricorder
+  npm i -g clingon
 
   # or
 
-  yarn add -g tricorder
+  yarn add -g clingon
 
   # or
 
-  pnpm i -g tricorder
+  pnpm i -g clingon
 
   ```
 
 - Using `npx`
 
   ```shell
-   npx tricorder@latest guided
+   npx clingon@latest guided
   ```
 
 ## Features

@@ -19,7 +19,7 @@ export const localDirname = getLocalLibDirname()
 
 const program = new Command()
 
-program.name('tricorder').description('CLI to generate files based on templates').version(version)
+program.name('clingon').description('CLI to generate files based on templates').version(version)
 
 /*
  * Read config file from rootDir

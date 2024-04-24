@@ -23,6 +23,7 @@ export async function guidedFlowGenerator(data) {
         }
         case 'function': {
           generateFunction({ ...data, path })
+
           break
         }
         default: {
@@ -70,7 +71,7 @@ async function handleTests(data, path) {
   if (!data.withTest) return
 
   if (data.testPath === data.resourcePath) {
-    generateTests({ ...data, path })
+    return generateTests({ ...data, path })
   }
 
   return await checkProvidedPathRecursive(
