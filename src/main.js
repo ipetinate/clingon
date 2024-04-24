@@ -5,6 +5,8 @@ import { Command } from 'commander'
 import { guidedAction } from './actions/guided.js'
 import { getLocalLibDirname } from './utils/directory.js'
 
+import { version } from '../package.json'
+
 /*
  * Global Variables
  */
@@ -17,7 +19,7 @@ export const localDirname = getLocalLibDirname()
 
 const program = new Command()
 
-program.name('tricorder').description('CLI to generate files based on templates').version('0.0.1')
+program.name('tricorder').description('CLI to generate files based on templates').version(version)
 
 /*
  * Read config file from rootDir
@@ -36,7 +38,7 @@ program.name('tricorder').description('CLI to generate files based on templates'
  */
 
 program
-  .command('guided')
+  .command('gen')
   .action(guidedAction)
   .description('Start a guided flow to generate resources (components, functions, pages, etc)')
 
