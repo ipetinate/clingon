@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="doc/img/clingon.svg" alt="Clingon CLI logo" width="256"  style="display: block; margin: 0 auto;">
+  <img
+    src="https://github.com/ipetinate/clingon/blob/main/doc/img/clingon.svg"
+    alt="Clingon CLI logo" width="256"  style="display: block; margin: 0 auto;"
+    />
 </p>
 
 # Clingon CLI
