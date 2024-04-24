@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="doc/img/tricorder.svg" alt="Star Trek Tricorder" width="100"  style="display: block; margin: 0 auto;">
+  <img src="doc/img/clingon.svg" alt="Clingon CLI logo" width="256"  style="display: block; margin: 0 auto;">
 </p>
 
 # Clingon CLI

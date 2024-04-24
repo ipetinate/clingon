@@ -42,20 +42,20 @@ describe('File Util', () => {
     it('get file content', () => {
       mockFsReadFileSync.mock.mockImplementation((fileName) => {
         const files = {
-          'tricorder.json': '{"exportDefault":false}'
+          'clingon.json': '{"exportDefault":false}'
         }
 
         return files[fileName]
       })
 
-      const fileContent = readFileContent('tricorder.json')
+      const fileContent = readFileContent('clingon.json')
 
       assert.deepEqual(JSON.parse(fileContent), { exportDefault: false })
     })
 
     it('get file content error flow', () => {
       const expectToThrowError = () => {
-        const fileContent = readFileContent('/tricorder.blabla')
+        const fileContent = readFileContent('/clingon.blabla')
 
         assert.strictEqual(fileContent, undefined)
         assert.throws(expectToThrowError, Error)

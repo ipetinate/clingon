@@ -25,7 +25,7 @@ program.name('clingon').description('CLI to generate files based on templates').
  * Read config file from rootDir
  */
 
-// const config = readLocalConfig("tricorder.json");
+// const config = readLocalConfig("clingon.json");
 
 /*
  * Autogen flow - using built-in opinionated templates
@@ -34,7 +34,7 @@ program.name('clingon').description('CLI to generate files based on templates').
 // TODO
 
 /*
- * Guided flow - using user local templates from /.tricorder-templates
+ * Guided flow - using user local templates from /.clingon-templates
  */
 
 program

@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 /**
- * Reads the content of a local configuration file named "tricorder.json".
+ * Reads the content of a local configuration file named "clingon.json".
  *
  * @typedef {{ exportDefault: boolean }} GlobalConfig - Project global configuration
  *

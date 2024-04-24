@@ -10,13 +10,13 @@ const config = {
 describe('Global Config Utils', () => {
   describe('readLocalConfig util', () => {
     it('get local config from root dir', () => {
-      const localConfig = readLocalConfig('tricorder.json')
+      const localConfig = readLocalConfig('clingon.json')
 
       assert.deepEqual(localConfig, config)
     })
 
     it('throw error if file not exists', () => {
-      const shouldThrowError = () => readLocalConfig('tricorder.toml')
+      const shouldThrowError = () => readLocalConfig('clingon.toml')
 
       assert.throws(shouldThrowError, Error)
     })

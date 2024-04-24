@@ -31,7 +31,7 @@
 - [ ] Templates iniciais de testes JS (Jest)
 - [ ] Templates iniciais de testes JS (Jest)
 - [ ] Ação do fluxo guiado - Em andamento
-- [ ] Perguntar e Salvar predefinições do prompt executado localmente na pasta `/.tricorder`
+- [ ] Perguntar e Salvar predefinições do prompt executado localmente na pasta `/.clingon`
 - [ ] Ação do fluxo avançado - Em espera
 - [ ] Oferecer templates locais no fluxo avançado
 - [ ] Utilizar config global para parametrizar a ferramenta (caso omitido, usar a embarcada na raiz do projeto)
@@ -39,7 +39,7 @@
 ## Funcionalidades para o futuro ou para analise de necessidade
 
 - [ ] Adicionar novos frameworks como Solid, Svelte, Astro, etc
-- [ ] Permitir templates de qualquer tipo lendo os arquivos na pasta `/.tricorder`
+- [ ] Permitir templates de qualquer tipo lendo os arquivos na pasta `/.clingon`
 - [ ] Geração completa de projetos
 - [ ] Adicionar opções de estilos em componentes (tailwind, css-in-js, css modules, etc)
 
