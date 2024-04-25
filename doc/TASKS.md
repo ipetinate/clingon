@@ -29,14 +29,14 @@
 - [x] Gerador de componentes (versão básica)
 - [x] Templates iniciais de Vue
 - [x] Templates iniciais de React
-- [ ] Templates iniciais de funções TS
-- [ ] Templates iniciais de funções JS
+- [x] Templates iniciais de funções TS
+- [x] Templates iniciais de funções JS
 - [ ] Templates iniciais de stories TS
 - [ ] Templates iniciais de stories JS
-- [ ] Templates iniciais de testes TS (Vitest)
-- [ ] Templates iniciais de testes TS (Vitest)
-- [ ] Templates iniciais de testes JS (Jest)
-- [ ] Templates iniciais de testes JS (Jest)
+- [x] Templates iniciais de testes TS (Vitest)
+- [x] Templates iniciais de testes JS (Vitest)
+- [x] Templates iniciais de testes TS (Jest)
+- [x] Templates iniciais de testes JS (Jest)
 - [ ] Ação do fluxo guiado - Em andamento
 - [ ] Perguntar e Salvar predefinições do prompt executado localmente na pasta `/.clingon`
 - [ ] Ação do fluxo avançado - Em espera
