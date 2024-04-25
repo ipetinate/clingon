@@ -2,6 +2,13 @@
 
 > Good practice guide for project development
 
+## Guide
+
+- [Development Guide](https://github.com/ipetinate/clingon/blob/main/doc/DEVELOPMENT_README.md)
+- [Contribution Guide](https://github.com/ipetinate/clingon/blob/main/doc/CONTRIBUTION_GUIDE.md)
+- [Templates Variants](https://github.com/ipetinate/clingon/blob/main/doc/TEMPLATES.md)
+- [Development Taks](https://github.com/ipetinate/clingon/blob/main/doc/TASKS.md)
+
 ## Introduction
 
 This project aims to be an open source library, where we can accept contributions, but our code will undergo reviews and release by the core team before any merge into the main branch.

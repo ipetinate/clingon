@@ -2,6 +2,13 @@
 
 > Like every community, we have some rules, concepts and culture to follow, to maintain good coexistence and quality code
 
+## Guide
+
+- [Development Guide](https://github.com/ipetinate/clingon/blob/main/doc/DEVELOPMENT_README.md)
+- [Contribution Guide](https://github.com/ipetinate/clingon/blob/main/doc/CONTRIBUTION_GUIDE.md)
+- [Templates Variants](https://github.com/ipetinate/clingon/blob/main/doc/TEMPLATES.md)
+- [Development Taks](https://github.com/ipetinate/clingon/blob/main/doc/TASKS.md)
+
 ## Introduction
 
 Would you like to contribute to our project? So keep in mind that you must follow the guide below to get your PR approved and incorporated into the codebase.

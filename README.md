@@ -65,7 +65,7 @@ Note: Maybe on macOS you do not have permission to run the tool if you install i
 
 ## Features
 
-> This project is in beta stage (under development), so many of the expected features have not yet been implemented, if you want to contribute, check out the [contribution guide](doc/CONTRIBUTION_GUIDE.md)
+> This project is in beta stage (under development), so many of the expected features have not yet been implemented, if you want to contribute, check out the [Contribution Guide](https://github.com/ipetinate/clingon/blob/main/doc/CONTRIBUTION_GUIDE.md)
 
 - [ ] Opinionated resource generation
   - [ ] Options

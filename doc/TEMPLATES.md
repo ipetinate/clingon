@@ -1,8 +1,15 @@
-## Proposed Templates
+# Proposed Templates
 
 > Built-in opinionated components
 
-### Frontend Frameworks
+## Guide
+
+- [Development Guide](https://github.com/ipetinate/clingon/blob/main/doc/DEVELOPMENT_README.md)
+- [Contribution Guide](https://github.com/ipetinate/clingon/blob/main/doc/CONTRIBUTION_GUIDE.md)
+- [Templates Variants](https://github.com/ipetinate/clingon/blob/main/doc/TEMPLATES.md)
+- [Development Taks](https://github.com/ipetinate/clingon/blob/main/doc/TASKS.md)
+
+## Frontend Frameworks
 
 - [x] Vue
   - [x] 2
