@@ -5,6 +5,8 @@
     />
 </p>
 
+[![Node.js CI](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml)
+
 # Clingon CLI
 
 > Create components, functions, pages, and other files for your project with a few commands

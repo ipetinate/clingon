@@ -12,4 +12,4 @@
 
 # Config and other files
 yarn.lock
-rollup.config.json
+rollup.config.js
