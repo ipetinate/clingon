@@ -27,29 +27,39 @@ In the initial version, we have not yet made advanced mode available, it will be
 
 ## How to use
 
-Instale a ferramenta globalmente usando seu gerenciador de pacotes Node preferido, ou use `npx` para rodar o executável.
+Install the tool globally using your preferred Node package manager, or use `npx` to run the executable.
 
-- Using node package manager
-
-  ```shell
-  npm i -g clingon
-
-  # or
-
-  yarn add -g clingon
-
-  # or
-
-  pnpm i -g clingon
-
-  ```
+Note: Maybe on macOS you do not have permission to run the tool if you install it globally, if this happens you need to give the correct permissions or to avoid anything you can use `npx` which solves this problem.
 
 - Using `npx`
 
   ```shell
-   npx clingon@latest guided
+   npx clingon@latest gen
   ```
 
-## Features
+- Using node package manager
 
-...
+  - Install
+
+    ```shell
+    npm i -g clingon
+
+    # or
+
+    yarn add -g clingon
+
+    # or
+
+    pnpm i -g clingon
+
+    ```
+
+  - Execute
+
+    ```shell
+    clingon gen
+    ```
+
+<!-- ## Features
+
+... -->
