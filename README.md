@@ -63,6 +63,55 @@ Note: Maybe on macOS you do not have permission to run the tool if you install i
     clingon gen
     ```
 
-<!-- ## Features
+## Features
 
-... -->
+> This project is in beta stage (under development), so many of the expected features have not yet been implemented, if you want to contribute, check out the [contribution guide](doc/CONTRIBUTION_GUIDE.md)
+
+- [ ] Opinionated resource generation
+  - [ ] Options
+    - [x] TypeScript
+    - [x] Unit Test
+      - [x] Postfix
+        - [x] .spec
+        - [x] .test
+      - [x] Testing Library
+      - [x] Test Framework
+        - [x] Jest
+        - [x] Vitest
+    - [ ] Storybook Story
+    - [ ] CSS Style
+      - [x] Vanilla CSS
+      - [x] CSS Modules
+      - [x] SASS/SCSS
+      - [x] TailwindCSS w/ @apply
+      - [x] TailwindCSS inline (inside `class` attr)
+      - [ ] CSS-in-js
+  - [ ] Frameworks
+    - [ ] Vue
+      - [ ] Version
+        - [x] 2
+        - [ ] 3
+          - [x] Composition API
+          - [ ] Options API
+      - [x] Page
+      - [x] Component
+      - [ ] Mixin
+      - [ ] Filter
+      - [ ] Hook
+    - [x] React
+      - [x] Component
+      - [x] Page
+      - [ ] Hook
+  - [ ] Other resources
+    - [x] Function
+    - [ ] Model
+    - [ ] Enum
+    - [ ] Type
+    - [ ] Class
+    - [ ] Story
+    - [ ] Unit Test (.spec|.test)
+- [ ] Advanced resource generation
+  - [ ] Local custom templates
+  - [ ] Configuration file-based generation
+  - [ ] Generation based on existing files
+  - [ ] Composite dynamic generation (using several code snippets)
