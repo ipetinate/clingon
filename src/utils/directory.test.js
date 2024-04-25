@@ -1,15 +1,17 @@
 import fs from 'node:fs'
 
-import { describe, it, mock } from 'node:test'
+import { describe, it, mock, beforeEach } from 'node:test'
 import assert from 'node:assert/strict'
 
 import { checkDirectoriesTree, getDirectories, getLocalLibDirname } from './directory.js'
 import path from 'node:path'
 
 const srcDirs = ['actions', 'constants', 'enums', 'flows', 'generators', 'templates', 'utils']
-
+const nestedStrucuture = 'src/actions'
 const rootDirs = ['.git', 'doc', 'node_modules', 'src']
 
+const mockStatSync = mock.method(fs, 'statSync')
+const mockExistsSync = mock.method(fs, 'existsSync')
 const mockFsReadDir = mock.method(fs, 'readdirSync')
 const pathDirnameMock = mock.method(path, 'dirname')
 
@@ -17,8 +19,15 @@ describe('Directory Utils', () => {
   describe('getDirectories util', () => {
     it('get directories from a specific path/dir', () => {
       mockFsReadDir.mock.mockImplementation(() => srcDirs)
+      mockStatSync.mock.mockImplementation((value) => ({
+        isDirectory: () => {
+          for (let src of srcDirs) {
+            if (src.search(value)) return true
+          }
+        }
+      }))
 
-      const directories = getDirectories(process.cwd() + '/src')
+      const directories = getDirectories()
 
       assert.deepEqual(directories, srcDirs)
     })
@@ -34,12 +43,16 @@ describe('Directory Utils', () => {
 
   describe('checkDirectoriesTree util', () => {
     it('returns true if directory tree structure exists', () => {
+      mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
+
       const exists = checkDirectoriesTree(['src', 'actions'])
 
       assert.strictEqual(exists, true)
     })
 
     it('returns false if directory tree structure not exists', () => {
+      mockExistsSync.mock.restore()
+
       const exists = checkDirectoriesTree(['src', 'foo', 'bar'])
 
       assert.strictEqual(exists, false)

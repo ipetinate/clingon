@@ -1,5 +1,7 @@
-import { describe, it } from 'node:test'
+import fs from 'node:fs'
 import assert from 'node:assert/strict'
+
+import { describe, it, mock } from 'node:test'
 
 import { readLocalConfig } from './global-config.js'
 
@@ -7,18 +9,24 @@ const config = {
   exportDefault: false
 }
 
+const mockReadDirSync = mock.method(fs, 'readdirSync').mock
+const mockReadFIleSync = mock.method(fs, 'readFileSync').mock
+
 describe('Global Config Utils', () => {
-  describe('readLocalConfig util', () => {
-    it('get local config from root dir', () => {
-      const localConfig = readLocalConfig('clingon.json')
+  it('get local config from root dir', () => {
+    mockReadDirSync.mockImplementation(() => ['clingon.json'])
+    mockReadFIleSync.mockImplementation(() => '{"exportDefault":false}')
 
-      assert.deepEqual(localConfig, config)
-    })
+    const localConfig = readLocalConfig('clingon.json')
 
-    it('throw error if file not exists', () => {
-      const shouldThrowError = () => readLocalConfig('clingon.toml')
+    assert.deepEqual(localConfig, config)
+  })
 
-      assert.throws(shouldThrowError, Error)
-    })
+  it('throw error if file not exists', () => {
+    mockReadDirSync.mockImplementation(() => [])
+
+    const shouldThrowError = () => readLocalConfig('clingon.toml')
+
+    assert.throws(shouldThrowError, Error)
   })
 })
