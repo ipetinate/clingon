@@ -178,40 +178,40 @@ export const storiesTemplates = {
 export const unitTestTemplates = {
   react: {
     js: {
-      jest: 'templates/test/react/js/Jest.ts',
-      jestTestingLibrary: 'templates/test/react/js/JestTestingLibrary.ts',
-      vitest: 'templates/test/react/js/Vitest.ts',
-      vitestTestingLibrary: 'templates/test/react/js/VitestTestingLibrary.ts'
+      jest: 'templates/unit-test/react/js/Jest.ts',
+      jestTestingLibrary: 'templates/unit-test/react/js/JestTestingLibrary.ts',
+      vitest: 'templates/unit-test/react/js/Vitest.ts',
+      vitestTestingLibrary: 'templates/unit-test/react/js/VitestTestingLibrary.ts'
     },
     ts: {
-      jest: 'templates/test/react/ts/Jest.ts',
-      jestTestingLibrary: 'templates/test/react/ts/JestTestingLibrary.ts',
-      vitest: 'templates/test/react/ts/Vitest.ts',
-      vitestTestingLibrary: 'templates/test/react/ts/VitestTestingLibrary.ts'
+      jest: 'templates/unit-test/react/ts/Jest.ts',
+      jestTestingLibrary: 'templates/unit-test/react/ts/JestTestingLibrary.ts',
+      vitest: 'templates/unit-test/react/ts/Vitest.ts',
+      vitestTestingLibrary: 'templates/unit-test/react/ts/VitestTestingLibrary.ts'
     }
   },
   vue: {
     js: {
-      jest: 'templates/test/vue/ts/Jest.ts',
-      jestTestingLibrary: 'templates/test/vue/ts/JestTestingLibrary.ts',
-      vitest: 'templates/test/vue/ts/Vitest.ts',
-      vitestTestingLibrary: 'templates/test/vue/ts/VitestTestingLibrary.ts'
+      jest: 'templates/unit-test/vue/ts/Jest.ts',
+      jestTestingLibrary: 'templates/unit-test/vue/ts/JestTestingLibrary.ts',
+      vitest: 'templates/unit-test/vue/ts/Vitest.ts',
+      vitestTestingLibrary: 'templates/unit-test/vue/ts/VitestTestingLibrary.ts'
     },
     ts: {
-      jest: 'templates/test/vue/ts/Jest.ts',
-      jestTestingLibrary: 'templates/test/vue/ts/JestTestingLibrary.ts',
-      vitest: 'templates/test/vue/ts/Vitest.ts',
-      vitestTestingLibrary: 'templates/test/vue/ts/VitestTestingLibrary.ts'
+      jest: 'templates/unit-test/vue/ts/Jest.ts',
+      jestTestingLibrary: 'templates/unit-test/vue/ts/JestTestingLibrary.ts',
+      vitest: 'templates/unit-test/vue/ts/Vitest.ts',
+      vitestTestingLibrary: 'templates/unit-test/vue/ts/VitestTestingLibrary.ts'
     }
   },
   function: {
     js: {
-      jest: 'templates/test/function/js/Jest.js',
-      vitest: 'templates/test/function/js/Vitest.js'
+      jest: 'templates/unit-test/function/js/Jest.js',
+      vitest: 'templates/unit-test/function/js/Vitest.js'
     },
     ts: {
-      jest: 'templates/test/function/ts/Jest.ts',
-      vitest: 'templates/test/function/ts/Vitest.ts'
+      jest: 'templates/unit-test/function/ts/Jest.ts',
+      vitest: 'templates/unit-test/function/ts/Vitest.ts'
     }
   }
 }
