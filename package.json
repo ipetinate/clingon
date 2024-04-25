@@ -8,6 +8,18 @@
   "license": "MIT",
   "private": false,
   "type": "module",
+  "keywords": [
+    "cli",
+    "component",
+    "generator",
+    "multipurpose",
+    "templates",
+    "vue",
+    "react",
+    "typescript",
+    "devtool",
+    "devexp"
+  ],
   "scripts": {
     "build": "rollup --config",
     "test": "node --test",
