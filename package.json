@@ -5,6 +5,10 @@
   "main": "./lib/main.js",
   "bin": "./lib/main.js",
   "author": "Isac Petinate <idpetinate@gmail.com>",
+  "repository": {
+    "url": "https://github.com/ipetinate/clingon",
+    "type": "public"
+  },
   "license": "MIT",
   "private": false,
   "type": "module",
