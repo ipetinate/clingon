@@ -1,3 +1,5 @@
+import path from 'node:path'
+
 import { localDirname } from '../main.js'
 
 import { functionTemplates } from '../constants/templates.js'
@@ -66,7 +68,7 @@ export function defineFunctionTemplate(data) {
  *  }}
  */
 export function getTemplateContent(data) {
-  const fullPath = `${localDirname}/${data.templatePath}`
+  const fullPath = path.join(localDirname, data.templatePath)
 
   const fileContent = readFileContent(fullPath)
 

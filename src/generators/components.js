@@ -1,3 +1,5 @@
+import path from 'node:path'
+
 import { CssFrameworkEnum, FrameworkEnum } from '../enums/frameworks.js'
 
 import { frameworkTemplates } from '../constants/templates.js'
@@ -95,7 +97,7 @@ export function defineComponentTemplate(data) {
  *  }}
  */
 export function getTemplateContent(data) {
-  const fullPath = `${localDirname}/${data.templatePath}`
+  const fullPath = path.join(localDirname, data.templatePath)
 
   const fileContent = readFileContent(fullPath)
 

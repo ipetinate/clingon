@@ -1,3 +1,5 @@
+import path from 'node:path'
+
 import { FrameworkEnum } from '../enums/frameworks.js'
 
 import { unitTestTemplates } from '../constants/templates.js'
@@ -102,7 +104,7 @@ export function defineTestTemplate(data) {
  *  }}
  */
 export function getTemplateContent(data) {
-  const fullPath = `${localDirname}/${data.templatePath}`
+  const fullPath = path.join(localDirname, data.templatePath)
 
   const fileContent = readFileContent(fullPath)
 
