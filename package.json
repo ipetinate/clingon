@@ -9,6 +9,10 @@
     "url": "https://github.com/ipetinate/clingon",
     "type": "public"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "license": "MIT",
   "private": false,
   "type": "module",
