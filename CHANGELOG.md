@@ -1,3 +1,15 @@
+# v0.4.7 (Fri Apr 26 2024)
+
+#### 🐛 Bug Fix
+
+- feat: add release badge on readme [#7](https://github.com/ipetinate/clingon/pull/7) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.4.6 (Fri Apr 26 2024)
 
 #### 🐛 Bug Fix
