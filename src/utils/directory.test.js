@@ -57,6 +57,14 @@ describe('Directory Utils', () => {
 
       assert.strictEqual(exists, false)
     })
+
+    it('returns true if directory is a root and exists', () => {
+      mockExistsSync.mock.restore()
+
+      const exists = checkDirectoriesTree(['.'])
+
+      assert.strictEqual(exists, true)
+    })
   })
 
   describe('getLocalLibDirname util', () => {
