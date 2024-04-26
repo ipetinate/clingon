@@ -39,6 +39,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-terser": "^0.4.4",
+    "auto": "^11.1.6",
     "rollup": "^4.14.1",
     "rollup-plugin-copy": "^3.5.0"
   }
