@@ -1,3 +1,15 @@
+# v0.4.8 (Fri Apr 26 2024)
+
+#### 🐛 Bug Fix
+
+- chore(badges): add new badges on readme [#8](https://github.com/ipetinate/clingon/pull/8) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.4.7 (Fri Apr 26 2024)
 
 #### 🐛 Bug Fix
