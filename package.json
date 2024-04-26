@@ -33,7 +33,7 @@
     "test": "node --test",
     "test:watch": "node --test --watch",
     "test:coverage": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info",
-    "dev": "node src/main.js "
+    "dev": "yarn build && clear && node lib/main.js gen"
   },
   "dependencies": {
     "@inquirer/prompts": "^4.3.2",
