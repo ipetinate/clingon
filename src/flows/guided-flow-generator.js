@@ -5,6 +5,8 @@ import { generateComponent } from '../generators/components.js'
 import { generateTests } from '../generators/tests.js'
 import { generateFunction } from '../generators/functions.js'
 
+const currentRootPath = '.'
+
 /**
  * Generate file from guided prompt
  *
@@ -46,7 +48,7 @@ export async function guidedFlowGenerator(data) {
  * @returns {Promise<string>}
  */
 async function checkProvidedPathRecursive(path, callback, target) {
-  const pathArray = splitPathString(path)
+  const pathArray = path === currentRootPath ? [path] : splitPathString(path)
   const pathExists = checkDirectoriesTree(pathArray)
 
   if (pathExists) {
