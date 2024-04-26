@@ -21,9 +21,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm run test:coverage
-      - run: npm run build --if-present
+
+      - name: 💽 Install deps
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+      - name: 🧪 Coverage Tests
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: test:coverage
+      - name: 🏗️ Build
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
 
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@v2.2.3
