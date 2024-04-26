@@ -6,6 +6,7 @@
 </p>
 
 [![Build](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml)
+[![Release](https://github.com/ipetinate/clingon/actions/workflows/release.yml/badge.svg?branch=main&event=release)](https://github.com/ipetinate/clingon/actions/workflows/release.yml)
 [![Coverage Status](https://coveralls.io/repos/github/ipetinate/clingon/badge.svg?branch=main)](https://coveralls.io/github/ipetinate/clingon?branch=main)
 
 # Clingon CLI
