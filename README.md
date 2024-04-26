@@ -19,6 +19,16 @@ You are going to create a React or Vue component, but this component needs a tes
 
 Let's simplify all of this, execute a command, answer some questions, or select your favorite template and that's it, everything is created, just start coding.
 
+## Links
+
+- Releases
+  - [CHANGELOG](https://github.com/ipetinate/clingon/blob/main/CHANGELOG.md)
+- Documentation
+  - [Development Guide](https://github.com/ipetinate/clingon/blob/main/doc/DEVELOPMENT_README.md)
+  - [Contribution Guide](https://github.com/ipetinate/clingon/blob/main/doc/CONTRIBUTION_GUIDE.md)
+  - [Templates Variants](https://github.com/ipetinate/clingon/blob/main/doc/TEMPLATES.md)
+  - [Development Taks](https://github.com/ipetinate/clingon/blob/main/doc/TASKS.md)
+
 ## Description
 
 Clingon is a command line tool that helps you create files for your project.
