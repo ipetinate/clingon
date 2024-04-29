@@ -52,10 +52,32 @@ export function createFileWithContent(filename, content) {
 /**
  * Make the file extension and returns without dot on start, e.g `tsx` or `vue` or `spec.ts`
  *
- * @param {{  postfix?: string, typescript?: boolean, withJsx?: boolean, vue?: boolean }} param0 Properties to compose extension
+ * @typedef {{
+ *    postfix?: string,
+ *    typescript?: boolean,
+ *    withJsx?: boolean,
+ *    vue?: boolean,
+ *    cssFramework: import('../types.js').CssFramework
+ *  }} Props
+ *
+ * @param {Props} props Properties to compose extension
  * @returns string
  */
-export function makeFileExtension({ typescript, postfix, withJsx, vue }) {
+export function makeFileExtension({ typescript, postfix, withJsx, vue, cssFramework }) {
+  if (cssFramework) {
+    switch (cssFramework) {
+      case 'scss': {
+        return FileExtensionEnum.scss
+      }
+      case 'css_modules':
+      case 'vanilla_css':
+      case 'tailwind_file':
+      default: {
+        return postfix ? postfix + FileExtensionEnum.css : FileExtensionEnum.css
+      }
+    }
+  }
+
   if (vue) return FileExtensionEnum.vue
 
   const tsExt = withJsx ? FileExtensionEnum.tsx : FileExtensionEnum.ts
