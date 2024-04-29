@@ -22,5 +22,6 @@ export const CssFrameworkEnum = {
   tailwind_inline: 'tailwind_inline',
   tailwind_file: 'tailwind_file',
   vanilla_css: 'vanilla_css',
-  scss: 'scss'
+  scss: 'scss',
+  no_style: 'no_style'
 }

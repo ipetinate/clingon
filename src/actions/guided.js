@@ -15,7 +15,7 @@ import {
 import { boolAsText } from '../utils/string.js'
 import { guidedFlowGenerator } from '../flows/guided-flow-generator.js'
 
-import { FrameworkEnum } from '../enums/frameworks.js'
+import { CssFrameworkEnum, FrameworkEnum } from '../enums/frameworks.js'
 
 export async function guidedAction() {
   /**
@@ -134,14 +134,8 @@ export async function guidedAction() {
   if (['component', 'page'].includes(type)) {
     cssFramework = await select({
       message: 'Would you like to select the CSS styles?',
-      choices: [
-        {
-          name: 'None',
-          value: null
-        },
-        ...cssFrameworkChoices
-      ],
-      default: null
+      choices: cssFrameworkChoices,
+      default: CssFrameworkEnum.no_style
     })
   }
 

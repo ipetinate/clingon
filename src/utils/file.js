@@ -73,7 +73,7 @@ export function makeFileExtension({ typescript, postfix, withJsx, vue, cssFramew
       case 'vanilla_css':
       case 'tailwind_file':
       default: {
-        return postfix ? postfix + FileExtensionEnum.css : FileExtensionEnum.css
+        return postfix ? `${postfix}.${FileExtensionEnum.css}` : FileExtensionEnum.css
       }
     }
   }

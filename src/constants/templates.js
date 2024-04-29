@@ -20,9 +20,10 @@ export const frameworkTemplates = {
     js: {
       component: {
         functional: {
+          no_style: 'templates/react/js/component/Functional.jsx',
           css_modules: 'templates/react/js/component/CssModulesFunctional.jsx',
-          scss: 'templates/react/js/component/CssModulesFunctional.jsx',
-          vanilla_css: 'templates/react/js/component/Functional.jsx',
+          scss: 'templates/react/js/component/FunctionalWithScss.jsx',
+          vanilla_css: 'templates/react/js/component/FunctionalWithStyle.jsx',
           tailwind_inline: 'templates/react/js/component/TailwindInlineFunctional.jsx',
           tailwind_file: 'templates/react/js/component/TailwindFunctional.jsx'
         }
@@ -31,9 +32,10 @@ export const frameworkTemplates = {
     ts: {
       component: {
         functional: {
+          no_style: 'templates/react/ts/component/Functional.tsx',
           css_modules: 'templates/react/ts/component/CssModulesFunctional.tsx',
-          scss: 'templates/react/ts/component/CssModulesFunctional.tsx',
-          vanilla_css: 'templates/react/ts/component/Functional.tsx',
+          scss: 'templates/react/ts/component/FunctionalWithScss.tsx',
+          vanilla_css: 'templates/react/ts/component/FunctionalWithStyle.tsx',
           tailwind_inline: 'templates/react/ts/component/TailwindInlineFunctional.tsx',
           tailwind_file: 'templates/react/ts/component/TailwindFunctional.tsx'
         }

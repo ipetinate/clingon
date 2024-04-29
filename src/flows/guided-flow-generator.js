@@ -35,11 +35,8 @@ export async function guidedFlowGenerator(data) {
         }
       }
 
-      if (data.cssFramework) {
-        await handleStyles(data, path)
-      }
-
       await handleTests(data, path)
+      await handleStyles(data, path)
       await handleStories(data, path)
     },
     data.type
@@ -119,6 +116,8 @@ async function handleStories(data, path) {
  *
  */
 async function handleStyles(data, path) {
+  if (data.cssFramework === 'no_style') return
+
   if (data.storyPath === data.resourcePath) {
     return generateStyle({ ...data, path })
   }
