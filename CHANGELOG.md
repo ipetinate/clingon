@@ -1,3 +1,15 @@
+# v0.4.10 (Mon Apr 29 2024)
+
+#### 🐛 Bug Fix
+
+- feat: add storybook stories [#18](https://github.com/ipetinate/clingon/pull/18) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.4.9 (Mon Apr 29 2024)
 
 #### 🐛 Bug Fix
