@@ -91,6 +91,8 @@ export const testPostfixChoices = [
 
 export const storiesPostfixChoices = [{ name: '.stories', value: StoryPostfixEnum.stories }]
 
+export const chooseMyOwnPathChoice = [{ name: 'Type my path', value: 'type-path' }]
+
 export const resourcesPaths = {
   page: [
     { name: 'src/pages', value: 'src/pages' },
