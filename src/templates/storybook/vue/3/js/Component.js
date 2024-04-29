@@ -1,16 +1,14 @@
-import type { ArgTypes, Meta, StoryFn } from '@storybook/vue3'
+import { ArgTypes, Meta, StoryFn } from '@storybook/vue3'
 
 import { toRefs } from 'vue'
 
 import ResourceName from 'resourcePath'
 
-type Props = InstanceType<typeof ResourceName>
-
-const argTypes: Partial<ArgTypes<Props>> = {
+const argTypes = {
   // Describe your args type (component properties) here to autodocs show properly informations
 }
 
-const meta: Meta<Props> = {
+const meta = {
   component: ResourceName,
   title: 'Components/UI/Card',
   tags: ['autodocs'],
@@ -19,7 +17,7 @@ const meta: Meta<Props> = {
 
 export default meta
 
-const Template: StoryFn<Props> = (args) => ({
+const Template = (args) => ({
   components: { ResourceName },
   setup() {
     const reactiveArgs = toRefs(args)
@@ -27,13 +25,15 @@ const Template: StoryFn<Props> = (args) => ({
     return { args: reactiveArgs }
   },
   template: `
-    <ResourceName 
-      // pass here yours props, e.g: (remove this comment)
-
-      :id="args.id"
-    >
-        <!-- If your component receive slots, pass them here, if not, remove this comment -->
-    </ResourceName>
+    <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-content: center; align-items: center;">
+      <ResourceName
+        :id="args.id"
+        
+        // pass here yours props, e.g: (remove this comment before run)
+      >
+          <!-- If your component receive slots, pass them here, if not, remove this comment -->
+      </ResourceName>
+    </div>
   `
 })
 
