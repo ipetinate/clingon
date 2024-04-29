@@ -10,7 +10,7 @@ const argTypes = {
 
 const meta = {
   component: ResourceName,
-  title: 'Components/UI/Card',
+  title: 'ResourceType/ResourceName',
   tags: ['autodocs'],
   argTypes
 }

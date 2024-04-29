@@ -2,7 +2,7 @@ import { ResourceName } from 'resourcePath'
 
 const meta = {
   component: ResourceName,
-  title: 'Components/ResourceName',
+  title: 'ResourceType/ResourceName',
   tags: ['autodocs'],
   argTypes
 }
