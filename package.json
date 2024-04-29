@@ -1,6 +1,6 @@
 {
   "name": "clingon",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "Multipurpose generator CLI based on local config and templates",
   "main": "./lib/main.js",
   "bin": "./lib/main.js",
