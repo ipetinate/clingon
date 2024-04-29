@@ -76,7 +76,7 @@ export function getTemplateContent(data) {
 }
 
 /**
- * Get template content from file
+ * Replace all occurrences on file content
  *
  * @param {Answers & {
  *    templatePath: string,

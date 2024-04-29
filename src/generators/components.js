@@ -67,23 +67,30 @@ export function defineComponentTemplate(data) {
       3: 'setup'
     }
 
+    /**
+     * @type {"options" | "setup"}
+     */
+    const api = vueApi[vueVersion]
+
     switch (data.framework) {
       case FrameworkEnum.react: {
         templatePath = frameworkTemplates.react[variant].component.functional[data.cssFramework]
 
-        return { ...data, templatePath }
+        break
       }
       case FrameworkEnum.vue: {
-        const api = vueApi[vueVersion]
-
         templatePath = frameworkTemplates.vue[vueVersion][variant].component[api][data.cssFramework]
 
-        return { ...data, templatePath }
+        break
       }
       default: {
-        throw new Error('Framework is required to get a template')
+        console.error('Framework is required to get a template')
+
+        break
       }
     }
+
+    return { ...data, templatePath }
   }
 }
 
@@ -134,7 +141,7 @@ export function makePathWithExtension(data) {
 }
 
 /**
- * Get template content from file
+ * Replace all occurrences on file content
  *
  * @param {Answers & {
  *    templatePath: string,

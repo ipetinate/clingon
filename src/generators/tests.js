@@ -43,14 +43,14 @@ export function generateTests(answers) {
 export function defineTestTemplate(data) {
   return () => {
     /**
-     * @type {"js" | "ts"}
-     */
-    const variant = data.typescript ? 'ts' : 'js'
-
-    /**
      * Template path from path's dictionary
      */
     let templatePath = ''
+
+    /**
+     * @type {"js" | "ts"}
+     */
+    const variant = data.typescript ? 'ts' : 'js'
 
     switch (data.framework) {
       case FrameworkEnum.react: {
@@ -69,6 +69,8 @@ export function defineTestTemplate(data) {
             templatePath = unitTestTemplates.react[variant].vitest
           }
         }
+
+        break
       }
 
       case FrameworkEnum.vue: {
@@ -87,6 +89,13 @@ export function defineTestTemplate(data) {
             templatePath = unitTestTemplates.vue[variant].vitest
           }
         }
+
+        break
+      }
+      default: {
+        console.error('Framework is required to get a template')
+
+        break
       }
     }
 
@@ -149,7 +158,7 @@ export function makePathWithExtension(data) {
 }
 
 /**
- * Get template content from file
+ * Replace all occurrences on file content
  *
  * @param {Answers & {
  *    templatePath: string,
