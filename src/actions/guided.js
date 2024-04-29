@@ -203,7 +203,9 @@ export async function guidedAction() {
     })
   }
 
-  if (['component'].includes(type)) {
+  const isVue2TypeScript = framework === FrameworkEnum.vue && version === 2 && typescript
+
+  if (['component'].includes(type) && !isVue2TypeScript) {
     withStory = await confirm({
       message: 'Would you like to add storybook story?'
     })
@@ -315,6 +317,7 @@ function getPathChoices({ type, target }) {
 function showPreview(answers) {
   const askedQuestions = {
     'Framework/Lib': answers.framework,
+    'Framework/Lib Version': answers.version,
     'Resource Type': answers.type,
     'Resource Name': answers.name,
     'With TypeScript': boolAsText(answers.typescript),
