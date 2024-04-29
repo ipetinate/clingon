@@ -1,3 +1,5 @@
+import { CssFrameworkEnum } from '../enums/frameworks.js'
+
 /**
  * @template T
  * @typedef {Record<import("../types").LangType, Record<import("../types").Resource, Record<T, Record<import("../types").TemplateVariants, string>>>>} FrameworksTemplatesStructure
@@ -155,40 +157,6 @@ export const frameworkTemplates = {
 }
 
 /**
- * Functions templates
- */
-export const functionTemplates = {
-  js: 'templates/function/js/function.js',
-  ts: 'templates/function/ts/function.ts'
-}
-
-/**
- * Stories templates
- */
-export const storiesTemplates = {
-  storybook: {
-    vue: {
-      3: {
-        js: {
-          component: 'templates/storybook/vue/3/js/Component.js'
-        },
-        ts: {
-          component: 'templates/storybook/vue/3/ts/Component.ts'
-        }
-      }
-    },
-    react: {
-      js: {
-        component: 'templates/storybook/react/js/Component.jsx'
-      },
-      ts: {
-        component: 'templates/storybook/react/ts/Component.tsx'
-      }
-    }
-  }
-}
-
-/**
  * Built-in templates for unit test path dictionary
  */
 export const unitTestTemplates = {
@@ -230,4 +198,50 @@ export const unitTestTemplates = {
       vitest: 'templates/unit-test/function/ts/Vitest.ts'
     }
   }
+}
+
+/**
+ * Stories templates
+ */
+export const storiesTemplates = {
+  storybook: {
+    vue: {
+      3: {
+        js: {
+          component: 'templates/storybook/vue/3/js/Component.js'
+        },
+        ts: {
+          component: 'templates/storybook/vue/3/ts/Component.ts'
+        }
+      }
+    },
+    react: {
+      js: {
+        component: 'templates/storybook/react/js/Component.jsx'
+      },
+      ts: {
+        component: 'templates/storybook/react/ts/Component.tsx'
+      }
+    }
+  }
+}
+
+/**
+ * Functions templates
+ */
+export const functionTemplates = {
+  js: 'templates/function/js/function.js',
+  ts: 'templates/function/ts/function.ts'
+}
+
+/**
+ * Styles templates
+ *
+ * @type {Record<keyof typeof CssFrameworkEnum, string>}
+ */
+export const stylesTemplates = {
+  scss: 'templates/styles/Default.scss',
+  css_modules: 'templates/styles/Default.css',
+  vanilla_css: 'templates/styles/Default.css',
+  tailwind_file: 'templates/styles/Tailwind.css'
 }
