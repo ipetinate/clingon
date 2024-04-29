@@ -30,7 +30,7 @@ export function generateStory(answers) {
   if (success) {
     console.info('Story created successfully: ' + path)
   } else {
-    console.info(`Error on create Story, try again`)
+    console.error(`Error on create Story, try again`)
   }
 }
 

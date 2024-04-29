@@ -7,5 +7,7 @@ export const FileExtensionEnum = {
   js: 'js',
   jsx: 'jsx',
   vue: 'vue',
-  json: 'json'
+  json: 'json',
+  css: 'css',
+  scss: 'scss'
 }

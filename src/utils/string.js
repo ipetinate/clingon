@@ -5,7 +5,7 @@
  * @returns {Array<string>}
  */
 export function splitPathString(path) {
-  if (!path.includes('/')) {
+  if (!path?.includes('/')) {
     throw new Error('Should pass a string with slash separator, like a folder tree path')
   }
 

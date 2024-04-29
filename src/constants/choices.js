@@ -66,13 +66,14 @@ export const frameworksAndLibsChoices = [
  * @type {CssrameworkChoices[]}
  */
 export const cssFrameworkChoices = [
+  { name: 'None', value: 'no_style' },
   { name: 'Vanilla Pure CSS (.css)', value: CssFrameworkEnum.vanilla_css },
   {
-    name: 'Tailwind CSS Inline (inside component)',
+    name: 'Tailwind Inline (inside component)',
     value: CssFrameworkEnum.tailwind_inline
   },
   {
-    name: 'Tailwind CSS w/ File (.css w/ @apply)',
+    name: 'Tailwind (CSS w/ @apply)',
     value: CssFrameworkEnum.tailwind_file
   },
   { name: 'CSS Modules (.css)', value: CssFrameworkEnum.css_modules },

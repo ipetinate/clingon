@@ -30,7 +30,7 @@ export function generateTests(answers) {
   if (success) {
     console.info(capitalizeLetter(answers.testPostfix) + ' created successfully: ' + path)
   } else {
-    console.info(`Error on create ${answers.testPostfix}, try again`)
+    console.error(`Error on create ${answers.testPostfix}, try again`)
   }
 }
 

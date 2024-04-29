@@ -4,6 +4,10 @@
 /node_modules
 /.github
 
+# Env files
+
+.env
+
 # RunCom files
 
 .nvmrc

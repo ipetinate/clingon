@@ -1,7 +1,0 @@
-.component {
-  @apply flex justify-center items-center;
-}
-
-.message {
-  @apply text-slate-800;
-}

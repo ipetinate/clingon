@@ -132,17 +132,11 @@ export async function guidedAction() {
   }
 
   if (['component', 'page'].includes(type)) {
-    const chooseCssFramework = await confirm({
-      message: 'Do you want to select a specific css approach? '
+    cssFramework = await select({
+      message: 'Would you like to select the CSS styles?',
+      choices: cssFrameworkChoices,
+      default: CssFrameworkEnum.no_style
     })
-
-    if (chooseCssFramework) {
-      cssFramework = await select({
-        message: 'Would you like to select the CSS approach? (default: .css file with css vanilla)',
-        choices: cssFrameworkChoices,
-        default: CssFrameworkEnum.vanilla_css
-      })
-    }
   }
 
   /**
@@ -346,7 +340,9 @@ function showPreview(answers) {
  * @param {import("../types.js").CssFramework} target Css framework
  */
 function getCssApproachName(target) {
-  const option = cssFrameworkChoices.find(({ value }) => value === target)
+  if (!target) return null
 
-  return option.name
+  const option = cssFrameworkChoices.find(({ value }) => value && value === target)
+
+  return option?.name
 }

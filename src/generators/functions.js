@@ -28,9 +28,8 @@ export function generateFunction(answers) {
 
   if (success) {
     console.info('Function created successfully: ' + path)
-  }
-  if (error) {
-    console.info('Error on create component, try again')
+  } else {
+    console.error('Error on create component, try again')
   }
 }
 
