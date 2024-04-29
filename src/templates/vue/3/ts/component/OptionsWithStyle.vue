@@ -1,7 +1,7 @@
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'ResourceName',
   data() {
     return {
@@ -12,14 +12,14 @@ export default Vue.extend({
 </script>
 
 <template>
-  <div :class="$style.component">
-    <p :class="$style.message">
+  <div class="component">
+    <p class="message">
       {{ message }}
     </p>
   </div>
 </template>
 
-<style scoped module>
+<style scoped>
 .component {
   display: flex;
   justify-content: center;

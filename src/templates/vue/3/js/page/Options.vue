@@ -13,15 +13,7 @@ export default {
     greeting() {
       alert(this.message)
     }
-  },
-  computed: {},
-  watch: {},
-  beforeMounted() {},
-  mounted() {},
-  beforeCreated() {},
-  created() {},
-  beforeUpdated() {},
-  updated() {}
+  }
 }
 </script>
 

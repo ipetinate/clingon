@@ -11,9 +11,6 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'ResourceName',
-  components: {},
-  filters: {},
-  props: {},
   methods: {},
   computed: {},
   watch: {},

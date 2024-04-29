@@ -9,15 +9,7 @@ export default {
     }
   },
   props: {},
-  methods: {},
-  computed: {},
-  watch: {},
-  beforeMounted() {},
-  mounted() {},
-  beforeCreated() {},
-  created() {},
-  beforeUpdated() {},
-  updated() {}
+  methods: {}
 }
 </script>
 
