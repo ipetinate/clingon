@@ -9,7 +9,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    greeting() {
+    greeting(): void {
       alert(this.message)
     }
   }

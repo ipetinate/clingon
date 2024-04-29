@@ -15,44 +15,15 @@ export default {
 </script>
 
 <template>
-  <div class="page">
-    <header class="header">
-      <h2 class="title">ResourceName</h2>
+  <div>
+    <header>
+      <h2>ResourceName</h2>
 
-      <button @click="greeting" class="action">Action</button>
+      <button @click="greeting">Action</button>
     </header>
 
-    <main class="content">
+    <main>
       <p>{{ message }}</p>
     </main>
   </div>
 </template>
-
-<style scoped>
-.page {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 20px 40px;
-}
-
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-}
-
-.title {
-  color: #333;
-  font-size: x-large;
-}
-
-.content {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
-</style>

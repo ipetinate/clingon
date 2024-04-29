@@ -9,7 +9,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    greeting() {
+    greeting(): void {
       alert(this.message)
     }
   }
@@ -30,7 +30,7 @@ export default Vue.extend({
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .page,
 .header,
 .content {
@@ -47,31 +47,19 @@ export default Vue.extend({
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px 40px;
+}
 
-  .header {
-    flex-direction: row;
-    justify-content: space-between;
+.header {
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-    .title {
-      color: #333;
-      font-size: x-large;
-    }
+.content {
+  justify-content: center;
+}
 
-    .action {
-      color: #fff;
-      background-color: #1c77f7;
-
-      padding: 4px 8px;
-      border-radius: 8px;
-
-      &:hover {
-        background-color: #0758c9;
-      }
-    }
-  }
-
-  .content {
-    justify-content: center;
-  }
+.title {
+  color: #333;
+  font-size: x-large;
 }
 </style>

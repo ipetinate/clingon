@@ -1,7 +1,5 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
+<script>
+export default {
   name: 'ResourceName',
   data() {
     return {
@@ -14,7 +12,7 @@ export default defineComponent({
       alert(this.message)
     }
   }
-})
+}
 </script>
 
 <template>
@@ -31,7 +29,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .page,
 .header,
 .content {
@@ -48,31 +46,31 @@ export default defineComponent({
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px 40px;
+}
 
-  .header {
-    flex-direction: row;
-    justify-content: space-between;
+.header {
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-    .title {
-      color: #333;
-      font-size: x-large;
-    }
+.content {
+  justify-content: center;
+}
 
-    .action {
-      color: #fff;
-      background-color: #1c77f7;
+.title {
+  color: #333;
+  font-size: x-large;
+}
 
-      padding: 4px 8px;
-      border-radius: 8px;
+.action {
+  color: #fff;
+  background-color: #1c77f7;
 
-      &:hover {
-        background-color: #0758c9;
-      }
-    }
-  }
+  padding: 4px 8px;
+  border-radius: 8px;
+}
 
-  .content {
-    justify-content: center;
-  }
+.action:hover {
+  background-color: #0758c9;
 }
 </style>

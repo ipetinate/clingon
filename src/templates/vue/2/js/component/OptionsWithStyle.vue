@@ -10,9 +10,21 @@ export default {
 </script>
 
 <template>
-  <div>
-    <p>
+  <div class="component">
+    <p class="message">
       {{ message }}
     </p>
   </div>
 </template>
+
+<style scoped>
+.component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  color: #333;
+}
+</style>
