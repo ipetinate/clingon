@@ -7,8 +7,8 @@
 
 [![Build](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml)
 [![Release](https://github.com/ipetinate/clingon/actions/workflows/release.yml/badge.svg)](https://github.com/ipetinate/clingon/actions/workflows/release.yml)
-![GitHub Release Date](https://img.shields.io/github/release-date/ipetinate/clingon?display_date=published_at&logo=npm&label=Release%20Date&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fclingon)
-![![Coverage Status](https://coveralls.io/repos/github/ipetinate/clingon/badge.svg?branch=main)](https://img.shields.io/coverallsCoverage/github/ipetinate/clingon?branch=main&logo=coveralls&label=Coverage)
+[![GitHub Release Date](https://www.npmjs.com/package/clingon)](https://img.shields.io/github/release-date/ipetinate/clingon?display_date=published_at&logo=npm&label=Release%20Date&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fclingon)
+[![Coverage Status](https://coveralls.io/repos/github/ipetinate/clingon/badge.svg?branch=main)](https://img.shields.io/coverallsCoverage/github/ipetinate/clingon?branch=main&logo=coveralls&label=Coverage)
 ![GitHub top language](https://img.shields.io/github/languages/top/ipetinate/clingon?logo=javascript&label=Main%20Language%3A%20JS)
 
 # Clingon CLI
