@@ -5,6 +5,7 @@ import { generateComponent } from '../generators/components.js'
 import { generateTests } from '../generators/tests.js'
 import { generateFunction } from '../generators/functions.js'
 import { generateStory } from '../generators/storybook-story.js'
+import { generateStyle } from '../generators/css-styles.js'
 
 const currentRootPath = '.'
 
@@ -32,6 +33,10 @@ export async function guidedFlowGenerator(data) {
         default: {
           break
         }
+      }
+
+      if (data.cssFramework) {
+        await handleStyles(data, path)
       }
 
       await handleTests(data, path)
@@ -103,5 +108,24 @@ async function handleStories(data, path) {
     data.storyPath,
     (newPath) => generateStory({ ...data, path: newPath, resourcePath: path }),
     data.storyPostfix
+  )
+}
+
+/**
+ * Handle styles flow
+ *
+ * @param {import("../types.js").Answers} data Information the user provided in the guided prompt
+ * @param {string} path Path from main resource if should use same path
+ *
+ */
+async function handleStyles(data, path) {
+  if (data.storyPath === data.resourcePath) {
+    return generateStyle({ ...data, path })
+  }
+
+  return await checkProvidedPathRecursive(
+    data.storyPath,
+    (newPath) => generateStyle({ ...data, path: newPath, resourcePath: path }),
+    'style'
   )
 }
