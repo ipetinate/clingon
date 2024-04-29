@@ -1,3 +1,15 @@
+# v0.4.9 (Mon Apr 29 2024)
+
+#### 🐛 Bug Fix
+
+- feat: allow to choose custom path for resource and tests [#17](https://github.com/ipetinate/clingon/pull/17) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.4.8 (Fri Apr 26 2024)
 
 #### 🐛 Bug Fix
