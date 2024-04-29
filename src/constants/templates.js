@@ -162,12 +162,22 @@ export const functionTemplates = {
 export const storiesTemplates = {
   storybook: {
     vue: {
-      js: {},
-      ts: {}
+      3: {
+        js: {
+          component: 'templates/storybook/vue/3/js/Component.js'
+        },
+        ts: {
+          component: 'templates/storybook/vue/3/ts/Component.ts'
+        }
+      }
     },
     react: {
-      js: {},
-      ts: {}
+      js: {
+        component: 'templates/storybook/react/js/Component.jsx'
+      },
+      ts: {
+        component: 'templates/storybook/react/ts/Component.tsx'
+      }
     }
   }
 }
