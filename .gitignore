@@ -5,3 +5,5 @@
 /lib
 
 lcov.info
+
+.env
