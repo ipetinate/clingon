@@ -6,6 +6,7 @@ import { generateTests } from '../generators/tests.js'
 import { generateFunction } from '../generators/functions.js'
 import { generateStory } from '../generators/storybook-story.js'
 import { generateStyle } from '../generators/css-styles.js'
+import { FrameworkEnum } from '../enums/frameworks.js'
 
 const currentRootPath = '.'
 
@@ -23,6 +24,10 @@ export async function guidedFlowGenerator(data) {
         case 'component': {
           generateComponent({ ...data, path })
 
+          if (data.framework === FrameworkEnum.react) {
+            await handleStyles(data, path)
+          }
+
           break
         }
         case 'function': {
@@ -36,7 +41,6 @@ export async function guidedFlowGenerator(data) {
       }
 
       await handleTests(data, path)
-      await handleStyles(data, path)
       await handleStories(data, path)
     },
     data.type
