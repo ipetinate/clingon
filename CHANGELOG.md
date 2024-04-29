@@ -1,3 +1,19 @@
+# v0.6.0 (Mon Apr 29 2024)
+
+#### 🚀 Enhancement
+
+- fix: filter options to don't show storybook to vue 2 with typescript + templates bugfixes [#23](https://github.com/ipetinate/clingon/pull/23) ([@ipetinate](https://github.com/ipetinate))
+
+#### 📝 Documentation
+
+- chore: Update CHANGELOG.md [#22](https://github.com/ipetinate/clingon/pull/22) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.5.0 (Mon Apr 29 2024)
 
 #### 🚀 Enhancement
