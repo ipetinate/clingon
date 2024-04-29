@@ -2,25 +2,25 @@ import path from 'node:path'
 
 import { FrameworkEnum } from '../enums/frameworks.js'
 
-import { unitTestTemplates } from '../constants/templates.js'
+import { storiesTemplates, unitTestTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
+import { localDirname } from '../main.js'
 import { capitalizeLetter, convertCase } from '../utils/string.js'
 import { makeFileExtension, createFileWithContent, readFileContent } from '../utils/file.js'
-import { localDirname } from '../main.js'
 
 /**
  * @typedef {import("../types.js").Answers} Answers
  */
 
 /**
- * Component generator
+ * Storybook story generator
  *
  * @param {Answers  & { path: string }} answers Answers prompted to the user
  */
-export function generateTests(answers) {
+export function generateStory(answers) {
   const { success, path } = compose(
-    defineTestTemplate(answers),
+    defineStoryTemplate(answers),
     getTemplateContent,
     makePathWithExtension,
     replaceAllTestTextOccurrences,
@@ -28,19 +28,19 @@ export function generateTests(answers) {
   )
 
   if (success) {
-    console.info(capitalizeLetter(answers.testPostfix) + ' created successfully: ' + path)
+    console.info('Story created successfully: ' + path)
   } else {
-    console.info(`Error on create ${answers.testPostfix}, try again`)
+    console.info(`Error on create Story, try again`)
   }
 }
 
 /**
- * Get component template details
+ * Get storybook story template details
  *
  * @param {Answers & { path: string }} data - Data to compose component
  * @returns {() => Answers & { templatePath: string }}
  */
-export function defineTestTemplate(data) {
+export function defineStoryTemplate(data) {
   return () => {
     /**
      * Template path from path's dictionary
@@ -54,41 +54,12 @@ export function defineTestTemplate(data) {
 
     switch (data.framework) {
       case FrameworkEnum.react: {
-        if (data.testFramework === 'jest') {
-          if (data.withTestingLibrary) {
-            templatePath = unitTestTemplates.react[variant].jestTestingLibrary
-          } else {
-            templatePath = unitTestTemplates.react[variant].jest
-          }
-        }
-
-        if (data.testFramework === 'vitest') {
-          if (data.withTestingLibrary) {
-            templatePath = unitTestTemplates.react[variant].vitestTestingLibrary
-          } else {
-            templatePath = unitTestTemplates.react[variant].vitest
-          }
-        }
+        templatePath = storiesTemplates.storybook.react[variant].component
 
         break
       }
-
       case FrameworkEnum.vue: {
-        if (data.testFramework === 'jest') {
-          if (data.withTestingLibrary) {
-            templatePath = unitTestTemplates.vue[variant].jestTestingLibrary
-          } else {
-            templatePath = unitTestTemplates.vue[variant].jest
-          }
-        }
-
-        if (data.testFramework === 'vitest') {
-          if (data.withTestingLibrary) {
-            templatePath = unitTestTemplates.vue[variant].vitestTestingLibrary
-          } else {
-            templatePath = unitTestTemplates.vue[variant].vitest
-          }
-        }
+        templatePath = storiesTemplates.storybook.vue['3'][variant].component
 
         break
       }
@@ -139,9 +110,9 @@ export function makePathWithExtension(data) {
   data.name = convertCase('PascalCase', data.name)
 
   const extension = makeFileExtension({
-    typescript: data.typescript,
-    postfix: data.testPostfix,
-    withJsx: data.framework === FrameworkEnum.react
+    withJsx: data.framework === FrameworkEnum.react,
+    postfix: data.storyPostfix,
+    typescript: data.typescript
   })
 
   const fileName = `${data.name}.${extension}`
@@ -185,21 +156,28 @@ export function replaceAllTestTextOccurrences(data) {
    * @param {string} extension Extension to add on string
    * @returns {string}
    */
-  const removeTestPostfix = (value, extension) =>
-    value.replace(/(.spec.(ts|js))|(.test.(ts|js))/g, '') + extension
+  const removeStoryPostfix = (value, extension) => {
+    const extRegExp = new RegExp(/(.story.(ts|js))|(.stories.(ts|js))/g)
+
+    return value.replace(extRegExp, '') + extension
+  }
 
   data.fileContent = data.fileContent.replace(/ResourceName/g, data.name)
 
   if (data.framework === FrameworkEnum.vue) {
+    const ext = '.vue'
+
     data.fileContent = data.fileContent.replace(
       /resourcePath/g,
-      removeTestPostfix(data.resourcePathWithFileName, '.vue')
+      removeStoryPostfix(data.resourcePathWithFileName, ext)
     )
   }
   if (data.framework === FrameworkEnum.react) {
+    const ext = data.typescript ? '.tsx' : '.jsx'
+
     data.fileContent = data.fileContent.replace(
       /resourcePath/g,
-      removeTestPostfix(data.resourcePathWithFileName, data.typescript ? '.tsx' : '.jsx')
+      removeStoryPostfix(data.resourcePathWithFileName, ext)
     )
   }
 

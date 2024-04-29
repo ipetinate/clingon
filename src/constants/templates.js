@@ -15,21 +15,27 @@
  */
 export const frameworkTemplates = {
   react: {
-    ts: {
+    js: {
       component: {
         functional: {
-          standard: 'templates/react/ts/component/Functional.tsx',
-          tailwind_file: 'templates/react/ts/component/TailwindFunctional.tsx',
-          tailwind_inline: 'templates/react/ts/component/TailwindInlineFunctional.tsx',
-          css_modules: 'templates/react/ts/component/CssModulesFunctional.tsx'
+          css_modules: 'templates/react/js/component/CssModulesFunctional.jsx',
+          scss: 'templates/react/js/component/CssModulesFunctional.jsx',
+          vanilla_css: 'templates/react/js/component/Functional.jsx',
+          tailwind_inline: 'templates/react/js/component/TailwindInlineFunctional.jsx',
+          tailwind_file: 'templates/react/js/component/TailwindFunctional.jsx'
         }
       }
     },
-    js: {
-      functional: 'templates/react/js/component/Functional.jsx',
-      tailwind_file: 'templates/react/js/component/TailwindFunctional.jsx',
-      tailwind_inline: 'templates/react/js/component/TailwindInlineFunctional.jsx',
-      css_modules: 'templates/react/js/component/CssModulesFunctional.jsx'
+    ts: {
+      component: {
+        functional: {
+          css_modules: 'templates/react/ts/component/CssModulesFunctional.tsx',
+          scss: 'templates/react/ts/component/CssModulesFunctional.tsx',
+          vanilla_css: 'templates/react/ts/component/Functional.tsx',
+          tailwind_inline: 'templates/react/ts/component/TailwindInlineFunctional.tsx',
+          tailwind_file: 'templates/react/ts/component/TailwindFunctional.tsx'
+        }
+      }
     }
   },
   vue: {
@@ -162,12 +168,22 @@ export const functionTemplates = {
 export const storiesTemplates = {
   storybook: {
     vue: {
-      js: {},
-      ts: {}
+      3: {
+        js: {
+          component: 'templates/storybook/vue/3/js/Component.js'
+        },
+        ts: {
+          component: 'templates/storybook/vue/3/ts/Component.ts'
+        }
+      }
     },
     react: {
-      js: {},
-      ts: {}
+      js: {
+        component: 'templates/storybook/react/js/Component.jsx'
+      },
+      ts: {
+        component: 'templates/storybook/react/ts/Component.tsx'
+      }
     }
   }
 }

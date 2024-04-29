@@ -4,6 +4,7 @@ import { splitPathString } from '../utils/string.js'
 import { generateComponent } from '../generators/components.js'
 import { generateTests } from '../generators/tests.js'
 import { generateFunction } from '../generators/functions.js'
+import { generateStory } from '../generators/storybook-story.js'
 
 const currentRootPath = '.'
 
@@ -34,6 +35,7 @@ export async function guidedFlowGenerator(data) {
       }
 
       await handleTests(data, path)
+      await handleStories(data, path)
     },
     data.type
   )
@@ -78,12 +80,28 @@ async function handleTests(data, path) {
 
   return await checkProvidedPathRecursive(
     data.testPath,
-    (newPath) =>
-      generateTests({
-        ...data,
-        path: newPath,
-        resourcePath: path
-      }),
+    (newPath) => generateTests({ ...data, path: newPath, resourcePath: path }),
     data.testPostfix
+  )
+}
+
+/**
+ * Handle stories flow
+ *
+ * @param {import("../types.js").Answers} data Information the user provided in the guided prompt
+ * @param {string} path Path from main resource if should use same path
+ *
+ */
+async function handleStories(data, path) {
+  if (!data.withStory) return
+
+  if (data.storyPath === data.resourcePath) {
+    return generateStory({ ...data, path })
+  }
+
+  return await checkProvidedPathRecursive(
+    data.storyPath,
+    (newPath) => generateStory({ ...data, path: newPath, resourcePath: path }),
+    data.storyPostfix
   )
 }

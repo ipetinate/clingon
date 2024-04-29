@@ -5,7 +5,7 @@ import { Command } from 'commander'
 import { guidedAction } from './actions/guided.js'
 import { getLocalLibDirname } from './utils/directory.js'
 
-import { version } from '../package.json'
+import packageJson from '../package.json' assert { type: 'json' }
 
 /*
  * Global Variables
@@ -22,7 +22,7 @@ const program = new Command()
 program
   .name('clingon')
   .description('CLI to generate files based on templates')
-  .version(version, '-v, --version', 'Current version')
+  .version(packageJson.version, '-v, --version', 'Current version')
 
 /*
  * Read config file from rootDir

@@ -209,13 +209,11 @@ export async function guidedAction() {
     })
   }
 
-  // TODO: implements Story templatates and generator before uncomment this piece
-
-  // if (['component', 'page'].includes(type)) {
-  //   withStory = await confirm({
-  //     message: 'Would you like to add storybook story?'
-  //   })
-  // }
+  if (['component'].includes(type)) {
+    withStory = await confirm({
+      message: 'Would you like to add storybook story?'
+    })
+  }
 
   if (withStory) {
     const choices = getPathChoices({ type, target: 'story' })
@@ -321,7 +319,7 @@ function getPathChoices({ type, target }) {
  * @param {import("../types.js").Answers} answers User's responses
  */
 function showPreview(answers) {
-  console.table({
+  const askedQuestions = {
     'Framework/Lib': answers.framework,
     'Resource Type': answers.type,
     'Resource Name': answers.name,
@@ -335,7 +333,11 @@ function showPreview(answers) {
     'Resource Path': answers.resourcePath,
     'Test Path': answers.testPath,
     'Story Path': answers.storyPath
-  })
+  }
+
+  const preview = Object.fromEntries(Object.entries(askedQuestions).filter(([_, v]) => v !== null))
+
+  console.table(preview)
 }
 
 /**
@@ -344,13 +346,7 @@ function showPreview(answers) {
  * @param {import("../types.js").CssFramework} target Css framework
  */
 function getCssApproachName(target) {
-  const nameMap = {
-    [CssFrameworkEnum.css_modules]: 'CSS Modules (.css)',
-    [CssFrameworkEnum.tailwind_inline]: 'Tailwind CSS Inline (inside component)',
-    [CssFrameworkEnum.tailwind_file]: 'Tailwind CSS w/ File (.css w/ @apply)',
-    [CssFrameworkEnum.vanilla_css]: 'Vanilla Pure CSS (.css)',
-    [CssFrameworkEnum.scss]: 'SASS (.scss)'
-  }
+  const option = cssFrameworkChoices.find(({ value }) => value === target)
 
-  return nameMap[target]
+  return option.name
 }
