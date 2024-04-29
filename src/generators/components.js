@@ -32,7 +32,7 @@ export function generateComponent(answers) {
   if (success) {
     console.info('Component created successfully: ' + path)
   } else {
-    console.info('Error on create component, try again')
+    console.error('Error on create component, try again')
   }
 }
 
