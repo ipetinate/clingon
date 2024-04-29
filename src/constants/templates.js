@@ -49,8 +49,8 @@ export const frameworkTemplates = {
           options: {
             css_modules: 'templates/vue/2/js/component/CssModulesOptions.vue',
             scss: 'templates/vue/2/js/component/ScssOptions.vue',
-            no_style: 'templates/vue/2/js/component/OptionsWithStyle.vue',
-            vanilla_css: 'templates/vue/2/js/component/Options.vue',
+            no_style: 'templates/vue/2/js/component/Options.vue',
+            vanilla_css: 'templates/vue/2/js/component/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/2/js/component/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/2/js/component/TailwindOptions.vue'
           }
@@ -59,8 +59,8 @@ export const frameworkTemplates = {
           options: {
             css_modules: 'templates/vue/2/js/page/CssModulesOptions.vue',
             scss: 'templates/vue/2/js/page/ScssOptions.vue',
-            no_style: 'templates/vue/2/js/page/OptionsWithStyle.vue',
-            vanilla_css: 'templates/vue/2/js/page/Options.vue',
+            no_style: 'templates/vue/2/js/page/Options.vue',
+            vanilla_css: 'templates/vue/2/js/page/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/2/js/page/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/2/js/page/TailwindOptions.vue'
           }
@@ -71,8 +71,8 @@ export const frameworkTemplates = {
           options: {
             css_modules: 'templates/vue/2/ts/component/CssModulesOptions.vue',
             scss: 'templates/vue/2/ts/component/ScssOptions.vue',
-            no_style: 'templates/vue/2/ts/component/OptionsWithStyle.vue',
-            vanilla_css: 'templates/vue/2/ts/component/Options.vue',
+            no_style: 'templates/vue/2/ts/component/Options.vue',
+            vanilla_css: 'templates/vue/2/ts/component/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/2/ts/component/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/2/ts/component/TailwindOptions.vue'
           }
@@ -81,8 +81,8 @@ export const frameworkTemplates = {
           options: {
             css_modules: 'templates/vue/2/ts/page/CssModulesOptions.vue',
             scss: 'templates/vue/2/ts/page/ScssOptions.vue',
-            no_style: 'templates/vue/2/ts/page/OptionsWithStyle.vue',
-            vanilla_css: 'templates/vue/2/ts/page/Options.vue',
+            no_style: 'templates/vue/2/ts/page/Options.vue',
+            vanilla_css: 'templates/vue/2/ts/page/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/2/ts/page/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/2/ts/page/TailwindOptions.vue'
           }
