@@ -17,19 +17,23 @@ export const frameworkTemplates = {
   react: {
     js: {
       component: {
-        functional: 'templates/react/js/component/Functional.jsx',
-        tailwind_file: 'templates/react/js/component/TailwindFunctional.jsx',
-        tailwind_inline: 'templates/react/js/component/TailwindInlineFunctional.jsx',
-        css_modules: 'templates/react/js/component/CssModulesFunctional.jsx'
+        functional: {
+          css_modules: 'templates/react/js/component/CssModulesFunctional.jsx',
+          scss: 'templates/react/js/component/CssModulesFunctional.jsx',
+          vanilla_css: 'templates/react/js/component/Functional.jsx',
+          tailwind_inline: 'templates/react/js/component/TailwindInlineFunctional.jsx',
+          tailwind_file: 'templates/react/js/component/TailwindFunctional.jsx'
+        }
       }
     },
     ts: {
       component: {
         functional: {
-          standard: 'templates/react/ts/component/Functional.tsx',
-          tailwind_file: 'templates/react/ts/component/TailwindFunctional.tsx',
+          css_modules: 'templates/react/ts/component/CssModulesFunctional.tsx',
+          scss: 'templates/react/ts/component/CssModulesFunctional.tsx',
+          vanilla_css: 'templates/react/ts/component/Functional.tsx',
           tailwind_inline: 'templates/react/ts/component/TailwindInlineFunctional.tsx',
-          css_modules: 'templates/react/ts/component/CssModulesFunctional.tsx'
+          tailwind_file: 'templates/react/ts/component/TailwindFunctional.tsx'
         }
       }
     }
