@@ -1,6 +1,6 @@
 import styles from './ResourceName.css'
 
-type Props = {
+export type ResourceNameProps = {
   id: string
 }
 
