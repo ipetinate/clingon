@@ -8,7 +8,8 @@ import {
   vueVersionsChoices,
   storiesPostfixChoices,
   testFrameworkChoices,
-  cssFrameworkChoices
+  cssFrameworkChoices,
+  chooseMyOwnPathChoice
 } from '../constants/choices.js'
 
 import { boolAsText } from '../utils/string.js'
@@ -152,9 +153,11 @@ export async function guidedAction() {
   if (choices) {
     resourcePath = await select({
       message: `What is the folder path that I should create your ${type} in?`,
-      choices
+      choices: [...chooseMyOwnPathChoice, ...choices]
     })
-  } else {
+  }
+
+  if (!choices || resourcePath === 'type-path') {
     resourcePath = await input({
       message: `What is the folder path that I should create your ${type} in? e.g. src/folder/here`
     })
@@ -177,10 +180,13 @@ export async function guidedAction() {
             name: `Same as your ${type}: ${resourcePath}`,
             value: resourcePath
           },
+          ...chooseMyOwnPathChoice,
           ...choices
         ]
       })
-    } else {
+    }
+
+    if (!choices || testPath === 'type-path') {
       testPath = await input({
         message: 'What is the folder path that I should create your tests in? e.g. folder/here'
       })
@@ -222,10 +228,13 @@ export async function guidedAction() {
             name: `Same as your ${type}: ${resourcePath}`,
             value: resourcePath
           },
+          ...chooseMyOwnPathChoice,
           ...choices
         ]
       })
-    } else {
+    }
+
+    if (!choices || storyPath === 'type-path') {
       storyPath = await input({
         message: 'What is the folder path that I should create your story in? e.g. folder/here'
       })
