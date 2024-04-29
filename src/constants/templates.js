@@ -15,6 +15,14 @@
  */
 export const frameworkTemplates = {
   react: {
+    js: {
+      component: {
+        functional: 'templates/react/js/component/Functional.jsx',
+        tailwind_file: 'templates/react/js/component/TailwindFunctional.jsx',
+        tailwind_inline: 'templates/react/js/component/TailwindInlineFunctional.jsx',
+        css_modules: 'templates/react/js/component/CssModulesFunctional.jsx'
+      }
+    },
     ts: {
       component: {
         functional: {
@@ -24,12 +32,6 @@ export const frameworkTemplates = {
           css_modules: 'templates/react/ts/component/CssModulesFunctional.tsx'
         }
       }
-    },
-    js: {
-      functional: 'templates/react/js/component/Functional.jsx',
-      tailwind_file: 'templates/react/js/component/TailwindFunctional.jsx',
-      tailwind_inline: 'templates/react/js/component/TailwindInlineFunctional.jsx',
-      css_modules: 'templates/react/js/component/CssModulesFunctional.jsx'
     }
   },
   vue: {
