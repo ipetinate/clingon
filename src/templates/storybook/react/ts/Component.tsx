@@ -13,7 +13,7 @@ const args: Story['args'] = {
 
 const meta: Meta<typeof ResourceName> = {
   component: ResourceName,
-  title: 'ResourceType/ResourceName',
+  title: 'Components/ResourceName',
   tags: ['autodocs'],
   argTypes
 }

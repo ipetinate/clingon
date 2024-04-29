@@ -12,7 +12,7 @@ const argTypes: Partial<ArgTypes<Props>> = {
 
 const meta: Meta<Props> = {
   component: ResourceName,
-  title: 'ResourceType/ResourceName',
+  title: 'Components/ResourceName',
   tags: ['autodocs'],
   argTypes
 }
