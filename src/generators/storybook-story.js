@@ -2,12 +2,13 @@ import path from 'node:path'
 
 import { FrameworkEnum } from '../enums/frameworks.js'
 
-import { storiesTemplates, unitTestTemplates } from '../constants/templates.js'
+import { localDirname } from '../main.js'
+import { storiesTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
-import { localDirname } from '../main.js'
-import { capitalizeLetter, convertCase } from '../utils/string.js'
-import { makeFileExtension, createFileWithContent, readFileContent } from '../utils/file.js'
+import { convertCase } from '../utils/string.js'
+import { getFileExtension } from '../utils/file-extension.js'
+import { createFileWithContent, readFileContent } from '../utils/file.js'
 
 /**
  * @typedef {import("../types.js").Answers} Answers
@@ -109,10 +110,14 @@ export function getTemplateContent(data) {
 export function makePathWithExtension(data) {
   data.name = convertCase('PascalCase', data.name)
 
-  const extension = makeFileExtension({
-    withJsx: data.framework === FrameworkEnum.react,
-    postfix: data.storyPostfix,
-    typescript: data.typescript
+  const language = data.typescript ? 'ts' : 'js'
+  const framework = data.framework === 'react' ? data.framework : 'vanilla'
+
+  const extension = getFileExtension({
+    language,
+    framework,
+    target: 'resource',
+    postfix: data.storyPostfix
   })
 
   const fileName = `${data.name}.${extension}`

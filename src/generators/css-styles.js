@@ -1,13 +1,13 @@
 import path from 'node:path'
 
 import { localDirname } from '../main.js'
-
-import { functionTemplates, stylesTemplates } from '../constants/templates.js'
+import { stylesTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
 import { convertCase } from '../utils/string.js'
-import { makeFileExtension } from '../utils/file.js'
+import { getFileExtension } from '../utils/file-extension.js'
 import { createFileWithContent, readFileContent } from '../utils/file.js'
+import { StylePostfixEnum } from '../enums/postfixes.js'
 
 /**
  * @typedef {import("../types.js").Answers} Answers
@@ -92,10 +92,13 @@ export function replaceAllFunctionTextOccurrences(data) {
  * @returns {() => string}
  */
 export function generateStyleFile(data) {
-  const extension = makeFileExtension({
-    typescript: data.typescript,
-    cssFramework: data.cssFramework,
-    postfix: data.cssFramework === 'css_modules' ? 'modules' : ''
+  const postfix =
+    data.cssFramework === 'css_modules' ? StylePostfixEnum.module : StylePostfixEnum.style
+
+  const extension = getFileExtension({
+    postfix,
+    target: 'style',
+    cssFramework: data.cssFramework
   })
 
   const fileName = `${convertCase('PascalCase', data.name)}.${extension}`

@@ -1,16 +1,9 @@
 import fs from 'node:fs'
 
-import { describe, it, todo, mock } from 'node:test'
 import assert from 'node:assert/strict'
+import { describe, it, todo, mock } from 'node:test'
 
-import { getFiles, makeFileExtension, readFileContent } from './file.js'
-
-const typescript = true
-const withJsx = true
-const postfix = {
-  spec: 'spec',
-  test: 'test'
-}
+import { getFiles, readFileContent } from './file.js'
 
 const mockFsReadDir = mock.method(fs, 'readdirSync')
 const mockFsReadFileSync = mock.method(fs, 'readFileSync')
@@ -67,73 +60,5 @@ describe('File Util', () => {
     // TODO: mock fs to make this test
 
     todo('create a file with content', () => {})
-  })
-
-  describe('makeFileExtension util', () => {
-    it('make a file extension based on parameters for .vue', () => {
-      const extension = makeFileExtension({ vue: true })
-
-      assert.strictEqual(extension, 'vue')
-    })
-
-    it('make a file extension based on parameters for .tsx', () => {
-      const extension = makeFileExtension({ typescript, withJsx })
-
-      assert.strictEqual(extension, 'tsx')
-    })
-
-    it('make a file extension based on parameters for .jsx', () => {
-      const extension = makeFileExtension({ withJsx })
-
-      assert.strictEqual(extension, 'jsx')
-    })
-
-    it('make a file extension based on parameters for .ts', () => {
-      const extension = makeFileExtension({ typescript })
-
-      assert.strictEqual(extension, 'ts')
-    })
-
-    it('make a file extension based on parameters for .js', () => {
-      const extension = makeFileExtension({ typescript: false })
-
-      assert.strictEqual(extension, 'js')
-    })
-
-    it('make a file extension based on parameters for .ts with postfix spec', () => {
-      const extension = makeFileExtension({
-        typescript,
-        postfix: postfix.spec
-      })
-
-      assert.strictEqual(extension, 'spec.ts')
-    })
-
-    it('make a file extension based on parameters for .js with postfix spec', () => {
-      const extension = makeFileExtension({
-        typescript: false,
-        postfix: postfix.spec
-      })
-
-      assert.strictEqual(extension, 'spec.js')
-    })
-
-    it('make a file extension based on parameters for .ts with postfix test', () => {
-      const extension = makeFileExtension({
-        typescript,
-        postfix: postfix.test
-      })
-
-      assert.strictEqual(extension, 'test.ts')
-    })
-
-    it('make a file extension based on parameters for .js with postfix test', () => {
-      const extension = makeFileExtension({
-        typescript: false,
-        postfix: postfix.test
-      })
-
-      assert.strictEqual(extension, 'test.js')
-    })
   })
 })

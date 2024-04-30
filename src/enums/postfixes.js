@@ -12,3 +12,11 @@ export const TestPostfixEnum = {
 export const StoryPostfixEnum = {
   stories: 'stories'
 }
+
+/**
+ * List of availables style postfixes
+ */
+export const StylePostfixEnum = {
+  module: 'module',
+  style: 'style'
+}
