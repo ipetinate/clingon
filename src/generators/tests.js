@@ -194,6 +194,14 @@ export function makePathWithExtension(data) {
  *  }}
  */
 export function replaceAllTestTextOccurrences(data) {
+  if (['function'].includes(data.type)) {
+    data.name = convertCase('camelCase', data.name)
+  }
+
+  if (['component', 'page'].includes(data.type)) {
+    data.name = convertCase('PascalCase', data.name)
+  }
+
   /**
    * Removes `.spec` or `.test` from string
    *
@@ -205,18 +213,29 @@ export function replaceAllTestTextOccurrences(data) {
     value.replace(/(.spec.(ts|js))|(.test.(ts|js))/g, '') + extension
 
   data.fileContent = data.fileContent.replace(/ResourceName/g, data.name)
+  data.fileContent = data.fileContent.replace(/FunctionName/g, data.name)
 
-  if (data.framework === FrameworkEnum.vue) {
+  if (['function'].includes(data.type)) {
     data.fileContent = data.fileContent.replace(
-      /resourcePath/g,
-      removeTestPostfix(data.resourcePathWithFileName, '.vue')
-    )
-  }
-  if (data.framework === FrameworkEnum.react) {
-    data.fileContent = data.fileContent.replace(
-      /resourcePath/g,
+      /functionPath/g,
       removeTestPostfix(data.resourcePathWithFileName, data.typescript ? '.tsx' : '.jsx')
     )
+  }
+
+  if (['component', 'page'].includes(data.type)) {
+    if (data.framework === FrameworkEnum.vue) {
+      data.fileContent = data.fileContent.replace(
+        /resourcePath/g,
+        removeTestPostfix(data.resourcePathWithFileName, '.vue')
+      )
+    }
+
+    if (data.framework === FrameworkEnum.react) {
+      data.fileContent = data.fileContent.replace(
+        /resourcePath/g,
+        removeTestPostfix(data.resourcePathWithFileName, data.typescript ? '.tsx' : '.jsx')
+      )
+    }
   }
 
   return data
