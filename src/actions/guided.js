@@ -53,7 +53,7 @@ export async function guidedAction() {
    *
    * @type {import("../types.js").StoryPostfix}
    */
-  let storyPostfix = null
+  let storyPostfix = 'stories'
 
   /**
    * @type {import("../types.js").Framework} - Framework target value
@@ -233,11 +233,6 @@ export async function guidedAction() {
         message: 'What is the folder path that I should create your story in? e.g. folder/here'
       })
     }
-
-    storyPostfix = await select({
-      message: 'What postfix do you use in your story file?',
-      choices: storiesPostfixChoices
-    })
   }
 
   /**

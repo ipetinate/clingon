@@ -2,13 +2,13 @@ import path from 'node:path'
 
 import { CssFrameworkEnum, FrameworkEnum } from '../enums/frameworks.js'
 
+import { localDirname } from '../main.js'
 import { frameworkTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
 import { convertCase } from '../utils/string.js'
-import { makeFileExtension } from '../utils/file.js'
+import { getFileExtension } from '../utils/file-extension.js'
 import { createFileWithContent, readFileContent } from '../utils/file.js'
-import { localDirname } from '../main.js'
 
 /**
  * @typedef {import("../types.js").Answers} Answers
@@ -128,10 +128,12 @@ export function getTemplateContent(data) {
 export function makePathWithExtension(data) {
   data.name = convertCase('PascalCase', data.name)
 
-  const extension = makeFileExtension({
-    typescript: data.typescript,
-    vue: data.framework === FrameworkEnum.vue,
-    withJsx: data.framework === FrameworkEnum.react
+  const language = data.typescript ? 'ts' : 'js'
+
+  const extension = getFileExtension({
+    language,
+    target: 'resource',
+    framework: data.framework
   })
 
   const fileName = `${data.name}.${extension}`

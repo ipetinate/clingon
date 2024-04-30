@@ -1,12 +1,11 @@
 import path from 'node:path'
 
 import { localDirname } from '../main.js'
-
 import { functionTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
 import { convertCase } from '../utils/string.js'
-import { makeFileExtension } from '../utils/file.js'
+import { getFileExtension } from '../utils/file-extension.js'
 import { createFileWithContent, readFileContent } from '../utils/file.js'
 
 /**
@@ -99,7 +98,13 @@ export function replaceAllFunctionTextOccurrences(data) {
  * @returns {() => string}
  */
 export function generateFunctionFile(data) {
-  const extension = makeFileExtension({ typescript: data.typescript })
+  const language = data.typescript ? 'ts' : 'js'
+
+  const extension = getFileExtension({
+    language,
+    target: 'resource',
+    framework: 'vanilla'
+  })
 
   const fileName = `${convertCase('kebab-case', data.name)}.${extension}`
   const pathWithFileName = `${data.path}/${fileName}`

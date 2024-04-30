@@ -2,7 +2,7 @@ import { CssFrameworkEnum } from '../enums/frameworks.js'
 
 /**
  * @template T
- * @typedef {Record<import("../types").LangType, Record<import("../types").Resource, Record<T, Record<import("../types").TemplateVariants, string>>>>} FrameworksTemplatesStructure
+ * @typedef {Record<import("../types").Language, Record<import("../types").Resource, Record<T, Record<import("../types").CssFramework, string>>>>} FrameworksTemplatesStructure
  */
 
 /**
