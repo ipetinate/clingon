@@ -3,7 +3,8 @@
  */
 export const FrameworkEnum = {
   vue: 'vue',
-  react: 'react'
+  react: 'react',
+  vanilla: 'vanilla'
 }
 
 /**

@@ -24,30 +24,28 @@ export async function guidedAction() {
    * @type {boolean}
    */
   let withTest = false
+
   /**
    * With stories
    *
    * @type {boolean}
    */
   let withStory = false
+
   /**
    * With Testing Library on tests
    *
    * @type {boolean}
    */
   let withTestingLibrary = false
-  /**
-   * With Tailwind as CSS styles framework
-   *
-   * @type {boolean}
-   */
-  let withTailwindInline = false
+
   /**
    * Test file postfix
    *
    * @type {import("../types.js").TestPostfix}
    */
   let testPostfix = null
+
   /**
    * Test file postfix
    *
@@ -73,12 +71,14 @@ export async function guidedAction() {
    * @type {string}
    */
   let testPath = null
+
   /**
    * Story file path
    *
    * @type {string}
    */
   let storyPath = null
+
   /**
    * Resource file path
    *

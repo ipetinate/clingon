@@ -53,50 +53,55 @@ export function defineTestTemplate(data) {
      */
     const variant = data.typescript ? 'ts' : 'js'
 
-    switch (data.framework) {
-      case FrameworkEnum.react: {
-        if (data.testFramework === 'jest') {
-          if (data.withTestingLibrary) {
-            templatePath = unitTestTemplates.react[variant].jestTestingLibrary
-          } else {
-            templatePath = unitTestTemplates.react[variant].jest
+    if (['function'].includes(data.type)) {
+      templatePath = unitTestTemplates.function[variant][data.testFramework]
+    }
+
+    if (['component', 'page'].includes(data.type)) {
+      switch (data.framework) {
+        case FrameworkEnum.react: {
+          if (data.testFramework === 'jest') {
+            if (data.withTestingLibrary) {
+              templatePath = unitTestTemplates.react[variant].jestTestingLibrary
+            } else {
+              templatePath = unitTestTemplates.react[variant].jest
+            }
           }
-        }
 
-        if (data.testFramework === 'vitest') {
-          if (data.withTestingLibrary) {
-            templatePath = unitTestTemplates.react[variant].vitestTestingLibrary
-          } else {
-            templatePath = unitTestTemplates.react[variant].vitest
+          if (data.testFramework === 'vitest') {
+            if (data.withTestingLibrary) {
+              templatePath = unitTestTemplates.react[variant].vitestTestingLibrary
+            } else {
+              templatePath = unitTestTemplates.react[variant].vitest
+            }
           }
+
+          break
         }
-
-        break
-      }
-
-      case FrameworkEnum.vue: {
-        if (data.testFramework === 'jest') {
-          if (data.withTestingLibrary) {
-            templatePath = unitTestTemplates.vue[variant].jestTestingLibrary
-          } else {
-            templatePath = unitTestTemplates.vue[variant].jest
+        case FrameworkEnum.vue: {
+          if (data.testFramework === 'jest') {
+            if (data.withTestingLibrary) {
+              templatePath = unitTestTemplates.vue[variant].jestTestingLibrary
+            } else {
+              templatePath = unitTestTemplates.vue[variant].jest
+            }
           }
-        }
 
-        if (data.testFramework === 'vitest') {
-          if (data.withTestingLibrary) {
-            templatePath = unitTestTemplates.vue[variant].vitestTestingLibrary
-          } else {
-            templatePath = unitTestTemplates.vue[variant].vitest
+          if (data.testFramework === 'vitest') {
+            if (data.withTestingLibrary) {
+              templatePath = unitTestTemplates.vue[variant].vitestTestingLibrary
+            } else {
+              templatePath = unitTestTemplates.vue[variant].vitest
+            }
           }
+
+          break
         }
+        default: {
+          console.error('Error: Framework is required to get a template')
 
-        break
-      }
-      default: {
-        console.error('Framework is required to get a template')
-
-        break
+          break
+        }
       }
     }
 
@@ -137,7 +142,13 @@ export function getTemplateContent(data) {
  *  }}
  */
 export function makePathWithExtension(data) {
-  data.name = convertCase('PascalCase', data.name)
+  if (['function'].includes(data.type)) {
+    data.name = convertCase('kebab-case', data.name)
+  }
+
+  if (['component', 'page'].includes(data.type)) {
+    data.name = convertCase('PascalCase', data.name)
+  }
 
   const language = data.typescript ? 'ts' : 'js'
   const framework = data.framework === 'react' ? data.framework : 'vanilla'
@@ -183,6 +194,14 @@ export function makePathWithExtension(data) {
  *  }}
  */
 export function replaceAllTestTextOccurrences(data) {
+  if (['function'].includes(data.type)) {
+    data.name = convertCase('camelCase', data.name)
+  }
+
+  if (['component', 'page'].includes(data.type)) {
+    data.name = convertCase('PascalCase', data.name)
+  }
+
   /**
    * Removes `.spec` or `.test` from string
    *
@@ -194,18 +213,29 @@ export function replaceAllTestTextOccurrences(data) {
     value.replace(/(.spec.(ts|js))|(.test.(ts|js))/g, '') + extension
 
   data.fileContent = data.fileContent.replace(/ResourceName/g, data.name)
+  data.fileContent = data.fileContent.replace(/FunctionName/g, data.name)
 
-  if (data.framework === FrameworkEnum.vue) {
+  if (['function'].includes(data.type)) {
     data.fileContent = data.fileContent.replace(
-      /resourcePath/g,
-      removeTestPostfix(data.resourcePathWithFileName, '.vue')
-    )
-  }
-  if (data.framework === FrameworkEnum.react) {
-    data.fileContent = data.fileContent.replace(
-      /resourcePath/g,
+      /functionPath/g,
       removeTestPostfix(data.resourcePathWithFileName, data.typescript ? '.tsx' : '.jsx')
     )
+  }
+
+  if (['component', 'page'].includes(data.type)) {
+    if (data.framework === FrameworkEnum.vue) {
+      data.fileContent = data.fileContent.replace(
+        /resourcePath/g,
+        removeTestPostfix(data.resourcePathWithFileName, '.vue')
+      )
+    }
+
+    if (data.framework === FrameworkEnum.react) {
+      data.fileContent = data.fileContent.replace(
+        /resourcePath/g,
+        removeTestPostfix(data.resourcePathWithFileName, data.typescript ? '.tsx' : '.jsx')
+      )
+    }
   }
 
   return data
