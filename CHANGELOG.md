@@ -1,3 +1,20 @@
+# v0.7.0 (Tue Apr 30 2024)
+
+#### 🚀 Enhancement
+
+- refactor: improve file extension util [#29](https://github.com/ipetinate/clingon/pull/29) ([@ipetinate](https://github.com/ipetinate))
+
+#### 📝 Documentation
+
+- chore: update readme badges link [#25](https://github.com/ipetinate/clingon/pull/25) ([@ipetinate](https://github.com/ipetinate))
+- feat: update badges link [#24](https://github.com/ipetinate/clingon/pull/24) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.6.0 (Mon Apr 29 2024)
 
 #### 🚀 Enhancement
