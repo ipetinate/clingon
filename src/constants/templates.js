@@ -23,7 +23,7 @@ export const frameworkTemplates = {
           no_style: 'templates/react/js/component/Functional.jsx',
           css_modules: 'templates/react/js/component/CssModulesFunctional.jsx',
           scss: 'templates/react/js/component/FunctionalWithScss.jsx',
-          vanilla_css: 'templates/react/js/component/FunctionalWithStyle.jsx',
+          css_vanilla: 'templates/react/js/component/FunctionalWithStyle.jsx',
           tailwind_inline: 'templates/react/js/component/TailwindInlineFunctional.jsx',
           tailwind_file: 'templates/react/js/component/TailwindFunctional.jsx'
         }
@@ -35,7 +35,7 @@ export const frameworkTemplates = {
           no_style: 'templates/react/ts/component/Functional.tsx',
           css_modules: 'templates/react/ts/component/CssModulesFunctional.tsx',
           scss: 'templates/react/ts/component/FunctionalWithScss.tsx',
-          vanilla_css: 'templates/react/ts/component/FunctionalWithStyle.tsx',
+          css_vanilla: 'templates/react/ts/component/FunctionalWithStyle.tsx',
           tailwind_inline: 'templates/react/ts/component/TailwindInlineFunctional.tsx',
           tailwind_file: 'templates/react/ts/component/TailwindFunctional.tsx'
         }
@@ -50,7 +50,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/2/js/component/CssModulesOptions.vue',
             scss: 'templates/vue/2/js/component/ScssOptions.vue',
             no_style: 'templates/vue/2/js/component/Options.vue',
-            vanilla_css: 'templates/vue/2/js/component/OptionsWithStyle.vue',
+            css_vanilla: 'templates/vue/2/js/component/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/2/js/component/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/2/js/component/TailwindOptions.vue'
           }
@@ -60,7 +60,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/2/js/page/CssModulesOptions.vue',
             scss: 'templates/vue/2/js/page/ScssOptions.vue',
             no_style: 'templates/vue/2/js/page/Options.vue',
-            vanilla_css: 'templates/vue/2/js/page/OptionsWithStyle.vue',
+            css_vanilla: 'templates/vue/2/js/page/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/2/js/page/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/2/js/page/TailwindOptions.vue'
           }
@@ -72,7 +72,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/2/ts/component/CssModulesOptions.vue',
             scss: 'templates/vue/2/ts/component/ScssOptions.vue',
             no_style: 'templates/vue/2/ts/component/Options.vue',
-            vanilla_css: 'templates/vue/2/ts/component/OptionsWithStyle.vue',
+            css_vanilla: 'templates/vue/2/ts/component/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/2/ts/component/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/2/ts/component/TailwindOptions.vue'
           }
@@ -82,7 +82,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/2/ts/page/CssModulesOptions.vue',
             scss: 'templates/vue/2/ts/page/ScssOptions.vue',
             no_style: 'templates/vue/2/ts/page/Options.vue',
-            vanilla_css: 'templates/vue/2/ts/page/OptionsWithStyle.vue',
+            css_vanilla: 'templates/vue/2/ts/page/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/2/ts/page/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/2/ts/page/TailwindOptions.vue'
           }
@@ -96,7 +96,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/3/js/component/CssModulesOptions.vue',
             scss: 'templates/vue/3/js/component/ScssOptions.vue',
             no_style: 'templates/vue/3/js/component/Options.vue',
-            vanilla_css: 'templates/vue/3/js/component/OptionsWithStyle.vue',
+            css_vanilla: 'templates/vue/3/js/component/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/3/js/component/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/3/js/component/TailwindOptions.vue'
           },
@@ -104,7 +104,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/3/js/component/CssModulesSetup.vue',
             scss: 'templates/vue/3/js/component/ScssSetup.vue',
             no_style: 'templates/vue/3/js/component/Setup.vue',
-            vanilla_css: 'templates/vue/3/js/component/SetupWithStyle.vue',
+            css_vanilla: 'templates/vue/3/js/component/SetupWithStyle.vue',
             tailwind_inline: 'templates/vue/3/js/component/TailwindInlineSetup.vue',
             tailwind_file: 'templates/vue/3/js/component/TailwindSetup.vue'
           }
@@ -114,7 +114,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/3/js/page/CssModulesOptions.vue',
             scss: 'templates/vue/3/js/page/ScssOptions.vue',
             no_style: 'templates/vue/3/js/page/Options.vue',
-            vanilla_css: 'templates/vue/3/js/page/OptionsWithStyle.vue',
+            css_vanilla: 'templates/vue/3/js/page/OptionsWithStyle.vue',
             tailwind_inline: 'templates/vue/3/js/page/TailwindInlineOptions.vue',
             tailwind_file: 'templates/vue/3/js/page/TailwindOptions.vue'
           },
@@ -122,7 +122,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/3/js/page/CssModulesSetup.vue',
             scss: 'templates/vue/3/js/page/ScssSetup.vue',
             no_style: 'templates/vue/3/js/page/Setup.vue',
-            vanilla_css: 'templates/vue/3/js/page/SetupWithStyle.vue',
+            css_vanilla: 'templates/vue/3/js/page/SetupWithStyle.vue',
             tailwind_inline: 'templates/vue/3/js/page/TailwindInlineSetup.vue',
             tailwind_file: 'templates/vue/3/js/page/TailwindSetup.vue'
           }
@@ -134,7 +134,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/3/ts/component/CssModulesOptions.vue',
             scss: 'templates/vue/3/ts/component/ScssOptions.vue',
             no_style: 'templates/vue/3/ts/component/Options.vue',
-            vanilla_css: 'templates/vue/3/ts/component/OptionsWithStyle.vue',
+            css_vanilla: 'templates/vue/3/ts/component/OptionsWithStyle.vue',
             tailwind_file: 'templates/vue/3/ts/component/TailwindOptions.vue',
             tailwind_inline: 'templates/vue/3/ts/component/TailwindInlineOptions.vue'
           },
@@ -142,7 +142,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/3/ts/component/CssModulesSetup.vue',
             scss: 'templates/vue/3/ts/component/ScssSetup.vue',
             no_style: 'templates/vue/3/ts/component/Setup.vue',
-            vanilla_css: 'templates/vue/3/ts/component/SetupWithStyle.vue',
+            css_vanilla: 'templates/vue/3/ts/component/SetupWithStyle.vue',
             tailwind_file: 'templates/vue/3/ts/component/TailwindSetup.vue',
             tailwind_inline: 'templates/vue/3/ts/component/TailwindInlineSetup.vue'
           }
@@ -152,7 +152,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/3/ts/page/CssModulesOptions.vue',
             scss: 'templates/vue/3/ts/page/ScssOptions.vue',
             no_style: 'templates/vue/3/ts/page/Options.vue',
-            vanilla_css: 'templates/vue/3/ts/page/OptionsWithStyle.vue',
+            css_vanilla: 'templates/vue/3/ts/page/OptionsWithStyle.vue',
             tailwind_file: 'templates/vue/3/ts/page/TailwindOptions.vue',
             tailwind_inline: 'templates/vue/3/ts/page/TailwindInlineOptions.vue'
           },
@@ -160,7 +160,7 @@ export const frameworkTemplates = {
             css_modules: 'templates/vue/3/ts/page/CssModulesSetup.vue',
             scss: 'templates/vue/3/ts/page/ScssSetup.vue',
             no_style: 'templates/vue/3/ts/page/Setup.vue',
-            vanilla_css: 'templates/vue/3/ts/page/SetupWithStyle.vue',
+            css_vanilla: 'templates/vue/3/ts/page/SetupWithStyle.vue',
             tailwind_file: 'templates/vue/3/ts/page/TailwindSetup.vue',
             tailwind_inline: 'templates/vue/3/ts/page/TailwindInlineSetup.vue'
           }
@@ -256,6 +256,6 @@ export const functionTemplates = {
 export const stylesTemplates = {
   scss: 'templates/styles/Default.scss',
   css_modules: 'templates/styles/Default.css',
-  vanilla_css: 'templates/styles/Default.css',
+  css_vanilla: 'templates/styles/Default.css',
   tailwind_file: 'templates/styles/Tailwind.css'
 }

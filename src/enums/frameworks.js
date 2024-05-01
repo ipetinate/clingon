@@ -22,7 +22,7 @@ export const CssFrameworkEnum = {
   css_modules: 'css_modules',
   tailwind_inline: 'tailwind_inline',
   tailwind_file: 'tailwind_file',
-  vanilla_css: 'vanilla_css',
+  css_vanilla: 'css_vanilla',
   scss: 'scss',
   no_style: 'no_style'
 }

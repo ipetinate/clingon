@@ -2,6 +2,7 @@ import { CssFrameworkEnum, FrameworkEnum, TestFrameworkEnum } from '../enums/fra
 import { VueVersionEnum } from '../enums/vue-version.js'
 import { ResourceTypeEnum } from '../enums/resource-type.js'
 import { StoryPostfixEnum, TestPostfixEnum } from '../enums/postfixes.js'
+import { cssApproachLabels, frameworksLabel, testFrameworksLabel } from './labels.js'
 
 /**
  * @typedef {{ name: import("../types.js").TypeNames, value: import("../types.js").Resource }} TypeChoices
@@ -50,39 +51,63 @@ export const jsTypeChoices = [
  * @type {TestFrameworkChoices[]}
  */
 export const testFrameworkChoices = [
-  { name: 'Jest', value: TestFrameworkEnum.jest },
-  { name: 'Vitest', value: TestFrameworkEnum.vitest }
+  {
+    name: testFrameworksLabel.jest,
+    value: TestFrameworkEnum.jest
+  },
+  {
+    name: testFrameworksLabel.vitest,
+    value: TestFrameworkEnum.vitest
+  }
 ]
 
 /**
  * @type {FrameworkChoices[]}
  */
 export const frameworksAndLibsChoices = [
-  { name: 'Vue', value: FrameworkEnum.vue },
-  { name: 'React', value: FrameworkEnum.react }
+  {
+    name: frameworksLabel.vue,
+    value: FrameworkEnum.vue
+  },
+  {
+    name: frameworksLabel.react,
+    value: FrameworkEnum.react
+  }
 ]
 
 /**
  * @type {CssrameworkChoices[]}
  */
 export const cssFrameworkChoices = [
-  { name: 'None', value: 'no_style' },
-  { name: 'Vanilla Pure CSS (.css)', value: CssFrameworkEnum.vanilla_css },
   {
-    name: 'Tailwind Inline (inside component)',
+    name: cssApproachLabels.no_style,
+    value: CssFrameworkEnum.no_style
+  },
+  {
+    name: cssApproachLabels.css_vanilla,
+    value: CssFrameworkEnum.css_vanilla
+  },
+  {
+    name: cssApproachLabels.tailwind_inline,
     value: CssFrameworkEnum.tailwind_inline
   },
   {
-    name: 'Tailwind (CSS w/ @apply)',
+    name: cssApproachLabels.tailwind_file,
     value: CssFrameworkEnum.tailwind_file
   },
-  { name: 'CSS Modules (.css)', value: CssFrameworkEnum.css_modules },
-  { name: 'SASS (.scss)', value: CssFrameworkEnum.scss }
+  {
+    name: cssApproachLabels.css_modules,
+    value: CssFrameworkEnum.css_modules
+  },
+  {
+    name: cssApproachLabels.scss,
+    value: CssFrameworkEnum.scss
+  }
 ]
 
 export const vueVersionsChoices = [
-  { name: 'Vue 3', value: VueVersionEnum[3] },
-  { name: 'Vue 2', value: VueVersionEnum[2] }
+  { name: '3', value: VueVersionEnum[3] },
+  { name: '2', value: VueVersionEnum[2] }
 ]
 
 export const testPostfixChoices = [
