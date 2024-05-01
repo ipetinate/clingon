@@ -19,7 +19,9 @@ import { StylePostfixEnum } from '../enums/postfixes.js'
  * @param {Answers & { path: string }} answers Answers prompted to the user
  */
 export function generateStyle(answers) {
-  const { success, error, path } = compose(
+  if (answers.cssFramework === 'tailwind_inline') return
+
+  const { success, path } = compose(
     defineStyleTemplate(answers),
     getTemplateContent,
     replaceAllFunctionTextOccurrences,
