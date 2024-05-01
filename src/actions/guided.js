@@ -153,7 +153,8 @@ export async function guidedAction() {
 
   if (!choices || resourcePath === 'type-path') {
     resourcePath = await input({
-      message: `What is the folder path that I should create your ${type} in? e.g. src/folder/here`
+      message: `What is the folder path that I should create your ${type} in? e.g. src/folder/here`,
+      validate: pathValidator
     })
   }
 
@@ -182,7 +183,8 @@ export async function guidedAction() {
 
     if (!choices || testPath === 'type-path') {
       testPath = await input({
-        message: 'What is the folder path that I should create your tests in? e.g. folder/here'
+        message: 'What is the folder path that I should create your tests in? e.g. folder/here',
+        validate: pathValidator
       })
     }
 
@@ -230,7 +232,8 @@ export async function guidedAction() {
 
     if (!choices || storyPath === 'type-path') {
       storyPath = await input({
-        message: 'What is the folder path that I should create your story in? e.g. folder/here'
+        message: 'What is the folder path that I should create your story in? e.g. folder/here',
+        validate: pathValidator
       })
     }
   }
@@ -343,4 +346,11 @@ function getCssApproachName(target) {
   const option = cssFrameworkChoices.find(({ value }) => value && value === target)
 
   return option?.name
+}
+
+/**
+ * Path validator for inquirer `input()`
+ */
+function pathValidator(value) {
+  return value ?? 'Enter an existing path. For root dir, use "."'
 }
