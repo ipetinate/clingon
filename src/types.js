@@ -42,11 +42,11 @@ import { StoryPostfixEnum, TestPostfixEnum, StylePostfixEnum } from 'enums/postf
  *
  * @typedef {"Page" | "Component" | "Function" | "Type" | "Model" | "Enum" | "Test" | "Spec" | "Cypress Spec" | "Storybook Story"} TypeNames - Resource type names
  *
- * @typedef {"Vue" | "React"} FrameworkNames - Framework names
+ * @typedef {"Vue" | "React" | "Vanilla"} FrameworkNames - Framework names
  *
  * @typedef {"Vitest" | "Jest"} TestFrameworkNames - Test framework Names
  *
- * @typedef {"CSS Modules (.css)" | "Tailwind CSS Inline (inside component)" | "Tailwind CSS w/ File (.css w/ @apply)" | "Vanilla Pure CSS (.css)" | "SASS (.scss)"} CssFrameworkNames - Css Framework names
+ * @typedef {"CSS Modules" | "Tailwind (inline w/ class attr)" | "Tailwind (css file w/ @apply)" | "CSS Vanilla" | "Sass/Scss" | "None"} CssFrameworkNames - Css Framework names
  *
  * @typedef { "2" | "3" } VueVersion - Vue JS versions
  *

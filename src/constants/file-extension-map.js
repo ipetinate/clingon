@@ -26,7 +26,7 @@ export const fileExtensionMap = {
   style: {
     css_modules: 'css',
     tailwind_file: 'css',
-    vanilla_css: 'css',
+    css_vanilla: 'css',
     scss: 'scss'
   }
 }

@@ -117,10 +117,10 @@ describe('getFileExtension util', () => {
     assert.strictEqual(extension, 'scss')
   })
 
-  it('make a file extension based on parameters for css styles: vanilla_css', () => {
+  it('make a file extension based on parameters for css styles: css_vanilla', () => {
     const extension = getFileExtension({
       target: 'style',
-      cssFramework: 'vanilla_css'
+      cssFramework: 'css_vanilla'
     })
 
     assert.strictEqual(extension, 'css')

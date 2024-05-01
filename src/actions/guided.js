@@ -3,19 +3,18 @@ import {
   frameworksAndLibsChoices,
   jsTypeChoices,
   testPostfixChoices,
-  resourcesPaths,
   tsTypeChoices,
   vueVersionsChoices,
-  storiesPostfixChoices,
   testFrameworkChoices,
   cssFrameworkChoices,
   chooseMyOwnPathChoice
 } from '../constants/choices.js'
 
-import { boolAsText } from '../utils/string.js'
 import { guidedFlowGenerator } from '../flows/guided-flow-generator.js'
 
 import { CssFrameworkEnum, FrameworkEnum } from '../enums/frameworks.js'
+
+import { getPathChoices, pathValidator, showPreview } from '../utils/guided-action.js'
 
 export async function guidedAction() {
   /**
@@ -91,7 +90,7 @@ export async function guidedAction() {
    *
    * @type {import("../types.js").CssFramework}
    */
-  let cssFramework = 'vanilla_css'
+  let cssFramework = 'css_vanilla'
 
   /**
    * Target version of framework (e.g Vue 2 or 3, etc)
@@ -153,7 +152,8 @@ export async function guidedAction() {
 
   if (!choices || resourcePath === 'type-path') {
     resourcePath = await input({
-      message: `What is the folder path that I should create your ${type} in? e.g. src/folder/here`
+      message: `What is the folder path that I should create your ${type} in? e.g. src/folder/here`,
+      validate: pathValidator
     })
   }
 
@@ -182,7 +182,8 @@ export async function guidedAction() {
 
     if (!choices || testPath === 'type-path') {
       testPath = await input({
-        message: 'What is the folder path that I should create your tests in? e.g. folder/here'
+        message: 'What is the folder path that I should create your tests in? e.g. folder/here',
+        validate: pathValidator
       })
     }
 
@@ -230,7 +231,8 @@ export async function guidedAction() {
 
     if (!choices || storyPath === 'type-path') {
       storyPath = await input({
-        message: 'What is the folder path that I should create your story in? e.g. folder/here'
+        message: 'What is the folder path that I should create your story in? e.g. folder/here',
+        validate: pathValidator
       })
     }
   }
@@ -289,58 +291,4 @@ export async function guidedAction() {
 
     if (doAgain) guidedAction()
   }
-}
-
-/**
- * Get path choices for list on prompt
- *
- * @param {{ type: import("../types.js").Resource, target: }} props
- * @returns {import("../constants/choices.js").TypeChoices[]}
- */
-function getPathChoices({ type, target }) {
-  if (target === 'test') return resourcesPaths.test[type]
-  if (target === 'story') return resourcesPaths.storybook_story[type]
-
-  return resourcesPaths[type]
-}
-
-/**
- * Viewing answers to questions asked to the user
- *
- * @param {import("../types.js").Answers} answers User's responses
- */
-function showPreview(answers) {
-  const askedQuestions = {
-    'Framework/Lib': answers.framework,
-    'Framework/Lib Version': answers.version,
-    'Resource Type': answers.type,
-    'Resource Name': answers.name,
-    'With TypeScript': boolAsText(answers.typescript),
-    'CSS approach': getCssApproachName(answers.cssFramework),
-    'With Story': boolAsText(answers.withStory),
-    'With Unit Test': boolAsText(answers.withTest),
-    'With Testing Library': boolAsText(answers.withTestingLibrary),
-    'My Test Postfix': answers.testPostfix,
-    'My Test Framework': answers.testFramework,
-    'Resource Path': answers.resourcePath,
-    'Test Path': answers.testPath,
-    'Story Path': answers.storyPath
-  }
-
-  const preview = Object.fromEntries(Object.entries(askedQuestions).filter(([_, v]) => v !== null))
-
-  console.table(preview)
-}
-
-/**
- * Css Frameworks
- *
- * @param {import("../types.js").CssFramework} target Css framework
- */
-function getCssApproachName(target) {
-  if (!target) return null
-
-  const option = cssFrameworkChoices.find(({ value }) => value && value === target)
-
-  return option?.name
 }
