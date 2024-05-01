@@ -120,7 +120,7 @@ async function handleStories(data, path) {
  *
  */
 async function handleStyles(data, path) {
-  if (data.cssFramework === 'no_style') return
+  if (['no_style', 'tailwind_inline'].includes(data.cssFramework)) return
 
   if (data.storyPath === data.resourcePath) {
     return generateStyle({ ...data, path })
