@@ -6,7 +6,7 @@
  */
 export function splitPathString(path) {
   if (!path?.includes('/')) {
-    throw new Error('Should pass a string with slash separator, like a folder tree path')
+    return [path]
   }
 
   return path.split('/')
