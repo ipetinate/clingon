@@ -1,3 +1,15 @@
+# v0.7.4 (Thu May 02 2024)
+
+#### 🐛 Bug Fix
+
+- fix: remove double check on path validation [#36](https://github.com/ipetinate/clingon/pull/36) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.7.3 (Thu May 02 2024)
 
 #### 🐛 Bug Fix
