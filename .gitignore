@@ -1,5 +1,8 @@
 /node_modules
 /pages
+/components
+/src/pages
+/src/components
 /dist
 /build
 /lib
