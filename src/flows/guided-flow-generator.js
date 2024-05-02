@@ -56,7 +56,7 @@ export async function guidedFlowGenerator(data) {
  * @returns {Promise<string>}
  */
 async function checkProvidedPathRecursive(path, callback, target) {
-  const pathArray = path === currentRootPath ? [path] : splitPathString(path)
+  const pathArray = splitPathString(path)
   const pathExists = checkDirectoriesTree(pathArray)
 
   if (pathExists) {
