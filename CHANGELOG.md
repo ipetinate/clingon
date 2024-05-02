@@ -1,3 +1,15 @@
+# v0.7.2 (Wed May 01 2024)
+
+#### 🐛 Bug Fix
+
+- fix: add validation for empty custom paths [#34](https://github.com/ipetinate/clingon/pull/34) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.7.1 (Tue Apr 30 2024)
 
 #### 🐛 Bug Fix
