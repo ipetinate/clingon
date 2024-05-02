@@ -22,10 +22,12 @@ describe('String Utils', () => {
       assert.deepEqual(stringArray, expectedResult)
     })
 
-    it('throw an error when string does not have slashs', () => {
-      const expectToThrowError = () => splitPathString('my_path_with_slash')
+    it('return a array with not nested paths', () => {
+      const path = 'my_path_with_slash'
 
-      assert.throws(expectToThrowError, Error)
+      const stringArray = splitPathString(path)
+
+      assert.deepEqual(stringArray, [path])
     })
   })
 
