@@ -1,3 +1,15 @@
+# v0.7.3 (Thu May 02 2024)
+
+#### 🐛 Bug Fix
+
+- fix: split path error on not nested paths [#35](https://github.com/ipetinate/clingon/pull/35) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.7.2 (Wed May 01 2024)
 
 #### 🐛 Bug Fix
