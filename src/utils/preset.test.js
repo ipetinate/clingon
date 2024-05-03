@@ -69,9 +69,20 @@ describe('preset', () => {
 
     const content = { name: 'Clingon' }
 
-    const success = saveAnswersAsPreset('test.json', content)
+    const { success } = saveAnswersAsPreset('test', content)
 
     assert.strictEqual(success, true)
+  })
+
+  it('save file with preset content and return path', () => {
+    mockFsWrtieFileSync.mock.mockImplementation(() => true)
+
+    const content = { name: 'Clingon' }
+
+    const { success, path } = saveAnswersAsPreset('test', content)
+
+    assert.strictEqual(success, true)
+    assert.strictEqual(path, '.clingon/presets/test.json')
   })
 
   it("don't save file with preset content", () => {
@@ -81,7 +92,7 @@ describe('preset', () => {
 
     const content = { name: 'Clingon' }
 
-    const success = saveAnswersAsPreset('test', content)
+    const { success } = saveAnswersAsPreset('test', content)
 
     assert.strictEqual(success, false)
   })

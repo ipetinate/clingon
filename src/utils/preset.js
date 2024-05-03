@@ -58,5 +58,5 @@ export function saveAnswersAsPreset(fileName, answers) {
 
   const success = createFileWithContent(presetPath, parsedJsonContent)
 
-  return success
+  return { success, path: presetPath }
 }

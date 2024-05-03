@@ -39,7 +39,7 @@ export async function guidedAction() {
 
   const presets = getPresetFiles()
 
-  if (presets) {
+  if (presets && presets.length > 0) {
     const presetPreviews = getPresetsPreview(presets)
 
     const presetChoices = makePresetChoices(presetPreviews)
@@ -96,13 +96,10 @@ export async function guidedAction() {
     })
 
     if (savePreset) {
-      const success = saveAnswersAsPreset(presetName, answers)
+      const { success, path } = saveAnswersAsPreset(presetName, answers)
 
       if (success) {
-        console.info(
-          'Preset saved with success on: ' +
-            join(dotClingon, presetsDir, fileName + presetsExtension)
-        )
+        console.info('Preset saved with success on: ' + path)
       } else {
         console.error('Error on create preset file, try again')
       }
