@@ -5,7 +5,7 @@ import { createFileWithContent, getFiles, readFileContent } from './file.js'
 import { checkDirectoriesTree, createDir } from './directory.js'
 
 const rootDir = process.cwd()
-const dotClingon = './.clingon'
+const dotClingon = '.clingon'
 const presetsDir = 'presets'
 const presetsExtension = '.json'
 
@@ -25,9 +25,18 @@ export function getPresetFiles() {
 
     return presets
   } else {
-    const created = createDir(rootDir)
+    let createdRootDir
+    let createdPresetDir
 
-    if (created) getPresetFiles()
+    if (!checkDirectoriesTree([dotClingon])) {
+      createdRootDir = createDir(join(rootDir, dotClingon))
+    }
+
+    if (!checkDirectoriesTree([dotClingon, presetsDir])) {
+      createdPresetDir = createDir(join(rootDir, dotClingon, presetsDir))
+    }
+
+    if (createdRootDir && createdPresetDir) getPresetFiles()
   }
 }
 

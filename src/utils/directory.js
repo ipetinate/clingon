@@ -59,7 +59,7 @@ export function checkDirectoriesTree(directories) {
  * @param {string} name Directory name
  * @returns {boolean}
  */
-export function createDir(location, name) {
+export function createDir(location) {
   try {
     fs.mkdirSync(location)
 
