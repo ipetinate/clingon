@@ -1,8 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
-import { FileExtensionEnum } from '../enums/file-extension.js'
-
 /**
  * Get files from root directory
  *

@@ -15,8 +15,122 @@ import { guidedFlowGenerator } from '../flows/guided-flow-generator.js'
 import { CssFrameworkEnum, FrameworkEnum } from '../enums/frameworks.js'
 
 import { getPathChoices, pathValidator, showPreview } from '../utils/guided-action.js'
+import {
+  getPresetFileContent,
+  getPresetFiles,
+  getPresetsPreview,
+  saveAnswersAsPreset
+} from '../utils/preset.js'
 
 export async function guidedAction() {
+  /**
+   * Answers from prompt or preset
+   *
+   * @type {import('../types.js').Answers}
+   */
+  let answers
+
+  /**
+   * Selected preset
+   *
+   * @type {string }
+   */
+  let preset = false
+
+  const presets = getPresetFiles()
+
+  if (presets) {
+    const presetPreviews = getPresetsPreview(presets)
+
+    const presetChoices = makePresetChoices(presetPreviews)
+
+    preset = await select({
+      message: 'You already have some presets saved. Want to use some?',
+      choices: [
+        {
+          name: 'No, create a new one',
+          value: false
+        },
+        ...presetChoices
+      ]
+    })
+  }
+
+  if (preset) {
+    answers = getPresetFileContent(preset)
+
+    answers.name = await input({
+      message: 'Resource name: ',
+      validate: (value) => {
+        return !value ? 'Invalid. Please enter name!' : true
+      }
+    })
+  } else {
+    answers = await promptQuestions()
+  }
+
+  if (answers) {
+    showPreview(answers)
+  }
+
+  if (!preset) {
+    /**
+     * Save answers as new preset
+     *
+     * @type {boolean}
+     */
+    const savePreset = await confirm({
+      message: 'Do you want to save the answers as a preset to use later?'
+    })
+
+    /**
+     * Save answers as new preset
+     *
+     * @type {boolean}
+     */
+    const presetName = await input({
+      message: 'Preset name: ',
+      validate: (value) => {
+        return !value ? 'Invalid. Please enter preset name!' : true
+      }
+    })
+
+    if (savePreset) {
+      saveAnswersAsPreset(presetName, answers)
+    }
+  }
+
+  /**
+   * User's confirmation to proceed with generation after preview setup
+   *
+   * @type {boolean}
+   */
+  const allowedToGenerate = await confirm({
+    message: 'Confirm this is what you want to create?'
+  })
+
+  if (allowedToGenerate) {
+    await guidedFlowGenerator(answers)
+  } else {
+    /**
+     * If user made a mistake, ask if he want's to restart generation
+     *
+     * @type {boolean}
+     */
+    const doAgain = await confirm({
+      message: 'Do you want to restart the generator?'
+    })
+
+    if (doAgain) guidedAction()
+  }
+}
+
+/**
+ * Call inquirer prompts
+ *
+ * @returns {Promise<import('../types.js').Answers>}
+ */
+async function promptQuestions() {
   /**
    * With unit tests?
    *
@@ -241,7 +355,12 @@ export async function guidedAction() {
    * Resource name (e.g if is a component, should be like `PersonCard`)
    * @type {string}
    */
-  const name = await input({ message: 'Name' })
+  const name = await input({
+    message: 'Name',
+    validate: (value) => {
+      return !value ? 'Invalid. Please enter name!' : true
+    }
+  })
 
   /**
    * Result of user's prompted asked questions
@@ -266,29 +385,12 @@ export async function guidedAction() {
     withTestingLibrary
   }
 
-  showPreview(answers)
+  return answers
+}
 
-  /**
-   * User's confirmation to proceed with generation after preview setup
-   *
-   * @type {boolean}
-   */
-  const allowedToGenerate = await confirm({
-    message: 'Confirm this is what you want to create?'
-  })
-
-  if (allowedToGenerate) {
-    await guidedFlowGenerator(answers)
-  } else {
-    /**
-     * If user made a mistake, ask if he want's to restart generation
-     *
-     * @type {boolean}
-     */
-    const doAgain = await confirm({
-      message: 'Do you want to restart the generator?'
-    })
-
-    if (doAgain) guidedAction()
-  }
+function makePresetChoices(presets) {
+  return presets.map((preset) => ({
+    name: preset.name,
+    value: preset.fileName
+  }))
 }
