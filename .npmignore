@@ -3,6 +3,7 @@
 /src
 /node_modules
 /.github
+/.clingon
 
 # Env files
 
