@@ -58,11 +58,5 @@ export function saveAnswersAsPreset(fileName, answers) {
 
   const success = createFileWithContent(presetPath, parsedJsonContent)
 
-  if (success) {
-    console.info(
-      'Preset saved with success on: ' + join(dotClingon, presetsDir, fileName + presetsExtension)
-    )
-  } else {
-    console.error('Error on create preset file, try again')
-  }
+  return success
 }

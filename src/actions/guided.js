@@ -96,7 +96,16 @@ export async function guidedAction() {
     })
 
     if (savePreset) {
-      saveAnswersAsPreset(presetName, answers)
+      const success = saveAnswersAsPreset(presetName, answers)
+
+      if (success) {
+        console.info(
+          'Preset saved with success on: ' +
+            join(dotClingon, presetsDir, fileName + presetsExtension)
+        )
+      } else {
+        console.error('Error on create preset file, try again')
+      }
     }
   }
 

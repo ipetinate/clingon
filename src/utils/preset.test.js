@@ -3,11 +3,17 @@ import assert from 'node:assert'
 
 import { describe, it, mock } from 'node:test'
 
-import { getPresetFileContent, getPresetFiles, getPresetsPreview } from './preset.js'
+import {
+  getPresetFileContent,
+  getPresetFiles,
+  getPresetsPreview,
+  saveAnswersAsPreset
+} from './preset.js'
 
 const mockFsReadDir = mock.method(fs, 'readdirSync')
 const mockExistsSync = mock.method(fs, 'existsSync')
 const mockFsReadFileSync = mock.method(fs, 'readFileSync')
+const mockFsWrtieFileSync = mock.method(fs, 'writeFileSync')
 
 const srcDirs = ['.clingon']
 const nestedStrucuture = '.clingon/presets'
@@ -56,5 +62,27 @@ describe('preset', () => {
     const presetContent = getPresetFileContent('test.json')
 
     assert.deepEqual(presetContent, { name: 'test' })
+  })
+
+  it('save file with preset content', () => {
+    mockFsWrtieFileSync.mock.mockImplementation(() => true)
+
+    const content = { name: 'Clingon' }
+
+    const success = saveAnswersAsPreset('test.json', content)
+
+    assert.strictEqual(success, true)
+  })
+
+  it("don't save file with preset content", () => {
+    mockFsWrtieFileSync.mock.mockImplementation(() => {
+      throw new Error('wrong file format')
+    })
+
+    const content = { name: 'Clingon' }
+
+    const success = saveAnswersAsPreset('test', content)
+
+    assert.strictEqual(success, false)
   })
 })
