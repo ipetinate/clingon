@@ -51,3 +51,22 @@ export function checkDirectoriesTree(directories) {
 
   return true
 }
+
+/**
+ * Create new directory
+ *
+ * @param {string} location Directory location
+ * @param {string} name Directory name
+ * @returns {boolean}
+ */
+export function createDir(location) {
+  try {
+    fs.mkdirSync(location)
+
+    return true
+  } catch (error) {
+    console.error(error)
+
+    return false
+  }
+}

@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import { describe, it, mock, beforeEach } from 'node:test'
 import assert from 'node:assert/strict'
 
-import { checkDirectoriesTree, getDirectories, getLocalLibDirname } from './directory.js'
+import { checkDirectoriesTree, createDir, getDirectories, getLocalLibDirname } from './directory.js'
 import path from 'node:path'
 
 const srcDirs = ['actions', 'constants', 'enums', 'flows', 'generators', 'templates', 'utils']
@@ -13,6 +13,7 @@ const rootDirs = ['.git', 'doc', 'node_modules', 'src']
 const mockStatSync = mock.method(fs, 'statSync')
 const mockExistsSync = mock.method(fs, 'existsSync')
 const mockFsReadDir = mock.method(fs, 'readdirSync')
+const mockFsMkdirSync = mock.method(fs, 'mkdirSync')
 const pathDirnameMock = mock.method(path, 'dirname')
 
 describe('Directory Utils', () => {
@@ -76,6 +77,26 @@ describe('Directory Utils', () => {
       const local_dirname = getLocalLibDirname()
 
       assert.strictEqual(local_dirname, mockPath)
+    })
+  })
+
+  describe('createDir util', () => {
+    it('returns true if create dir', () => {
+      mockFsMkdirSync.mock.mockImplementation(() => true)
+
+      const dirCreated = createDir('/', '/new')
+
+      assert.strictEqual(dirCreated, true)
+    })
+
+    it('returns false if not create dir', () => {
+      mockFsMkdirSync.mock.mockImplementation(() => {
+        throw new Error('error')
+      })
+
+      const dirCreated = createDir('/', '/new')
+
+      assert.strictEqual(dirCreated, false)
     })
   })
 })

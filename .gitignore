@@ -6,6 +6,9 @@
 /dist
 /build
 /lib
+/coverage
+
+/.clingon
 
 lcov.info
 

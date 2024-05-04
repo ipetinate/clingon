@@ -3,17 +3,18 @@ import fs from 'node:fs'
 import assert from 'node:assert/strict'
 import { describe, it, todo, mock } from 'node:test'
 
-import { getFiles, readFileContent } from './file.js'
+import { createFileWithContent, getFiles, readFileContent } from './file.js'
 
-const mockFsReadDir = mock.method(fs, 'readdirSync')
+const mockFsReadDirSync = mock.method(fs, 'readdirSync')
 const mockFsReadFileSync = mock.method(fs, 'readFileSync')
+const mockFsWrtieFileSync = mock.method(fs, 'writeFileSync')
 
 const mockFolderFiles = ['mockFile.json', 'mocks.js', 'fakeFile.ts']
 
 describe('File Util', () => {
   describe('getFiles util', () => {
     it('get files from root dir', () => {
-      mockFsReadDir.mock.mockImplementation(() => mockFolderFiles)
+      mockFsReadDirSync.mock.mockImplementation(() => mockFolderFiles)
 
       const files = getFiles()
 
@@ -23,7 +24,7 @@ describe('File Util', () => {
     })
 
     it('get files content error flow', () => {
-      mockFsReadDir.mock.mockImplementation(() => {
+      mockFsReadDirSync.mock.mockImplementation(() => {
         throw new Error('fake error')
       })
 
@@ -57,8 +58,24 @@ describe('File Util', () => {
   })
 
   describe('createFileWithContent util', () => {
-    // TODO: mock fs to make this test
+    it('create a file with content', () => {
+      mockFsWrtieFileSync.mock.mockImplementation(() => true)
 
-    todo('create a file with content', () => {})
+      const success = createFileWithContent('test.json', 'content')
+
+      assert.strictEqual(success, true)
+    })
+
+    it('create a file with content should throw error', () => {
+      mockFsWrtieFileSync.mock.mockImplementation(() => {
+        throw new Error('wrong file format')
+      })
+
+      const success = createFileWithContent('test.json', {
+        invalid: 'content'
+      })
+
+      assert.strictEqual(success, false)
+    })
   })
 })

@@ -2,7 +2,10 @@
 
 /src
 /node_modules
+/coverage
+
 /.github
+/.clingon
 
 # Env files
 

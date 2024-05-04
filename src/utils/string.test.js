@@ -12,7 +12,7 @@ import {
   capitalizeLetter
 } from './string.js'
 
-describe('String Utils', () => {
+describe('String Utils', async () => {
   describe('splitPathString util', () => {
     it('return a array of string', () => {
       const stringArray = splitPathString('my/path/with/slash')
