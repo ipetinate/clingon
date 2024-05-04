@@ -1,3 +1,25 @@
+# v0.8.0 (Sat May 04 2024)
+
+#### 🚀 Enhancement
+
+- feat: add preset to save answers [#41](https://github.com/ipetinate/clingon/pull/41) ([@ipetinate](https://github.com/ipetinate))
+
+#### 🏠 Internal
+
+- feat: add script to generate templates doc based on templates folder and files [#40](https://github.com/ipetinate/clingon/pull/40) ([@ipetinate](https://github.com/ipetinate))
+
+#### 📝 Documentation
+
+- refactor: reorder badges [#39](https://github.com/ipetinate/clingon/pull/39) ([@ipetinate](https://github.com/ipetinate))
+- feat: add website badge on readme [#38](https://github.com/ipetinate/clingon/pull/38) ([@ipetinate](https://github.com/ipetinate))
+- chore: add official website and home page [#37](https://github.com/ipetinate/clingon/pull/37) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.7.4 (Thu May 02 2024)
 
 #### 🐛 Bug Fix
