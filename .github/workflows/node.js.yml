@@ -26,10 +26,10 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: install
+
       - name: 🧪 Coverage Tests
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: test:coverage
+        run: npm run test:coverage
+
       - name: 🏗️ Build
         uses: borales/actions-yarn@v4
         with:
