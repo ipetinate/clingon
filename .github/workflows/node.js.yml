@@ -12,28 +12,24 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.11.1]
+        node-version: [22.1.0]
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: 🟢 Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
       - name: 💽 Install deps
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
+        run: npm install
 
       - name: 🧪 Coverage Tests
         run: npm run test:coverage
 
       - name: 🏗️ Build
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build
+        run: npm run build
 
-      - name: Coveralls GitHub Action
+      - name: 🧑‍🔬 Coveralls GitHub Action
         uses: coverallsapp/github-action@v2.2.3
