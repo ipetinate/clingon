@@ -4,20 +4,36 @@ import assert from 'node:assert'
 import { describe, it, mock } from 'node:test'
 
 import {
+  dotClingon,
   getPresetFileContent,
   getPresetFiles,
   getPresetsPreview,
+  presetsDir,
+  rootDir,
   saveAnswersAsPreset
 } from './preset.js'
+import { join } from 'node:path'
 
-const mockFsReadDir = mock.method(fs, 'readdirSync')
+/*
+ * Mocks
+ */
+
+const mockStatSync = mock.method(fs, 'statSync')
 const mockExistsSync = mock.method(fs, 'existsSync')
+const mockFsMkdirSync = mock.method(fs, 'mkdirSync')
+const mockFsReadDirSync = mock.method(fs, 'readdirSync')
 const mockFsReadFileSync = mock.method(fs, 'readFileSync')
-const mockFsWrtieFileSync = mock.method(fs, 'writeFileSync')
+const mockFsWriteFileSync = mock.method(fs, 'writeFileSync')
 
-const srcDirs = ['.clingon']
-const nestedStrucuture = '.clingon/presets'
+/*
+ * Placeholder data
+ */
+
+const srcDirs = [dotClingon]
+const nestedStrucuture = join(dotClingon, presetsDir)
+
 const mockFolderFiles = ['preset1.json', 'test.json', 'react-component.json']
+
 const mockFolderFilesName = [
   { name: 'preset1', fileName: 'preset1.json' },
   { name: 'test', fileName: 'test.json' },
@@ -26,10 +42,17 @@ const mockFolderFilesName = [
 
 describe('preset', () => {
   it('get preset files', () => {
-    mockFsReadDir.mock.mockImplementation(() => srcDirs)
-
-    mockFsReadDir.mock.mockImplementation(() => mockFolderFiles)
+    mockFsReadDirSync.mock.mockImplementation(() => mockFolderFiles)
     mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
+    mockFsMkdirSync.mock.mockImplementation(() => true)
+
+    mockStatSync.mock.mockImplementation((value) => ({
+      isDirectory: () => {
+        for (let src of srcDirs) {
+          if (src.search(value)) return true
+        }
+      }
+    }))
 
     const presets = getPresetFiles()
 
@@ -37,10 +60,9 @@ describe('preset', () => {
   })
 
   it('get preset file name to show as object', () => {
-    mockFsReadDir.mock.mockImplementation(() => srcDirs)
-
-    mockFsReadDir.mock.mockImplementation(() => mockFolderFiles)
+    mockFsReadDirSync.mock.mockImplementation(() => mockFolderFiles)
     mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
+    mockFsMkdirSync.mock.mockImplementation(() => true)
 
     const presets = getPresetFiles()
     const presetsPreview = getPresetsPreview(presets)
@@ -49,9 +71,9 @@ describe('preset', () => {
   })
 
   it('get preset file content by name', () => {
-    mockFsReadDir.mock.mockImplementation(() => srcDirs)
+    mockFsReadDirSync.mock.mockImplementation(() => srcDirs)
+    mockFsMkdirSync.mock.mockImplementation(() => true)
 
-    mockFsReadDir.mock.mockImplementation(() => mockFolderFiles)
     mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
     mockFsReadFileSync.mock.mockImplementation((fileName) => {
       if (fileName.includes('.clingon/presets/test.json')) {
@@ -65,7 +87,8 @@ describe('preset', () => {
   })
 
   it('save file with preset content', () => {
-    mockFsWrtieFileSync.mock.mockImplementation(() => true)
+    mockFsWriteFileSync.mock.mockImplementation(() => true)
+    mockFsMkdirSync.mock.mockImplementation(() => true)
 
     const content = { name: 'Clingon' }
 
@@ -75,7 +98,7 @@ describe('preset', () => {
   })
 
   it('save file with preset content and return path', () => {
-    mockFsWrtieFileSync.mock.mockImplementation(() => true)
+    mockFsWriteFileSync.mock.mockImplementation(() => true)
 
     const content = { name: 'Clingon' }
 
@@ -86,7 +109,7 @@ describe('preset', () => {
   })
 
   it("don't save file with preset content", () => {
-    mockFsWrtieFileSync.mock.mockImplementation(() => {
+    mockFsWriteFileSync.mock.mockImplementation(() => {
       throw new Error('wrong file format')
     })
 

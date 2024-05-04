@@ -4,10 +4,10 @@ import { createFileWithContent, getFiles, readFileContent } from './file.js'
 
 import { checkDirectoriesTree, createDir } from './directory.js'
 
-const rootDir = process.cwd()
-const dotClingon = '.clingon'
-const presetsDir = 'presets'
-const presetsExtension = '.json'
+export const rootDir = process.cwd()
+export const dotClingon = '.clingon'
+export const presetsDir = 'presets'
+export const presetsExtension = '.json'
 
 export function getPresetFiles() {
   const hasDotClingonPath = checkDirectoriesTree([dotClingon, presetsDir])

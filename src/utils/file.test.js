@@ -5,7 +5,7 @@ import { describe, it, todo, mock } from 'node:test'
 
 import { createFileWithContent, getFiles, readFileContent } from './file.js'
 
-const mockFsReadDir = mock.method(fs, 'readdirSync')
+const mockFsReadDirSync = mock.method(fs, 'readdirSync')
 const mockFsReadFileSync = mock.method(fs, 'readFileSync')
 const mockFsWrtieFileSync = mock.method(fs, 'writeFileSync')
 
@@ -14,7 +14,7 @@ const mockFolderFiles = ['mockFile.json', 'mocks.js', 'fakeFile.ts']
 describe('File Util', () => {
   describe('getFiles util', () => {
     it('get files from root dir', () => {
-      mockFsReadDir.mock.mockImplementation(() => mockFolderFiles)
+      mockFsReadDirSync.mock.mockImplementation(() => mockFolderFiles)
 
       const files = getFiles()
 
@@ -24,7 +24,7 @@ describe('File Util', () => {
     })
 
     it('get files content error flow', () => {
-      mockFsReadDir.mock.mockImplementation(() => {
+      mockFsReadDirSync.mock.mockImplementation(() => {
         throw new Error('fake error')
       })
 
