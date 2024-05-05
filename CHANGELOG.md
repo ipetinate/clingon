@@ -1,3 +1,15 @@
+# v0.8.1 (Sun May 05 2024)
+
+#### 🐛 Bug Fix
+
+- feat: add resource name as arg to avoid prompt [#43](https://github.com/ipetinate/clingon/pull/43) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.8.0 (Sat May 04 2024)
 
 #### 🚀 Enhancement
