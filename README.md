@@ -1,6 +1,6 @@
 <p align="center">
   <img
-    src="https://github.com/ipetinate/clingon/blob/main/doc/img/clingon.svg"
+    src="https://raw.githubusercontent.com/ipetinate/clingon/main/doc/img/clingon.svg"
     alt="Clingon CLI logo" width="256"  style="display: block; margin: 0 auto;"
     />
 </p>

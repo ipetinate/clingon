@@ -1,6 +1,6 @@
 <p align="center">
   <img
-    src="https://github.com/ipetinate/clingon/blob/main/doc/img/clingon.svg"
+    src="https://raw.githubusercontent.com/ipetinate/clingon/main/doc/img/clingon.svg"
     alt="Clingon CLI logo" width="128"  style="display: block; margin: 0 auto;"
     />
 </p>
@@ -12,7 +12,10 @@
 ---
 
 > [!IMPORTANT]
-> Do not publish using local npm, with each PR the [Release CI](https://github.com/ipetinate/clingon/actions/workflows/release.yml) pipeline is executed, ensuring version control, publication and creation of the release and changelog..
+> Do not publish using local npm, with each PR the [Release CI](https://github.com/ipetinate/clingon/actions/workflows/release.yml) pipeline is executed, ensuring version control, publication and creation of the release and changelog.
+
+> [!WARNING]
+> Don't forget to put the correct label before creating the PR, so that auto does not create canaries for code that it doesn't need (docs, internal, etc.) and versioning correctly for the code that needs to be published. To learn about labels, check the following documentation: [Auto Release](https://github.com/ipetinate/clingon/blob/main/doc/AUTO_RELEASE.md).
 
 ---
 
@@ -24,7 +27,15 @@
 
 ## Requirements
 
--
+I did:
+
+- [ ] Unit tests
+- [ ] Code formatting
+- [ ] Documentation with JSDocs
+- [ ] \(Optional) Documentation with Markdown
+- [ ] Local Tests
+- [ ] I tested the canary release
+- [ ] I marked the Issue referring to the code (if you didn't create the branch from the issue)
 
 <!-- Fill in the items made in the task, remembering that it is important to maintain the quality of the project, always try to fill in as much as you can, if it makes sense -->
 
