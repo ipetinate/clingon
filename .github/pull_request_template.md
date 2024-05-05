@@ -33,6 +33,7 @@ I did:
 - [ ] Code formatting
 - [ ] Documentation with JSDocs
 - [ ] \(Optional) Documentation with Markdown
+- [ ] Documentation on github.com/ipetinate/clingon-dot-dev
 - [ ] Local Tests
 - [ ] I tested the canary release
 - [ ] I marked the Issue referring to the code (if you didn't create the branch from the issue)
@@ -46,7 +47,5 @@ I did:
 <!-- If possible, post a preview of the work done. It can be a short video, a screenshot, or text terminal output, whatever makes sense. -->
 
 ## Canary Release
-
--
 
 <!-- This area is intended for auto-completion of the "auto" tool that will add the details of the NPM canary release here. Don't put anything after this section, "auto" always adds it to the end of the readme. -->
