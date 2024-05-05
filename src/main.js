@@ -43,6 +43,7 @@ program
 program
   .command('gen')
   .argument('[name]', 'Resource name')
+  .option('-p, --preset', 'Preset name')
   .action(guidedAction)
   .description('Start a guided flow to generate resources (components, functions, pages, etc)')
 
