@@ -22,7 +22,7 @@ import {
   saveAnswersAsPreset
 } from '../utils/preset.js'
 
-export async function guidedAction() {
+export async function guidedAction(resourceName) {
   /**
    * Answers from prompt or preset
    *
@@ -59,14 +59,18 @@ export async function guidedAction() {
   if (preset) {
     answers = getPresetFileContent(preset)
 
-    answers.name = await input({
-      message: 'Resource name: ',
-      validate: (value) => {
-        return !value ? 'Invalid. Please enter name!' : true
-      }
-    })
+    if (!resourceName) {
+      answers.name = await input({
+        message: 'Resource name: ',
+        validate: (value) => {
+          return !value ? 'Invalid. Please enter name!' : true
+        }
+      })
+    } else {
+      answers.name = resourceName
+    }
   } else {
-    answers = await promptQuestions()
+    answers = await promptQuestions(resourceName)
   }
 
   if (answers) {
@@ -135,8 +139,10 @@ export async function guidedAction() {
  * Call inquirer prompts
  *
  * @returns {Promise<import('../types.js').Answers>}
+ *
+ * @param {string} resourceName Resource name from command args
  */
-async function promptQuestions() {
+async function promptQuestions(resourceName) {
   /**
    * With unit tests?
    *
@@ -359,14 +365,20 @@ async function promptQuestions() {
 
   /**
    * Resource name (e.g if is a component, should be like `PersonCard`)
-   * @type {string}
+   * @type {string | null}
    */
-  const name = await input({
-    message: 'Name',
-    validate: (value) => {
-      return !value ? 'Invalid. Please enter name!' : true
-    }
-  })
+  let name = null
+
+  if (!resourceName) {
+    name = await input({
+      message: 'Name',
+      validate: (value) => {
+        return !value ? 'Invalid. Please enter name!' : true
+      }
+    })
+  } else {
+    name = resourceName
+  }
 
   /**
    * Result of user's prompted asked questions
