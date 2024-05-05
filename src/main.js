@@ -42,7 +42,7 @@ program
 
 program
   .command('gen')
-  .argument('<name>', 'Resource name')
+  .argument('[name]', 'Resource name')
   .action(guidedAction)
   .description('Start a guided flow to generate resources (components, functions, pages, etc)')
 
