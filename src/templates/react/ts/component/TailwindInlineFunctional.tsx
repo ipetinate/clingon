@@ -2,7 +2,7 @@ export type ResourceNameProps = {
   id: string
 }
 
-export function ResourceName({ id }: Props) {
+export function ResourceName({ id }: ResourceNameProps) {
   return (
     <div id={id} className="flex flex-row justify-center items-center content-center">
       <p className="text-slate-900 text-lg">

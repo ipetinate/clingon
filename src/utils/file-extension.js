@@ -25,3 +25,15 @@ export function getFileExtension({ framework, cssFramework, language, postfix, t
 
   return postfix ? `${postfix}.${extension}` : extension
 }
+
+/**
+ * Removes `.spec` or `.test` from string
+ *
+ * @param {string} value Value to replaced
+ * @returns {string}
+ */
+export function removePostfixAndExt(value) {
+  const regex = /\.(stories|spec|test)?\.(jsx?|tsx?|ts|vue)|\.(jsx?|tsx?|vue)$/
+
+  return value.replace(regex, '')
+}
