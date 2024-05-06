@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { getFileExtension } from './file-extension.js'
+import { getFileExtension, removePostfixAndExt } from './file-extension.js'
 
 describe('getFileExtension util', () => {
   it('make a file extension based on parameters for .vue', () => {
@@ -133,5 +133,95 @@ describe('getFileExtension util', () => {
     })
 
     assert.strictEqual(extension, 'css')
+  })
+
+  it('remove extension from vue file', () => {
+    const name = removePostfixAndExt('File.vue')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from react file', () => {
+    const name = removePostfixAndExt('File.jsx')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from react-ts file', () => {
+    const name = removePostfixAndExt('File.tsx')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from story jsx file', () => {
+    const name = removePostfixAndExt('File.stories.jsx')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from story tsx file', () => {
+    const name = removePostfixAndExt('File.stories.tsx')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from story js file', () => {
+    const name = removePostfixAndExt('File.stories.js')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from story ts file', () => {
+    const name = removePostfixAndExt('File.stories.ts')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from spec jsx file', () => {
+    const name = removePostfixAndExt('File.spec.jsx')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from spec tsx file', () => {
+    const name = removePostfixAndExt('File.spec.tsx')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from spec js file', () => {
+    const name = removePostfixAndExt('File.spec.js')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from spec ts file', () => {
+    const name = removePostfixAndExt('File.spec.ts')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from test jsx file', () => {
+    const name = removePostfixAndExt('File.test.jsx')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from test tsx file', () => {
+    const name = removePostfixAndExt('File.test.tsx')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from test js file', () => {
+    const name = removePostfixAndExt('File.test.js')
+
+    assert.strictEqual(name, 'File')
+  })
+
+  it('remove extension from test ts file', () => {
+    const name = removePostfixAndExt('File.test.ts')
+
+    assert.strictEqual(name, 'File')
   })
 })

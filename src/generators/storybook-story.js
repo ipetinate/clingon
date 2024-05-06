@@ -7,7 +7,7 @@ import { storiesTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
 import { convertCase } from '../utils/string.js'
-import { getFileExtension } from '../utils/file-extension.js'
+import { getFileExtension, removePostfixAndExt } from '../utils/file-extension.js'
 import { createFileWithContent, readFileContent } from '../utils/file.js'
 
 /**
@@ -154,36 +154,17 @@ export function makePathWithExtension(data) {
  *  }}
  */
 export function replaceAllTestTextOccurrences(data) {
-  /**
-   * Removes `.spec` or `.test` from string
-   *
-   * @param {string} value Value to replaced
-   * @param {string} extension Extension to add on string
-   * @returns {string}
-   */
-  const removeStoryPostfix = (value, extension) => {
-    const extRegExp = new RegExp(/(.story.(ts|js))|(.stories.(ts|js))/g)
-
-    return value.replace(extRegExp, '') + extension
-  }
-
   data.fileContent = data.fileContent.replace(/ResourceName/g, data.name)
 
   if (data.framework === FrameworkEnum.vue) {
-    const ext = '.vue'
+    const resourcePath = removePostfixAndExt(data.resourcePathWithFileName)
 
-    data.fileContent = data.fileContent.replace(
-      /resourcePath/g,
-      removeStoryPostfix(data.resourcePathWithFileName, ext)
-    )
+    data.fileContent = data.fileContent.replace(/resourcePath/g, resourcePath)
   }
   if (data.framework === FrameworkEnum.react) {
-    const ext = data.typescript ? '.tsx' : '.jsx'
+    const resourcePath = removePostfixAndExt(data.resourcePathWithFileName)
 
-    data.fileContent = data.fileContent.replace(
-      /resourcePath/g,
-      removeStoryPostfix(data.resourcePathWithFileName, ext)
-    )
+    data.fileContent = data.fileContent.replace(/resourcePath/g, resourcePath)
   }
 
   return data

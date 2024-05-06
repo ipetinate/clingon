@@ -6,7 +6,7 @@ import { localDirname } from '../main.js'
 import { unitTestTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
-import { getFileExtension } from '../utils/file-extension.js'
+import { getFileExtension, removePostfixAndExt } from '../utils/file-extension.js'
 import { capitalizeLetter, convertCase } from '../utils/string.js'
 import { createFileWithContent, readFileContent } from '../utils/file.js'
 
@@ -202,23 +202,13 @@ export function replaceAllTestTextOccurrences(data) {
     data.name = convertCase('PascalCase', data.name)
   }
 
-  /**
-   * Removes `.spec` or `.test` from string
-   *
-   * @param {string} value Value to replaced
-   * @param {string} extension Extension to add on string
-   * @returns {string}
-   */
-  const removeTestPostfix = (value, extension) =>
-    value.replace(/(.spec.(ts|js))|(.test.(ts|js))/g, '') + extension
-
   data.fileContent = data.fileContent.replace(/ResourceName/g, data.name)
   data.fileContent = data.fileContent.replace(/FunctionName/g, data.name)
 
   if (['function'].includes(data.type)) {
     data.fileContent = data.fileContent.replace(
       /functionPath/g,
-      removeTestPostfix(data.resourcePathWithFileName, data.typescript ? '.tsx' : '.jsx')
+      removePostfixAndExt(data.resourcePathWithFileName)
     )
   }
 
@@ -226,14 +216,14 @@ export function replaceAllTestTextOccurrences(data) {
     if (data.framework === FrameworkEnum.vue) {
       data.fileContent = data.fileContent.replace(
         /resourcePath/g,
-        removeTestPostfix(data.resourcePathWithFileName, '.vue')
+        removePostfixAndExt(data.resourcePathWithFileName, '.vue')
       )
     }
 
     if (data.framework === FrameworkEnum.react) {
       data.fileContent = data.fileContent.replace(
         /resourcePath/g,
-        removeTestPostfix(data.resourcePathWithFileName, data.typescript ? '.tsx' : '.jsx')
+        removePostfixAndExt(data.resourcePathWithFileName)
       )
     }
   }
