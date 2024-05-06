@@ -79,3 +79,11 @@ Note: Maybe on macOS you do not have permission to run the tool if you install i
     ```shell
     clingon gen
     ```
+
+  - Composing with arguments and options
+
+    ```shell
+    clingon gen <ResourceName>
+    ```
+
+    - You can pass Resource name as argument after `gen` command, read more about on [Arguments doc](https://www.clingon.dev/docs/arguments).
