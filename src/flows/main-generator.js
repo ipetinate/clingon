@@ -15,7 +15,7 @@ const currentRootPath = '.'
  *
  * @param {import("../types.js").Answers} data Information the user provided in the guided prompt
  */
-export async function guidedFlowGenerator(data) {
+export async function mainGenerator(data) {
   await checkProvidedPathRecursive(
     data.resourcePath,
     async (path) => {

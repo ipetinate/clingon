@@ -6,6 +6,7 @@ import { guidedAction } from './actions/guided.js'
 import { getLocalLibDirname } from './utils/directory.js'
 
 import packageJson from '../package.json' assert { type: 'json' }
+import { createAction } from './actions/create.js'
 
 /*
  * Global Variables
@@ -45,6 +46,18 @@ program
   .argument('[name]', 'Resource name')
   .action(guidedAction)
   .description('Start a guided flow to generate resources (components, functions, pages, etc)')
+
+/*
+ * Preset flow to create with no verbose
+ */
+program
+  .command('create')
+  .argument('<name>', 'Resource name')
+  .option('-p, --preset <preset>', 'Preset name')
+  .action(createAction)
+  .description(
+    'Creates the resources with a local preset in non-verbose mode (preview and ask to confirm are not shown, resources will be created immediately), if the preset folder is empty, it will call the guided flow (the same as the `gen` command executes)'
+  )
 
 /*
  * Init flow - generate needed files
