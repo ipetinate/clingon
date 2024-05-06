@@ -30,7 +30,7 @@ export function generateComponent(answers) {
   )
 
   if (success) {
-    console.info('\n\n ----------------------- \n')
+    console.info('\n')
     console.info('Component created successfully: ' + path)
   } else {
     console.error('Error on create component, try again')
