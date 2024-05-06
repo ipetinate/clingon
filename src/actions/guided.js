@@ -1,4 +1,4 @@
-import { confirm, input, select } from '@inquirer/prompts'
+import { confirm, select } from '@inquirer/prompts'
 
 import { mainGenerator } from '../flows/main-generator.js'
 
@@ -12,6 +12,7 @@ import {
 } from '../utils/preset.js'
 
 import { namePrompt } from '../prompts/name.js'
+import { presetNamePrompt } from '../prompts/preset-name.js'
 
 export async function guidedAction(resourceName) {
   /**
@@ -74,12 +75,7 @@ export async function guidedAction(resourceName) {
      *
      * @type {boolean}
      */
-    const presetName = await input({
-      message: 'Preset name: ',
-      validate: (value) => {
-        return !value ? 'Invalid. Please enter preset name!' : true
-      }
-    })
+    const presetName = await presetNamePrompt()
 
     if (savePreset) {
       const { success, path } = saveAnswersAsPreset(presetName, answers)

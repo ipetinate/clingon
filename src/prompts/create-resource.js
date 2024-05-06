@@ -12,6 +12,8 @@ import {
 } from '../constants/choices.js'
 
 import { namePrompt } from './name.js'
+import { CssFrameworkEnum, FrameworkEnum } from '../enums/frameworks.js'
+import { getPathChoices, pathValidator } from '../utils/guided-action.js'
 
 /**
  * Call inquirer prompts
