@@ -1,3 +1,15 @@
+# v0.9.1 (Wed May 08 2024)
+
+#### ⚠️ Pushed to `main`
+
+- chore: update doc ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.9.0 (Wed May 08 2024)
 
 #### 🚀 Enhancement
