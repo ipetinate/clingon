@@ -55,6 +55,10 @@ Note: Maybe on macOS you do not have permission to run the tool if you install i
 
   ```shell
    npx clingon@latest gen
+
+   # or
+
+   npx clingon create ResourceName --preset preset-name
   ```
 
 - Using node package manager
@@ -78,12 +82,24 @@ Note: Maybe on macOS you do not have permission to run the tool if you install i
 
     ```shell
     clingon gen
+
+    # or
+
+    npx clingon create ResourceName --preset preset-name
     ```
 
   - Composing with arguments and options
 
     ```shell
     clingon gen <ResourceName>
+
+    # or
+
+    npx clingon create ResourceName --preset preset-name
     ```
 
-    - You can pass Resource name as argument after `gen` command, read more about on [Arguments doc](https://www.clingon.dev/docs/arguments).
+  - You can pass Resource name as argument after `gen` command, read more about on [Arguments doc](https://www.clingon.dev/docs/arguments).
+
+## Command modes
+
+Read more on: [clingon.dev/docs/guide/commands](https://www.clingon.dev/docs/guide/commands)
