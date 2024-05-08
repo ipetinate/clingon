@@ -8,6 +8,7 @@ import {
   getPresetFileContent,
   getPresetFiles,
   getPresetsPreview,
+  makePresetChoices,
   presetsDir,
   rootDir,
   saveAnswersAsPreset
@@ -68,6 +69,31 @@ describe('preset', () => {
     const presetsPreview = getPresetsPreview(presets)
 
     assert.deepEqual(presetsPreview, mockFolderFilesName)
+  })
+
+  it('get preset as inquirer choice { name: string, value: string }[]', () => {
+    mockFsReadDirSync.mock.mockImplementation(() => mockFolderFiles)
+    mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
+    mockFsMkdirSync.mock.mockImplementation(() => true)
+
+    const presets = getPresetFiles()
+    const presetsPreview = getPresetsPreview(presets)
+    const choices = makePresetChoices(presetsPreview)
+
+    assert.deepEqual(choices, [
+      {
+        name: 'preset1',
+        value: 'preset1.json'
+      },
+      {
+        name: 'test',
+        value: 'test.json'
+      },
+      {
+        name: 'react-component',
+        value: 'react-component.json'
+      }
+    ])
   })
 
   it('get preset file content by name', () => {

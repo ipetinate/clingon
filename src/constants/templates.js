@@ -176,10 +176,10 @@ export const frameworkTemplates = {
 export const unitTestTemplates = {
   react: {
     js: {
-      jest: 'templates/unit-test/react/js/Jest.ts',
-      jestTestingLibrary: 'templates/unit-test/react/js/JestTestingLibrary.ts',
-      vitest: 'templates/unit-test/react/js/Vitest.ts',
-      vitestTestingLibrary: 'templates/unit-test/react/js/VitestTestingLibrary.ts'
+      jest: 'templates/unit-test/react/js/Jest.js',
+      jestTestingLibrary: 'templates/unit-test/react/js/JestTestingLibrary.js',
+      vitest: 'templates/unit-test/react/js/Vitest.js',
+      vitestTestingLibrary: 'templates/unit-test/react/js/VitestTestingLibrary.js'
     },
     ts: {
       jest: 'templates/unit-test/react/ts/Jest.ts',

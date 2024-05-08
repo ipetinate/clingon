@@ -69,3 +69,10 @@ export function saveAnswersAsPreset(fileName, answers) {
 
   return { success, path: presetPath }
 }
+
+export function makePresetChoices(presets) {
+  return presets.map((preset) => ({
+    name: preset.name,
+    value: preset.fileName
+  }))
+}

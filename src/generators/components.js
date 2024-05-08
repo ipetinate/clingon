@@ -1,4 +1,4 @@
-import path from 'node:path'
+import path, { join } from 'node:path'
 
 import { CssFrameworkEnum, FrameworkEnum } from '../enums/frameworks.js'
 
@@ -6,9 +6,10 @@ import { localDirname } from '../main.js'
 import { frameworkTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
-import { convertCase } from '../utils/string.js'
+import { convertCase, splitPathString } from '../utils/string.js'
 import { getFileExtension } from '../utils/file-extension.js'
 import { createFileWithContent, readFileContent } from '../utils/file.js'
+import { checkDirectoriesTree, createDir } from '../utils/directory.js'
 
 /**
  * @typedef {import("../types.js").Answers} Answers
@@ -24,12 +25,14 @@ export function generateComponent(answers) {
   const { success, path } = compose(
     defineComponentTemplate(answers),
     getTemplateContent,
+    makeFolderWrapperOrBypass,
     makePathWithExtension,
     replaceAllComponentTextOccurrences,
     generateComponentFile
   )
 
   if (success) {
+    console.info('\n')
     console.info('Component created successfully: ' + path)
   } else {
     console.error('Error on create component, try again')
@@ -123,11 +126,40 @@ export function getTemplateContent(data) {
  *    extension: string,
  *    fileName: string,
  *    pathWithFileName: string,
+ *    folderWrapperPath: string,
+ *  }}
+ */
+export function makeFolderWrapperOrBypass(data) {
+  data.name = convertCase('PascalCase', data.name)
+
+  const folderWrapperPath = join(data.resourcePath, data.name)
+  const folderWrapperExists = checkDirectoriesTree(splitPathString(folderWrapperPath))
+
+  if (data.folderWrapper && !folderWrapperExists) {
+    const created = createDir(folderWrapperPath)
+
+    if (!created) console.error('Error: cannot create folder wrapper.')
+  }
+
+  return { ...data, folderWrapperPath }
+}
+
+/**
+ *
+ * @param {Answers & {
+ *    templatePath: string,
+ *    fileContent: string
+ *    folderWrapperPath: string,
+ *  }} data Data to compose component
+ * @returns {Answers & {
+ *    templatePath: string,
+ *    fileContent: string,
+ *    extension: string,
+ *    fileName: string,
+ *    pathWithFileName: string,
  *  }}
  */
 export function makePathWithExtension(data) {
-  data.name = convertCase('PascalCase', data.name)
-
   const language = data.typescript ? 'ts' : 'js'
 
   const extension = getFileExtension({
@@ -136,7 +168,9 @@ export function makePathWithExtension(data) {
     framework: data.framework
   })
 
-  const fileName = `${data.name}.${extension}`
+  const fileName = data.folderWrapper
+    ? `${data.name}/${data.name}.${extension}`
+    : `${data.name}.${extension}`
   const pathWithFileName = `${data.path}/${fileName}`
 
   return { ...data, extension, fileName, pathWithFileName }
@@ -203,6 +237,12 @@ export function replaceAllComponentTextOccurrences(data) {
 export function generateComponentFile(data) {
   const path = data.pathWithFileName
   const success = createFileWithContent(data.pathWithFileName, data.fileContent)
+
+  if (data.folderWrapper) {
+    const filePath = join(data.resourcePath, data.name, 'index.' + data.extension)
+
+    createFileWithContent(filePath, `export * from './${data.name}'`)
+  }
 
   return { success, path }
 }
