@@ -35,13 +35,29 @@ export async function createAction(resourceName, options) {
    */
   let preset = options.preset
 
+  if (!options.type) {
+    // TODO: prompt type
+  }
+
+  if (!options.framework) {
+    // TODO: prompt framework
+  }
+
+  if (!options.path) {
+    // TODO: prompt framework
+  }
+
   if (!preset && options.framework) {
-    const storyPath = options.story ? options.storyPath : options.path
-    const withStory = options.story
+    let storyPath = options.path
+    let withStory = options.story
 
     let testPath = options.path
     let testPostfix = 'spec'
-    const withTest = options.test || options.spec
+    let withTest = options.test || options.spec
+
+    if (options.story) {
+      storyPath = options.storyPath ?? options.path
+    }
 
     if (options.test || options.spec) {
       testPath = options.testPath ?? options.path
@@ -68,11 +84,13 @@ export async function createAction(resourceName, options) {
     }
   }
 
+  console.log({ answers })
+
   if (!options.framework && preset) {
     answers = getPresetFileContent(preset + '.json')
 
     answers.name = resourceName ?? (await namePrompt())
-  } else {
+  } else if (!options.framework) {
     const presets = getPresetFiles()
 
     if (presets && presets.length > 0) {
