@@ -14,6 +14,12 @@ import { createResourcePrompt } from '../prompts/create-resource.js'
 import { presetNamePrompt } from '../prompts/preset-name.js'
 import { mainGenerator } from '../flows/main-generator.js'
 
+/**
+ * Create resource based on a command line argument and options
+ *
+ * @param {string} resourceName Resource name from command argument
+ * @param {import('../types.js').CommanderOptions} options Options from command after argument
+ */
 export async function createAction(resourceName, options) {
   /**
    * Answers from prompt or preset
@@ -29,7 +35,40 @@ export async function createAction(resourceName, options) {
    */
   let preset = options.preset
 
-  if (preset) {
+  if (!preset && options.framework) {
+    const storyPath = options.story ? options.storyPath : options.path
+    const withStory = options.story
+
+    let testPath = options.path
+    let testPostfix = 'spec'
+    const withTest = options.test || options.spec
+
+    if (options.test || options.spec) {
+      testPath = options.testPath ?? options.path
+
+      testPostfix = options.test ? 'test' : options.spec ? 'spec' : undefined
+    }
+
+    answers = {
+      name: resourceName,
+      framework: options.framework,
+      testFramework: options.testFramework,
+      cssFramework: options.cssFramework,
+      typescript: options.typescript,
+      type: options.type,
+      resourcePath: options.path,
+      withTestingLibrary: options.testingLibrary,
+      storyPostfix: 'stories',
+      version: options.vueVersion,
+      testPath,
+      storyPath,
+      testPostfix,
+      withStory,
+      withTest
+    }
+  }
+
+  if (!options.framework && preset) {
     answers = getPresetFileContent(preset + '.json')
 
     answers.name = resourceName ?? (await namePrompt())

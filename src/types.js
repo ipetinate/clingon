@@ -40,6 +40,24 @@ import { StoryPostfixEnum, TestPostfixEnum, StylePostfixEnum } from 'enums/postf
  *   storyPath: string
  * }} Answers - Users prompted answers
  *
+ * @typedef {{
+ *   preset: string,
+ *   type: Resource,
+ *   framework: Framework,
+ *   testFramework: TestFramework,
+ *   cssFramework: CssFramework
+ *   path: string,
+ *   testPath: string,
+ *   storyPath: string,
+ *   test: boolean,
+ *   spec: boolean,
+ *   story: boolean,
+ *   typescript: boolean,
+ *   testingLibrary: boolean,
+ *   folderWrapper: boolean,
+ *   vueVersion: VueVersion
+ * }} CommanderOptions - Commander command line options
+ *
  * @typedef {"Page" | "Component" | "Function" | "Type" | "Model" | "Enum" | "Test" | "Spec" | "Cypress Spec" | "Storybook Story"} TypeNames - Resource type names
  *
  * @typedef {"Vue" | "React" | "Vanilla"} FrameworkNames - Framework names

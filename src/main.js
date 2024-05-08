@@ -7,8 +7,6 @@ import { createAction } from './actions/create.js'
 
 import { getLocalLibDirname } from './utils/directory.js'
 
-import packageJson from '../package.json' assert { type: 'json' }
-
 /*
  * Global Variables
  */
@@ -28,7 +26,7 @@ const program = new Command()
 program
   .name('clingon')
   .description('CLI to generate files based on templates')
-  .version(packageJson.version, '-v, --version', 'Current version')
+  .version('0.9.0', '-v, --version', 'Current version')
 
 /*
  * Guided flow - generate components based on prompt answers
@@ -47,9 +45,42 @@ program
 program
   .command('create')
   .argument('<name>', 'Resource name')
-  .option('--preset <preset>', 'Preset name')
+  .option('--preset [preset]', 'Preset name')
+  .option('--framework <frameworkName>', 'Framework name for default preset: vue or react')
+  .option('--type <resourceType>', 'Resource type: "function" | "page" | "component"')
+  .option('--vue-version [vueVersion]', 'Vue version: "2" | "3" (default: 3))', '3')
+  .option(
+    '--path <resourcePath>',
+    'Path to resource, use dot (".") to current dir where command is executed'
+  )
+  .option(
+    '--testPath [testPath]',
+    'Path to test, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
+  )
+  .option(
+    '--storyPath [storyPath]',
+    'Path to story, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
+  )
+  .option(
+    '--cssFramework [cssFramework]',
+    'Style approach: "css_modules" | "tailwind_inline" | "tailwind_file" | "css_vanilla" | "scss" (default: no_style)',
+    'no_style'
+  )
+  .option('--test-framework [testFrameworkName]', 'Test framework: jest or vitest (default: jest)')
+  .option('--typescript', 'With TypeScript (default: false)')
+  .option('--testing-library', 'With Testing Library (default: false)')
+  .option('--test', 'Add test file (default: false)')
+  .option('--spec', 'Add spec file (default: false)')
+  .option('--story', 'Add story file (default: false)')
+  .option(
+    '--folder-wrapper',
+    'Creates a folder with the name of the resource, with the files inside it'
+  )
   .action(createAction)
   .usage('create <resourceName> -p <presetName>')
+  .usage(
+    'create <resourceName> --framework <framework> (--test | --spec) --typescript --folder-wrapper --story --test-framework (vitest | jest)'
+  )
   .description(
     'Creates the resources with a local preset in non-verbose mode (preview and ask to confirm are not shown, resources will be created immediately), if the preset folder is empty, it will call the guided flow (the same as the `gen` command executes)'
   )
