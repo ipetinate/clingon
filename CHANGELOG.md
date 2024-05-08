@@ -1,3 +1,15 @@
+# v0.9.0 (Wed May 08 2024)
+
+#### 🚀 Enhancement
+
+- feat: add new command to instantly creation with params [#45](https://github.com/ipetinate/clingon/pull/45) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.8.2 (Mon May 06 2024)
 
 #### 🐛 Bug Fix
