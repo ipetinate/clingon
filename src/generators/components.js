@@ -135,7 +135,7 @@ export function makeFolderWrapperOrBypass(data) {
   const folderWrapperPath = join(data.resourcePath, data.name)
   const folderWrapperExists = checkDirectoriesTree(splitPathString(folderWrapperPath))
 
-  if (!folderWrapperExists) {
+  if (data.folderWrapper && !folderWrapperExists) {
     const created = createDir(folderWrapperPath)
 
     if (!created) console.error('Error: cannot create folder wrapper.')
@@ -237,6 +237,12 @@ export function replaceAllComponentTextOccurrences(data) {
 export function generateComponentFile(data) {
   const path = data.pathWithFileName
   const success = createFileWithContent(data.pathWithFileName, data.fileContent)
+
+  if (data.folderWrapper) {
+    const filePath = join(data.resourcePath, data.name, 'index.' + data.extension)
+
+    createFileWithContent(filePath, `export * from './${data.name}'`)
+  }
 
   return { success, path }
 }
