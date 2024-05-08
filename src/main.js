@@ -46,27 +46,27 @@ program
   .command('create')
   .argument('<name>', 'Resource name')
   .option('--preset [preset]', 'Preset name')
-  .option('--framework <frameworkName>', 'Framework name for default preset: vue or react')
   .option('--type <resourceType>', 'Resource type: "function" | "page" | "component"')
   .option('--vue-version [vueVersion]', 'Vue version: "2" | "3" (default: 3))', '3')
-  .option(
-    '--path <resourcePath>',
-    'Path to resource, use dot (".") to current dir where command is executed'
-  )
-  .option(
-    '--testPath [testPath]',
-    'Path to test, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
-  )
-  .option(
-    '--storyPath [storyPath]',
-    'Path to story, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
-  )
+  .option('--framework <frameworkName>', 'Framework name for default preset: vue or react')
   .option(
     '--cssFramework [cssFramework]',
     'Style approach: "css_modules" | "tailwind_inline" | "tailwind_file" | "css_vanilla" | "scss" (default: no_style)',
     'no_style'
   )
   .option('--test-framework [testFrameworkName]', 'Test framework: jest or vitest (default: jest)')
+  .option(
+    '--path <resourcePath>',
+    'Path to resource, use dot (".") to current dir where command is executed'
+  )
+  .option(
+    '--test-path [testPath]',
+    'Path to test, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
+  )
+  .option(
+    '--story-path [storyPath]',
+    'Path to story, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
+  )
   .option('--typescript', 'With TypeScript (default: false)')
   .option('--testing-library', 'With Testing Library (default: false)')
   .option('--test', 'Add test file (default: false)')
