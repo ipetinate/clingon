@@ -31,6 +31,7 @@ import { StoryPostfixEnum, TestPostfixEnum, StylePostfixEnum } from 'enums/postf
  *   withTest: boolean;
  *   withStory: boolean;
  *   withTestingLibrary: boolean
+ *   folderWrapper: boolean
  *   testPostfix: TestPostfix;
  *   storyPostfix: StoryPostfix;
  *   testFramework: TestFramework

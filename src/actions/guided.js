@@ -13,6 +13,7 @@ import {
 
 import { namePrompt } from '../prompts/name.js'
 import { presetNamePrompt } from '../prompts/preset-name.js'
+import { createResourcePrompt } from '../prompts/create-resource.js'
 
 export async function guidedAction(resourceName) {
   /**

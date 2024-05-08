@@ -106,6 +106,13 @@ export async function createResourcePrompt(resourceName) {
   let version = null
 
   /**
+   * Creates the resource in a folder with the same name as the resource
+   *
+   * @type {boolean}
+   */
+  let folderWrapper = false
+
+  /**
    * With typescript
    *
    * @type {boolean}
@@ -128,6 +135,10 @@ export async function createResourcePrompt(resourceName) {
       choices: frameworksAndLibsChoices
     })
   }
+
+  folderWrapper = await confirm({
+    message: 'Put the files in a folder with the same name as the resource?'
+  })
 
   if (framework === FrameworkEnum.vue) {
     version = await select({
@@ -275,7 +286,8 @@ export async function createResourcePrompt(resourceName) {
     typescript,
     withStory,
     withTest,
-    withTestingLibrary
+    withTestingLibrary,
+    folderWrapper
   }
 
   return answers

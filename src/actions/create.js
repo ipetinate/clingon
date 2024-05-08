@@ -74,8 +74,9 @@ export async function createAction(resourceName, options) {
       type: options.type,
       resourcePath: options.path,
       withTestingLibrary: options.testingLibrary,
-      storyPostfix: 'stories',
       version: options.vueVersion,
+      folderWrapper: options.folderWrapper,
+      storyPostfix: 'stories',
       testPath,
       storyPath,
       testPostfix,
@@ -83,8 +84,6 @@ export async function createAction(resourceName, options) {
       withTest
     }
   }
-
-  console.log({ answers })
 
   if (!options.framework && preset) {
     answers = getPresetFileContent(preset + '.json')

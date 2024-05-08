@@ -77,6 +77,8 @@ export function getTemplateContent(data) {
  * @returns {() => data}
  */
 export function replaceAllFunctionTextOccurrences(data) {
+  data.name = convertCase('PascalCase', data.name)
+
   data.fileContent = data.fileContent.replace('component', convertCase('kebab-case', data.name))
 
   return data
@@ -101,7 +103,10 @@ export function generateStyleFile(data) {
     cssFramework: data.cssFramework
   })
 
-  const fileName = `${convertCase('PascalCase', data.name)}.${extension}`
+  const fileName =
+    data.folderWrapper && ['component', 'page'].includes(data.type)
+      ? `${data.name}/${data.name}.${extension}`
+      : `${data.name}.${extension}`
   const pathWithFileName = `${data.path}/${fileName}`
 
   const success = createFileWithContent(pathWithFileName, data.fileContent)

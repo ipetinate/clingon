@@ -120,7 +120,10 @@ export function makePathWithExtension(data) {
     postfix: data.storyPostfix
   })
 
-  const fileName = `${data.name}.${extension}`
+  const fileName =
+    data.folderWrapper && ['component', 'page'].includes(data.type)
+      ? `${data.name}/${data.name}.${extension}`
+      : `${data.name}.${extension}`
   const pathWithFileName = `${data.path}/${fileName}`
   const resourcePathWithFileName = `${data.resourcePath}/${data.name}.${extension}`
 

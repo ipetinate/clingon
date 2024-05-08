@@ -83,7 +83,9 @@ export function getTemplateContent(data) {
  * @returns {() => data}
  */
 export function replaceAllFunctionTextOccurrences(data) {
-  data.fileContent = data.fileContent.replace('FunctionName', convertCase('camelCase', data.name))
+  data.name = convertCase('camelCase', data.name)
+
+  data.fileContent = data.fileContent.replace('FunctionName', data.name)
 
   return data
 }
@@ -106,7 +108,13 @@ export function generateFunctionFile(data) {
     framework: 'vanilla'
   })
 
-  const fileName = `${convertCase('kebab-case', data.name)}.${extension}`
+  const fileName =
+    data.folderWrapper && ['component', 'page'].includes(data.type)
+      ? `${convertCase('kebab-case', data.name)}/${convertCase(
+          'kebab-case',
+          data.name
+        )}.${extension}`
+      : `${convertCase('kebab-case', data.name)}.${extension}`
   const pathWithFileName = `${data.path}/${fileName}`
 
   const success = createFileWithContent(pathWithFileName, data.fileContent)
