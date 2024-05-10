@@ -7,6 +7,7 @@ import { createAction } from './actions/create.js'
 
 import { getLocalLibDirname } from './utils/directory.js'
 import { TestFrameworkEnum } from './enums/frameworks.js'
+import { initAction } from './actions/init.js'
 
 /*
  * Global Variables
@@ -90,6 +91,16 @@ program
   .description(
     'Creates the resources with a local preset in non-verbose mode (preview and ask to confirm are not shown, resources will be created immediately), if the preset folder is empty, it will call the guided flow (the same as the `gen` command executes)'
   )
+
+/*
+ * Init tool assets, generate clingon.config.json
+ */
+
+program
+  .command('init')
+  .actions(initAction)
+  .usage('init')
+  .description('Init all needed setup, generate files and create folders to store assets.')
 
 /*
  * Parse program to execution
