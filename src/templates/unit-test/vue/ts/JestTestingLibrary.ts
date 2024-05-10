@@ -1,6 +1,6 @@
 import { render, screen, type RenderOptions } from '@testing-library/vue'
 
-import ResourceName from 'resourcePath'
+import ResourceName from 'resourcePath.vue'
 
 type RenderComponent = {
   props: InstanceType<typeof ResourceName>['$props']

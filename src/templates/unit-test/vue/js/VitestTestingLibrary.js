@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/vue'
 
 import { describe, it, expect } from 'vitest'
 
-import ResourceName from 'resourcePath'
+import ResourceName from 'resourcePath.vue'
 
 describe('ResourceName', () => {
   const componentData = {

@@ -2,7 +2,7 @@ import { ArgTypes, Meta, StoryFn } from '@storybook/vue3'
 
 import { toRefs } from 'vue'
 
-import ResourceName from 'resourcePath'
+import ResourceName from 'resourcePath.vue'
 
 const argTypes = {
   // Describe your args type (component properties) here to autodocs show properly informations

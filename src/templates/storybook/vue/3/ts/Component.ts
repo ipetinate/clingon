@@ -2,7 +2,7 @@ import type { ArgTypes, Args, Meta, StoryFn } from '@storybook/vue3'
 
 import { toRefs } from 'vue'
 
-import ResourceName from 'resourcePath'
+import ResourceName from 'resourcePath.vue'
 
 type Props = InstanceType<typeof ResourceName>
 
