@@ -35,7 +35,7 @@
     "test:watch": "node --test --watch",
     "test:coverage": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info",
     "dev": "yarn build && clear && node src/main.js",
-    "dev:npx": "yarn build && npm link && clear && npx clingon gen"
+    "dev:npx": "yarn build && npm link && clear && npx clingon "
   },
   "dependencies": {
     "@inquirer/prompts": "^4.3.2",

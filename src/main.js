@@ -47,9 +47,9 @@ program
   .command('create')
   .argument('<name>', 'Resource name')
   .option('--preset [preset]', 'Preset name')
-  .option('--type <resourceType>', 'Resource type: "function" | "page" | "component"')
+  .option('--type [resourceType]', 'Resource type: "function" | "page" | "component"')
   .option('--vue-version [vueVersion]', 'Vue version: "2" | "3" (default: 3))', '3')
-  .option('--framework <frameworkName>', 'Framework name for default preset: vue or react')
+  .option('--framework [frameworkName]', 'Framework name for default preset: vue or react')
   .option(
     '--css-framework [cssFramework]',
     'Style approach: "css_modules" | "tailwind_inline" | "tailwind_file" | "css_vanilla" | "scss" (default: no_style)',
@@ -61,7 +61,7 @@ program
     TestFrameworkEnum.vitest
   )
   .option(
-    '--path <resourcePath>',
+    '--path [resourcePath]',
     'Path to resource, use dot (".") to current dir where command is executed'
   )
   .option(

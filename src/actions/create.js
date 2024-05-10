@@ -35,11 +35,11 @@ export async function createAction(resourceName, options) {
    */
   let preset = options.preset
 
-  if (!options.type || !options.framework || !options.path) {
-    throw new Error('You did not pass any of the mandatory parameters for Options Mode')
-  }
-
   if (!preset && options.framework) {
+    if (!options.type || !options.framework || !options.path) {
+      throw new Error('You did not pass any of the mandatory parameters for Options Mode')
+    }
+
     let storyPath = options.path
     let withStory = options.story
 
