@@ -1,3 +1,15 @@
+# v0.9.4 (Fri May 10 2024)
+
+#### 🐛 Bug Fix
+
+- fix: versions [#49](https://github.com/ipetinate/clingon/pull/49) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.9.3 (Fri May 10 2024)
 
 #### 🐛 Bug Fix
