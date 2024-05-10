@@ -1,3 +1,19 @@
+# v0.9.2 (Fri May 10 2024)
+
+#### 🐛 Bug Fix
+
+- fix: vue components imports inside templates [#47](https://github.com/ipetinate/clingon/pull/47) ([@ipetinate](https://github.com/ipetinate))
+
+#### 🏠 Internal
+
+- chore: add scripts folder to be ignored [#46](https://github.com/ipetinate/clingon/pull/46) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.9.1 (Wed May 08 2024)
 
 #### ⚠️ Pushed to `main`
