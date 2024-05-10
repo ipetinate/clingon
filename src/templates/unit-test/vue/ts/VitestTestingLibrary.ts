@@ -2,7 +2,7 @@ import { render, screen, type RenderOptions } from '@testing-library/vue'
 
 import { describe, it, expect } from 'vitest'
 
-import ResourceName from 'resourcePath'
+import ResourceName from 'resourcePath.vue'
 
 type RenderComponent = {
   props: InstanceType<typeof ResourceName>['$props']

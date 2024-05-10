@@ -164,6 +164,7 @@ export function replaceAllTestTextOccurrences(data) {
 
     data.fileContent = data.fileContent.replace(/resourcePath/g, resourcePath)
   }
+
   if (data.framework === FrameworkEnum.react) {
     const resourcePath = removePostfixAndExt(data.resourcePathWithFileName)
 

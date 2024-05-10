@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/vue'
 
-import ResourceName from 'resourcePath'
+import ResourceName from 'resourcePath.vue'
 
 describe('ResourceName', () => {
   const componentData = {

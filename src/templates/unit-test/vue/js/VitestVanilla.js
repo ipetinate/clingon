@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils'
 
 import { describe, it, expect } from 'vitest'
 
-import ResourceName from 'resourcePath'
+import ResourceName from 'resourcePath.vue'
 
 describe('ResourceName', () => {
   const wrapper = shallowMount(ResourceName)
