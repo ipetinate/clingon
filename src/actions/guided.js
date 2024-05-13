@@ -26,7 +26,7 @@ export async function guidedAction(resourceName) {
   /**
    * Selected preset
    *
-   * @type {string }
+   * @type { string | boolean }
    */
   let preset = false
 
