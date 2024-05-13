@@ -46,3 +46,10 @@ export function createFileWithContent(filename, content) {
     return false
   }
 }
+
+/**
+ * Check if file exists
+ * @param {string} path File path
+ * @returns {boolean}
+ */
+export function checkFileExists(path) {}
