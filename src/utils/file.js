@@ -49,7 +49,16 @@ export function createFileWithContent(filename, content) {
 
 /**
  * Check if file exists
- * @param {string} path File path
+ *
+ * @param {string} fullPath File path
  * @returns {boolean}
  */
-export function checkFileExists(path) {}
+export function checkFileExists(fullPath) {
+  try {
+    fs.accessSync(fullPath, fs.constants.F_OK)
+
+    return true
+  } catch {
+    return false
+  }
+}

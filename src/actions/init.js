@@ -1,12 +1,31 @@
+import { globalConfigSubject } from '../store/global.js'
+
 import { compose } from '../utils/compose.js'
-import { readFileContent } from '../utils/file.js'
-import { getConfigContent, getFilePathOrCreate } from '../utils/init-action.js'
+import {
+  createFileIfNotExists,
+  getConfigContent,
+  getConfigFilePath,
+  updateGlobalStore
+} from '../utils/init-action.js'
 
 export async function initAction() {
-  // TODO: generate clingon.config.js
+  let alreadyHaveGlobalConfig = false
 
-  const result = compose(getFilePathOrCreate, getConfigContent)
+  const subscription = globalConfigSubject.subscribe((content) => {
+    if (typeof content === 'object') alreadyHaveGlobalConfig = true
+  })
+
+  if (!alreadyHaveGlobalConfig) {
+    compose(
+      getConfigFilePath,
+      createFileIfNotExists,
+      getConfigContent,
+      updateGlobalStore
+    )
+  }
 
   // TODO: create folders for presets and templates
   // TODO: add a default template for function or other asset
+
+  return subscription.unsubscribe()
 }
