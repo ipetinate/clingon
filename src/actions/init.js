@@ -22,6 +22,11 @@ export async function initAction() {
       getConfigContent,
       updateGlobalStore
     )
+  } else {
+    console.info(
+      'You already have a configuration file at: ',
+      getConfigFilePath()
+    )
   }
 
   // TODO: create folders for presets and templates

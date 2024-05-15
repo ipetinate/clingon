@@ -1,7 +1,9 @@
-import { join } from 'node:path'
 import { BehaviorSubject } from 'rxjs'
-import { getConfigContent } from '../utils/init-action.js'
 
-const configFilePath = join(process.cwd(), 'clingon.config.json')
+import { getConfigContent, getConfigFilePath } from '../utils/init-action.js'
 
-export const globalConfigSubject = new BehaviorSubject(getConfigContent(configFilePath))
+const configFilePath = getConfigFilePath()
+
+export const globalConfigSubject = new BehaviorSubject(
+  getConfigContent(configFilePath)
+)

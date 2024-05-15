@@ -7,7 +7,6 @@ import {
 } from './file.js'
 
 import { defaultConfig } from '../constants/config.js'
-import { error } from 'node:console'
 import { globalConfigSubject } from '../store/global.js'
 
 const rootDir = process.cwd()
@@ -64,7 +63,7 @@ export function getConfigContent(filePath) {
 
     return fileContentParsed
   } catch (e) {
-    return error instanceof Error ? error.message : error
+    return e instanceof Error ? error.message : error
   }
 }
 
