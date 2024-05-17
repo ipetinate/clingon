@@ -48,7 +48,7 @@ const program = new Command()
 program
   .name('clingon')
   .description('CLI to generate files based on templates')
-  .version('0.9.4', '-v, --version', 'Current version')
+  .version('0.9.5', '-v, --version', 'Current version')
 
 /*
  * Guided flow - generate components based on prompt answers
