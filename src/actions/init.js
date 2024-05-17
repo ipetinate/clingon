@@ -24,5 +24,8 @@ export async function initAction() {
    * Preset Folder
    */
 
-  compose(checkIfPresetFolderAlreadyExists, createPresetFolderIfNotExists)
+  compose(
+    checkIfPresetFolderAlreadyExists, 
+    createPresetFolderIfNotExists
+  )
 }

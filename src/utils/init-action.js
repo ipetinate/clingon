@@ -17,9 +17,6 @@ import { checkDirectoriesTree } from './directory.js'
  * ----------------------------------------
  */
 
-const rootDir = process.cwd()
-const configFileName = 'clingon.config.json'
-
 /**
  * Get config file path
  *
@@ -27,10 +24,13 @@ const configFileName = 'clingon.config.json'
  */
 export function getConfigFilePath() {
   const fullPath = join(process.cwd(), 'clingon.config.json')
-
   const fileExists = checkFileExists(fullPath)
 
-  return fileExists ? fullPath : undefined
+  if (!fileExists) {
+    return undefined
+  }
+
+  return fullPath
 }
 
 /**
@@ -40,18 +40,19 @@ export function getConfigFilePath() {
  */
 export function createFileIfNotExists(filePath) {
   if (filePath) {
-    console.info('\n✅ You already have global config file at: ', filePath)
+    console.info('\n✅ You already have config at: ', filePath)
 
     return filePath
   }
 
   const success = createFileWithContent(
-    configFileName,
+    'clingon.config.json',
     JSON.stringify(defaultConfig, null, 2)
   )
+  const fullPath = join(process.cwd(), 'clingon.config.json')
 
   if (success) {
-    console.info('🌎 Global config file created at: ', filePath)
+    console.info('🌎 Global config file created at: ', fullPath)
   } else {
     console.error('❌ Error: Cannot create global config file, try again.')
   }
@@ -96,7 +97,7 @@ export function updateGlobalStore(fileContent) {
 
 const dotClingonDir = '.clingon'
 const presetsDir = 'presets'
-const presetFullDir = join(rootDir, dotClingonDir, presetsDir)
+const presetFullDir = join(process.cwd(), dotClingonDir, presetsDir)
 
 /**
  * Check if `.clingon/prests` folde exists
