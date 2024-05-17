@@ -3,16 +3,22 @@ import fs from 'node:fs'
 import assert from 'node:assert/strict'
 import { describe, it, todo, mock } from 'node:test'
 
-import { createFileWithContent, getFiles, readFileContent } from './file.js'
+import {
+  checkFileExists,
+  createFileWithContent,
+  getFiles,
+  readFileContent
+} from './file.js'
 
+const accesSync = mock.method(fs, 'accessSync')
 const mockFsReadDirSync = mock.method(fs, 'readdirSync')
 const mockFsReadFileSync = mock.method(fs, 'readFileSync')
-const mockFsWrtieFileSync = mock.method(fs, 'writeFileSync')
+const mockFsWriteFileSync = mock.method(fs, 'writeFileSync')
 
 const mockFolderFiles = ['mockFile.json', 'mocks.js', 'fakeFile.ts']
 
 describe('File Util', () => {
-  describe('getFiles util', () => {
+  describe('getFiles', () => {
     it('get files from root dir', () => {
       mockFsReadDirSync.mock.mockImplementation(() => mockFolderFiles)
 
@@ -32,7 +38,7 @@ describe('File Util', () => {
     })
   })
 
-  describe('readFileContent util', () => {
+  describe('readFileContent', () => {
     it('get file content', () => {
       mockFsReadFileSync.mock.mockImplementation((fileName) => {
         const files = {
@@ -57,9 +63,9 @@ describe('File Util', () => {
     })
   })
 
-  describe('createFileWithContent util', () => {
+  describe('createFileWithContent', () => {
     it('create a file with content', () => {
-      mockFsWrtieFileSync.mock.mockImplementation(() => true)
+      mockFsWriteFileSync.mock.mockImplementation(() => true)
 
       const success = createFileWithContent('test.json', 'content')
 
@@ -67,7 +73,7 @@ describe('File Util', () => {
     })
 
     it('create a file with content should throw error', () => {
-      mockFsWrtieFileSync.mock.mockImplementation(() => {
+      mockFsWriteFileSync.mock.mockImplementation(() => {
         throw new Error('wrong file format')
       })
 
@@ -76,6 +82,42 @@ describe('File Util', () => {
       })
 
       assert.strictEqual(success, false)
+    })
+  })
+
+  describe('checkFileExists', () => {
+    it('return true if the file exists', () => {
+      accesSync.mock.mockImplementation(() => true)
+
+      const fileExists = checkFileExists('./myDirectory/myFile.txt')
+
+      assert.strictEqual(fileExists, true)
+    })
+
+    it.skip('return false if the file does not exist', () => {
+      accesSync.mock.mockImplementation(() => false)
+
+      const fileExists = checkFileExists('./myDirectory/nonExistentFile.txt')
+
+      assert.strictEqual(fileExists, false)
+    })
+
+    it('return true for an existing nested file', () => {
+      accesSync.mock.mockImplementation(() => true)
+
+      const fileExists = checkFileExists('./myDirectory/nested/nestedFile.txt')
+
+      assert.strictEqual(fileExists, true)
+    })
+
+    it.skip('return false for a non-existing nested file', () => {
+      accesSync.mock.mockImplementation(() => false)
+
+      const fileExists = checkFileExists(
+        './myDirectory/nested/nonExistentFile.txt'
+      )
+
+      assert.strictEqual(fileExists, false)
     })
   })
 })

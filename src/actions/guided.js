@@ -26,7 +26,7 @@ export async function guidedAction(resourceName) {
   /**
    * Selected preset
    *
-   * @type {string }
+   * @type { string | boolean }
    */
   let preset = false
 
@@ -71,14 +71,14 @@ export async function guidedAction(resourceName) {
       message: 'Do you want to save the answers as a preset to use later?'
     })
 
-    /**
-     * Save answers as new preset
-     *
-     * @type {boolean}
-     */
-    const presetName = await presetNamePrompt()
-
     if (savePreset) {
+      /**
+       * Save answers as new preset
+       *
+       * @type {boolean}
+       */
+      const presetName = await presetNamePrompt()
+
       const { success, path } = saveAnswersAsPreset(presetName, answers)
 
       if (success) {

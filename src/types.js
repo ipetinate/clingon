@@ -23,41 +23,48 @@ import { StoryPostfixEnum, TestPostfixEnum, StylePostfixEnum } from 'enums/postf
  * @typedef {TestPostfix | StoryPostfix | StylePostfix} Postfix - All files postfixes
  *
  * @typedef {{
- *   name: string;
- *   type: Resource;
- *   framework: Framework;
- *   version: string | number
- *   typescript: boolean;
- *   withTest: boolean;
- *   withStory: boolean;
- *   withTestingLibrary: boolean
- *   folderWrapper: boolean
- *   testPostfix: TestPostfix;
- *   storyPostfix: StoryPostfix;
- *   testFramework: TestFramework
- *   cssFramework: CssFramework
- *   resourcePath: string;
- *   testPath: string
- *   storyPath: string
+ *  name: string;
+ *  type: Resource;
+ *  framework: Framework;
+ *  version: string | number
+ *  typescript: boolean;
+ *  withTest: boolean;
+ *  withStory: boolean;
+ *  withTestingLibrary: boolean
+ *  folderWrapper: boolean
+ *  testPostfix: TestPostfix;
+ *  storyPostfix: StoryPostfix;
+ *  testFramework: TestFramework
+ *  cssFramework: CssFramework
+ *  resourcePath: string;
+ *  testPath: string
+ *  storyPath: string
  * }} Answers - Users prompted answers
  *
  * @typedef {{
- *   preset: string,
- *   type: Resource,
- *   framework: Framework,
- *   testFramework: TestFramework,
- *   cssFramework: CssFramework
- *   path: string,
- *   testPath: string,
- *   storyPath: string,
- *   test: boolean,
- *   spec: boolean,
- *   story: boolean,
- *   typescript: boolean,
- *   testingLibrary: boolean,
- *   folderWrapper: boolean,
- *   vueVersion: VueVersion
+ *  preset: string,
+ *  type: Resource,
+ *  framework: Framework,
+ *  testFramework: TestFramework,
+ *  cssFramework: CssFramework
+ *  path: string,
+ *  testPath: string,
+ *  storyPath: string,
+ *  test: boolean,
+ *  spec: boolean,
+ *  story: boolean,
+ *  typescript: boolean,
+ *  testingLibrary: boolean,
+ *  folderWrapper: boolean,
+ *  vueVersion: VueVersion
  * }} CommanderOptions - Commander command line options
+ *
+ * @typedef {{
+ *  alias: {
+ *    src: string
+ *  },
+ * exportDefault: boolean
+ * }} GlobalConfig - Clingon global config object
  *
  * @typedef {"Page" | "Component" | "Function" | "Type" | "Model" | "Enum" | "Test" | "Spec" | "Cypress Spec" | "Storybook Story"} TypeNames - Resource type names
  *

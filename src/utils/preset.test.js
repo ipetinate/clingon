@@ -1,5 +1,5 @@
 import fs from 'node:fs'
-import assert from 'node:assert'
+import assert from 'node:assert/strict'
 
 import { describe, it, mock } from 'node:test'
 
@@ -44,7 +44,9 @@ const mockFolderFilesName = [
 describe('preset', () => {
   it('get preset files', () => {
     mockFsReadDirSync.mock.mockImplementation(() => mockFolderFiles)
-    mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
+    mockExistsSync.mock.mockImplementation((value) =>
+      nestedStrucuture.search(value)
+    )
     mockFsMkdirSync.mock.mockImplementation(() => true)
 
     mockStatSync.mock.mockImplementation((value) => ({
@@ -62,7 +64,9 @@ describe('preset', () => {
 
   it('get preset file name to show as object', () => {
     mockFsReadDirSync.mock.mockImplementation(() => mockFolderFiles)
-    mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
+    mockExistsSync.mock.mockImplementation((value) =>
+      nestedStrucuture.search(value)
+    )
     mockFsMkdirSync.mock.mockImplementation(() => true)
 
     const presets = getPresetFiles()
@@ -73,7 +77,9 @@ describe('preset', () => {
 
   it('get preset as inquirer choice { name: string, value: string }[]', () => {
     mockFsReadDirSync.mock.mockImplementation(() => mockFolderFiles)
-    mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
+    mockExistsSync.mock.mockImplementation((value) =>
+      nestedStrucuture.search(value)
+    )
     mockFsMkdirSync.mock.mockImplementation(() => true)
 
     const presets = getPresetFiles()
@@ -100,7 +106,9 @@ describe('preset', () => {
     mockFsReadDirSync.mock.mockImplementation(() => srcDirs)
     mockFsMkdirSync.mock.mockImplementation(() => true)
 
-    mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
+    mockExistsSync.mock.mockImplementation((value) =>
+      nestedStrucuture.search(value)
+    )
     mockFsReadFileSync.mock.mockImplementation((fileName) => {
       if (fileName.includes('.clingon/presets/test.json')) {
         return '{"name":"test"}'

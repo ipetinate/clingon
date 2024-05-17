@@ -9,35 +9,43 @@ export const dotClingon = '.clingon'
 export const presetsDir = 'presets'
 export const presetsExtension = '.json'
 
+export function createPresetsFolder() {
+  let createdRootDir
+  let createdPresetDir
+
+  if (!checkDirectoriesTree([dotClingon])) {
+    createdRootDir = createDir(join(rootDir, dotClingon))
+  }
+
+  if (!checkDirectoriesTree([dotClingon, presetsDir])) {
+    createdPresetDir = createDir(join(rootDir, dotClingon, presetsDir))
+  }
+
+  if (!createdRootDir || !createdPresetDir) return false
+
+  return true
+}
+
 export function getPresetFiles() {
   const hasDotClingonPath = checkDirectoriesTree([dotClingon, presetsDir])
 
-  if (hasDotClingonPath) {
-    const presetFilesPath = join(rootDir, dotClingon, presetsDir)
+  if (!hasDotClingonPath) {
+    const created = createPresetsFolder()
 
-    const files = getFiles(presetFilesPath)
-
-    const presets = files.map((path) => {
-      const pieces = path.split('/')
-
-      return pieces[pieces.length - 1]
-    })
-
-    return presets
-  } else {
-    let createdRootDir
-    let createdPresetDir
-
-    if (!checkDirectoriesTree([dotClingon])) {
-      createdRootDir = createDir(join(rootDir, dotClingon))
-    }
-
-    if (!checkDirectoriesTree([dotClingon, presetsDir])) {
-      createdPresetDir = createDir(join(rootDir, dotClingon, presetsDir))
-    }
-
-    if (createdRootDir && createdPresetDir) getPresetFiles()
+    if (created) return getPresetFiles()
   }
+
+  const presetFilesPath = join(rootDir, dotClingon, presetsDir)
+
+  const files = getFiles(presetFilesPath)
+
+  const presets = files.map((path) => {
+    const pieces = path.split('/')
+
+    return pieces[pieces.length - 1]
+  })
+
+  return presets
 }
 
 export function getPresetFileContent(fileName) {

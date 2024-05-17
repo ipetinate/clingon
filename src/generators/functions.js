@@ -1,6 +1,6 @@
 import path from 'node:path'
 
-import { localDirname } from '../main.js'
+import { globalConfig, localDirname } from '../main.js'
 import { functionTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
@@ -83,6 +83,15 @@ export function getTemplateContent(data) {
  * @returns {() => data}
  */
 export function replaceAllFunctionTextOccurrences(data) {
+  if (!data.folderWrapper) {
+    if (globalConfig?.exportDefault) {
+      data.fileContent = data.fileContent.replace(
+        /export function/g,
+        'export default function'
+      )
+    }
+  }
+
   data.name = convertCase('camelCase', data.name)
 
   data.fileContent = data.fileContent.replace('FunctionName', data.name)

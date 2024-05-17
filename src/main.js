@@ -2,17 +2,26 @@
 
 import { Command } from 'commander'
 
+import { coldStart } from './flows/coldStart.js'
+
+import { initAction } from './actions/init.js'
 import { guidedAction } from './actions/guided.js'
 import { createAction } from './actions/create.js'
 
-import { getLocalLibDirname } from './utils/directory.js'
 import { TestFrameworkEnum } from './enums/frameworks.js'
+import { getLocalLibDirname } from './utils/directory.js'
 
 /*
  * Global Variables
  */
 
-export const localDirname = getLocalLibDirname()
+const localDirname = getLocalLibDirname()
+
+/*
+ * Start app
+ */
+
+const { globalConfig } = await coldStart()
 
 /*
  * Resources
@@ -27,7 +36,7 @@ const program = new Command()
 program
   .name('clingon')
   .description('CLI to generate files based on templates')
-  .version('0.9.4', '-v, --version', 'Current version')
+  .version('0.9.5', '-v, --version', 'Current version')
 
 /*
  * Guided flow - generate components based on prompt answers
@@ -37,7 +46,9 @@ program
   .command('gen')
   .argument('[name]', 'Resource name')
   .action(guidedAction)
-  .description('Start a guided flow to generate resources (components, functions, pages, etc)')
+  .description(
+    'Start a guided flow to generate resources (components, functions, pages, etc)'
+  )
 
 /*
  * Preset flow - create instantly resources with presets
@@ -46,39 +57,53 @@ program
 program
   .command('create')
   .argument('<name>', 'Resource name')
-  .option('--preset [preset]', 'Preset name')
-  .option('--type [resourceType]', 'Resource type: "function" | "page" | "component"')
-  .option('--vue-version [vueVersion]', 'Vue version: "2" | "3" (default: 3))', '3')
-  .option('--framework [frameworkName]', 'Framework name for default preset: vue or react')
+  .option('-p, --preset [preset]', 'Preset name')
   .option(
-    '--css-framework [cssFramework]',
+    '-t, --type [resourceType]',
+    'Resource type: "function" | "page" | "component"'
+  )
+  .option(
+    '-vv, --vue-version [vueVersion]',
+    'Vue version: "2" | "3" (default: 3))',
+    '3'
+  )
+  .option(
+    '-f, --framework [frameworkName]',
+    'Framework name for default preset: vue or react'
+  )
+  .option(
+    '-cs, --css-framework [cssFramework]',
     'Style approach: "css_modules" | "tailwind_inline" | "tailwind_file" | "css_vanilla" | "scss" (default: no_style)',
     'no_style'
   )
   .option(
-    '--test-framework [testFrameworkName]',
+    '-tf, --test-framework [testFrameworkName]',
     'Test framework: jest or vitest (default: vitest)',
     TestFrameworkEnum.vitest
   )
   .option(
-    '--path [resourcePath]',
+    '-rp, --path [resourcePath]',
     'Path to resource, use dot (".") to current dir where command is executed'
   )
   .option(
-    '--test-path [testPath]',
+    '-tp, --test-path [testPath]',
     'Path to test, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
   )
   .option(
-    '--story-path [storyPath]',
+    '-sp, --story-path [storyPath]',
     'Path to story, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
   )
-  .option('--typescript', 'With TypeScript (default: false)', false)
-  .option('--testing-library', 'With Testing Library (default: false)', false)
+  .option('-ts, --typescript', 'With TypeScript (default: false)', false)
+  .option(
+    '-tl, --testing-library',
+    'With Testing Library (default: false)',
+    false
+  )
   .option('--test', 'Add test file (default: false)', false)
   .option('--spec', 'Add spec file (default: false)', false)
   .option('--story', 'Add story file (default: false)', false)
   .option(
-    '--folder-wrapper',
+    '-fw, --folder-wrapper',
     'Creates a folder with the name of the resource, with the files inside it',
     false
   )
@@ -92,7 +117,25 @@ program
   )
 
 /*
+ * Init tool assets, generate clingon.config.json
+ */
+
+program
+  .command('init')
+  .action(initAction)
+  .usage('init')
+  .description(
+    'Init all needed setup, generate files and create folders to store assets.'
+  )
+
+/*
  * Parse program to execution
  */
 
 program.parse()
+
+/*
+ * Exports
+ */
+
+export { globalConfig, localDirname }

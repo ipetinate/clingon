@@ -1,8 +1,10 @@
 <p align="center">
-  <img
-    src="https://raw.githubusercontent.com/ipetinate/clingon/main/doc/img/clingon.svg"
-    alt="Clingon CLI logo" width="256"  style="display: block; margin: 0 auto;"
-    />
+    <a href="https://clingon.dev">
+      <img
+        src="https://raw.githubusercontent.com/ipetinate/clingon/main/doc/img/clingon.svg"
+        alt="Clingon CLI logo" width="256"  style="display: block; margin: 0 auto;"
+      />
+    </a>
 </p>
 
 [![Build CI](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml)
@@ -27,7 +29,10 @@ Let's simplify all of this, execute a command, answer some questions, or select 
 
 ## Links
 
-- Official website: [clingon.dev](https://clingon.dev)
+<p align="center" style="font-size: 20px;">
+  <a href="https://clingon.dev">🔗 Official website 🔗</a>
+</p>
+
 - Releases
   - [CHANGELOG](https://github.com/ipetinate/clingon/blob/main/CHANGELOG.md)
 - Documentation
