@@ -13,7 +13,7 @@ import {
 const accesSync = mock.method(fs, 'accessSync')
 const mockFsReadDirSync = mock.method(fs, 'readdirSync')
 const mockFsReadFileSync = mock.method(fs, 'readFileSync')
-const mockFsWrtieFileSync = mock.method(fs, 'writeFileSync')
+const mockFsWriteFileSync = mock.method(fs, 'writeFileSync')
 
 const mockFolderFiles = ['mockFile.json', 'mocks.js', 'fakeFile.ts']
 
@@ -65,7 +65,7 @@ describe('File Util', () => {
 
   describe('createFileWithContent', () => {
     it('create a file with content', () => {
-      mockFsWrtieFileSync.mock.mockImplementation(() => true)
+      mockFsWriteFileSync.mock.mockImplementation(() => true)
 
       const success = createFileWithContent('test.json', 'content')
 
@@ -73,7 +73,7 @@ describe('File Util', () => {
     })
 
     it('create a file with content should throw error', () => {
-      mockFsWrtieFileSync.mock.mockImplementation(() => {
+      mockFsWriteFileSync.mock.mockImplementation(() => {
         throw new Error('wrong file format')
       })
 

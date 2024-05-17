@@ -1,0 +1,12 @@
+{
+  "type": "function",
+  "testFramework": "vitest",
+  "resourcePath": "src/utils",
+  "testPath": "src/utils",
+  "testPostfix": "test",
+  "typescript": false,
+  "withStory": false,
+  "withTest": true,
+  "withTestingLibrary": false,
+  "folderWrapper": false
+}

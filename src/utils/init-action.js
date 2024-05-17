@@ -24,9 +24,7 @@ export function getConfigFilePath() {
   const fullPath = join(process.cwd(), 'clingon.config.json')
   const fileExists = checkFileExists(fullPath)
 
-  if (!fileExists) {
-    return undefined
-  }
+  if (!fileExists) return undefined
 
   return fullPath
 }
