@@ -16,11 +16,7 @@ export async function coldStart() {
   }
 
   try {
-    const config = getConfigContent(configPath)
-
-    if (config) {
-      data.globalConfig = JSON.parse(config)
-    }
+    data.globalConfig = getConfigContent(configPath)
   } catch (error) {
     console.error(error)
   }
