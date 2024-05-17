@@ -1,3 +1,15 @@
+# v0.9.5 (Fri May 17 2024)
+
+#### 🐛 Bug Fix
+
+- feat: Init command [#51](https://github.com/ipetinate/clingon/pull/51) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.9.4 (Fri May 10 2024)
 
 #### 🐛 Bug Fix
