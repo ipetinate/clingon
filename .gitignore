@@ -7,9 +7,5 @@
 /build
 /lib
 /coverage
-
-/.clingon
-
 lcov.info
-
 .env
