@@ -23,7 +23,7 @@ jobs:
           cache: 'npm'
 
       - name: 💽 Install deps
-        run: npm install
+        run: npm ci
 
       - name: 🧪 Coverage Tests
         run: npm run test:coverage
