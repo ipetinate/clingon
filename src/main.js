@@ -48,7 +48,7 @@ const program = new Command()
 program
   .name('clingon')
   .description('CLI to generate files based on templates')
-  .version('0.9.0', '-v, --version', 'Current version')
+  .version('0.9.4', '-v, --version', 'Current version')
 
 /*
  * Guided flow - generate components based on prompt answers
@@ -71,7 +71,7 @@ program
   .argument('<name>', 'Resource name')
   .option('--preset [preset]', 'Preset name')
   .option(
-    '--type <resourceType>',
+    '--type [resourceType]',
     'Resource type: "function" | "page" | "component"'
   )
   .option(
@@ -80,7 +80,7 @@ program
     '3'
   )
   .option(
-    '--framework <frameworkName>',
+    '--framework [frameworkName]',
     'Framework name for default preset: vue or react'
   )
   .option(
@@ -94,7 +94,7 @@ program
     TestFrameworkEnum.vitest
   )
   .option(
-    '--path <resourcePath>',
+    '--path [resourcePath]',
     'Path to resource, use dot (".") to current dir where command is executed'
   )
   .option(
