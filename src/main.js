@@ -69,49 +69,53 @@ program
 program
   .command('create')
   .argument('<name>', 'Resource name')
-  .option('--preset [preset]', 'Preset name')
+  .option('-p, --preset [preset]', 'Preset name')
   .option(
-    '--type [resourceType]',
+    '-t, --type [resourceType]',
     'Resource type: "function" | "page" | "component"'
   )
   .option(
-    '--vue-version [vueVersion]',
+    '-vv, --vue-version [vueVersion]',
     'Vue version: "2" | "3" (default: 3))',
     '3'
   )
   .option(
-    '--framework [frameworkName]',
+    '-f, --framework [frameworkName]',
     'Framework name for default preset: vue or react'
   )
   .option(
-    '--css-framework [cssFramework]',
+    '-cs, --css-framework [cssFramework]',
     'Style approach: "css_modules" | "tailwind_inline" | "tailwind_file" | "css_vanilla" | "scss" (default: no_style)',
     'no_style'
   )
   .option(
-    '--test-framework [testFrameworkName]',
+    '-tf, --test-framework [testFrameworkName]',
     'Test framework: jest or vitest (default: vitest)',
     TestFrameworkEnum.vitest
   )
   .option(
-    '--path [resourcePath]',
+    '-rp, --path [resourcePath]',
     'Path to resource, use dot (".") to current dir where command is executed'
   )
   .option(
-    '--test-path [testPath]',
+    '-tp, --test-path [testPath]',
     'Path to test, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
   )
   .option(
-    '--story-path [storyPath]',
+    '-sp, --story-path [storyPath]',
     'Path to story, use dot (".") to current dir where command is executed, if ommited, and --spec is present, will use the same path to resource'
   )
-  .option('--typescript', 'With TypeScript (default: false)', false)
-  .option('--testing-library', 'With Testing Library (default: false)', false)
+  .option('-ts, --typescript', 'With TypeScript (default: false)', false)
+  .option(
+    '-tl, --testing-library',
+    'With Testing Library (default: false)',
+    false
+  )
   .option('--test', 'Add test file (default: false)', false)
   .option('--spec', 'Add spec file (default: false)', false)
   .option('--story', 'Add story file (default: false)', false)
   .option(
-    '--folder-wrapper',
+    '-fw, --folder-wrapper',
     'Creates a folder with the name of the resource, with the files inside it',
     false
   )
