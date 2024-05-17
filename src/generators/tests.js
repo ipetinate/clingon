@@ -2,11 +2,14 @@ import path from 'node:path'
 
 import { FrameworkEnum } from '../enums/frameworks.js'
 
-import { localDirname } from '../main.js'
+import { globalConfig, localDirname } from '../main.js'
 import { unitTestTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
-import { getFileExtension, removePostfixAndExt } from '../utils/file-extension.js'
+import {
+  getFileExtension,
+  removePostfixAndExt
+} from '../utils/file-extension.js'
 import { capitalizeLetter, convertCase } from '../utils/string.js'
 import { createFileWithContent, readFileContent } from '../utils/file.js'
 
@@ -29,7 +32,9 @@ export function generateTests(answers) {
   )
 
   if (success) {
-    console.info(capitalizeLetter(answers.testPostfix) + ' created successfully: ' + path)
+    console.info(
+      capitalizeLetter(answers.testPostfix) + ' created successfully: ' + path
+    )
   } else {
     console.error(`Error on create ${answers.testPostfix}, try again`)
   }
@@ -70,7 +75,8 @@ export function defineTestTemplate(data) {
 
           if (data.testFramework === 'vitest') {
             if (data.withTestingLibrary) {
-              templatePath = unitTestTemplates.react[variant].vitestTestingLibrary
+              templatePath =
+                unitTestTemplates.react[variant].vitestTestingLibrary
             } else {
               templatePath = unitTestTemplates.react[variant].vitest
             }
@@ -197,6 +203,15 @@ export function makePathWithExtension(data) {
  *  }}
  */
 export function replaceAllTestTextOccurrences(data) {
+  if (globalConfig?.exportDefault) {
+    const regex = new RegExp(`import { ResourceName } from`)
+
+    data.fileContent = data.fileContent.replace(
+      regex,
+      `import ResourceName from`
+    )
+  }
+
   if (['function'].includes(data.type)) {
     data.name = convertCase('camelCase', data.name)
   }
@@ -229,6 +244,10 @@ export function replaceAllTestTextOccurrences(data) {
         removePostfixAndExt(data.resourcePathWithFileName)
       )
     }
+  }
+
+  if (globalConfig?.alias?.src) {
+    data.fileContent = data.fileContent.replace(/src/g, globalConfig.alias.src)
   }
 
   return data

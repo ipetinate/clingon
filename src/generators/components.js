@@ -2,7 +2,8 @@ import path, { join } from 'node:path'
 
 import { CssFrameworkEnum, FrameworkEnum } from '../enums/frameworks.js'
 
-import { localDirname } from '../main.js'
+import { globalConfig, localDirname } from '../main.js'
+
 import { frameworkTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
@@ -14,6 +15,10 @@ import { checkDirectoriesTree, createDir } from '../utils/directory.js'
 /**
  * @typedef {import("../types.js").Answers} Answers
  * @typedef {Record<2 | 3, "options" | "setup">} VueApi - Vue API variant options or setup (composition)
+ */
+
+/*
+ * Data Variables
  */
 
 /**
@@ -32,8 +37,7 @@ export function generateComponent(answers) {
   )
 
   if (success) {
-    console.info('\n')
-    console.info('Component created successfully: ' + path)
+    console.info('\nComponent created successfully: ' + path)
   } else {
     console.error('Error on create component, try again')
   }
@@ -77,12 +81,18 @@ export function defineComponentTemplate(data) {
 
     switch (data.framework) {
       case FrameworkEnum.react: {
-        templatePath = frameworkTemplates.react[variant].component.functional[data.cssFramework]
+        templatePath =
+          frameworkTemplates.react[variant].component.functional[
+            data.cssFramework
+          ]
 
         break
       }
       case FrameworkEnum.vue: {
-        templatePath = frameworkTemplates.vue[vueVersion][variant].component[api][data.cssFramework]
+        templatePath =
+          frameworkTemplates.vue[vueVersion][variant].component[api][
+            data.cssFramework
+          ]
 
         break
       }
@@ -133,7 +143,9 @@ export function makeFolderWrapperOrBypass(data) {
   data.name = convertCase('PascalCase', data.name)
 
   const folderWrapperPath = join(data.resourcePath, data.name)
-  const folderWrapperExists = checkDirectoriesTree(splitPathString(folderWrapperPath))
+  const folderWrapperExists = checkDirectoriesTree(
+    splitPathString(folderWrapperPath)
+  )
 
   if (data.folderWrapper && !folderWrapperExists) {
     const created = createDir(folderWrapperPath)
@@ -197,6 +209,17 @@ export function makePathWithExtension(data) {
 export function replaceAllComponentTextOccurrences(data) {
   switch (data.framework) {
     case FrameworkEnum.react: {
+      if (!data.folderWrapper) {
+        if (globalConfig?.exportDefault) {
+          console.log({ globalConfig })
+
+          data.fileContent = data.fileContent.replace(
+            /export function/g,
+            'export default function'
+          )
+        }
+      }
+
       data.fileContent = data.fileContent.replace(/ResourceName/g, data.name)
 
       return data
@@ -239,9 +262,20 @@ export function generateComponentFile(data) {
   const success = createFileWithContent(data.pathWithFileName, data.fileContent)
 
   if (data.folderWrapper) {
-    const filePath = join(data.resourcePath, data.name, 'index.' + data.extension)
+    const filePath = join(
+      data.resourcePath,
+      data.name,
+      'index.' + data.extension
+    )
 
-    createFileWithContent(filePath, `export * from './${data.name}'`)
+    if (globalConfig?.exportDefault) {
+      createFileWithContent(
+        filePath,
+        `import { ${data.name} } from './${data.name}'\n\nexport * from './${data.name}'\nexport default ${data.name}\n`
+      )
+    } else {
+      createFileWithContent(filePath, `export * from './${data.name}'`)
+    }
   }
 
   return { success, path }

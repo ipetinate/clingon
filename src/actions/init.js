@@ -4,8 +4,7 @@ import {
   createFileIfNotExists,
   createPresetFolderIfNotExists,
   getConfigContent,
-  getConfigFilePath,
-  updateGlobalStore
+  getConfigFilePath
 } from '../utils/init-action.js'
 
 export async function initAction() {
@@ -13,19 +12,11 @@ export async function initAction() {
    * Global Config
    */
 
-  compose(
-    getConfigFilePath,
-    createFileIfNotExists,
-    getConfigContent,
-    updateGlobalStore
-  )
+  compose(getConfigFilePath, createFileIfNotExists, getConfigContent)
 
   /*
    * Preset Folder
    */
 
-  compose(
-    checkIfPresetFolderAlreadyExists, 
-    createPresetFolderIfNotExists
-  )
+  compose(checkIfPresetFolderAlreadyExists, createPresetFolderIfNotExists)
 }

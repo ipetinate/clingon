@@ -2,12 +2,15 @@ import path from 'node:path'
 
 import { FrameworkEnum } from '../enums/frameworks.js'
 
-import { localDirname } from '../main.js'
+import { globalConfig, localDirname } from '../main.js'
 import { storiesTemplates } from '../constants/templates.js'
 
 import { compose } from '../utils/compose.js'
 import { convertCase } from '../utils/string.js'
-import { getFileExtension, removePostfixAndExt } from '../utils/file-extension.js'
+import {
+  getFileExtension,
+  removePostfixAndExt
+} from '../utils/file-extension.js'
 import { createFileWithContent, readFileContent } from '../utils/file.js'
 
 /**
@@ -157,6 +160,15 @@ export function makePathWithExtension(data) {
  *  }}
  */
 export function replaceAllTestTextOccurrences(data) {
+  if (globalConfig?.exportDefault) {
+    const regex = new RegExp(`import { ResourceName } from`)
+
+    data.fileContent = data.fileContent.replace(
+      regex,
+      `import ResourceName from`
+    )
+  }
+
   data.fileContent = data.fileContent.replace(/ResourceName/g, data.name)
 
   if (data.framework === FrameworkEnum.vue) {
@@ -169,6 +181,10 @@ export function replaceAllTestTextOccurrences(data) {
     const resourcePath = removePostfixAndExt(data.resourcePathWithFileName)
 
     data.fileContent = data.fileContent.replace(/resourcePath/g, resourcePath)
+  }
+
+  if (globalConfig?.alias?.src) {
+    data.fileContent = data.fileContent.replace(/src/g, globalConfig.alias.src)
   }
 
   return data

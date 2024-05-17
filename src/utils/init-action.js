@@ -1,7 +1,5 @@
 import { join } from 'node:path'
 
-import { globalConfigSubject } from '../store/global.js'
-
 import {
   checkFileExists,
   createFileWithContent,
@@ -67,26 +65,14 @@ export function createFileIfNotExists(filePath) {
  * @returns {import('../types.js').GlobalConfig | string}
  */
 export function getConfigContent(filePath) {
-  try {
-    const fileContent = readFileContent(filePath)
-    const fileContentParsed = JSON.parse(fileContent)
+  const exists = checkFileExists(filePath)
 
-    return fileContentParsed
-  } catch (error) {
-    return error instanceof Error ? error.message : error
-  }
-}
+  if (!exists) return null
 
-/**
- * Get config file content
- *
- * @param {ReturnType<typeof getConfigContent>} fileContent Config file content
- * @returns {void}
- */
-export function updateGlobalStore(fileContent) {
-  if (!fileContent) return
+  const fileContent = readFileContent(filePath)
+  const fileContentParsed = JSON.parse(fileContent)
 
-  globalConfigSubject.next(fileContent)
+  return fileContentParsed
 }
 
 /*

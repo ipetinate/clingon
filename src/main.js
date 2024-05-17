@@ -2,38 +2,26 @@
 
 import { Command } from 'commander'
 
+import { coldStart } from './flows/coldStart.js'
+
 import { initAction } from './actions/init.js'
 import { guidedAction } from './actions/guided.js'
 import { createAction } from './actions/create.js'
 
 import { TestFrameworkEnum } from './enums/frameworks.js'
 import { getLocalLibDirname } from './utils/directory.js'
-import { globalConfigSubject } from './store/global.js'
 
 /*
  * Global Variables
  */
 
-export const localDirname = getLocalLibDirname()
-export let globalConfig = null
+const localDirname = getLocalLibDirname()
 
 /*
- * Subscriptions
+ * Start app
  */
 
-const globalConfigSubscription = globalConfigSubject.subscribe(
-  (globalConfigContent) => {
-    if (typeof globalConfigContent !== 'object') return
-
-    globalConfig = globalConfigContent
-  }
-)
-
-/*
- * Unsubscriptions
- */
-
-process.on('exit', globalConfigSubscription.unsubscribe)
+const { globalConfig } = await coldStart()
 
 /*
  * Resources
@@ -145,3 +133,9 @@ program
  */
 
 program.parse()
+
+/*
+ * Exports
+ */
+
+export { globalConfig, localDirname }
