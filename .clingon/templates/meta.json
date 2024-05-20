@@ -3,42 +3,42 @@
     "identifier": "component",
     "folderWrapper": true,
     "resource": {
-      "withIndex": true,
-      "target": "src/components",
-      "templatePath": "./ReactComponent/Component.tsx"
+      "index": true,
+      "path": "src/components",
+      "template": "./ReactComponent/Component.tsx"
     },
     "test": {
-      "target": "src/components",
-      "templatePath": "./ReactComponent/Component.spec.tsx"
+      "path": "src/components",
+      "template": "./ReactComponent/Component.spec.tsx"
     },
     "story": {
-      "target": "src/components",
-      "templatePath": "./ReactComponent/Component.stories.tsx"
+      "path": "src/components",
+      "template": "./ReactComponent/Component.stories.tsx"
     }
   },
   {
     "identifier": "async-function",
     "resource": {
-      "target": "src/utils",
-      "templatePath": "./Functions/AsyncFunction.ts"
+      "path": "src/utils",
+      "template": "./Functions/AsyncFunction.ts"
     },
     "test": {
-      "target": "src/utils",
-      "templatePath": "./Functions/AsyncFunction.spec.ts"
+      "path": "src/utils",
+      "template": "./Functions/AsyncFunction.spec.ts"
     }
   },
   {
     "identifier": "markdown",
     "resource": {
-      "target": "src/docs",
-      "templatePath": "./Docs/ReactHookDoc.md"
+      "path": "src/docs",
+      "template": "./Docs/ReactHookDoc.md"
     }
   },
   {
     "identifier": "nvmrc",
     "resource": {
-      "target": ".",
-      "templatePath": "./Core/.nvmrc"
+      "path": ".",
+      "template": "./Core/.nvmrc"
     }
   }
 ]

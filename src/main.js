@@ -10,6 +10,7 @@ import { createAction } from './actions/create.js'
 
 import { TestFrameworkEnum } from './enums/frameworks.js'
 import { getLocalLibDirname } from './utils/directory.js'
+import { scaffoldAction } from './actions/scaffold.js'
 
 /*
  * Global Variables
@@ -48,6 +49,19 @@ program
   .action(guidedAction)
   .description(
     'Start a guided flow to generate resources (components, functions, pages, etc)'
+  )
+
+/*
+ * Advanced flow - generate components based on local templates
+ */
+
+program
+  .command('scaffold')
+  .argument('[name]', 'Resource name')
+  .argument('-t, --template', 'Template name')
+  .action(scaffoldAction)
+  .description(
+    'Scaffold resources based on a local template config inside meta.yaml or meta.json'
   )
 
 /*
