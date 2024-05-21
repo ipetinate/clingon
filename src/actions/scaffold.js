@@ -1,20 +1,52 @@
-import { readFileContent } from '../utils/file.js'
-import { parse as parseYaml } from 'yaml'
+import { join } from 'node:path'
 
-export function scaffoldAction(name, options) {
-  const template = getTemplateFomMetaFile(options.template)
-}
+import { buildFromTemplate } from '../generators/scaffold-template.js'
 
-export function getTemplateFomMetaFile() {
-  try {
-    const path = join(process.cwd(), '.clingon', 'templates', 'meta.yaml')
+import {
+  getTemplateFromMetaFile,
+  validateTemplate
+} from '../utils/scaffold-action.js'
 
-    const fileContent = readFileContent(path)
+/**
+ * Build resources from local custom templates
+ *
+ * @typedef {"template"} Options
+ *
+ * @param {string} name
+ * @param {Record<Options, string>} options
+ */
 
-    const parsedYamlFileContent = yaml
+export async function scaffoldAction(name, options) {
+  /**
+   * Templates folder path
+   */
+  const basePath = join(process.cwd(), '.clingon', 'templates')
 
-    return parsedYamlFileContent
-  } catch (error) {
-    console.error(error)
+  /**
+   * Templates from meta file
+   */
+  const template = getTemplateFromMetaFile(options.template)
+
+  /**
+   * Template already be validated and flow can continue
+   */
+  const alreadyOkContinue = validateTemplate(template)
+
+  if (!alreadyOkContinue) {
+    throw new Error(
+      'Template has many errors, please, review your meta at: ',
+      basePath
+    )
+  }
+
+  /**
+   * Resources already be created
+   */
+  const created = await buildFromTemplate(name, template)
+
+  if (created) {
+    console.info('Success')
+  } else {
+    console.info('Fail')
   }
 }
