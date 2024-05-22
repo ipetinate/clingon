@@ -4,7 +4,6 @@
  * @type {Record<keyof import("../types").TemplateResource, import("../types").Primitives>}
  */
 export const templateResourceTypeMap = {
-  index: 'boolean',
   path: 'string',
   template: 'string'
 }

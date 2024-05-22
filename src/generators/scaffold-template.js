@@ -1,8 +1,8 @@
+import { join } from 'node:path'
 import { compose } from '../utils/compose.js'
 import { convertCase, splitPathString } from '../utils/string.js'
 import { createFileWithContent, readFileContent } from '../utils/file.js'
 import {
-  getFileNameFromMetadata,
   getFullPath,
   getTargetFullPath,
   getTemplateFullPath,
@@ -52,27 +52,35 @@ function checkPaths(name, template) {
       story: false
     }
 
-    targets.resource = checkDirectoriesTree(
-      splitPathString(template.resource.path)
-    )
+    const resourcePath = template.folderWrapper
+      ? join(template.resource.path, name)
+      : template.resource.path
+    const storyPath = template.folderWrapper
+      ? join(template.story.path, name)
+      : template.story.path
+    const testPath = template.folderWrapper
+      ? join(template.test.path, name)
+      : template.test.path
+
+    targets.resource = checkDirectoriesTree(splitPathString(resourcePath))
 
     if (!targets.resource) {
-      targets.resource = createDir(getTargetFullPath(template.resource.path))
+      targets.resource = createDir(getTargetFullPath(resourcePath))
     }
 
     if (template.test) {
-      targets.test = checkDirectoriesTree(splitPathString(template.test.path))
+      targets.test = checkDirectoriesTree(splitPathString(testPath))
 
       if (!targets.test) {
-        targets.resource = createDir(getTargetFullPath(template.test.path))
+        targets.resource = createDir(getTargetFullPath(testPath))
       }
     }
 
     if (template.story) {
-      targets.story = checkDirectoriesTree(splitPathString(template.story.path))
+      targets.story = checkDirectoriesTree(splitPathString(storyPath))
 
       if (!targets.story) {
-        targets.resource = createDir(getTargetFullPath(template.story.path))
+        targets.resource = createDir(getTargetFullPath(storyPath))
       }
     }
 
@@ -131,8 +139,6 @@ function handleTemplateReplacements({
 }) {
   name = convertCase('PascalCase', name)
 
-  console.log({ templatesContent })
-
   templatesContent.resource = templatesContent.resource.replace(
     /ResourceName/g,
     name
@@ -170,11 +176,10 @@ function createResources({ name, targets, template, templatesContent }) {
   }
 
   if (targets.resource) {
-    const fullPath = getFullPath(
-      name,
-      template.resource.template,
-      template.resource.path
-    )
+    if (template.folderWrapper)
+      template.resource.path = join(template.resource.path, name)
+
+    const fullPath = getFullPath(name, 'resource', template)
 
     created.resource = createFileWithContent(
       fullPath,
@@ -183,29 +188,22 @@ function createResources({ name, targets, template, templatesContent }) {
   }
 
   if (targets.test) {
-    const fullPath = getFullPath(
-      name,
-      template.test.template,
-      template.test.path
-    )
+    if (template.folderWrapper)
+      template.test.path = join(template.test.path, name)
+
+    const fullPath = getFullPath(name, 'test', template)
 
     created.test = createFileWithContent(fullPath, templatesContent.test)
   }
 
   if (targets.story) {
-    const fullPath = getFullPath(
-      name,
-      template.story.template,
-      template.story.path
-    )
+    if (template.folderWrapper)
+      template.story.path = join(template.story.path, name)
+
+    const fullPath = getFullPath(name, 'story', template)
 
     created.story = createFileWithContent(fullPath, templatesContent.story)
   }
-
-  console.log({
-    created,
-    paths: targets
-  })
 
   return {
     created,

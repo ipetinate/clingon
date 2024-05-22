@@ -110,7 +110,9 @@ export function getLastItem(text, pattern) {
 }
 
 export function replaceContentFromSideResource(name, content, template) {
-  content = content.replace(/ResourceName/g, name)
+  const resourceNameReplaced = content.replace(/ResourceName/g, name)
+
+  if (resourceNameReplaced) content = resourceNameReplaced
 
   const { extension } = getFileNameFromMetadata(template.story.template)
 
@@ -132,7 +134,12 @@ export function replaceContentFromSideResource(name, content, template) {
 export function replaceResourcePath(fullPath, fileContent) {
   const resourcePath = removePostfixAndExt(fullPath)
 
-  fileContent = fileContent?.replace(/resourcePath/g, resourcePath)
+  const resourcePathReplaced = fileContent?.replace(
+    /resourcePath/g,
+    resourcePath
+  )
+
+  if (resourcePathReplaced) fileContent = resourcePathReplaced
 
   return fileContent
 }
@@ -145,10 +152,12 @@ export function getTargetFullPath(path) {
   return join(process.cwd(), path)
 }
 
-export function getFullPath(name, template, path) {
-  const { extension } = getFileNameFromMetadata(template)
+export function getFullPath(name, key, template) {
+  const { extension } = getFileNameFromMetadata(template[key].template)
 
-  const fullPath = join(path, `${name}.${extension}`)
+  const fileName = `${name}.${extension}`
+
+  const fullPath = join(template[key].path, fileName)
 
   return fullPath
 }

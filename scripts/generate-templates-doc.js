@@ -57,4 +57,4 @@ function generateDocumentation() {
 
 generateDocumentation()
 
-console.log('Documentação gerada com sucesso!')
+console.info('📚 Documentação gerada com sucesso!')

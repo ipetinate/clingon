@@ -211,8 +211,6 @@ export function replaceAllComponentTextOccurrences(data) {
     case FrameworkEnum.react: {
       if (!data.folderWrapper) {
         if (globalConfig?.exportDefault) {
-          console.log({ globalConfig })
-
           data.fileContent = data.fileContent.replace(
             /export function/g,
             'export default function'

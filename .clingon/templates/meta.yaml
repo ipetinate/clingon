@@ -1,7 +1,6 @@
 - identifier: component
   folderWrapper: true
   resource:
-    index: true
     path: 'src/components'
     template: './ReactComponent/Component.tsx'
   test:

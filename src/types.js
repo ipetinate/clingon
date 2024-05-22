@@ -93,7 +93,6 @@ import {
  * @typedef {"class" | "functional"} ReactComponentVariant - React component type variant (class or functional)
  *
  * @typedef {{
- *    index?: boolean
  *    path: string
  *    template: string
  *  }} TemplateResource - Template resource definition
@@ -102,8 +101,8 @@ import {
  *  identifier: string
  *  folderWrapper: boolean
  *  resource: TemplateResource
- *  test?: Omit<TemplateResource, "index">
- *  story?: Omit<TemplateResource, "index">
+ *  test?: TemplateResource
+ *  story?: TemplateResource
  * }} CustomTemplate - Custom template from meta file
  *
  * @typedef {"bigint" | "boolean" | "function" | "number" | "object" | "string" | "symbol" | "undefined"} Primitives - JS Primities
