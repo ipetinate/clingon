@@ -7,7 +7,8 @@ import {
 } from './file.js'
 import { defaultConfig } from '../constants/config.js'
 import { createPresetsFolder } from './preset.js'
-import { checkDirectoriesTree } from './directory.js'
+import { checkDirectoriesTree, createDir } from './directory.js'
+import { localDirname } from '../main.js'
 
 /*
  * ----------------------------------------
@@ -84,7 +85,7 @@ const presetsDir = 'presets'
 const presetFullDir = join(process.cwd(), dotClingonDir, presetsDir)
 
 /**
- * Check if `.clingon/prests` folde exists
+ * Check if `.clingon/prests` folder exists
  *
  * @returns {boolean}
  */
@@ -107,8 +108,77 @@ export function createPresetFolderIfNotExists(exists) {
 
   const created = createPresetsFolder()
 
-  if (!created)
+  if (created) {
+    console.info('\n✅ Presets folder created at: ', presetFullDir)
+  } else {
     console.error('\n❌ Error: cannot create presets dir, try again')
+  }
+}
 
-  console.info('\n✅ Presets folder created at: ', presetFullDir)
+/*
+ * ----------------------------------------
+ *             Preset Folder
+ * ----------------------------------------
+ */
+
+const templatesDir = 'templates'
+const templatesFullDir = join(process.cwd(), dotClingonDir, templatesDir)
+
+/**
+ * Check if `.clingon/templates` folder exists
+ *
+ * @returns {boolean}
+ */
+export function checkIfTemplateFolderAlreadyExists() {
+  return checkDirectoriesTree([dotClingonDir, templatesDir])
+}
+
+/**
+ * Create `.clingon/templates` if not exists
+ *
+ * @param {boolean} exists Folder exists?
+ */
+export function createTemplateFolderIfNotExists(exists) {
+  if (exists) {
+    console.info(
+      '\n✅ You already have templates folder at: ',
+      templatesFullDir
+    )
+
+    return exists
+  }
+
+  const created = createDir(templatesFullDir)
+
+  if (created) {
+    console.info('\n✅ Templates folder created at: ', templatesFullDir)
+  } else {
+    console.error('\n❌ Error: cannot create templates dir, try again')
+  }
+
+  return created
+}
+
+/**
+ * Create readme and meta file at `.clingon/templates`
+ *
+ * @param {boolean} created Folder exists or already be created
+ */
+export function createTemplateFolderAssets(created) {
+  try {
+    const guideMdFileName = join(templatesFullDir, 'README.md')
+    const guideMdContent = readFileContent(
+      join(localDirname, 'templates', 'core', 'SCAFFOLD_GUIDE.md')
+    )
+
+    const metaFileName = join(templatesFullDir, 'meta.yaml')
+    const metaYamlContent = readFileContent(
+      join(localDirname, 'templates', 'core', 'meta.yaml')
+    )
+
+    createFileWithContent(guideMdFileName, guideMdContent)
+    createFileWithContent(metaFileName, metaYamlContent)
+  } catch (error) {
+    console.error(error)
+  }
 }

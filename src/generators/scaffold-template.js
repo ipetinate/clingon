@@ -11,7 +11,6 @@ import {
 import { checkDirectoriesTree, createDir } from '../utils/directory.js'
 
 /**
- *
  * @typedef {Record<keyof Omit<import('../types').CustomTemplate, "folderWrapper" | "identifier">, boolean>} TargetPaths
  *
  * @typedef {{name: string, template: import('../types').CustomTemplate, targets: TargetPaths}} CommomReturn
