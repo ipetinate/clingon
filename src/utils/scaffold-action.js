@@ -80,7 +80,7 @@ export function getMetaFilePath() {
  * @returns {boolean} - Returns true if the template is valid, false otherwise.
  */
 export function validateTemplate(template) {
-  return validateObject(template, customTemplateTypeMap)
+  return validateObject(template, customTemplateTypeMap, true)
 }
 
 /**
@@ -109,14 +109,14 @@ export function getLastItem(text, pattern) {
   return pieces[pieces.length - 1]
 }
 
-export function replaceContentFromSideResource(name, content, template) {
+export function replaceContentFromSideResource(name, content, key, template) {
   const resourceNameReplaced = content.replace(/ResourceName/g, name)
 
   if (resourceNameReplaced) content = resourceNameReplaced
 
-  const { extension } = getFileNameFromMetadata(template.story.template)
+  const { extension } = getFileNameFromMetadata(template[key].template)
 
-  const fullPath = join(template.story.path, `${name}.${extension}`)
+  const fullPath = join(template[key].path, `${name}.${extension}`)
 
   content = replaceResourcePath(fullPath, content)
 

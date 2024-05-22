@@ -52,23 +52,25 @@ function checkPaths(name, template) {
       story: false
     }
 
-    const resourcePath = template.folderWrapper
-      ? join(template.resource.path, name)
-      : template.resource.path
-    const storyPath = template.folderWrapper
-      ? join(template.story.path, name)
-      : template.story.path
-    const testPath = template.folderWrapper
-      ? join(template.test.path, name)
-      : template.test.path
+    const resourcePath = template?.folderWrapper
+      ? join(template?.resource?.path, name)
+      : template?.resource?.path
+
+    const storyPath = template?.folderWrapper
+      ? join(template?.story?.path, name)
+      : template?.story?.path
+
+    const testPath = template?.folderWrapper
+      ? join(template?.test?.path, name)
+      : template?.test?.path
 
     targets.resource = checkDirectoriesTree(splitPathString(resourcePath))
 
-    if (!targets.resource) {
+    if (!targets?.resource) {
       targets.resource = createDir(getTargetFullPath(resourcePath))
     }
 
-    if (template.test) {
+    if (template?.test) {
       targets.test = checkDirectoriesTree(splitPathString(testPath))
 
       if (!targets.test) {
@@ -76,7 +78,7 @@ function checkPaths(name, template) {
       }
     }
 
-    if (template.story) {
+    if (template?.story) {
       targets.story = checkDirectoriesTree(splitPathString(storyPath))
 
       if (!targets.story) {
@@ -105,18 +107,18 @@ function getTemplatesData({ name, template, targets }) {
 
   try {
     templatesContent.resource = readFileContent(
-      getTemplateFullPath(template.resource.template)
+      getTemplateFullPath(template?.resource?.template)
     )
 
-    if (template.test) {
+    if (template?.test) {
       templatesContent.test = readFileContent(
-        getTemplateFullPath(template.test.template)
+        getTemplateFullPath(template?.test?.template)
       )
     }
 
-    if (template.story) {
+    if (template?.story) {
       templatesContent.story = readFileContent(
-        getTemplateFullPath(template.story.template)
+        getTemplateFullPath(template?.story?.template)
       )
     }
 
@@ -137,27 +139,33 @@ function handleTemplateReplacements({
   templatesContent,
   targets
 }) {
-  name = convertCase('PascalCase', name)
+  if (!template.case) {
+    return { name, template, templatesContent, targets }
+  }
 
-  templatesContent.resource = templatesContent.resource.replace(
+  name = convertCase(template.case, name)
+
+  templatesContent.resource = templatesContent.resource?.replace(
     /ResourceName/g,
     name
   )
 
-  if (templatesContent.story) {
-    templatesContent.story = replaceContentFromSideResource(
-      name,
-      templatesContent.story,
-      template
-    )
-  }
-
-  if (templatesContent.test) {
+  if (templatesContent?.test) {
     templatesContent.test = replaceContentFromSideResource(
       name,
       templatesContent.test,
+      'test',
       template
     )
+
+    if (templatesContent?.story) {
+      templatesContent.story = replaceContentFromSideResource(
+        name,
+        templatesContent.story,
+        'story',
+        template
+      )
+    }
   }
 
   return { name, template, templatesContent, targets }
@@ -177,7 +185,7 @@ function createResources({ name, targets, template, templatesContent }) {
 
   if (targets.resource) {
     if (template.folderWrapper)
-      template.resource.path = join(template.resource.path, name)
+      template.resource.path = join(template.resource?.path, name)
 
     const fullPath = getFullPath(name, 'resource', template)
 
@@ -187,22 +195,22 @@ function createResources({ name, targets, template, templatesContent }) {
     )
   }
 
-  if (targets.test) {
+  if (targets?.test) {
     if (template.folderWrapper)
-      template.test.path = join(template.test.path, name)
+      template.test.path = join(template?.test?.path, name)
 
     const fullPath = getFullPath(name, 'test', template)
 
     created.test = createFileWithContent(fullPath, templatesContent.test)
   }
 
-  if (targets.story) {
+  if (targets?.story) {
     if (template.folderWrapper)
-      template.story.path = join(template.story.path, name)
+      template.story.path = join(template?.story?.path, name)
 
     const fullPath = getFullPath(name, 'story', template)
 
-    created.story = createFileWithContent(fullPath, templatesContent.story)
+    created.story = createFileWithContent(fullPath, templatesContent?.story)
   }
 
   return {

@@ -1,5 +1,6 @@
 - identifier: component
   folderWrapper: true
+  case: 'PascalCase'
   resource:
     path: 'src/components'
     template: './ReactComponent/Component.tsx'
@@ -11,17 +12,19 @@
     template: './ReactComponent/Component.stories.tsx'
 
 - identifier: async-function
+  case: 'kebab-case'
   resource:
     path: src/utils
-    template: './Functions/AsyncFunction.ts'
+    template: './functions/AsyncFunction.ts'
   test:
     path: src/utils
-    template: './Functions/AsyncFunction.spec.ts'
+    template: './functions/AsyncFunction.spec.ts'
 
 - identifier: markdown
+  case: 'UPPERCASE'
   resource:
     path: src/docs
-    template: './Docs/ReactHookDoc.md'
+    template: './docs/ReactHookDoc.md'
 
 - identifier: nvmrc
   resource:

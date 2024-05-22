@@ -15,14 +15,6 @@ export const templateResourceTypeMap = {
  */
 export const customTemplateTypeMap = {
   identifier: 'string',
-  folderWrapper: 'boolean',
-  resource: templateResourceTypeMap,
-  test: {
-    path: 'string',
-    template: 'string'
-  },
-  story: {
-    path: 'string',
-    template: 'string'
-  }
+  case: 'string',
+  resource: templateResourceTypeMap
 }

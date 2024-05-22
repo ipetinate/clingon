@@ -92,6 +92,8 @@ import {
  *
  * @typedef {"class" | "functional"} ReactComponentVariant - React component type variant (class or functional)
  *
+ * @typedef {"camelCase" | "PascalCase" | "snake_case" | "kebab-case" | "CamelCase" | "UPPERCASE" | "lowercase"} TextCase - Case to convert strings
+ *
  * @typedef {{
  *    path: string
  *    template: string
@@ -99,7 +101,8 @@ import {
  *
  * @typedef {{
  *  identifier: string
- *  folderWrapper: boolean
+ *  case?: TextCase
+ *  folderWrapper?: boolean
  *  resource: TemplateResource
  *  test?: TemplateResource
  *  story?: TemplateResource
