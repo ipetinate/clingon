@@ -4,7 +4,7 @@ This documentation describes how to use the `meta.yaml` file to create local res
 
 ## Structure of the `meta.yaml` File
 
-The `meta.yaml` file contains definitions of resources that the CLI tool uses to generate components, asynchronous functions, markdown documents, and `.nvmrc` configurations.
+The `meta.yaml` file contains definitions of resources that the CLI tool uses to generate components, pages, async functions, or whatever you want.
 
 ## Field Details
 
@@ -15,7 +15,6 @@ The table below describes the fields used in the resource definitions in the `me
 | `identifier`            | string  | Yes                      | Unique identifier for the resource.                                   |
 | `folderWrapper`         | boolean | No                       | Indicates if the resource should be wrapped by a folder.              |
 | `resource`              | object  | Yes                      | Contains information about the main resource.                         |
-| `resource.index`        | boolean | No                       | Indicates if an `index` file should be created.                       |
 | `resource.target`       | string  | Yes                      | Target directory where the resource will be generated.                |
 | `resource.templatePath` | string  | Yes                      | Path to the resource template.                                        |
 | `test`                  | object  | No                       | Contains information about the resource's test file.                  |
@@ -33,7 +32,6 @@ The table below describes the fields used in the resource definitions in the `me
 - identifier: component
   folderWrapper: true
   resource:
-    index: true
     target: src/components
     templatePath: ./ReactComponent/Component.tsx
   test:
@@ -47,7 +45,6 @@ The table below describes the fields used in the resource definitions in the `me
 - **identifier**: `component`
 - **folderWrapper**: `true`
 - **resource**:
-  - **index**: `true`
   - **target**: `src/components`
   - **templatePath**: `./ReactComponent/Component.tsx`
 - **test**:
@@ -107,7 +104,11 @@ The table below describes the fields used in the resource definitions in the `me
 
 ## How to Use
 
-1. Place the `meta.yaml` file in the `.clingon/templates` folder along with your templates.
-2. Run the CLI tool according to your project's instructions to generate the resources defined in the `meta.yaml`.
+1. Place the `meta.yaml` or `meta.json` (I strongly recommend using YAML, but you can use JSON) file in the `.clingon/templates` folder along with your templates.
+2. Run the CLI tool according to your project's instructions to generate the resources defined in the `meta` file.
+
+   ```shell
+   npx clingon scaffold <name> --template <templateName>
+   ```
 
 This structure allows for easy definition and generation of different types of resources in your project, ensuring consistency and organization.
