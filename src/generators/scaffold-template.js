@@ -11,7 +11,6 @@ import {
 import { checkDirectoriesTree, createDir } from '../utils/directory.js'
 
 /**
- * @typedef {Record<keyof Omit<import('../types').CustomTemplate, "folderWrapper" | "identifier">, string>} TemplatesContent
  *
  * @typedef {Record<keyof Omit<import('../types').CustomTemplate, "folderWrapper" | "identifier">, boolean>} TargetPaths
  *
@@ -96,12 +95,10 @@ function checkPaths(name, template) {
  * @param {ReturnType<typeof checkPaths>} param0 Template data from meta file
  */
 function getTemplatesData({ name, template, targets }) {
-  /**
-   * @type {TemplatesContent}
-   */
   const templatesContent = {
     resource: null,
     story: null,
+    style: null,
     test: null
   }
 
@@ -119,6 +116,12 @@ function getTemplatesData({ name, template, targets }) {
     if (template?.story) {
       templatesContent.story = readFileContent(
         getTemplateFullPath(template?.story?.template)
+      )
+    }
+
+    if (template?.style) {
+      templatesContent.style = readFileContent(
+        getTemplateFullPath(template?.style?.template)
       )
     }
 
@@ -172,27 +175,28 @@ function handleTemplateReplacements({
 }
 
 /**
+ * Create files after processing
  *
  * @param {ReturnType<typeof checkPaths>} param0 Template data from meta file
  * @returns {boolean}
  */
 function createResources({ name, targets, template, templatesContent }) {
-  const created = {
-    resource: false,
-    story: undefined,
-    test: undefined
-  }
+  /**
+   * @type {string[]}
+   */
+  let created = []
 
   if (targets.resource) {
     if (template.folderWrapper)
       template.resource.path = join(template.resource?.path, name)
 
     const fullPath = getFullPath(name, 'resource', template)
-
-    created.resource = createFileWithContent(
+    const resourceCreated = createFileWithContent(
       fullPath,
       templatesContent.resource
     )
+
+    if (resourceCreated) created.push(fullPath)
   }
 
   if (targets?.test) {
@@ -200,8 +204,9 @@ function createResources({ name, targets, template, templatesContent }) {
       template.test.path = join(template?.test?.path, name)
 
     const fullPath = getFullPath(name, 'test', template)
+    const testCreated = createFileWithContent(fullPath, templatesContent.test)
 
-    created.test = createFileWithContent(fullPath, templatesContent.test)
+    if (testCreated) created.push(fullPath)
   }
 
   if (targets?.story) {
@@ -209,12 +214,13 @@ function createResources({ name, targets, template, templatesContent }) {
       template.story.path = join(template?.story?.path, name)
 
     const fullPath = getFullPath(name, 'story', template)
+    const storyCreated = createFileWithContent(
+      fullPath,
+      templatesContent?.story
+    )
 
-    created.story = createFileWithContent(fullPath, templatesContent?.story)
+    if (storyCreated) created.push(fullPath)
   }
 
-  return {
-    created,
-    paths: targets
-  }
+  return created
 }
