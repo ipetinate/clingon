@@ -118,7 +118,7 @@ export function replaceContentFromSideResource(name, content, template) {
 
   const fullPath = join(template.story.path, `${name}.${extension}`)
 
-  content = replaceResourcePath(fullPath)
+  content = replaceResourcePath(fullPath, content)
 
   return content
 }
@@ -134,7 +134,7 @@ export function replaceContentFromSideResource(name, content, template) {
 export function replaceResourcePath(fullPath, fileContent) {
   const resourcePath = removePostfixAndExt(fullPath)
 
-  const resourcePathReplaced = fileContent?.replace(
+  const resourcePathReplaced = fileContent.replace(
     /resourcePath/g,
     resourcePath
   )
