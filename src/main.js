@@ -57,11 +57,11 @@ program
 
 program
   .command('scaffold')
-  .argument('[name]', 'Resource name')
-  .argument('-t, --template', 'Template name')
+  .argument('<name>', 'Resource name')
+  .option('-t, --template <template>', 'Template name')
   .action(scaffoldAction)
   .description(
-    'Scaffold resources based on a local template config inside meta.yaml or meta.json'
+    'Generate resources based on a local template config inside meta.yaml or meta.json'
   )
 
 /*

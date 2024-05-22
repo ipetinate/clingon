@@ -6,7 +6,7 @@
     template: './ReactComponent/Component.tsx'
   test:
     path: 'src/components'
-    template: './ReactComponent/Component.spec.tsx'
+    template: './ReactComponent/Component.test.tsx'
   story:
     path: 'src/components'
     template: './ReactComponent/Component.stories.tsx'

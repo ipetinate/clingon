@@ -1,3 +1,4 @@
+import { join } from 'node:path'
 import { parse as parseYaml } from 'yaml'
 
 import { validateObject } from '../validators/validator.js'
@@ -21,7 +22,7 @@ export function getTemplateFromMetaFile(templateName) {
     /**
      * @type {import('../types.js').CustomTemplate[]}
      */
-    const templates = null
+    let templates = null
 
     switch (type) {
       case 'json':
@@ -87,9 +88,9 @@ export function validateTemplate(template) {
  *
  * @param {string} templatePath Template path from meta file
  */
-export function getFileMetadata(templatePath) {
+export function getFileNameFromMetadata(templatePath) {
   const fileName = getLastItem(templatePath, '/')
-  const extension = getLastItem(fileName, '.')
+  const extension = getLastItem(fileName, /^[^.]*\./)
 
   return { fileName, extension }
 }
@@ -111,9 +112,9 @@ export function getLastItem(text, pattern) {
 export function replaceContentFromSideResource(name, content, template) {
   content = content.replace(/ResourceName/g, name)
 
-  const { extension } = getFileMetadata(template.story.template)
+  const { extension } = getFileNameFromMetadata(template.story.template)
 
-  const fullPath = join(template.story.path, name + extension)
+  const fullPath = join(template.story.path, `${name}.${extension}`)
 
   content = replaceResourcePath(fullPath)
 
@@ -131,7 +132,23 @@ export function replaceContentFromSideResource(name, content, template) {
 export function replaceResourcePath(fullPath, fileContent) {
   const resourcePath = removePostfixAndExt(fullPath)
 
-  fileContent = fileContent.replace(/resourcePath/g, resourcePath)
+  fileContent = fileContent?.replace(/resourcePath/g, resourcePath)
 
   return fileContent
+}
+
+export function getTemplateFullPath(path) {
+  return join(process.cwd(), '.clingon', 'templates', path)
+}
+
+export function getTargetFullPath(path) {
+  return join(process.cwd(), path)
+}
+
+export function getFullPath(name, template, path) {
+  const { extension } = getFileNameFromMetadata(template)
+
+  const fullPath = join(path, `${name}.${extension}`)
+
+  return fullPath
 }

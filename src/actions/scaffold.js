@@ -42,10 +42,10 @@ export async function scaffoldAction(name, options) {
   /**
    * Resources already be created
    */
-  const created = await buildFromTemplate(name, template)
+  const { created, paths } = await buildFromTemplate(name, template)
 
   if (created) {
-    console.info('Success')
+    console.info('Success', paths)
   } else {
     console.info('Fail')
   }

@@ -1,13 +1,21 @@
 import { compose } from '../utils/compose.js'
 import { convertCase, splitPathString } from '../utils/string.js'
-import { readFileContent } from '../utils/file.js'
-import { replaceContentFromSideResource } from '../utils/scaffold-action.js'
-import { checkDirectoriesTree } from '../utils/directory.js'
+import { createFileWithContent, readFileContent } from '../utils/file.js'
+import {
+  getFileNameFromMetadata,
+  getFullPath,
+  getTargetFullPath,
+  getTemplateFullPath,
+  replaceContentFromSideResource
+} from '../utils/scaffold-action.js'
+import { checkDirectoriesTree, createDir } from '../utils/directory.js'
 
 /**
  * @typedef {Record<keyof Omit<import('../types').CustomTemplate, "folderWrapper" | "identifier">, string>} TemplatesContent
  *
- * @typedef {{name: string, template: import('../types').CustomTemplate, templatesContent: TemplatesContent}} CommomReturn
+ * @typedef {Record<keyof Omit<import('../types').CustomTemplate, "folderWrapper" | "identifier">, boolean>} TargetPaths
+ *
+ * @typedef {{name: string, template: import('../types').CustomTemplate, targets: TargetPaths}} CommomReturn
  */
 
 /**
@@ -19,9 +27,9 @@ import { checkDirectoriesTree } from '../utils/directory.js'
  */
 export async function buildFromTemplate(name, template) {
   const result = compose(
-    getTemplatesData(name, template),
+    checkPaths(name, template),
+    getTemplatesData,
     handleTemplateReplacements,
-    checkPaths,
     createResources
   )
 
@@ -29,31 +37,84 @@ export async function buildFromTemplate(name, template) {
 }
 
 /**
- * Get templates from local dir
+ * Check templates path and ask if not exists
  *
  * @param {string} name Resource name from arguments
  * @param {import('../types').CustomTemplate} template Template data from meta file
  *
  * @returns {CommomReturn}
  */
-function getTemplatesData(name, template) {
+function checkPaths(name, template) {
   return () => {
-    /**
-     * @type {TemplatesContent}
-     */
-    const templatesContent = {
-      resource: readFileContent(template.resource.template)
+    const targets = {
+      resource: false,
+      test: false,
+      story: false
+    }
+
+    targets.resource = checkDirectoriesTree(
+      splitPathString(template.resource.path)
+    )
+
+    if (!targets.resource) {
+      targets.resource = createDir(getTargetFullPath(template.resource.path))
     }
 
     if (template.test) {
-      templatesContent.test = readFileContent(template.test.template)
+      targets.test = checkDirectoriesTree(splitPathString(template.test.path))
+
+      if (!targets.test) {
+        targets.resource = createDir(getTargetFullPath(template.test.path))
+      }
     }
 
     if (template.story) {
-      templatesContent.story = readFileContent(template.story.template)
+      targets.story = checkDirectoriesTree(splitPathString(template.story.path))
+
+      if (!targets.story) {
+        targets.resource = createDir(getTargetFullPath(template.story.path))
+      }
     }
 
-    return { name, template, templatesContent }
+    return { name, template, targets }
+  }
+}
+
+/**
+ * Get templates from local dir
+ *
+ * @param {ReturnType<typeof checkPaths>} param0 Template data from meta file
+ */
+function getTemplatesData({ name, template, targets }) {
+  /**
+   * @type {TemplatesContent}
+   */
+  const templatesContent = {
+    resource: null,
+    story: null,
+    test: null
+  }
+
+  try {
+    templatesContent.resource = readFileContent(
+      getTemplateFullPath(template.resource.template)
+    )
+
+    if (template.test) {
+      templatesContent.test = readFileContent(
+        getTemplateFullPath(template.test.template)
+      )
+    }
+
+    if (template.story) {
+      templatesContent.story = readFileContent(
+        getTemplateFullPath(template.story.template)
+      )
+    }
+
+    return { name, template, templatesContent, targets }
+  } catch (error) {
+    console.error(error)
   }
 }
 
@@ -62,8 +123,15 @@ function getTemplatesData(name, template) {
  *
  * @param {ReturnType<typeof getTemplatesData>} param0 - Template data and templates content
  */
-function handleTemplateReplacements({ name, template, templatesContent }) {
+function handleTemplateReplacements({
+  name,
+  template,
+  templatesContent,
+  targets
+}) {
   name = convertCase('PascalCase', name)
+
+  console.log({ templatesContent })
 
   templatesContent.resource = templatesContent.resource.replace(
     /ResourceName/g,
@@ -86,33 +154,6 @@ function handleTemplateReplacements({ name, template, templatesContent }) {
     )
   }
 
-  return { name, template, templatesContent }
-}
-
-/**
- * Check templates path and ask if not exists
- *
- * @param {ReturnType<typeof handleTemplateReplacements>} param0 Template data from meta file
- */
-function checkPaths({ name, template, templatesContent }) {
-  const targets = {
-    resource: false,
-    test: false,
-    story: false
-  }
-
-  targets.resource = checkDirectoriesTree(
-    splitPathString(template.resource.path)
-  )
-
-  if (templatesContent.test) {
-    targets.test = checkDirectoriesTree(splitPathString(template.test.path))
-  }
-
-  if (templatesContent.story) {
-    targets.story = checkDirectoriesTree(splitPathString(template.story.path))
-  }
-
   return { name, template, templatesContent, targets }
 }
 
@@ -122,15 +163,52 @@ function checkPaths({ name, template, templatesContent }) {
  * @returns {boolean}
  */
 function createResources({ name, targets, template, templatesContent }) {
-  if (targets.resource) {
-    // TODO: generate file
-  }
-  if (targets.test) {
-    // TODO: generate file
-  }
-  if (targets.style) {
-    // TODO: generate file
+  const created = {
+    resource: false,
+    story: undefined,
+    test: undefined
   }
 
-  return true
+  if (targets.resource) {
+    const fullPath = getFullPath(
+      name,
+      template.resource.template,
+      template.resource.path
+    )
+
+    created.resource = createFileWithContent(
+      fullPath,
+      templatesContent.resource
+    )
+  }
+
+  if (targets.test) {
+    const fullPath = getFullPath(
+      name,
+      template.test.template,
+      template.test.path
+    )
+
+    created.test = createFileWithContent(fullPath, templatesContent.test)
+  }
+
+  if (targets.story) {
+    const fullPath = getFullPath(
+      name,
+      template.story.template,
+      template.story.path
+    )
+
+    created.story = createFileWithContent(fullPath, templatesContent.story)
+  }
+
+  console.log({
+    created,
+    paths: targets
+  })
+
+  return {
+    created,
+    paths: targets
+  }
 }
