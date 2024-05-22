@@ -41,12 +41,20 @@ export async function scaffoldAction(name, options) {
 
   /**
    * Resources already be created
+   *
+   * @type {Record<"resource" | "test" | "story" | "style", string>}
    */
-  const { created, paths } = await buildFromTemplate(name, template)
+  const paths = await buildFromTemplate(name, template)
 
-  if (created) {
-    console.info('Success', paths)
+  if (paths) {
+    showCreatedResources(paths)
   } else {
-    console.info('Fail')
+    console.error('An error has ocurred, try again')
   }
+}
+
+export function showCreatedResources(paths) {
+  console.info('⎧ 💿 Files successfully created at:\n⎪')
+
+  paths.forEach((path) => console.info('⎪⎯→ ' + path))
 }
