@@ -47,20 +47,13 @@ function checkPaths(name, template) {
     const targets = {
       resource: false,
       test: false,
-      story: false
+      story: false,
+      style: false
     }
 
     const resourcePath = template?.folderWrapper
       ? join(template?.resource?.path, name)
       : template?.resource?.path
-
-    const storyPath = template?.folderWrapper
-      ? join(template?.story?.path, name)
-      : template?.story?.path
-
-    const testPath = template?.folderWrapper
-      ? join(template?.test?.path, name)
-      : template?.test?.path
 
     targets.resource = checkDirectoriesTree(splitPathString(resourcePath))
 
@@ -69,18 +62,38 @@ function checkPaths(name, template) {
     }
 
     if (template?.test) {
+      const testPath = template?.folderWrapper
+        ? join(template?.test?.path, name)
+        : template?.test?.path
+
       targets.test = checkDirectoriesTree(splitPathString(testPath))
 
       if (!targets.test) {
-        targets.resource = createDir(getTargetFullPath(testPath))
+        targets.test = createDir(getTargetFullPath(testPath))
       }
     }
 
     if (template?.story) {
+      const storyPath = template?.folderWrapper
+        ? join(template?.story?.path, name)
+        : template?.story?.path
+
       targets.story = checkDirectoriesTree(splitPathString(storyPath))
 
       if (!targets.story) {
-        targets.resource = createDir(getTargetFullPath(storyPath))
+        targets.story = createDir(getTargetFullPath(storyPath))
+      }
+    }
+
+    if (template?.style) {
+      const stylePath = template?.folderWrapper
+        ? join(template?.style?.path, name)
+        : template?.style?.path
+
+      targets.style = checkDirectoriesTree(splitPathString(stylePath))
+
+      if (!targets.style) {
+        targets.style = createDir(getTargetFullPath(stylePath))
       }
     }
 
@@ -168,6 +181,15 @@ function handleTemplateReplacements({
         template
       )
     }
+
+    if (templatesContent?.style) {
+      templatesContent.style = replaceContentFromSideResource(
+        name,
+        templatesContent.style,
+        'style',
+        template
+      )
+    }
   }
 
   return { name, template, templatesContent, targets }
@@ -206,6 +228,19 @@ function createResources({ name, targets, template, templatesContent }) {
     const testCreated = createFileWithContent(fullPath, templatesContent.test)
 
     if (testCreated) created.push(fullPath)
+  }
+
+  if (targets?.style) {
+    if (template.folderWrapper)
+      template.style.path = join(template?.style?.path, name)
+
+    const fullPath = getFullPath(name, 'style', template)
+    const styleCreated = createFileWithContent(
+      fullPath,
+      templatesContent?.style
+    )
+
+    if (styleCreated) created.push(fullPath)
   }
 
   if (targets?.story) {

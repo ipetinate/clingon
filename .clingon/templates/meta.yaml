@@ -10,6 +10,9 @@
   story:
     path: 'src/components'
     template: './ReactComponent/Component.stories.tsx'
+  style:
+    path: 'src/components'
+    template: './ReactComponent/Component.styles.css'
 
 - identifier: async-function
   case: 'kebab-case'

@@ -15,6 +15,5 @@ export const templateResourceTypeMap = {
  */
 export const customTemplateTypeMap = {
   identifier: 'string',
-  case: 'string',
   resource: templateResourceTypeMap
 }

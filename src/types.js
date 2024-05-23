@@ -106,6 +106,7 @@ import {
  *  resource: TemplateResource
  *  test?: TemplateResource
  *  story?: TemplateResource
+ *  style?: TemplateResource
  * }} CustomTemplate - Custom template from meta file
  *
  * @typedef {"bigint" | "boolean" | "function" | "number" | "object" | "string" | "symbol" | "undefined"} Primitives - JS Primities
