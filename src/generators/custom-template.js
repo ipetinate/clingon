@@ -11,90 +11,59 @@ import {
 import { checkDirectoriesTree, createDir } from '../utils/directory.js'
 
 /**
- * @typedef {Record<keyof Omit<import('../types').CustomTemplate, "folderWrapper" | "identifier">, boolean>} TargetPaths
+ * @typedef {Record<keyof Omit<import('../types.js').CustomTemplate, "folderWrapper" | "identifier">, boolean>} TargetPaths
  *
- * @typedef {{name: string, template: import('../types').CustomTemplate, targets: TargetPaths}} CommomReturn
+ * @typedef {{name: string, template: import('../types.js').CustomTemplate, targets: TargetPaths}} CommomReturn
+ *
+ * @typedef {Omit<import('../types.js').CustomTemplate, "resources"> & { resource: import('../types.js').TemplateResource }} Resource
  */
 
 /**
  * Build resources from template
  *
  * @param {string} name Resource name from arguments
- * @param {import("../types").CustomTemplate} template Local template from meta file
+ * @param {Resource} template Local template from meta file
  * @returns {Promise<boolean>}
  */
-export async function buildFromTemplate(name, template) {
-  const result = compose(
-    checkPaths(name, template),
-    getTemplatesData,
-    handleTemplateReplacements,
-    createResources
-  )
+export async function buildCustomTemplate(name, template) {
+  let results = []
 
-  return result
+  for (resource of template.resources) {
+    const result = compose(
+      checkPaths(name),
+      getTemplatesData,
+      handleTemplateReplacements,
+      createResources
+    )
+
+    results.push(result)
+  }
+
+  return results
 }
 
 /**
  * Check templates path and ask if not exists
  *
  * @param {string} name Resource name from arguments
- * @param {import('../types').CustomTemplate} template Template data from meta file
+ * @param {import('../types.js').CustomTemplate} template Template data from meta file
  *
  * @returns {CommomReturn}
  */
 function checkPaths(name, template) {
   return () => {
-    const targets = {
-      resource: false,
-      test: false,
-      story: false,
-      style: false
-    }
-
     const resourcePath = template?.folderWrapper
       ? join(template?.resource?.path, name)
       : template?.resource?.path
 
-    targets.resource = checkDirectoriesTree(splitPathString(resourcePath))
+    const resourceSplitedPath = splitPathString(resourcePath)
+
+    if (resourceSplitedPath) {
+      targets.resource = checkDirectoriesTree(resourceSplitedPath)
+    }
 
     if (!targets?.resource) {
       targets.resource = createDir(getTargetFullPath(resourcePath))
-    }
-
-    if (template?.test) {
-      const testPath = template?.folderWrapper
-        ? join(template?.test?.path, name)
-        : template?.test?.path
-
-      targets.test = checkDirectoriesTree(splitPathString(testPath))
-
-      if (!targets.test) {
-        targets.test = createDir(getTargetFullPath(testPath))
-      }
-    }
-
-    if (template?.story) {
-      const storyPath = template?.folderWrapper
-        ? join(template?.story?.path, name)
-        : template?.story?.path
-
-      targets.story = checkDirectoriesTree(splitPathString(storyPath))
-
-      if (!targets.story) {
-        targets.story = createDir(getTargetFullPath(storyPath))
-      }
-    }
-
-    if (template?.style) {
-      const stylePath = template?.folderWrapper
-        ? join(template?.style?.path, name)
-        : template?.style?.path
-
-      targets.style = checkDirectoriesTree(splitPathString(stylePath))
-
-      if (!targets.style) {
-        targets.style = createDir(getTargetFullPath(stylePath))
-      }
     }
 
     return { name, template, targets }

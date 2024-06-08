@@ -10,25 +10,36 @@ import {
   getConfigFilePath
 } from '../utils/init-action.js'
 
-export async function initAction() {
+/**
+ *
+ * @param {Record<"examples", boolean>} options Command options with flags, like `--e`
+ */
+export async function initAction(options) {
   /*
    * Global Config
    */
 
-  compose(getConfigFilePath, createFileIfNotExists, getConfigContent)
+  compose(
+    getConfigFilePath(options.examples),
+    createFileIfNotExists,
+    getConfigContent
+  )
 
   /*
    * Preset Folder
    */
 
-  compose(checkIfPresetFolderAlreadyExists, createPresetFolderIfNotExists)
+  compose(
+    checkIfPresetFolderAlreadyExists(options.examples),
+    createPresetFolderIfNotExists
+  )
 
   /*
    * Templates Folder
    */
 
   compose(
-    checkIfTemplateFolderAlreadyExists,
+    checkIfTemplateFolderAlreadyExists(options.examples),
     createTemplateFolderIfNotExists,
     createTemplateFolderAssets
   )

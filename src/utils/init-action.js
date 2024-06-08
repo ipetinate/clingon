@@ -5,10 +5,13 @@ import {
   createFileWithContent,
   readFileContent
 } from './file.js'
-import { defaultConfig } from '../constants/config.js'
+import { defaultConfig } from '../templates/core/global-config.js'
 import { createPresetsFolder } from './preset.js'
-import { checkDirectoriesTree, createDir } from './directory.js'
-import { localDirname } from '../main.js'
+import {
+  checkDirectoriesTree,
+  createDir,
+  getLocalLibDirname
+} from './directory.js'
 
 /*
  * ----------------------------------------
@@ -76,12 +79,12 @@ export function getConfigContent(filePath) {
 
 /*
  * ----------------------------------------
- *             Preset Folder
+ *             Presets Folder
  * ----------------------------------------
  */
 
-const dotClingonDir = '.clingon'
 const presetsDir = 'presets'
+const dotClingonDir = '.clingon'
 const presetFullDir = join(process.cwd(), dotClingonDir, presetsDir)
 
 /**
@@ -117,7 +120,7 @@ export function createPresetFolderIfNotExists(exists) {
 
 /*
  * ----------------------------------------
- *             Preset Folder
+ *             Templates Folder
  * ----------------------------------------
  */
 
@@ -166,6 +169,10 @@ export function createTemplateFolderIfNotExists(exists) {
  */
 export function createTemplateFolderAssets(created) {
   try {
+    if (!created) throw new Error()
+
+    const localDirname = getLocalLibDirname()
+
     const guideMdFileName = join(templatesFullDir, 'README.md')
     const guideMdContent = readFileContent(
       join(localDirname, 'templates', 'core', 'SCAFFOLD_GUIDE.md')
@@ -181,4 +188,16 @@ export function createTemplateFolderAssets(created) {
   } catch (error) {
     console.error(error)
   }
+}
+
+/*
+ * ----------------------------------------
+ *             Handle Examples
+ * ----------------------------------------
+ */
+
+export function generateExamples() {
+  /* Global Config */
+  /* Presets */
+  /* Templates */
 }

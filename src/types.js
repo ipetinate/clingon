@@ -92,7 +92,7 @@ import {
  *
  * @typedef {"class" | "functional"} ReactComponentVariant - React component type variant (class or functional)
  *
- * @typedef {"camelCase" | "PascalCase" | "snake_case" | "kebab-case" | "CamelCase" | "UPPERCASE" | "lowercase"} TextCase - Case to convert strings
+ * @typedef {"camelCase" | "PascalCase" | "snake_case" | "kebab-case" | "UPPERCASE" | "lowercase"} TextCase - Case to convert strings
  *
  * @typedef {{
  *    path: string
@@ -103,10 +103,7 @@ import {
  *  identifier: string
  *  case?: TextCase
  *  folderWrapper?: boolean
- *  resource: TemplateResource
- *  test?: TemplateResource
- *  story?: TemplateResource
- *  style?: TemplateResource
+ *  resources: TemplateResource[]
  * }} CustomTemplate - Custom template from meta file
  *
  * @typedef {"bigint" | "boolean" | "function" | "number" | "object" | "string" | "symbol" | "undefined"} Primitives - JS Primities

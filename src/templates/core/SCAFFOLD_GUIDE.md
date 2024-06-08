@@ -1,5 +1,7 @@
 # Documentation for Local Resource Creation
 
+> Read updated version of this doc on: [clingon.dev/docs/advanced](https://www.clingon.dev/docs/advanced)
+
 This documentation describes how to use the `meta.yaml` file to create local resources based on templates found in the `.clingon/templates` folder.
 
 ## Structure of the `meta.yaml` File

@@ -77,7 +77,7 @@ export function getMetaFilePath() {
  * Validate template data
  *
  * @param {CustomTemplate} template
- * @returns {boolean} - Returns true if the template is valid, false otherwise.
+ * @returns {string[]} - Returns true if the template is valid, false otherwise.
  */
 export function validateTemplate(template) {
   return validateObject(template, customTemplateTypeMap, true)

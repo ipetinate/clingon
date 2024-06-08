@@ -4,16 +4,16 @@ import assert from 'node:assert/strict'
 import { describe, it, mock } from 'node:test'
 
 import {
-  checkIfPresetFolderAlreadyExists,
-  createFileIfNotExists,
   getConfigContent,
-  getConfigFilePath
+  getConfigFilePath,
+  createFileIfNotExists,
+  checkIfPresetFolderAlreadyExists
 } from './init-action.js'
 
 const configFileName = 'clingon.config.json'
 
-const mockFsAccessSync = mock.method(fs, 'accessSync')
 const mockExistsSync = mock.method(fs, 'existsSync')
+const mockFsAccessSync = mock.method(fs, 'accessSync')
 const mockFsReadFileSync = mock.method(fs, 'readFileSync')
 const mockFsWriteFileSync = mock.method(fs, 'writeFileSync')
 
