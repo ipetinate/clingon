@@ -25,22 +25,24 @@ describe('scaffoldTemplate', () => {
       identifier: 'component',
       case: 'camelCase',
       folderWrapper: true,
-      resource: {
-        path: 'components',
-        template: './components/Component.ts'
-      },
-      story: {
-        path: 'components',
-        template: './components/Component.stories.ts'
-      },
-      style: {
-        path: 'components',
-        template: './components/Component.styles.ts'
-      },
-      test: {
-        path: 'components',
-        template: './components/Component.test.ts'
-      }
+      resources: [
+        {
+          path: 'components',
+          template: './components/Component.ts'
+        },
+        {
+          path: 'components',
+          template: './components/Component.stories.ts'
+        },
+        {
+          path: 'components',
+          template: './components/Component.styles.ts'
+        },
+        {
+          path: 'components',
+          template: './components/Component.test.ts'
+        }
+      ]
     })
 
     assert.deepEqual(result, [
@@ -86,10 +88,12 @@ describe('scaffoldTemplate', () => {
       identifier: 'component',
       case: 'snake_case',
       folderWrapper: false,
-      resource: {
-        path: 'controllers',
-        template: './controllers/user_controller.rs'
-      }
+      resources: [
+        {
+          path: 'controllers',
+          template: './controllers/user_controller.rs'
+        }
+      ]
     })
 
     assert.deepEqual(result, ['controllers/test_controller.rs'])
@@ -108,10 +112,12 @@ describe('scaffoldTemplate', () => {
       identifier: 'component',
       case: 'PascalCase',
       folderWrapper: false,
-      resource: {
-        path: 'controllers',
-        template: './controllers/UserController.ts'
-      }
+      resources: [
+        {
+          path: 'controllers',
+          template: './controllers/UserController.ts'
+        }
+      ]
     })
 
     assert.deepEqual(result, ['controllers/UserController.ts'])
@@ -130,10 +136,12 @@ describe('scaffoldTemplate', () => {
       identifier: 'component',
       case: 'camelCase',
       folderWrapper: false,
-      resource: {
-        path: 'controllers',
-        template: './controllers/UserController.ts'
-      }
+      resources: [
+        {
+          path: 'controllers',
+          template: './controllers/UserController.ts'
+        }
+      ]
     })
 
     assert.deepEqual(result, ['controllers/userController.ts'])
@@ -152,10 +160,12 @@ describe('scaffoldTemplate', () => {
       identifier: 'component',
       case: 'snake_case',
       folderWrapper: false,
-      resource: {
-        path: 'controllers',
-        template: './controllers/UserController.ts'
-      }
+      resources: [
+        {
+          path: 'controllers',
+          template: './controllers/UserController.ts'
+        }
+      ]
     })
 
     assert.deepEqual(result, ['controllers/user_controller.ts'])
@@ -174,10 +184,12 @@ describe('scaffoldTemplate', () => {
       identifier: 'component',
       case: 'kebab-case',
       folderWrapper: false,
-      resource: {
-        path: 'controllers',
-        template: './controllers/UserController.ts'
-      }
+      resources: [
+        {
+          path: 'controllers',
+          template: './controllers/UserController.ts'
+        }
+      ]
     })
 
     assert.deepEqual(result, ['controllers/user-controller.ts'])
@@ -196,16 +208,18 @@ describe('scaffoldTemplate', () => {
       identifier: 'component',
       case: 'UPPERCASE',
       folderWrapper: false,
-      resource: {
-        path: 'docs',
-        template: './docs/REACT_HOOK_DOCUMENTATION.md'
-      }
+      resources: [
+        {
+          path: 'docs',
+          template: './docs/REACT_HOOK_DOCUMENTATION.md'
+        }
+      ]
     })
 
     assert.deepEqual(result, ['docs/USEHTTPREQUEST.md'])
   })
 
-  it('build a file with UPPERCASE', async () => {
+  it('build a file with lowercase', async () => {
     mockStatSync.mock.mockImplementation(() => ({
       isDirectory: () => true
     }))
@@ -218,10 +232,12 @@ describe('scaffoldTemplate', () => {
       identifier: 'component',
       case: 'lowercase',
       folderWrapper: false,
-      resource: {
-        path: 'docs',
-        template: './docs/REACT_HOOK_DOCUMENTATION.md'
-      }
+      resources: [
+        {
+          path: 'docs',
+          template: './docs/REACT_HOOK_DOCUMENTATION.md'
+        }
+      ]
     })
 
     assert.deepEqual(result, ['docs/usehttprequest.md'])
