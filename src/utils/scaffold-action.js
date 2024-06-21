@@ -8,6 +8,10 @@ import { checkFileExists, readFileContent } from '../utils/file.js'
 import { removePostfixAndExt } from './file-extension.js'
 
 /**
+ * @typedef {Omit<import('../types.js').CustomTemplate, 'resources'> & { resource: import('../types.js').TemplateResource }} Template
+ */
+
+/**
  * Get template from meta file
  *
  * @param {string} templateName Template name to find inside meta templates
@@ -109,14 +113,22 @@ export function getLastItem(text, pattern) {
   return pieces[pieces.length - 1]
 }
 
-export function replaceContentFromSideResource(name, content, key, template) {
+/**
+ * Replace text occurrences inside a string
+ *
+ * @param {string} name Resource name
+ * @param {string} content File content from template
+ * @param {Template} template Template config from meta file
+ * @returns {string}
+ */
+export function replaceContentFromSideResource(name, content, template) {
   const resourceNameReplaced = content.replace(/ResourceName/g, name)
 
   if (resourceNameReplaced) content = resourceNameReplaced
 
-  const { extension } = getFileNameFromMetadata(template[key].template)
+  const { extension } = getFileNameFromMetadata(template.resource.template)
 
-  const fullPath = join(template[key].path, `${name}.${extension}`)
+  const fullPath = join(template.resource.path, `${name}.${extension}`)
 
   content = replaceResourcePath(fullPath, content)
 
@@ -144,20 +156,41 @@ export function replaceResourcePath(fullPath, fileContent) {
   return fileContent
 }
 
+/**
+ * Get full path from root dir where command is called
+ *
+ * @param {string} path File path
+ * @returns {string}
+ */
 export function getTemplateFullPath(path) {
   return join(process.cwd(), '.clingon', 'templates', path)
 }
 
+/**
+ * Get target full path from root dir where command is called
+ *
+ * @param {string} path File path
+ * @returns {string}
+ */
 export function getTargetFullPath(path) {
   return join(process.cwd(), path)
 }
 
-export function getFullPath(name, key, template) {
-  const { extension } = getFileNameFromMetadata(template[key].template)
+/**
+ * Get full path with file name and extension
+ *
+ * @param {string} name
+ * @param {Template} template
+ * @returns {string}
+ */
+export function getFullPath(name, template) {
+  const { extension } = getFileNameFromMetadata(template.resource.template)
 
-  const fileName = `${name}.${extension}`
+  const fileName = template.resource.template.includes('index')
+    ? `index.${extension}`
+    : `${name}.${extension}`
 
-  const fullPath = join(template[key].path, fileName)
+  const fullPath = join(template.resource.path, fileName)
 
   return fullPath
 }
