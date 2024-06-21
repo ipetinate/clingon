@@ -12,17 +12,14 @@
 
 - identifier: component
   folderWrapper: true
-  resource:
-    path: 'src/components'
+  resources:
+    - path: 'src/components'
     template: './component/Component.tsx'
-  test:
-    path: 'src/components'
+    - path: 'src/components'
     template: './component/Component.test.tsx'
-  story:
-    path: 'src/components'
+    - path: 'src/components'
     template: './component/Component.stories.tsx'
-  style:
-    path: 'src/components'
+    - path: 'src/components'
     template: './component/Component.styles.css'
 
 # Async Function
