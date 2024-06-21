@@ -78,4 +78,35 @@ describe('validateObject function', () => {
     const errors = validateObject(obj, typeMap, false)
     assert.strictEqual(errors.length > 0, true)
   })
+
+  it('returns an empty array for matching array items and type map', () => {
+    const obj = { a: [{ b: 1 }, { b: 2 }] }
+    const typeMap = { a: { type: 'array', items: { b: 'number' } } }
+
+    assert.deepStrictEqual(validateObject(obj, typeMap), [])
+  })
+
+  it('returns an array of errors for non-matching array items and type map', () => {
+    const obj = { a: [{ b: 1 }, { b: 'not a number' }] }
+    const typeMap = { a: { type: 'array', items: { b: 'number' } } }
+
+    const errors = validateObject(obj, typeMap)
+    assert.strictEqual(errors.length > 0, true)
+  })
+
+  it('returns an array of errors for type map expecting an array but receiving a non-array', () => {
+    const obj = { a: 'not an array' }
+    const typeMap = { a: { type: 'array', items: { b: 'number' } } }
+
+    const errors = validateObject(obj, typeMap)
+    assert.strictEqual(errors.length > 0, true)
+  })
+
+  it('returns an array of errors for array items missing required fields', () => {
+    const obj = { a: [{ b: 1 }, {}] }
+    const typeMap = { a: { type: 'array', items: { b: 'number' } } }
+
+    const errors = validateObject(obj, typeMap)
+    assert.strictEqual(errors.length > 0, true)
+  })
 })

@@ -11,9 +11,10 @@ export const templateResourceTypeMap = {
 /**
  * Define the type map for CustomTemplate
  *
- * @type {Record<keyof import("../types").CustomTemplate, import("../types").Primitives | typeof templateResourceTypeMap> }
+ * @type {Record<keyof import("../types").CustomTemplate, import("../types").Primitives | typeof templateResourceTypeMap | { type: 'array', items: object }>}
  */
 export const customTemplateTypeMap = {
   identifier: 'string',
-  resource: templateResourceTypeMap
+  folderWrapper: 'boolean',
+  resources: { type: 'array', items: templateResourceTypeMap } // Define array with item type map
 }

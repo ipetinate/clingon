@@ -12,7 +12,7 @@ export function validateObject(obj, typeMap, allowPartial = false) {
 
   if (typeof obj !== 'object' || obj === null) {
     errors.push(
-      'The provided value is not an object or this identifier not exists inside your meta file.'
+      'The provided value is not an object or this identifier does not exist inside your meta file.'
     )
 
     return errors
@@ -30,9 +30,26 @@ export function validateObject(obj, typeMap, allowPartial = false) {
       continue
     }
 
-    if (typeof expectedType === 'object' && expectedType !== null) {
-      const nestedErrors = validateObject(value, expectedType, allowPartial)
+    if (expectedType.type === 'array') {
+      if (!Array.isArray(value)) {
+        errors.push(
+          `Expected an array for key '${key}', but got type '${typeof value}'.`
+        )
+        continue
+      }
 
+      value.forEach((item, index) => {
+        const nestedErrors = validateObject(
+          item,
+          expectedType.items,
+          allowPartial
+        )
+        if (nestedErrors.length > 0) {
+          errors.push(...nestedErrors.map((e) => `${key}[${index}].${e}`))
+        }
+      })
+    } else if (typeof expectedType === 'object' && expectedType !== null) {
+      const nestedErrors = validateObject(value, expectedType, allowPartial)
       if (nestedErrors.length > 0) {
         errors.push(...nestedErrors.map((e) => `${key}.${e}`))
       }
