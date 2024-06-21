@@ -11,7 +11,7 @@ export const templateCoreFiles = [
   },
   {
     folder: 'templates/core/react-component',
-    target: 'component/react-component',
+    target: 'components/react-component',
     files: [
       'index.tsx',
       'Component.tsx',
