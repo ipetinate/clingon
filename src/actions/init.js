@@ -4,9 +4,9 @@ import {
   checkIfTemplateFolderAlreadyExists,
   createFileIfNotExists,
   createPresetFolderIfNotExists,
+  createPresetsFolderAssets,
   createTemplateFolderAssets,
   createTemplateFolderIfNotExists,
-  getConfigContent,
   getConfigFilePath
 } from '../utils/init-action.js'
 
@@ -19,11 +19,7 @@ export async function initAction(options) {
    * Global Config
    */
 
-  compose(
-    getConfigFilePath(options.examples),
-    createFileIfNotExists,
-    getConfigContent
-  )
+  compose(getConfigFilePath(options.examples), createFileIfNotExists)
 
   /*
    * Preset Folder
@@ -31,7 +27,8 @@ export async function initAction(options) {
 
   compose(
     checkIfPresetFolderAlreadyExists(options.examples),
-    createPresetFolderIfNotExists
+    createPresetFolderIfNotExists,
+    createPresetsFolderAssets
   )
 
   /*

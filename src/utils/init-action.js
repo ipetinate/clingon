@@ -5,13 +5,18 @@ import {
   createFileWithContent,
   readFileContent
 } from './file.js'
-import { defaultConfig } from '../templates/core/global-config.js'
-import { createPresetsFolder } from './preset.js'
 import {
   checkDirectoriesTree,
   createDir,
   getLocalLibDirname
 } from './directory.js'
+import { createPresetsFolder } from './preset.js'
+import {
+  globalCoreFiles,
+  presetsCoreFiles,
+  templateCoreFiles
+} from '../constants/init.js'
+import { splitPathString } from './string.js'
 
 /*
  * ----------------------------------------
@@ -24,57 +29,43 @@ import {
  *
  * @returns {string | undefined}
  */
-export function getConfigFilePath() {
-  const fullPath = join(process.cwd(), 'clingon.config.json')
-  const fileExists = checkFileExists(fullPath)
+export function getConfigFilePath(examples) {
+  return () => {
+    const fullPath = join(process.cwd(), 'clingon.config.json')
+    const fileExists = checkFileExists(fullPath)
 
-  if (!fileExists) return undefined
+    if (!fileExists) {
+      return { fullPath: undefined, examples }
+    }
 
-  return fullPath
+    return { fullPath, examples }
+  }
 }
 
 /**
  * Create the config file if it does not exist
  *
- * @param {ReturnType<typeof getConfigFilePath>} filePath
+ * @param {{ fullPath: string, examples: boolean }} props Props
  */
-export function createFileIfNotExists(filePath) {
-  if (filePath) {
-    console.info('\n✅ You already have config at: ', filePath)
+export function createFileIfNotExists({ examples, fullPath }) {
+  if (fullPath) {
+    console.info('\n✅ You already have config at: ', fullPath)
 
-    return filePath
+    return fullPath
   }
 
-  const success = createFileWithContent(
-    'clingon.config.json',
-    JSON.stringify(defaultConfig, null, 2)
-  )
-  const fullPath = join(process.cwd(), 'clingon.config.json')
+  const success = createFolderAssets(globalCoreFiles, process.cwd())
 
   if (success) {
-    console.info('🌎 Global config file created at: ', fullPath)
+    console.info(
+      '🌎 Global config file created at: ',
+      join(process.cwd(), 'clingon.config.json')
+    )
   } else {
     console.error('❌ Error: Cannot create global config file, try again.')
   }
 
-  return filePath
-}
-
-/**
- * Get config file content
- *
- * @param {ReturnType<typeof createFileIfNotExists>} filePath Config file path
- * @returns {import('../types.js').GlobalConfig | string}
- */
-export function getConfigContent(filePath) {
-  const exists = checkFileExists(filePath)
-
-  if (!exists) return null
-
-  const fileContent = readFileContent(filePath)
-  const fileContentParsed = JSON.parse(fileContent)
-
-  return fileContentParsed
+  return { fullPath, examples }
 }
 
 /*
@@ -92,16 +83,19 @@ const presetFullDir = join(process.cwd(), dotClingonDir, presetsDir)
  *
  * @returns {boolean}
  */
-export function checkIfPresetFolderAlreadyExists() {
-  return checkDirectoriesTree([dotClingonDir, presetsDir])
+export function checkIfPresetFolderAlreadyExists(examples) {
+  return () => ({
+    exists: checkDirectoriesTree([dotClingonDir, presetsDir]),
+    examples
+  })
 }
 
 /**
  * Create `.clingon/prests` if not exists
  *
- * @param {boolean} exists Folder exists?
+ * @param {{ exists: boolean, examples: boolean }} props Props
  */
-export function createPresetFolderIfNotExists(exists) {
+export function createPresetFolderIfNotExists({ exists, examples }) {
   if (exists) {
     return console.info(
       '\n✅ You already have presets folder at: ',
@@ -109,12 +103,31 @@ export function createPresetFolderIfNotExists(exists) {
     )
   }
 
-  const created = createPresetsFolder()
+  exists = createPresetsFolder()
 
-  if (created) {
-    console.info('\n✅ Presets folder created at: ', presetFullDir)
+  if (exists) {
+    console.info('\n🎛️ Presets created at: ', presetFullDir)
   } else {
     console.error('\n❌ Error: cannot create presets dir, try again')
+  }
+
+  return { exists, examples }
+}
+
+/**
+ * Create readme and meta file at `.clingon/templates`
+ *
+ * @param {{ exists: boolean, examples: boolean }} props Props
+ */
+export function createPresetsFolderAssets({ examples, exists }) {
+  if (!examples) return
+
+  try {
+    if (!exists) throw new Error('Cannot create folder to place files')
+
+    createFolderAssets(presetsCoreFiles, presetFullDir)
+  } catch (error) {
+    console.error(error)
   }
 }
 
@@ -129,62 +142,52 @@ const templatesFullDir = join(process.cwd(), dotClingonDir, templatesDir)
 
 /**
  * Check if `.clingon/templates` folder exists
- *
- * @returns {boolean}
  */
-export function checkIfTemplateFolderAlreadyExists() {
-  return checkDirectoriesTree([dotClingonDir, templatesDir])
+export function checkIfTemplateFolderAlreadyExists(examples) {
+  return () => ({
+    exists: checkDirectoriesTree([dotClingonDir, templatesDir]),
+    examples
+  })
 }
 
 /**
  * Create `.clingon/templates` if not exists
  *
- * @param {boolean} exists Folder exists?
+ * @param {{ exists: boolean, examples: boolean }} props Props
  */
-export function createTemplateFolderIfNotExists(exists) {
+export function createTemplateFolderIfNotExists({ examples, exists }) {
   if (exists) {
     console.info(
       '\n✅ You already have templates folder at: ',
       templatesFullDir
     )
 
-    return exists
+    return { examples, exists }
   }
 
-  const created = createDir(templatesFullDir)
+  exists = createDir(templatesFullDir)
 
-  if (created) {
-    console.info('\n✅ Templates folder created at: ', templatesFullDir)
+  if (exists) {
+    console.info('\n📂 Templates created at: ', templatesFullDir)
   } else {
     console.error('\n❌ Error: cannot create templates dir, try again')
   }
 
-  return created
+  return { examples, exists }
 }
 
 /**
  * Create readme and meta file at `.clingon/templates`
  *
- * @param {boolean} created Folder exists or already be created
+ * @param {{ exists: boolean, examples: boolean }} props Props
  */
-export function createTemplateFolderAssets(created) {
+export function createTemplateFolderAssets({ examples, exists }) {
+  if (!examples) return
+
   try {
-    if (!created) throw new Error()
+    if (!exists) throw new Error('Cannot create folder to place files')
 
-    const localDirname = getLocalLibDirname()
-
-    const guideMdFileName = join(templatesFullDir, 'README.md')
-    const guideMdContent = readFileContent(
-      join(localDirname, 'templates', 'core', 'SCAFFOLD_GUIDE.md')
-    )
-
-    const metaFileName = join(templatesFullDir, 'meta.yaml')
-    const metaYamlContent = readFileContent(
-      join(localDirname, 'templates', 'core', 'meta.yaml')
-    )
-
-    createFileWithContent(guideMdFileName, guideMdContent)
-    createFileWithContent(metaFileName, metaYamlContent)
+    createFolderAssets(templateCoreFiles, templatesFullDir)
   } catch (error) {
     console.error(error)
   }
@@ -196,8 +199,35 @@ export function createTemplateFolderAssets(created) {
  * ----------------------------------------
  */
 
-export function generateExamples() {
-  /* Global Config */
-  /* Presets */
-  /* Templates */
+/**
+ * Create file based on json
+ *
+ * @param {{ folder: string, target: string, files: string[] }} data Data
+ */
+export function createFolderAssets(data, path) {
+  try {
+    const localDirname = getLocalLibDirname()
+
+    data.forEach((item) => {
+      let target = join(path, item.target)
+
+      let exists = checkDirectoriesTree(splitPathString(target))
+
+      if (!exists) createDir(target)
+
+      item.files.forEach((file) => {
+        const fileName = join(target, file)
+
+        const fileContent = readFileContent(
+          join(localDirname, item.folder, file)
+        )
+
+        return createFileWithContent(fileName, fileContent)
+      })
+    })
+
+    return true
+  } catch (error) {
+    console.error(error)
+  }
 }
