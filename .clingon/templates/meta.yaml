@@ -32,3 +32,10 @@
       template: ./functions/AsyncFunction.ts
     - path: src/utils
       template: ./functions/AsyncFunction.spec.ts
+
+# Markdown
+
+- identifier: hook-doc
+  resources:
+    - path: src/docs/hooks
+      template: ./docs/ReactHookDoc.md

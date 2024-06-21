@@ -1,8 +1,10 @@
 import './ResourceName.styles.css'
 
-export function ResourceName() {
-  const message = 'Hello Clingon!'
+export interface ResourceNameProps {
+  message: string
+}
 
+export function ResourceName({ message }: ResourceNameProps) {
   return (
     <div>
       <p>{message}</p>

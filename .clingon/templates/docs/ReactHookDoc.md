@@ -1,5 +1,5 @@
 # ResourceName
 
-> My hok doc
+> My hook doc
 
 - Test generate with MD file
