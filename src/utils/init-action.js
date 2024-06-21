@@ -108,7 +108,7 @@ export function createPresetFolderIfNotExists({ exists, examples }) {
   if (exists) {
     console.info('\n🎛️  Presets created at: ', presetFullDir)
   } else {
-    console.error('\n❌ Error: cannot create presets dir, try again')
+    console.error('\n❌ Error: cannot create presets dir, try again.')
   }
 
   return { exists, examples }
