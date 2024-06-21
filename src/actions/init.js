@@ -14,19 +14,19 @@ import {
  *
  * @param {Record<"examples", boolean>} options Command options with flags, like `--e`
  */
-export async function initAction(options) {
+export async function initAction(options = { examples: false }) {
   /*
    * Global Config
    */
 
-  compose(getConfigFilePath(options.examples), createFileIfNotExists)
+  compose(getConfigFilePath(options?.examples), createFileIfNotExists)
 
   /*
    * Preset Folder
    */
 
   compose(
-    checkIfPresetFolderAlreadyExists(options.examples),
+    checkIfPresetFolderAlreadyExists(options?.examples),
     createPresetFolderIfNotExists,
     createPresetsFolderAssets
   )
@@ -36,7 +36,7 @@ export async function initAction(options) {
    */
 
   compose(
-    checkIfTemplateFolderAlreadyExists(options.examples),
+    checkIfTemplateFolderAlreadyExists(options?.examples),
     createTemplateFolderIfNotExists,
     createTemplateFolderAssets
   )
