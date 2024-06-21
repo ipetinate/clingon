@@ -8,7 +8,9 @@
 export function compose(...fns) {
   let result
 
-  fns.forEach((fn, index) => (index === 0 ? (result = fn()) : (result = fn(result))))
+  fns.forEach((fn, index) =>
+    index === 0 ? (result = fn()) : (result = fn(result))
+  )
 
   return result
 }
