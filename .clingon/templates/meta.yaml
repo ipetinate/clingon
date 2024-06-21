@@ -14,6 +14,8 @@
   folderWrapper: true
   resources:
     - path: src/components
+      template: ./component/index.tsx
+    - path: src/components
       template: ./component/Component.tsx
     - path: src/components
       template: ./component/Component.test.tsx
