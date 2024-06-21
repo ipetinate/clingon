@@ -137,8 +137,10 @@ program
 program
   .command('init')
   .action(initAction)
-  .option('-e, --examples', 'Generate folders with examples', false)
+  .option('-e, --examples [examples]', 'Generate folders with examples', false)
   .usage('init')
+  .usage('init -e')
+  .usage('init --examples')
   .description(
     'Init all needed setup, generate files and create folders to store assets.'
   )
