@@ -129,9 +129,9 @@ function handleTemplateReplacements({
  */
 function createResources({ name, target, template, templateContent }) {
   /**
-   * @type {string[]}
+   * @type {string}
    */
-  let created = []
+  let created
 
   if (target) {
     if (template.folderWrapper)
@@ -140,7 +140,7 @@ function createResources({ name, target, template, templateContent }) {
     const fullPath = getFullPath(name, template)
     const resourceCreated = createFileWithContent(fullPath, templateContent)
 
-    if (resourceCreated) created.push(fullPath)
+    if (resourceCreated) created = fullPath
   }
 
   return created

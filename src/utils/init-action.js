@@ -27,7 +27,8 @@ import { splitPathString } from './string.js'
 /**
  * Get config file path
  *
- * @returns {string | undefined}
+ * @param {boolean} examples Should generate examples
+ * @returns {() => ({ fullPath: string, examples: examples })}
  */
 export function getConfigFilePath(examples) {
   return () => {
@@ -46,6 +47,7 @@ export function getConfigFilePath(examples) {
  * Create the config file if it does not exist
  *
  * @param {{ fullPath: string, examples: boolean }} props Props
+ * @returns {{ fullPath: string, examples: boolean }}
  */
 export function createFileIfNotExists({ examples, fullPath }) {
   if (fullPath) {
@@ -81,7 +83,7 @@ const presetFullDir = join(process.cwd(), dotClingonDir, presetsDir)
 /**
  * Check if `.clingon/prests` folder exists
  *
- * @returns {boolean}
+ * @returns {() => ({ exists: boolean, examples: boolean })}
  */
 export function checkIfPresetFolderAlreadyExists(examples) {
   return () => ({

@@ -47,9 +47,9 @@ describe('scaffoldTemplate', () => {
 
     assert.deepEqual(result, [
       'components/testComponent/testComponent.ts',
-      'components/testComponent/testComponent.test.ts',
+      'components/testComponent/testComponent.stories.ts',
       'components/testComponent/testComponent.styles.ts',
-      'components/testComponent/testComponent.stories.ts'
+      'components/testComponent/testComponent.test.ts'
     ])
   })
 
@@ -66,10 +66,12 @@ describe('scaffoldTemplate', () => {
       identifier: 'component',
       case: 'snake_case',
       folderWrapper: true,
-      resource: {
-        path: 'controllers',
-        template: './controllers/user_controller.rs'
-      }
+      resources: [
+        {
+          path: 'controllers',
+          template: './controllers/user_controller.rs'
+        }
+      ]
     })
 
     assert.deepEqual(result, ['controllers/test_controller/test_controller.rs'])
