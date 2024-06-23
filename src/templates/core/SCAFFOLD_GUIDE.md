@@ -1,4 +1,4 @@
-# Documentation for Local Resource Creation
+# Scaffold Command Guide
 
 > Read updated version of this doc on: [clingon.dev/docs/advanced](https://www.clingon.dev/docs/advanced)
 
