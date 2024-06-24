@@ -78,7 +78,7 @@ export function createFileIfNotExists({ examples, fullPath }) {
 
 const presetsDir = 'presets'
 const dotClingonDir = '.clingon'
-const presetFullDir = join(process.cwd(), dotClingonDir, presetsDir)
+const presetsFullDir = join(process.cwd(), dotClingonDir, presetsDir)
 
 /**
  * Check if `.clingon/prests` folder exists
@@ -86,10 +86,9 @@ const presetFullDir = join(process.cwd(), dotClingonDir, presetsDir)
  * @returns {() => ({ exists: boolean, examples: boolean })}
  */
 export function checkIfPresetFolderAlreadyExists(examples) {
-  return () => ({
-    exists: checkDirectoriesTree([dotClingonDir, presetsDir]),
-    examples
-  })
+  const exists = checkDirectoriesTree([dotClingonDir, presetsDir])
+
+  return () => ({ exists, examples })
 }
 
 /**
@@ -99,17 +98,19 @@ export function checkIfPresetFolderAlreadyExists(examples) {
  */
 export function createPresetFolderIfNotExists({ exists, examples }) {
   if (exists && !examples) {
-    console.info('\n✅ You already have presets folder at: ', presetFullDir)
+    console.info('\n✅ You already have presets folder at: ', presetsFullDir)
 
     return { exists, examples }
   }
 
-  let created = false
+  exists = createDir(presetsFullDir)
 
-  if (!exists) created = createPresetsFolder()
+  if (exists) {
+    const message = examples
+      ? 'Presets examples created at: '
+      : 'Presets created at: '
 
-  if (created) {
-    console.info('\n🎛️  Presets created at: ', presetFullDir)
+    console.info(`\n🎛️  ${message}`, presetsFullDir)
   } else {
     console.error('\n❌ Error: cannot create presets dir, try again.')
   }
@@ -128,7 +129,7 @@ export function createPresetsFolderAssets({ examples, exists }) {
   try {
     if (!exists) throw new Error('Cannot create folder to place files')
 
-    createFolderAssets(presetsCoreFiles, presetFullDir)
+    createFolderAssets(presetsCoreFiles, presetsFullDir)
   } catch (error) {
     console.error(error)
   }
@@ -147,10 +148,9 @@ const templatesFullDir = join(process.cwd(), dotClingonDir, templatesDir)
  * Check if `.clingon/templates` folder exists
  */
 export function checkIfTemplateFolderAlreadyExists(examples) {
-  return () => ({
-    exists: checkDirectoriesTree([dotClingonDir, templatesDir]),
-    examples
-  })
+  const exists = checkDirectoriesTree([dotClingonDir, templatesDir])
+
+  return () => ({ exists, examples })
 }
 
 /**
@@ -168,17 +168,19 @@ export function createTemplateFolderIfNotExists({ examples, exists }) {
     return { examples, exists }
   }
 
-  let created = false
+  exists = createDir(templatesFullDir)
 
-  if (!exists) created = createDir(templatesFullDir)
+  if (exists) {
+    const message = examples
+      ? 'Templates examples created at:'
+      : 'Templates created at:'
 
-  if (created) {
-    console.info('\n📂 Templates created at: ', templatesFullDir)
+    console.info(`\n📂 ${message} `, templatesFullDir)
   } else {
     console.error('\n❌ Error: cannot create templates dir, try again')
   }
 
-  return { examples, exists: created }
+  return { examples, exists }
 }
 
 /**
