@@ -3,10 +3,23 @@ import fs from 'node:fs'
 import { describe, it, mock, beforeEach } from 'node:test'
 import assert from 'node:assert/strict'
 
-import { checkDirectoriesTree, createDir, getDirectories, getLocalLibDirname } from './directory.js'
+import {
+  checkDirectoriesTree,
+  createDir,
+  getDirectories,
+  getLocalLibDirname
+} from './directory.js'
 import path from 'node:path'
 
-const srcDirs = ['actions', 'constants', 'enums', 'flows', 'generators', 'templates', 'utils']
+const srcDirs = [
+  'actions',
+  'constants',
+  'enums',
+  'flows',
+  'generators',
+  'templates',
+  'utils'
+]
 const nestedStrucuture = 'src/actions'
 const rootDirs = ['.git', 'doc', 'node_modules', 'src']
 
@@ -44,7 +57,9 @@ describe('Directory Utils', () => {
 
   describe('checkDirectoriesTree util', () => {
     it('returns true if directory tree structure exists', () => {
-      mockExistsSync.mock.mockImplementation((value) => nestedStrucuture.search(value))
+      mockExistsSync.mock.mockImplementation((value) =>
+        nestedStrucuture.search(value)
+      )
 
       const exists = checkDirectoriesTree(['src', 'actions'])
 

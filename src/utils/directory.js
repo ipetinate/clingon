@@ -44,7 +44,10 @@ export function checkDirectoriesTree(directories) {
 
   for (const directory of directories) {
     currentDirectory = nodePath.join(currentDirectory, directory)
-    if (!fs.existsSync(currentDirectory) || !fs.statSync(currentDirectory).isDirectory()) {
+    if (
+      !fs.existsSync(currentDirectory) ||
+      !fs.statSync(currentDirectory).isDirectory()
+    ) {
       return false
     }
   }
@@ -56,12 +59,11 @@ export function checkDirectoriesTree(directories) {
  * Create new directory
  *
  * @param {string} location Directory location
- * @param {string} name Directory name
  * @returns {boolean}
  */
 export function createDir(location) {
   try {
-    fs.mkdirSync(location)
+    fs.mkdirSync(location, { recursive: true })
 
     return true
   } catch (error) {

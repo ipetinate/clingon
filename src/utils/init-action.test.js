@@ -4,17 +4,14 @@ import assert from 'node:assert/strict'
 import { describe, it, mock } from 'node:test'
 
 import {
-  checkIfPresetFolderAlreadyExists,
+  getConfigFilePath,
   createFileIfNotExists,
-  getConfigContent,
-  getConfigFilePath
+  checkIfPresetFolderAlreadyExists
 } from './init-action.js'
 
-const configFileName = 'clingon.config.json'
-
-const mockFsAccessSync = mock.method(fs, 'accessSync')
+const mockStatSync = mock.method(fs, 'statSync')
 const mockExistsSync = mock.method(fs, 'existsSync')
-const mockFsReadFileSync = mock.method(fs, 'readFileSync')
+const mockFsAccessSync = mock.method(fs, 'accessSync')
 const mockFsWriteFileSync = mock.method(fs, 'writeFileSync')
 
 describe('Init Action Utils', () => {
@@ -22,9 +19,11 @@ describe('Init Action Utils', () => {
     it('get config file path', () => {
       mockFsAccessSync.mock.mockImplementation(() => true)
 
-      const result = getConfigFilePath()
+      const clojure = getConfigFilePath(false)
 
-      const expectedPath = result.includes('clingon.config.json')
+      const { fullPath } = clojure()
+
+      const expectedPath = fullPath?.includes('clingon.config.json')
 
       assert.strictEqual(expectedPath, true)
     })
@@ -33,41 +32,31 @@ describe('Init Action Utils', () => {
       mockFsAccessSync.mock.mockImplementation(() => true)
       mockFsWriteFileSync.mock.mockImplementation(() => true)
 
-      const result = createFileIfNotExists(getConfigFilePath())
+      const getPath = getConfigFilePath(false)
 
-      const expectedPath = result.includes('clingon.config.json')
+      const { fullPath } = createFileIfNotExists({
+        examples: true,
+        fullPath: getPath()
+      })
+
+      const expectedPath = fullPath?.includes('clingon.config.json')
 
       assert.strictEqual(expectedPath, true)
-    })
-
-    it('get config content', () => {
-      mockFsAccessSync.mock.mockImplementation(() => true)
-      mockFsReadFileSync.mock.mockImplementation((fileName) => {
-        fileName = fileName.split('clingon/')[1]
-
-        const files = {
-          [configFileName]: '{"exportDefault":false,"alias":{"src":"@"}}'
-        }
-
-        return files[fileName]
-      })
-
-      const result = getConfigContent(getConfigFilePath())
-
-      assert.deepEqual(result, {
-        exportDefault: false,
-        alias: { src: '@' }
-      })
     })
   })
 
   describe('Presets Folder', () => {
     it('check if folders exists', () => {
+      mockStatSync.mock.mockImplementation(() => ({
+        isDirectory: () => true
+      }))
       mockExistsSync.mock.mockImplementation((value) =>
         '.clingon/presets'.search(value)
       )
 
-      const exists = checkIfPresetFolderAlreadyExists(['.clingon', 'presets'])
+      const clojure = checkIfPresetFolderAlreadyExists(false)
+
+      const { exists } = clojure()
 
       assert.strictEqual(exists, true)
     })

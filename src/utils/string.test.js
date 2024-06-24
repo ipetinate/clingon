@@ -9,7 +9,9 @@ import {
   convertToPascalCase,
   convertToKebabCase,
   convertToSnakeCase,
-  capitalizeLetter
+  capitalizeLetter,
+  convertToLowerCase,
+  convertToUpperCase
 } from './string.js'
 
 describe('String Utils', async () => {
@@ -81,6 +83,18 @@ describe('String Utils', async () => {
 
       assert.strictEqual(result, 'PascalCaseString')
     })
+
+    it('convert a string case: kebab-case -> lowercase', () => {
+      const result = convertCase('lowercase', 'PascalCaseString')
+
+      assert.strictEqual(result, 'pascalcasestring')
+    })
+
+    it('convert a string case: kebab-case -> UPPERCASE', () => {
+      const result = convertCase('UPPERCASE', 'PascalCaseString')
+
+      assert.strictEqual(result, 'PASCALCASESTRING')
+    })
   })
 
   describe('convert case individual utils', () => {
@@ -92,9 +106,18 @@ describe('String Utils', async () => {
     })
 
     it('convertToPascalCase', () => {
-      assert.strictEqual(convertToPascalCase('kebab-to-pascal'), 'KebabToPascal')
-      assert.strictEqual(convertToPascalCase('snake_to_pascal'), 'SnakeToPascal')
-      assert.strictEqual(convertToPascalCase('PascalToPascal'), 'PascalToPascal')
+      assert.strictEqual(
+        convertToPascalCase('kebab-to-pascal'),
+        'KebabToPascal'
+      )
+      assert.strictEqual(
+        convertToPascalCase('snake_to_pascal'),
+        'SnakeToPascal'
+      )
+      assert.strictEqual(
+        convertToPascalCase('PascalToPascal'),
+        'PascalToPascal'
+      )
       assert.strictEqual(convertToPascalCase('camelToPascal'), 'CamelToPascal')
     })
 
@@ -110,6 +133,20 @@ describe('String Utils', async () => {
       assert.strictEqual(convertToSnakeCase('snake_to_snake'), 'snake_to_snake')
       assert.strictEqual(convertToSnakeCase('PascalToSnake'), 'pascal_to_snake')
       assert.strictEqual(convertToSnakeCase('camelToSnake'), 'camel_to_snake')
+    })
+
+    it('convertToUpperCase', () => {
+      assert.strictEqual(convertToUpperCase('kebab-to-upper'), 'KEBAB-TO-UPPER')
+      assert.strictEqual(convertToUpperCase('snake_to_upper'), 'SNAKE_TO_UPPER')
+      assert.strictEqual(convertToUpperCase('PascalToUpper'), 'PASCALTOUPPER')
+      assert.strictEqual(convertToUpperCase('camelToUpper'), 'CAMELTOUPPER')
+    })
+
+    it('convertToLowerCase', () => {
+      assert.strictEqual(convertToLowerCase('kebab-to-lower'), 'kebab-to-lower')
+      assert.strictEqual(convertToLowerCase('snake_to_lower'), 'snake_to_lower')
+      assert.strictEqual(convertToLowerCase('PascalToLower'), 'pascaltolower')
+      assert.strictEqual(convertToLowerCase('camelToLower'), 'cameltolower')
     })
   })
 

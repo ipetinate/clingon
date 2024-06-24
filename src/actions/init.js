@@ -1,22 +1,44 @@
 import { compose } from '../utils/compose.js'
 import {
   checkIfPresetFolderAlreadyExists,
+  checkIfTemplateFolderAlreadyExists,
   createFileIfNotExists,
   createPresetFolderIfNotExists,
-  getConfigContent,
+  createPresetsFolderAssets,
+  createTemplateFolderAssets,
+  createTemplateFolderIfNotExists,
   getConfigFilePath
 } from '../utils/init-action.js'
 
-export async function initAction() {
+/**
+ * Init clingon assets, generate necessary files and folders.
+ *
+ * @param {Record<"examples", boolean>} options Command options with flags, like `--e`
+ */
+export async function initAction(options = { examples: false }) {
   /*
    * Global Config
    */
 
-  compose(getConfigFilePath, createFileIfNotExists, getConfigContent)
+  compose(getConfigFilePath(options?.examples), createFileIfNotExists)
 
   /*
    * Preset Folder
    */
 
-  compose(checkIfPresetFolderAlreadyExists, createPresetFolderIfNotExists)
+  compose(
+    checkIfPresetFolderAlreadyExists(options?.examples),
+    createPresetFolderIfNotExists,
+    createPresetsFolderAssets
+  )
+
+  /*
+   * Templates Folder
+   */
+
+  compose(
+    checkIfTemplateFolderAlreadyExists(options?.examples),
+    createTemplateFolderIfNotExists,
+    createTemplateFolderAssets
+  )
 }

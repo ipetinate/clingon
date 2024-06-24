@@ -1,7 +1,15 @@
 import { ResourceTypeEnum } from 'enums/resource-type.js'
 import { FileExtensionEnum } from 'enums/file-extension.js'
-import { FrameworkEnum, TestFrameworkEnum, CssFrameworkEnum } from 'enums/frameworks.js'
-import { StoryPostfixEnum, TestPostfixEnum, StylePostfixEnum } from 'enums/postfixes.js'
+import {
+  FrameworkEnum,
+  TestFrameworkEnum,
+  CssFrameworkEnum
+} from 'enums/frameworks.js'
+import {
+  StoryPostfixEnum,
+  TestPostfixEnum,
+  StylePostfixEnum
+} from 'enums/postfixes.js'
 
 /**
  * @typedef {keyof typeof ResourceTypeEnum} Resource - Resource type
@@ -83,6 +91,24 @@ import { StoryPostfixEnum, TestPostfixEnum, StylePostfixEnum } from 'enums/postf
  * @typedef {"options" | "setup"} VueApi - Vue api template syntax
  *
  * @typedef {"class" | "functional"} ReactComponentVariant - React component type variant (class or functional)
+ *
+ * @typedef {"camelCase" | "PascalCase" | "snake_case" | "kebab-case" | "UPPERCASE" | "lowercase"} TextCase - Case to convert strings
+ *
+ * @typedef {{
+ *    path: string
+ *    template: string
+ *  }} TemplateResource - Template resource definition
+ *
+ * @typedef {{
+ *  identifier: string
+ *  case?: TextCase
+ *  folderWrapper?: boolean
+ *  resources: TemplateResource[]
+ * }} CustomTemplate - Custom template from meta file
+ *
+ * @typedef {"bigint" | "boolean" | "function" | "number" | "object" | "string" | "symbol" | "undefined"} Primitives - JS Primities
  */
+
+typeof 1 == ''
 
 export default {}

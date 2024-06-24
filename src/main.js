@@ -10,6 +10,7 @@ import { createAction } from './actions/create.js'
 
 import { TestFrameworkEnum } from './enums/frameworks.js'
 import { getLocalLibDirname } from './utils/directory.js'
+import { scaffoldAction } from './actions/scaffold.js'
 
 /*
  * Global Variables
@@ -36,7 +37,7 @@ const program = new Command()
 program
   .name('clingon')
   .description('CLI to generate files based on templates')
-  .version('0.9.5', '-v, --version', 'Current version')
+  .version('1.0.0', '-v, --version', 'Current version')
 
 /*
  * Guided flow - generate components based on prompt answers
@@ -48,6 +49,19 @@ program
   .action(guidedAction)
   .description(
     'Start a guided flow to generate resources (components, functions, pages, etc)'
+  )
+
+/*
+ * Advanced flow - generate components based on local templates
+ */
+
+program
+  .command('scaffold')
+  .argument('<name>', 'Resource name')
+  .option('-t, --template <template>', 'Template name')
+  .action(scaffoldAction)
+  .description(
+    'Generate resources based on a local template config inside meta.yaml or meta.json'
   )
 
 /*
@@ -123,7 +137,7 @@ program
 program
   .command('init')
   .action(initAction)
-  .usage('init')
+  .option('-e, --examples [examples]', 'Generate folders with examples', false)
   .description(
     'Init all needed setup, generate files and create folders to store assets.'
   )

@@ -25,20 +25,24 @@ export function boolAsText(bool) {
 /**
  * Convert a specific case to target case, e.g "MyResource" to "my_resource"
  *
- * @param {"camelCase" | "snake_case" | "PascalCase" | "kebab-case"} targetPattern Case target
+ * @param {import("../types").TextCase} targetPattern Case target
  * @param {string} inputString - String to be converted
  * @returns {string}
  */
 export function convertCase(targetPattern, inputString) {
   switch (targetPattern) {
+    case 'PascalCase':
+      return convertToPascalCase(inputString)
     case 'camelCase':
       return convertToCamelCase(inputString)
     case 'snake_case':
       return convertToSnakeCase(inputString)
-    case 'PascalCase':
-      return convertToPascalCase(inputString)
     case 'kebab-case':
       return convertToKebabCase(inputString)
+    case 'UPPERCASE':
+      return convertToUpperCase(inputString)
+    case 'lowercase':
+      return convertToLowerCase(inputString)
     default:
       throw new Error('Invalid target pattern.')
   }
@@ -62,6 +66,26 @@ export function convertToCamelCase(inputString) {
   }
 
   return words.join('')
+}
+
+/**
+ * Convert a string on any case to a UPPERCASE
+ *
+ * @param {string} inputString String to be converted
+ * @returns {string}
+ */
+export function convertToUpperCase(inputString) {
+  return inputString.toUpperCase()
+}
+
+/**
+ * Convert a string on any case to a lowercase
+ *
+ * @param {string} inputString String to be converted
+ * @returns {string}
+ */
+export function convertToLowerCase(inputString) {
+  return inputString.toLowerCase()
 }
 
 /**
