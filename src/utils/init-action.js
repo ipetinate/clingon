@@ -98,19 +98,22 @@ export function checkIfPresetFolderAlreadyExists(examples) {
  * @param {{ exists: boolean, examples: boolean }} props Props
  */
 export function createPresetFolderIfNotExists({ exists, examples }) {
-  if (exists) {
-    return console.info(
-      '\n✅ You already have presets folder at: ',
-      presetFullDir
-    )
+  if (exists && !examples) {
+    console.info('\n✅ You already have presets folder at: ', presetFullDir)
+
+    return { exists, examples }
   }
 
-  exists = createPresetsFolder()
+  let created = false
 
-  if (exists) {
-    console.info('\n🎛️  Presets created at: ', presetFullDir)
-  } else {
-    console.error('\n❌ Error: cannot create presets dir, try again.')
+  if (!exists) {
+    created = createPresetsFolder()
+
+    if (created) {
+      console.info('\n🎛️  Presets created at: ', presetFullDir)
+    } else {
+      console.error('\n❌ Error: cannot create presets dir, try again.')
+    }
   }
 
   return { exists, examples }
@@ -158,7 +161,7 @@ export function checkIfTemplateFolderAlreadyExists(examples) {
  * @param {{ exists: boolean, examples: boolean }} props Props
  */
 export function createTemplateFolderIfNotExists({ examples, exists }) {
-  if (exists) {
+  if (exists && !examples) {
     console.info(
       '\n✅ You already have templates folder at: ',
       templatesFullDir
@@ -167,15 +170,19 @@ export function createTemplateFolderIfNotExists({ examples, exists }) {
     return { examples, exists }
   }
 
-  exists = createDir(templatesFullDir)
+  let created = false
 
-  if (exists) {
-    console.info('\n📂 Templates created at: ', templatesFullDir)
-  } else {
-    console.error('\n❌ Error: cannot create templates dir, try again')
+  if (!exists) {
+    created = createDir(templatesFullDir)
+
+    if (created) {
+      console.info('\n📂 Templates created at: ', templatesFullDir)
+    } else {
+      console.error('\n❌ Error: cannot create templates dir, try again')
+    }
   }
 
-  return { examples, exists }
+  return { examples, exists: created }
 }
 
 /**

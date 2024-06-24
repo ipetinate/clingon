@@ -11,6 +11,7 @@ import {
 } from '../utils/init-action.js'
 
 /**
+ * Init clingon assets, generate necessary files and folders.
  *
  * @param {Record<"examples", boolean>} options Command options with flags, like `--e`
  */
