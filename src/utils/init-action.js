@@ -106,14 +106,12 @@ export function createPresetFolderIfNotExists({ exists, examples }) {
 
   let created = false
 
-  if (!exists) {
-    created = createPresetsFolder()
+  if (!exists) created = createPresetsFolder()
 
-    if (created) {
-      console.info('\n🎛️  Presets created at: ', presetFullDir)
-    } else {
-      console.error('\n❌ Error: cannot create presets dir, try again.')
-    }
+  if (created) {
+    console.info('\n🎛️  Presets created at: ', presetFullDir)
+  } else {
+    console.error('\n❌ Error: cannot create presets dir, try again.')
   }
 
   return { exists, examples }
@@ -172,14 +170,12 @@ export function createTemplateFolderIfNotExists({ examples, exists }) {
 
   let created = false
 
-  if (!exists) {
-    created = createDir(templatesFullDir)
+  if (!exists) created = createDir(templatesFullDir)
 
-    if (created) {
-      console.info('\n📂 Templates created at: ', templatesFullDir)
-    } else {
-      console.error('\n❌ Error: cannot create templates dir, try again')
-    }
+  if (created) {
+    console.info('\n📂 Templates created at: ', templatesFullDir)
+  } else {
+    console.error('\n❌ Error: cannot create templates dir, try again')
   }
 
   return { examples, exists: created }
