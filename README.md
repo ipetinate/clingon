@@ -48,63 +48,35 @@ By default, it already comes with some settings, which are commonly used concept
 
 Answer a questionnaire with a few questions in guided mode (if you don't know exactly what you want, or if you're a beginner and need the code ready to start coding), or use advanced mode by selecting custom models that you created and added to the root of your project.
 
-In the initial version, we have not yet made advanced mode available, it will be released in future updates.
-
 ## How to use
 
 Install the tool globally using your preferred Node package manager, or use `npx` to run the executable.
 
 Note: Maybe on macOS you do not have permission to run the tool if you install it globally, if this happens you need to give the correct permissions or to avoid anything you can use `npx` which solves this problem.
 
-- Using `npx`
+```shell
 
-  ```shell
-   npx clingon@latest gen
+npx clingon@latest gen
 
-   # or
+# or
 
-   npx clingon create ResourceName --preset preset-name
-  ```
+npx clingon@latest init
 
-- Using node package manager
+# or
 
-  - Install
+npx clingon@latest create ResourceName --preset preset-name
 
-    ```shell
-    npm i -g clingon
+# or
 
-    # or
-
-    yarn add -g clingon
-
-    # or
-
-    pnpm i -g clingon
-
-    ```
-
-  - Execute
-
-    ```shell
-    clingon gen
-
-    # or
-
-    npx clingon create ResourceName --preset preset-name
-    ```
-
-  - Composing with arguments and options
-
-    ```shell
-    clingon gen <ResourceName>
-
-    # or
-
-    npx clingon create ResourceName --preset preset-name
-    ```
-
-  - You can pass Resource name as argument after `gen` command, read more about on [Arguments doc](https://www.clingon.dev/docs/arguments).
+npx clingon@latest scaffold ResourceName --template template-name
+```
 
 ## Command modes
 
 Read more on: [clingon.dev/docs/guide/commands](https://www.clingon.dev/docs/guide/commands)
+
+- Commands shortcuts
+  - `init`: [Init doc](https://www.clingon.dev/docs/guide/commands#init-command)
+  - `gen`: [Gen doc](https://www.clingon.dev/docs/guide/commands#gen-command)
+  - `create`: [Create doc](https://www.clingon.dev/docs/guide/commands#create-command)
+  - `scaffold`: [Scaffold doc](https://www.clingon.dev/docs/guide/commands#scaffold-command)
