@@ -66,7 +66,7 @@ interface Meta {
     - path: src/components
       template: ./ReactComponent/Component.tsx
     - path: src/components
-      tempalte: ./ReactComponent/Component.spec.tsx
+      template: ./ReactComponent/Component.spec.tsx
     - path: src/components
       template: ./ReactComponent/Component.stories.tsx
     - path: src/components
