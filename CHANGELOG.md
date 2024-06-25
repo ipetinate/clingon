@@ -1,3 +1,15 @@
+# v1.0.0 (Mon Jun 24 2024)
+
+#### 💥 Breaking Change
+
+- feat: Advanced command [#52](https://github.com/ipetinate/clingon/pull/52) ([@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 1
+
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v0.9.5 (Fri May 17 2024)
 
 #### 🐛 Bug Fix
