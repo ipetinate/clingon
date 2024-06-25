@@ -1,3 +1,17 @@
+# v1.0.1 (Tue Jun 25 2024)
+
+#### 🐛 Bug Fix
+
+- fix: update docs [#54](https://github.com/ipetinate/clingon/pull/54) ([@ipetinate](https://github.com/ipetinate))
+- chore(deps-dev): bump braces from 3.0.2 to 3.0.3 [#53](https://github.com/ipetinate/clingon/pull/53) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@ipetinate](https://github.com/ipetinate))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Isac Petinate ([@ipetinate](https://github.com/ipetinate))
+
+---
+
 # v1.0.0 (Mon Jun 24 2024)
 
 #### 💥 Breaking Change
