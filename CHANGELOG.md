@@ -1,3 +1,15 @@
+# v1.1.0 (Thu Feb 13 2025)
+
+#### 🚀 Enhancement
+
+- chore(deps-dev): bump rollup from 4.17.2 to 4.22.4 [#55](https://github.com/ipetinate/clingon/pull/55) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v1.0.1 (Tue Jun 25 2024)
 
 #### 🐛 Bug Fix
