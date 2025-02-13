@@ -2,5 +2,12 @@
     "author": {
       "name": "Isac Petinate",
       "email": "idpetinate@gmail.com"
+    },
+    {
+      "canary": {
+        "target": "pr-body",
+        "message": "string",
+        "force": true
+      }
     }
   }
