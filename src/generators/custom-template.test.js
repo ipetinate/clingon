@@ -77,6 +77,31 @@ describe('scaffoldTemplate', () => {
     assert.deepEqual(result, ['controllers/test_controller/test_controller.rs'])
   })
 
+  it('build a rust file and keep the original template name', async () => {
+    mockStatSync.mock.mockImplementation(() => ({
+      isDirectory: () => true
+    }))
+    mockExistsSync.mock.mockImplementation(() => true)
+    mockFsAccessSync.mock.mockImplementation(() => true)
+    mockFsReadFileSync.mock.mockImplementation(() => 'mock file content')
+    mockFsWriteFileSync.mock.mockImplementation(() => true)
+
+    const result = await buildCustomTemplate('TestController', {
+      identifier: 'component',
+      case: 'snake_case',
+      folderWrapper: false,
+      keepTemplateName: true,
+      resources: [
+        {
+          path: 'controllers',
+          template: './controllers/user_controller.rs'
+        }
+      ]
+    })
+
+    assert.deepEqual(result, ['controllers/user_controller.rs'])
+  })
+
   it('build a rust file without folder wrapper', async () => {
     mockStatSync.mock.mockImplementation(() => ({
       isDirectory: () => true

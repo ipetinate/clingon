@@ -32,6 +32,7 @@ export async function buildCustomTemplate(name, template) {
     const resourceData = {
       identifier: template.identifier,
       folderWrapper: template.folderWrapper,
+      keepTemplateName: template.keepTemplateName,
       case: template.case,
       resource
     }
@@ -122,6 +123,19 @@ function handleTemplateReplacements({
 }
 
 /**
+ * get template file name
+ *
+ * @param {Resource} template Template data from meta file
+ * @returns {string}
+ */
+function getTemplateFileName(template) {
+  const pathArray = template.resource.template.split('/')
+  const fileName = pathArray[pathArray.length - 1]
+
+  return fileName.split('.')[0]
+}
+
+/**
  * Create files after processing
  *
  * @param {ReturnType<typeof checkPaths>} param0 Template data from meta file
@@ -137,7 +151,11 @@ function createResources({ name, target, template, templateContent }) {
     if (template.folderWrapper)
       template.resource.path = join(template.resource?.path, name)
 
-    const fullPath = getFullPath(name, template)
+    const templateFileName = getTemplateFileName(template)
+
+    const fullPath = template.keepTemplateName
+      ? getFullPath(templateFileName, template)
+      : getFullPath(name, template)
     const resourceCreated = createFileWithContent(fullPath, templateContent)
 
     if (resourceCreated) created = fullPath
