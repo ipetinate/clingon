@@ -123,7 +123,7 @@ function handleTemplateReplacements({
 }
 
 /**
- * get template file name
+ * Get template file name
  *
  * @param {Resource} template Template data from meta file
  * @returns {string}
