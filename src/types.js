@@ -103,6 +103,7 @@ import {
  *  identifier: string
  *  case?: TextCase
  *  folderWrapper?: boolean
+ *  keepTemplateName?: boolean
  *  resources: TemplateResource[]
  * }} CustomTemplate - Custom template from meta file
  *

@@ -22,6 +22,7 @@ The table below describes the fields used in the resource definitions in the `me
 | -------------------- | ------------ | -------- | --------------------------------------------------------------------------------------- |
 | `identifier`         | `string`     | Yes      | Unique identifier for the resource (used on `scaffold` flag `--template` as tag value). |
 | `folderWrapper`      | `boolean`    | No       | Indicates if the resource should be wrapped by a folder.                                |
+| `keepTemplateName`   | `boolean`    | No       | Use the template file name when generate files.                                         |
 | `case`               | `Case`       | No       | Indicates if the resource should be wrapped by a folder.                                |
 | `resources`          | `Resource[]` | Yes      | List of resources to be created.                                                        |
 | `resources.path`     | `string`     | Yes      | Path target directory where the resource will be generated.                             |
@@ -48,6 +49,7 @@ interface Resource {
 interface Meta {
   identifier: string
   folderWrapper?: boolean
+  keepTemplateName?: boolean
   case?: Case
   resources: Resource[]
 }

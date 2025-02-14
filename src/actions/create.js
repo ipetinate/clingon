@@ -37,7 +37,9 @@ export async function createAction(resourceName, options) {
 
   if (!preset && options.framework) {
     if (!options.type || !options.framework || !options.path) {
-      throw new Error('You did not pass any of the mandatory parameters for Options Mode')
+      throw new Error(
+        'You did not pass any of the mandatory parameters for Options Mode'
+      )
     }
 
     let storyPath = options.path
@@ -68,6 +70,7 @@ export async function createAction(resourceName, options) {
       withTestingLibrary: options.testingLibrary,
       version: options.vueVersion,
       folderWrapper: options.folderWrapper,
+      keepTemplateName: options.keepTemplateName,
       storyPostfix: 'stories',
       testPath,
       storyPath,
@@ -130,6 +133,8 @@ export async function createAction(resourceName, options) {
   if (answers) {
     await mainGenerator(answers)
   } else {
-    console.error('Error: an error has ocurred when retrieve answers, try again')
+    console.error(
+      'Error: an error has ocurred when retrieve answers, try again'
+    )
   }
 }
