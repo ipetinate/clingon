@@ -30,7 +30,8 @@ Let's simplify all of this, execute a command, answer some questions, or select 
 ## Links
 
 <p align="center" style="font-size: 20px;">
-  <a href="https://clingon.dev">🔗 Official website 🔗</a>
+    <!--   <a href="https://clingon.dev">🔗 Official website 🔗</a> -->
+    <a href="https://clingon.vercel.app/">🔗 Official website 🔗</a>
 </p>
 
 - Releases
