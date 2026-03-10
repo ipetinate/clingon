@@ -3,7 +3,9 @@
   "version": "1.1.0",
   "description": "Multipurpose generator CLI based on local config and templates",
   "main": "./lib/main.js",
-  "bin": "./lib/main.js",
+  "bin": {
+    "clingon": "./lib/main.js"
+  },
   "author": "Isac Petinate <idpetinate@gmail.com>",
   "homepage": "https://clingon.dev",
   "repository": {
