@@ -10,7 +10,7 @@
 [![Build CI](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/ipetinate/clingon/actions/workflows/node.js.yml)
 [![Release CI](https://github.com/ipetinate/clingon/actions/workflows/release.yml/badge.svg)](https://github.com/ipetinate/clingon/actions/workflows/release.yml)
 [![Coverage Status](https://img.shields.io/coverallsCoverage/github/ipetinate/clingon?branch=main&logo=coveralls&label=Coverage)](https://coveralls.io/repos/github/ipetinate/clingon/badge.svg?branch=main)
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fclingon.dev&logo=nextra&label=clingon.dev)](https://clingon.dev)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fclingon.vercel.app&logo=nextra&label=clingon%20doc)](https://clingon.vercel.app/)
 
 [![GitHub Release Date](https://img.shields.io/github/release-date/ipetinate/clingon?display_date=published_at&logo=npm&label=Release%20Date&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fclingon)](https://www.npmjs.com/package/clingon)
 [![GitHub Release version](https://img.shields.io/github/v/release/ipetinate/clingon?display_name=release&logo=github&label=Release%20version)](https://github.com/ipetinate/clingon/releases)
@@ -74,10 +74,10 @@ npx clingon@latest scaffold ResourceName --template template-name
 
 ## Command modes
 
-Read more on: [clingon.dev/docs/guide/commands](https://www.clingon.dev/docs/guide/commands)
+Read more on: [clingon.dev/docs/guide/commands](https://clingon.vercel.app/docs/guide/commands)
 
 - Commands shortcuts
-  - `init`: [Init doc](https://www.clingon.dev/docs/guide/commands#init-command)
-  - `gen`: [Gen doc](https://www.clingon.dev/docs/guide/commands#gen-command)
-  - `create`: [Create doc](https://www.clingon.dev/docs/guide/commands#create-command)
-  - `scaffold`: [Scaffold doc](https://www.clingon.dev/docs/guide/commands#scaffold-command)
+  - `init`: [Init doc](https://clingon.vercel.app/docs/guide/commands#init-command)
+  - `gen`: [Gen doc](https://clingon.vercel.app/docs/guide/commands#gen-command)
+  - `create`: [Create doc](https://clingon.vercel.app/docs/guide/commands#create-command)
+  - `scaffold`: [Scaffold doc](https://clingon.vercel.app/docs/guide/commands#scaffold-command)
